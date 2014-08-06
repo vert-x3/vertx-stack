@@ -1,0 +1,31 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  <id>stack</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>/</baseDirectory>
+
+  <dependencySets>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <unpack>true</unpack>
+      <includes>
+        <include>io.vertx:vertx-dist:zip</include>
+      </includes>
+    </dependencySet>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>/vert.x-${version}/lib/</outputDirectory>
+      <includes>
+        <include>io.vertx:vertx-js</include>
+        <include>io.vertx:vertx-groovy</include>
+        <include>org.codehaus.groovy:groovy-all</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+
+</assembly>
