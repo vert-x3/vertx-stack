@@ -61,6 +61,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
               <descriptors>
                 <descriptor>assembly/stack.xml</descriptor>
               </descriptors>
