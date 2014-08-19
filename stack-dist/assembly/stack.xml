@@ -24,6 +24,8 @@
         <include>io.vertx:vertx-js</include>
         <include>io.vertx:vertx-groovy</include>
         <include>org.codehaus.groovy:groovy-all</include>
+        <include>io.vertx:vertx-java</include>
+        <include>io.vertx:vertx-ext</include>
       </includes>
     </dependencySet>
   </dependencySets>
