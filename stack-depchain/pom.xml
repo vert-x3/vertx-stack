@@ -60,6 +60,10 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>ext-mongo-embedded-db</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>ext-reactive-streams</artifactId>
     </dependency>
     <dependency>
