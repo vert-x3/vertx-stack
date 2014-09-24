@@ -23,6 +23,7 @@
         <include>io.vertx:vertx-hazelcast</include>
         <include>io.vertx:vertx-js</include>
         <include>io.vertx:vertx-groovy</include>
+        <include>io.vertx:codegen</include>
         <include>org.codehaus.groovy:groovy-all</include>
         <include>io.vertx:vertx-java</include>
         <include>io.vertx:ext-*</include>
