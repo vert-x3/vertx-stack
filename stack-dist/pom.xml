@@ -23,12 +23,6 @@
       <artifactId>stack-depchain</artifactId>
       <type>pom</type>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-dist</artifactId>
-      <version>${vertx.version}</version>
-      <type>zip</type>
-    </dependency>
   </dependencies>
 
   <build>
@@ -43,8 +37,9 @@
             </goals>
             <configuration>
               <appendAssemblyId>false</appendAssemblyId>
+              <finalName>vert.x-${project.version}</finalName>
               <descriptors>
-                <descriptor>assembly/stack.xml</descriptor>
+                <descriptor>src/main/assembly/stack.xml</descriptor>
               </descriptors>
               <formats>
                 <format>dir</format>
