@@ -14,6 +14,14 @@
       <useProjectArtifact>false</useProjectArtifact>
       <outputDirectory>/lib/</outputDirectory>
       <includes>
+        <include>io.netty:netty-all</include>
+        <include>com.fasterxml.jackson.core:jackson-core</include>
+        <include>com.fasterxml.jackson.core:jackson-databind</include>
+        <include>com.fasterxml.jackson.core:jackson-databind</include>
+<!--
+        <include>org.apache.directory.server:apacheds-protocol-dns</include>
+        <include>org.slf4j:slf4j-api</include>
+-->
         <include>io.vertx:vertx-core</include>
         <include>io.vertx:vertx-hazelcast</include>
         <include>io.vertx:vertx-js</include>
