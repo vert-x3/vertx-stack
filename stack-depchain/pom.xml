@@ -74,6 +74,10 @@
       <groupId>io.vertx</groupId>
       <artifactId>ext-routematcher</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-maven-modules</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
