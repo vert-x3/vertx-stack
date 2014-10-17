@@ -26,7 +26,8 @@
         <include>io.vertx:codegen</include>
         <include>org.codehaus.groovy:groovy-all</include>
         <include>io.vertx:ext-*</include>
-        <include>io.vertx:vertx-maven-modules</include>
+        <include>io.vertx:vertx-service-factory</include>
+        <include>io.vertx:maven-service-factory</include>
         <include>io.reactivex:rxjava</include>
       </includes>
     </dependencySet>
