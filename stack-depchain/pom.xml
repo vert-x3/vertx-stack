@@ -72,7 +72,15 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>ext-rxjava</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-maven-modules</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxjava</artifactId>
     </dependency>
   </dependencies>
 
