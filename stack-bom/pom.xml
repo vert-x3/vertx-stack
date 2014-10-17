@@ -91,9 +91,9 @@
         <version>${vertx.version}</version>
       </dependency>
       <dependency>
-        <groupId>io.reactivex</groupId>
-        <artifactId>rxjava</artifactId>
-        <version>${rxjava.version}</version>
+        <groupId>io.vertx</groupId>
+        <artifactId>ext-metrics</artifactId>
+        <version>${vertx.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

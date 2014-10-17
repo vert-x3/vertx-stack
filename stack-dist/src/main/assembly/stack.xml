@@ -13,23 +13,14 @@
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
       <outputDirectory>/lib/</outputDirectory>
-      <includes>
-        <include>io.netty:netty-all</include>
-        <include>com.fasterxml.jackson.core:jackson-core</include>
-        <include>com.fasterxml.jackson.core:jackson-databind</include>
-        <include>com.fasterxml.jackson.core:jackson-annotations</include>
-        <include>com.hazelcast:hazelcast</include>
-        <include>io.vertx:vertx-core</include>
-        <include>io.vertx:vertx-hazelcast</include>
-        <include>io.vertx:vertx-js</include>
-        <include>io.vertx:vertx-groovy</include>
-        <include>io.vertx:codegen</include>
-        <include>org.codehaus.groovy:groovy-all</include>
-        <include>io.vertx:ext-*</include>
-        <include>io.vertx:vertx-service-factory</include>
-        <include>io.vertx:maven-service-factory</include>
-        <include>io.reactivex:rxjava</include>
-      </includes>
+      <excludes>
+        <exclude>io.vertx:codegen</exclude>
+        <exclude>junit:junit</exclude>
+        <exclude>org.mvel:mvel2</exclude>
+        <exclude>log4j:log4j</exclude>
+        <exclude>org.slf4j:slf4j-api</exclude>
+        <exclude>org.hamcrest:hamcrest-core</exclude>
+      </excludes>
     </dependencySet>
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>

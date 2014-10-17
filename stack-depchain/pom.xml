@@ -83,8 +83,8 @@
       <artifactId>maven-service-factory</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxjava</artifactId>
+      <groupId>io.vertx</groupId>
+      <artifactId>ext-metrics</artifactId>
     </dependency>
   </dependencies>
 
