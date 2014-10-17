@@ -15,7 +15,7 @@ set JVM_OPTS=
 
 set JMX_OPTS=
 @rem To enable JMX uncomment the following
-@rem set JMX_OPTS=-Dcom.sun.management.jmxremote -Dvertx.management.jmx=true -Dhazelcast.jmx=true
+@rem set JMX_OPTS=-Dcom.sun.management.jmxremote -Dhazelcast.jmx=true
 
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.

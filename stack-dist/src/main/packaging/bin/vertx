@@ -17,7 +17,7 @@ JVM_OPTS=""
 
 JMX_OPTS=""
 # To enable JMX uncomment the following
-# JMX_OPTS="-Dcom.sun.management.jmxremote -Dvertx.management.jmx=true -Dhazelcast.jmx=true"
+# JMX_OPTS="-Dcom.sun.management.jmxremote -Dhazelcast.jmx=true"
 
 APP_NAME="vertx"
 APP_BASE_NAME=`basename "$0"`
