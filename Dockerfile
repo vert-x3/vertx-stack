@@ -22,6 +22,14 @@ RUN cd /home/work/codegen && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=t
 RUN git clone --depth 1 https://github.com/eclipse/vert.x /home/work/vert.x
 RUN cd /home/work/vert.x && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true -Pdist install
 
+# Clone and install the vertx-service-factory repository
+RUN git clone --depth 1 https://github.com/vert-x3/vertx-service-factory /home/work/vertx-service-factory
+RUN cd /home/work/vertx-service-factory && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
+
+# Clone and install the vertx-maven-modules repository
+RUN git clone --depth 1 https://github.com/vert-x3/vertx-maven-modules /home/work/vertx-maven-modules
+RUN cd /home/work/vertx-maven-modules && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
+
 # Clone and install the vertx-js repository
 RUN git clone --depth 1 https://github.com/vert-x3/vertx-js /home/work/vertx-js
 RUN cd /home/work/vertx-js && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
@@ -35,7 +43,7 @@ RUN git clone --depth 1 https://github.com/vert-x3/vertx-stack /home/work/vertx-
 RUN cd /home/work/vertx-stack && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
 
 # Copy binary
-RUN tar -xvzf /home/work/vertx-stack/stack-dist/target/vertx-stack-dist-3.0.0-SNAPSHOT.tar.gz -C /usr/local
+RUN tar -xvzf /home/work/vertx-stack/stack-dist/target/vert.x-3.0.0-SNAPSHOT.tar.gz -C /usr/local
 ENV VERTX_HOME /usr/local/vert.x-3.0.0-SNAPSHOT
 ENV PATH $VERTX_HOME/bin:$PATH
 
