@@ -54,3 +54,27 @@ Therefore it should be used with explicit dependencies:
     ...
   </dependencies>
 ~~~~
+
+### Docker
+
+To build docker images, you need docker1.3+ and run docker-build-images.sh
+It will build two images :
+- vertx3
+- vertx3-exec
+
+#### Classical image
+
+The eclipse/vertx3 is the previous refactored image with official java 8 image from Docker (since 1.3+)
+An environment variable is added to choose the Git Branch : GIT_BRANCH with default value "-b master".
+Now you can log into container and execute again "install.sh" to build clone source and launch maven tasks. 
+
+#### Executable image
+
+A second image is added to have a executable container: eclipse/vertx3-exec.
+So you can run from boot2docker for example
+
+➜  docker run eclipse/vertx3-exec -version
+
+➜  3.0.0-SNAPSHOT
+
+
