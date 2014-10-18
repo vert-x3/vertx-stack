@@ -3,7 +3,7 @@
 set -e
 set -x
 
-cd base
+cd images
 docker build -t eclipse/vertx3 .
 
 cd executable
