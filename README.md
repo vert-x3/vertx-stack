@@ -74,6 +74,7 @@ A second image is added to have a executable container: eclipse/vertx3-exec.
 So you can run from boot2docker for example
 
 ➜  docker run eclipse/vertx3-exec -version
+
 ➜  3.0.0-SNAPSHOT
 
 
