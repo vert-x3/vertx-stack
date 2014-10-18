@@ -62,4 +62,7 @@ It will build two images :
 - vertx3
 - vertx3-exec
 
+#### Classical image
 
+The eclipse/vertx3 is the previous refactored image with official java 8 image from Docker (since 1.3+)
+An environment variabe
