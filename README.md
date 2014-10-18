@@ -54,3 +54,12 @@ Therefore it should be used with explicit dependencies:
     ...
   </dependencies>
 ~~~~
+
+### Docker
+
+To build docker images, you need docker1.3+ and run docker-build-images.sh
+It will build two images :
+- vertx3
+- vertx3-exec
+
+
