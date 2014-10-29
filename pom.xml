@@ -41,7 +41,6 @@
   <properties>
     <vertx.version>3.0.0-SNAPSHOT</vertx.version>
     <groovy.version>2.3.3</groovy.version>
-    <rxjava.version>1.0.0-rc.5</rxjava.version>
   </properties>
 
   <dependencyManagement>

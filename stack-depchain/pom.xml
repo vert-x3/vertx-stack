@@ -72,7 +72,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>ext-rxjava</artifactId>
+      <artifactId>ext-rx</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
