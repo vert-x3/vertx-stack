@@ -15,10 +15,5 @@ RUN chmod -R +x /home/work/scripts
 RUN /home/work/scripts/install.sh
 
 # Copy binary
-RUN tar -xvzf /home/work/vertx-stack/stack-dist/target/vert.x-3.0.0-SNAPSHOT.tar.gz -C /usr/local
 ENV VERTX_HOME /usr/local/vert.x-3.0.0-SNAPSHOT
 ENV PATH $VERTX_HOME/bin:$PATH
-
-# Cleanup
-RUN rm -rf /home/work /root/.m2 /usr/local/apache-maven-3.0.5
-

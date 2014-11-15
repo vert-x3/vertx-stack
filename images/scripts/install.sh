@@ -29,3 +29,9 @@ cd /home/work/vertx-groovy && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=
 # Clone and install the vertx-stack repository
 git clone --depth 1 https://github.com/vert-x3/vertx-stack $GIT_BRANCH /home/work/vertx-stack
 cd /home/work/vertx-stack && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
+
+# Unar
+tar -xvzf /home/work/vertx-stack/stack-dist/target/vert.x-3.0.0-SNAPSHOT.tar.gz -C /usr/local
+
+# Cleanup
+rm -rf /home/work /root/.m2 /usr/local/apache-maven-3.0.5
