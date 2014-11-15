@@ -14,7 +14,7 @@
 # If you're deploying and undeploying a lot of verticles with dynamic languages it's recommended to enable GC'ing
 # of generated classes and prevent OOM due to a lot of gc
 # JVM_OPTS="-XX:+CMSClassUnloadingEnabled -XX:-UseGCOverheadLimit"
-JVM_OPTS=""
+JVM_OPTS="-XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0"
 
 JMX_OPTS=""
 # To enable JMX uncomment the following

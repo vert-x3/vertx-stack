@@ -14,7 +14,6 @@
       <useProjectArtifact>false</useProjectArtifact>
       <outputDirectory>/lib/</outputDirectory>
       <excludes>
-        <exclude>io.vertx:codegen</exclude>
         <exclude>junit:junit</exclude>
         <exclude>org.mvel:mvel2</exclude>
         <exclude>log4j:log4j</exclude>

@@ -12,7 +12,7 @@ if "%OS%"=="Windows_NT" setlocal
 @rem You can configure any property on VertxOptions or DeploymentOptions by setting system properties e.g.
 @rem set VERTX_OPTS=-Dvertx.options.eventLoopPoolSize=26 -Dvertx.options.deployment.worker=true
 
-set JVM_OPTS=
+set JVM_OPTS="-XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0"
 
 set JMX_OPTS=
 @rem To enable JMX uncomment the following
