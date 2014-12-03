@@ -52,27 +52,15 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>ext-mongo</artifactId>
+      <artifactId>vertx-mongo</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>ext-mongo-embedded-db</artifactId>
+      <artifactId>vertx-reactive-streams</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>ext-reactive-streams</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>ext-sockjs</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>ext-routematcher</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>ext-rx</artifactId>
+      <artifactId>vertx-sockjs</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -84,7 +72,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>ext-metrics</artifactId>
+      <artifactId>vertx-metrics</artifactId>
     </dependency>
   </dependencies>
 
