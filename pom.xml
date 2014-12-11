@@ -11,7 +11,7 @@
   </parent>
 
   <groupId>io.vertx</groupId>
-  <artifactId>stack-parent</artifactId>
+  <artifactId>vertx-stack-parent</artifactId>
   <version>3.0.0-SNAPSHOT</version>
 
   <name>Vert.x Stack - Project</name>
@@ -47,19 +47,19 @@
     <dependencies>
       <dependency>
         <groupId>io.vertx</groupId>
-        <artifactId>stack-bom</artifactId>
+        <artifactId>vertx-stack-bom</artifactId>
         <type>pom</type>
         <version>3.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>io.vertx</groupId>
-        <artifactId>stack-depchain</artifactId>
+        <artifactId>vertx-stack-depchain</artifactId>
         <type>pom</type>
         <version>3.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>io.vertx</groupId>
-        <artifactId>stack-dist</artifactId>
+        <artifactId>vertx-stack-dist</artifactId>
         <type>pom</type>
         <version>3.0.0-SNAPSHOT</version>
       </dependency>

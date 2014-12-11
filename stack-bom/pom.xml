@@ -6,12 +6,12 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>stack-parent</artifactId>
+    <artifactId>vertx-stack-parent</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>stack-bom</artifactId>
+  <artifactId>vertx-stack-bom</artifactId>
   <version>3.0.0-SNAPSHOT</version>
 
   <name>Vert.x Stack - Bill Of Materials</name>
