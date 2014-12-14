@@ -22,7 +22,7 @@
       <dependency>
         <groupId>io.vertx</groupId>
         <artifactId>vertx-stack-bom</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>${vertx.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
