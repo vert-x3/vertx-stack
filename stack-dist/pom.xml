@@ -17,13 +17,93 @@
   <name>Vert.x Stack - Distrib</name>
   <packaging>pom</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-depchain</artifactId>
-      <type>pom</type>
-    </dependency>
-  </dependencies>
+  <properties>
+    <finalName>vert.x-${project.version}</finalName>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-stack-bom</artifactId>
+        <version>${vertx.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <profiles>
+    <profile>
+      <id>full</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-stack-depchain</artifactId>
+          <type>pom</type>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>minimal</id>
+      <properties>
+        <finalName>vert.x-minimal-${project.version}</finalName>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-core</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-hazelcast</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>javascript</id>
+      <properties>
+        <finalName>vert.x-js-${project.version}</finalName>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-core</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-hazelcast</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-lang-js</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>groovy</id>
+      <properties>
+        <finalName>vert.x-groovy-${project.version}</finalName>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-core</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-hazelcast</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-lang-groovy</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
@@ -37,7 +117,7 @@
             </goals>
             <configuration>
               <appendAssemblyId>false</appendAssemblyId>
-              <finalName>vert.x-${project.version}</finalName>
+              <finalName>${finalName}</finalName>
               <descriptors>
                 <descriptor>src/main/assembly/stack.xml</descriptor>
               </descriptors>
