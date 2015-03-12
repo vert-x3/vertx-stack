@@ -99,8 +99,10 @@
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
+
+          <!-- Package archives -->
           <execution>
-            <id>dist</id>
+            <id>dist-archive</id>
             <goals>
               <goal>single</goal>
             </goals>
@@ -108,13 +110,24 @@
               <appendAssemblyId>false</appendAssemblyId>
               <finalName>${finalName}</finalName>
               <descriptors>
-                <descriptor>src/main/assembly/stack.xml</descriptor>
+                <descriptor>src/main/assembly/stack-archive.xml</descriptor>
               </descriptors>
-              <formats>
-                <format>dir</format>
-                <format>zip</format>
-                <format>tar.gz</format>
-              </formats>
+            </configuration>
+            <phase>package</phase>
+          </execution>
+
+          <!-- This is useful for testing the CLI directly without unpacking archives -->
+          <execution>
+            <id>dist-dir</id>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>vertx</finalName>
+              <descriptors>
+                <descriptor>src/main/assembly/stack-dir.xml</descriptor>
+              </descriptors>
             </configuration>
             <phase>package</phase>
           </execution>
