@@ -48,7 +48,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-metrics</artifactId>
+      <artifactId>vertx-dropwizard-metrics</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
