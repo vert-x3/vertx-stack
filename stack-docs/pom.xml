@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2011-2014 The original author or authors
+  ~
+  ~  All rights reserved. This program and the accompanying materials
+  ~  are made available under the terms of the Eclipse Public License v1.0
+  ~  and Apache License v2.0 which accompanies this distribution.
+  ~
+  ~      The Eclipse Public License is available at
+  ~      http://www.eclipse.org/legal/epl-v10.html
+  ~
+  ~      The Apache License v2.0 is available at
+  ~      http://www.opensource.org/licenses/apache2.0.php
+  ~
+  ~  You may elect to redistribute this code under either of these licenses.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-stack-parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>vertx-stack-docs</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+
+  <name>Vert.x Stack - Docs</name>
+  <packaging>pom</packaging>
+
+  <properties>
+
+    <vertx.version>3.0.0-SNAPSHOT</vertx.version>
+    <vertx.docs.version>3.0.0-SNAPSHOT</vertx.docs.version>
+
+    <asciidoclet.version>1.5.1</asciidoclet.version>
+    <apacheds-protocol-dns.version>1.5.7</apacheds-protocol-dns.version>
+    <asciidoc.dir>${project.build.directory}/asciidoc</asciidoc.dir>
+
+    <github.global.server>github</github.global.server>
+
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-docgen</artifactId>
+      <version>${vertx.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-groovy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-js</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-unit</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-dropwizard-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mail-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-groovy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-js</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-reactive-streams</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mongo-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jdbc-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-postgresql-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-apex</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
+    <!-- Sources dependencies for building JavaDoc -->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-unit</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-postgresql-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jdbc-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mongo-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-dropwizard-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mail-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-service</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-apex</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+
+          <!-- Unpack sources for Javadoc generation to target/sources -->
+          <execution>
+            <id>unpack-sources</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeClassifiers>sources</includeClassifiers>
+              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+              <includes>**/*.java</includes>
+              <excludes>examples\/**,**\/impl\/**,**\/package-info.java</excludes>
+            </configuration>
+          </execution>
+
+          <!-- Unpack docs to target/work -->
+          <execution>
+            <id>unpack-docs</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>vertx-core,vertx-lang-groovy,vertx-lang-js,vertx-unit,vertx-dropwizard-metrics,vertx-mail-service,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-service,vertx-jdbc-service,vertx-mysql-postgresql-service,vertx-auth-service,vertx-apex,vertx-reactive-streams</includeArtifactIds>
+              <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
+              <includeClassifiers>docs</includeClassifiers>
+              <stripClassifier>true</stripClassifier>
+              <stripVersion>true</stripVersion>
+              <outputDirectory>${project.build.directory}/work/</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Process Javadoc from sources to target/docs/apidocs -->
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>
+              <additionalparam>-Xdoclint:none</additionalparam>
+              <sourcepath>${project.build.directory}/sources</sourcepath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Copy target/work to final doc structure in target/docs -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <target>
+                <!-- Copy the docs to the site dir -->
+                <copy todir="${project.build.directory}/docs/vertx-core/">
+                  <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-unit/">
+                  <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/">
+                  <fileset dir="${project.build.directory}/work/vertx-dropwizard-metrics-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mail-service/">
+                  <fileset dir="${project.build.directory}/work/vertx-mail-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-rx">
+                  <fileset dir="${project.build.directory}/work/vertx-rx-java-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-rx-groovy-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-rx-js-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-reactive-streams/">
+                  <fileset dir="${project.build.directory}/work/vertx-reactive-streams-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mongo-service/">
+                  <fileset dir="${project.build.directory}/work/vertx-mongo-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-sql-common/">
+                  <fileset dir="${project.build.directory}/work/vertx-sql-common-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-jdbc-service/">
+                  <fileset dir="${project.build.directory}/work/vertx-jdbc-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mysql-postgresql-service/">
+                  <fileset dir="${project.build.directory}/work/vertx-mysql-postgresql-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-service/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-apex/">
+                  <fileset dir="${project.build.directory}/work/vertx-apex-docs-zip"/>
+                </copy>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>process-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Process all .adoc files to target/html -->
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.2</version>
+        <configuration>
+          <backend>html</backend>
+          <doctype>book</doctype>
+          <relativeBaseDir>true</relativeBaseDir>
+          <preserveDirectories>true</preserveDirectories>
+          <sourceHighlighter>prettify</sourceHighlighter>
+        </configuration>
+        <executions>
+          <execution>
+            <id>process-vertx-docs</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <attributes>
+                <toc>left</toc>
+              </attributes>
+              <sourceDirectory>${project.build.directory}/docs</sourceDirectory>
+              <outputDirectory>${project.build.directory}/html</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Zip html.zip and docs.zip -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <attach>true</attach>
+              <descriptors>
+                <descriptor>docs.xml</descriptor>
+                <descriptor>html.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

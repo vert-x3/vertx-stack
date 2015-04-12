@@ -66,6 +66,7 @@
 
   <modules>
     <module>stack-depchain</module>
+    <module>stack-docs</module>
     <module>stack-dist</module>
   </modules>
 
