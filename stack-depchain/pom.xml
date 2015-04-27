@@ -76,7 +76,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-jdbc-service</artifactId>
+      <artifactId>vertx-jdbc-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
