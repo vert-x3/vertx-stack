@@ -66,9 +66,9 @@ cd /home/work/vertx-sockjs && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=
 git clone --depth 1 https://github.com/vert-x3/vertx-embedded-mongo-db $GIT_BRANCH /home/work/vertx-embedded-mongo-db
 cd /home/work/vertx-embedded-mongo-db && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
 
-# Clone and install the vertx-mongo-service repository
-git clone --depth 1 https://github.com/vert-x3/vertx-mongo-service $GIT_BRANCH /home/work/vertx-mongo-service
-cd /home/work/vertx-mongo-service && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
+# Clone and install the vertx-mongo-client repository
+git clone --depth 1 https://github.com/vert-x3/vertx-mongo-client $GIT_BRANCH /home/work/vertx-mongo-client
+cd /home/work/vertx-mongo-client && /usr/local/apache-maven-3.0.5/bin/mvn -DskipTests=true install
 
 # Clone and install the vertx-metrics repository
 git clone --depth 1 https://github.com/vert-x3/vertx-metrics $GIT_BRANCH /home/work/vertx-metrics

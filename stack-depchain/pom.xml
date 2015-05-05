@@ -68,7 +68,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-service</artifactId>
+      <artifactId>vertx-mongo-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -92,11 +92,11 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mail-service</artifactId>
+      <artifactId>vertx-mail-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mysql-postgresql-service</artifactId>
+      <artifactId>vertx-mysql-postgresql-client</artifactId>
     </dependency>
   </dependencies>
 
