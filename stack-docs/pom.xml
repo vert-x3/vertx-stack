@@ -179,7 +179,7 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-service</artifactId>
+      <artifactId>vertx-auth</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
@@ -237,7 +237,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-service</artifactId>
+      <artifactId>vertx-auth</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -373,8 +373,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-mysql-postgresql-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mysql-postgresql-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-service/">
-                  <fileset dir="${project.build.directory}/work/vertx-auth-service-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-auth/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-apex/">
                   <fileset dir="${project.build.directory}/work/vertx-apex-docs-zip"/>

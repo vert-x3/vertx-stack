@@ -92,7 +92,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-service</artifactId>
+      <artifactId>vertx-auth</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
