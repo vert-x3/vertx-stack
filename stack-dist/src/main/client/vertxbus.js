@@ -49,11 +49,11 @@ var vertx = vertx || {};
 
     that.send = function(address, message, replyHandler) {
       sendOrPub("send", address, message, replyHandler)
-    }
+    };
 
     that.publish = function(address, message) {
       sendOrPub("publish", address, message, null)
-    }
+    };
 
     that.registerHandler = function(address, handler) {
       checkSpecified("address", 'string', address);
@@ -70,7 +70,7 @@ var vertx = vertx || {};
       } else {
         handlers[handlers.length] = handler;
       }
-    }
+    };
 
     that.unregisterHandler = function(address, handler) {
       checkSpecified("address", 'string', address);
@@ -89,17 +89,17 @@ var vertx = vertx || {};
           delete handlerMap[address];
         }
       }
-    }
+    };
 
     that.close = function() {
       checkOpen();
       state = vertx.EventBus.CLOSING;
       sockJSConn.close();
-    }
+    };
 
     that.readyState = function() {
       return state;
-    }
+    };
 
     sockJSConn.onopen = function() {
       // Send the first ping then send a ping every pingInterval milliseconds
@@ -153,12 +153,12 @@ var vertx = vertx || {};
           handler(body, replyHandler);
         }
       }
-    }
+    };
 
     function sendPing() {
       var msg = {
         type: "ping"
-      }
+      };
       sockJSConn.send(JSON.stringify(msg));
     }
 
@@ -200,7 +200,7 @@ var vertx = vertx || {};
     function makeUUID(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
         .replace(/[xy]/g,function(a,b){return b=Math.random()*16,(a=="y"?b&3|8:b|0).toString(16)})}
 
-  }
+  };
 
   vertx.EventBus.CONNECTING = 0;
   vertx.EventBus.OPEN = 1;
