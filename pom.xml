@@ -68,6 +68,10 @@
     <module>stack-depchain</module>
     <module>stack-docs</module>
     <module>stack-dist</module>
+
+    <module>docker/vertx-docker-base-image</module>
+    <module>docker/vertx-docker-executable</module>
+    <module>docker/vertx-docker-example</module>
   </modules>
 
   <!-- Relax the enforce rule in order to allow mongodb driver snapshtos -->
