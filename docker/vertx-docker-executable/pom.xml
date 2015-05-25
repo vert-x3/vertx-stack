@@ -12,6 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>vertx-docker-executable</artifactId>
+    <name>Vert.x Stack - Docker Image for Executable</name>
 
     <build>
         <plugins>
