@@ -1,0 +1,10 @@
+<assembly>
+  <dependencySets>
+    <dependencySet>
+      <includes>
+        <include>:vertx-docker-example</include>
+      </includes>
+      <outputDirectory>.</outputDirectory>
+    </dependencySet>
+  </dependencySets>
+</assembly>
