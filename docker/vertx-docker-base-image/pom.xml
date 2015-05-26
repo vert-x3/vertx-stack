@@ -2,101 +2,101 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-stack-parent</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
-    <artifactId>vertx-stack-docker-image</artifactId>
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-stack-parent</artifactId>
     <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <name>Vert.x Stack - Base Docker Image</name>
-    <packaging>pom</packaging>
+  <artifactId>vertx-stack-docker-image</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-stack-dist</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
-            <type>zip</type>
-        </dependency>
-    </dependencies>
+  <name>Vert.x Stack - Base Docker Image</name>
+  <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-stack-dist</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Copy the vert.x stack to target/work -->
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>unzip-vertx-stack</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-                            <outputDirectory>${project.build.directory}/work</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <!--
-                Copy a filtered version of the docker file, the output directory is used as dockerDirectory in the
-                docker maven plugin
-                -->
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>prepare-dockerfile</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/docker-filtered</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/docker</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.2.8</version>
-                <executions>
-                    <execution>
-                        <id>docker</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
-                    <imageName>vertx/vertx3</imageName>
-                    <resources>
-                        <resource>
-                            <targetPath>/usr/local</targetPath>
-                            <directory>${project.build.directory}/work</directory>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Copy the vert.x stack to target/work -->
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+        <executions>
+          <execution>
+            <id>unzip-vertx-stack</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <outputDirectory>${project.build.directory}/work</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!--
+        Copy a filtered version of the docker file, the output directory is used as dockerDirectory in the
+        docker maven plugin
+        -->
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>prepare-dockerfile</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/docker-filtered</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/docker</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.2.8</version>
+        <executions>
+          <execution>
+            <id>docker</id>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
+          <imageName>vertx/vertx3</imageName>
+          <resources>
+            <resource>
+              <targetPath>/usr/local</targetPath>
+              <directory>${project.build.directory}/work</directory>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

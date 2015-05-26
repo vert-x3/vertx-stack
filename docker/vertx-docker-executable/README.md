@@ -17,3 +17,10 @@ Just launch:
 `docker run -i -t vertx/vertx3-executable`
 
 Append the `vertx` command parameter you need.
+
+for instance:
+
+```
+> docker run -i -t vertx/vertx3-executable -version
+3.0.0-SNAPSHOT 
+```
