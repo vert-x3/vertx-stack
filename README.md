@@ -12,7 +12,7 @@ The Vert.x stack : Vert.x + the endorsed modules
 
 ### Maven
 
-This project provides preconfigured Maven poms for using in your projects, allowing you to consume the Vert.x stack
+This project provides pre-configured Maven poms for using in your projects, allowing you to consume the Vert.x stack
 easily.
 
 #### Dependency chain (_Maven depchain_)
@@ -59,24 +59,14 @@ Therefore it should be used with explicit dependencies:
 
 ### Docker
 
-To build docker images, you need docker1.3+ and run docker-build-images.sh
-It will build two images :
-- vertx3
-- vertx3-exec
+To build docker images, you need docker1.3+ and run `mvn clean install -Pdocker`
+It builds four images :
+- vert.x3 base - the base image provisionning the vert.x stack (`vertx/vertx3`)
+- vert.x3 executable - an image providing the vert.x command (`vertx/vertx3-executable`)
+- vert.x3 docker example - an example of verticle using the base image (`vertx/vertx3-example`)
+- vert.x3 docker example for fabric 8 - an example of verticle that you can deploy on fabric8 
+(`vertx/vertx3-example-fabric8`) 
 
-#### Classical image
-
-The eclipse/vertx3 is the previous refactored image with official java 8 image from Docker (since 1.3+)
-An environment variable is added to choose the Git Branch : GIT_BRANCH with default value "-b master".
-Now you can log into container and execute again "install.sh" to build clone source and launch maven tasks. 
-
-#### Executable image
-
-A second image is added to have a executable container: eclipse/vertx3-exec.
-So you can run from boot2docker for example
-
-➜  docker run eclipse/vertx3-exec -version
-
-➜  3.0.0-SNAPSHOT
+All images have a _readme_ file containing their documentation and build instructions.
 
 

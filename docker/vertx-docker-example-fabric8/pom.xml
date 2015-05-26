@@ -68,7 +68,8 @@
                   <port>8080</port>
                 </ports>
                 <command>vertx run io.vertx.example.HelloWorldVerticle -cp
-                  /usr/verticles/${project.artifactId}-${project.version}.jar</command>
+                  /usr/verticles/${project.artifactId}-${project.version}.jar
+                </command>
                 <assembly>
                   <mode>dir</mode>
                   <basedir>/usr/verticles</basedir>
