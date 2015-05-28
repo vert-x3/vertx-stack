@@ -12,6 +12,10 @@
         <include>commons-beanutils:commons-beanutils</include>
 
         <include>io.vertx:vertx-web:jar</include>
+        <include>org.thymeleaf:thymeleaf</include>
+        <include>com.github.jknack:handlebars</include>
+        <include>de.neuland-bfi:jade4j</include>
+        <include>org.mvel:mvel2</include>
 
       </includes>
     </dependencySet>
