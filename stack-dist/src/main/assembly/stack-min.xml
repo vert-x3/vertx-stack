@@ -5,13 +5,28 @@
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
       <outputDirectory>/lib/</outputDirectory>
-      <excludes>
-        <exclude>junit:junit</exclude>
-        <exclude>org.mvel:mvel2</exclude>
-        <exclude>log4j:log4j</exclude>
-        <exclude>org.slf4j:slf4j-api</exclude>
-        <exclude>org.hamcrest:hamcrest-core</exclude>
-      </excludes>
+      <includes>
+
+        <include>io.vertx:vertx-core</include>
+        <include>io.netty:netty-all</include>
+        <include>com.fasterxml.jackson.core:jackson-core</include>
+        <include>com.fasterxml.jackson.core:jackson-databind</include>
+
+        <include>io.vertx:vertx-hazelcast</include>
+        <include>io.vertx:vertx-hazelcast</include>
+        <include>com.hazelcast:hazelcast</include>
+
+        <include>io.vertx:vertx-service-proxy</include>
+
+        <include>io.vertx:vertx-lang-js</include>
+
+        <include>io.vertx:vertx-lang-ruby</include>
+        <include>org.jruby:jruby-complete</include>
+
+        <include>io.vertx:vertx-lang-groovy</include>
+        <include>org.codehaus.groovy:groovy-all</include>
+
+      </includes>
     </dependencySet>
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
@@ -34,12 +49,5 @@
       <outputDirectory>.</outputDirectory>
     </fileSet>
   </fileSets>
-  <files>
-    <file>
-      <outputDirectory>/client</outputDirectory>
-      <destName>vertxbus-${project.version}.js</destName>
-      <source>src/main/client/vertxbus.js</source>
-    </file>
-  </files>
 
 </component>

@@ -5,10 +5,29 @@ The Vert.x stack : Vert.x + the endorsed modules
 
 ### Distributions
 
-- [zip snapshot](https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=io.vertx&a=vertx-stack-dist&v=3.0.0-SNAPSHOT&e=zip)
-- [tgz snapshot](https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=io.vertx&a=vertx-stack-dist&v=3.0.0-SNAPSHOT&e=tar.gz)
-- [Docker base image](https://registry.hub.docker.com/u/vertx/vertx3/)
-- [Docker executable image](https://registry.hub.docker.com/u/vertx/vertx3-exec/)
+#### Vert.x min
+
+- Vert.x Core
+- Groovy, JS and Ruby languages
+- Hazelcast clustering
+- Service proxy
+
+#### Vert.x base
+
+Based on Vert.x min:
+
+- Reactive programming
+- Services deployment
+- Vert.x Unit
+- Dropwizard Metrics
+
+#### Vert.x full
+
+Based on Vert.x base:
+
+- Auth + Web components
+- Data components
+- Mail service
 
 ### Maven
 

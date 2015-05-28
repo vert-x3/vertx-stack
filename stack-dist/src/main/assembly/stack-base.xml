@@ -1,0 +1,49 @@
+<component xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.2 http://maven.apache.org/xsd/component-1.1.2.xsd">
+
+  <dependencySets>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>/lib/</outputDirectory>
+      <includes>
+
+        <include>io.vertx:vertx-service-factory</include>
+        <include>io.vertx:vertx-maven-service-factory</include>
+        <include>org.apache.maven:maven-aether-provider</include>
+        <include>org.apache.maven:maven-model</include>
+        <include>org.apache.maven:maven-model-builder</include>
+        <include>org.apache.maven:maven-repository-metadata</include>
+        <include>org.codehaus.plexus:plexus-interpolation</include>
+        <include>org.codehaus.plexus:plexus-utils</include>
+        <include>org.eclipse.aether:aether-api</include>
+        <include>org.eclipse.aether:aether-connector-basic</include>
+        <include>org.eclipse.aether:aether-transport-file</include>
+        <include>org.eclipse.aether:aether-transport-http</include>
+        <include>org.eclipse.aether:aether-spi</include>
+        <include>org.eclipse.aether:aether-impl</include>
+        <include>org.eclipse.aether:aether-util</include>
+        <include>org.apache.httpcomponents:httpclient</include>
+        <include>org.apache.httpcomponents:httpcore</include>
+        <include>commons-codec:commons-codec</include>
+
+        <include>io.vertx:vertx-http-service-factory</include>
+        <include>org.bouncycastle:bcpg-jdk15on</include>
+        <include>org.bouncycastle:bcprov-jdk15on</include>
+
+        <include>io.vertx:vertx-unit</include>
+
+        <include>io.vertx:vertx-dropwizard-metrics</include>
+        <include>io.dropwizard.metrics:metrics-core</include>
+
+        <include>io.vertx:vertx-reactive-streams</include>
+        <include>org.reactivestreams:reactive-streams</include>
+
+        <include>io.vertx:vertx-rx-*</include>
+        <include>io.reactivex:rxjava</include>
+        <include>io.reactivex:rxgroovy</include>
+
+      </includes>
+    </dependencySet>
+  </dependencySets>
+
+</component>
