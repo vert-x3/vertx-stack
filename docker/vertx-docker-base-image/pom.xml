@@ -22,6 +22,7 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-dist</artifactId>
       <version>3.0.0-SNAPSHOT</version>
+      <classifier>full</classifier>
       <type>zip</type>
     </dependency>
   </dependencies>
@@ -42,6 +43,7 @@
             </goals>
             <configuration>
               <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <includeClassifiers>full</includeClassifiers>
               <outputDirectory>${project.build.directory}/work</outputDirectory>
             </configuration>
           </execution>
