@@ -11,6 +11,7 @@
         <include>io.netty:netty-all</include>
         <include>com.fasterxml.jackson.core:jackson-core</include>
         <include>com.fasterxml.jackson.core:jackson-databind</include>
+        <include>com.fasterxml.jackson.core:jackson-annotations</include>
 
         <include>io.vertx:vertx-hazelcast</include>
         <include>io.vertx:vertx-hazelcast</include>
