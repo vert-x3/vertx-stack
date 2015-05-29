@@ -29,13 +29,13 @@
     </license>
   </licenses>
 
-<!--
-  <scm>
-    <connection>scm:git:git@github.com:eclipse/vert.x.git</connection>
-    <developerConnection>scm:git:git@github.com:eclipse/vert.x.git</developerConnection>
-    <url>git@github.com:eclipse/vert.x.git</url>
-  </scm>
--->
+  <!--
+    <scm>
+      <connection>scm:git:git@github.com:eclipse/vert.x.git</connection>
+      <developerConnection>scm:git:git@github.com:eclipse/vert.x.git</developerConnection>
+      <url>git@github.com:eclipse/vert.x.git</url>
+    </scm>
+  -->
 
   <properties>
     <stack.version>3.0.0-SNAPSHOT</stack.version>
@@ -101,6 +101,16 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <!-- as the docker module requires docker to be installed, there are built an their own profile -->
+      <id>docker</id>
+      <modules>
+        <module>docker/vertx-docker-base-image</module>
+        <module>docker/vertx-docker-executable</module>
+        <module>docker/vertx-docker-example</module>
+        <module>docker/vertx-docker-example-fabric8</module>
+      </modules>
     </profile>
   </profiles>
 
