@@ -100,6 +100,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-mail-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mail-service</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -245,6 +252,12 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-mail-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mail-service</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
@@ -378,6 +391,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/">
                   <fileset dir="${project.build.directory}/work/vertx-dropwizard-metrics-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mail-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mail-service/">
                   <fileset dir="${project.build.directory}/work/vertx-mail-service-docs-zip"/>
