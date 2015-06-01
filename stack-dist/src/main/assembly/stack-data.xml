@@ -29,6 +29,7 @@
         <include>org.scala-lang:scala-library</include>
         <include>com.github.mauricio:postgresql-async_2.11</include>
         <include>com.github.mauricio:mysql-async_2.11</include>
+        <include>com.github.mauricio:db-async-common_2.11</include>
         <include>joda-time:joda-time</include>
         <include>org.joda:joda-convert</include>
         <include>org.javassist:javassist</include>

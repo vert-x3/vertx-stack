@@ -25,6 +25,8 @@
         <include>org.apache.httpcomponents:httpclient</include>
         <include>org.apache.httpcomponents:httpcore</include>
         <include>commons-codec:commons-codec</include>
+        <include>org.slf4j:slf4j-api</include>
+        <include>org.slf4j:jcl-over-slf4j</include>
 
         <include>io.vertx:vertx-http-service-factory</include>
         <include>org.bouncycastle:bcpg-jdk15on</include>
