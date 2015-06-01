@@ -31,7 +31,13 @@
         </executions>
         <configuration>
           <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
-          <imageName>vertx/vertx3-executable</imageName>
+          <imageName>vertx/vertx3-exec</imageName>
+          <imageTags>
+            <tag>${project.version}</tag>
+          </imageTags>
+          <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+          <serverId>docker-hub</serverId>
+          <registryUrl>https://index.docker.io/v1/</registryUrl>
         </configuration>
       </plugin>
     </plugins>

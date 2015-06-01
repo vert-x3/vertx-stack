@@ -91,12 +91,18 @@
         <configuration>
           <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
           <imageName>vertx/vertx3</imageName>
+          <imageTags>
+            <tag>${project.version}</tag>
+          </imageTags>
           <resources>
             <resource>
               <targetPath>/usr/local</targetPath>
               <directory>${project.build.directory}/work</directory>
             </resource>
           </resources>
+          <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+          <serverId>docker-hub</serverId>
+          <registryUrl>https://index.docker.io/v1/</registryUrl>
         </configuration>
       </plugin>
     </plugins>

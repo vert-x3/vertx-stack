@@ -90,4 +90,26 @@ It builds four images :
 
 All images have a _readme_ file containing their documentation and build instructions.
 
+#### Pushing Docker image to Docker Hub
+
+The images can be pushed to Docker Hub. Before, be sure you are in the _vertx_ organisation on docker hub (https://registry.hub.docker.com/repos/vertx/). Then, add your credentials into `~/.m2/settings.xml`:
+
+```
+<server>
+  <id>docker-hub</id>
+  <username>username</username>
+  <password>password</password>
+  <configuration>
+    <email>email</email>
+  </configuration>
+</server>
+```
+
+Once done, in the `vertx-docker-base-image` and `vertx-docker-executable` project just launch:
+
+```
+mvn docker:push
+```
+
+**WARNING**: This is going to take a while.....
 
