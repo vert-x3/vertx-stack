@@ -106,10 +106,7 @@
       <!-- as the docker module requires docker to be installed, there are built an their own profile -->
       <id>docker</id>
       <modules>
-        <module>docker/vertx-docker-base-image</module>
-        <module>docker/vertx-docker-executable</module>
-        <module>docker/vertx-docker-example</module>
-        <module>docker/vertx-docker-example-fabric8</module>
+        <module>docker</module>
       </modules>
     </profile>
   </profiles>
