@@ -522,7 +522,7 @@ docker run -i -t -p 8080:8080 \
 This command mount the current directory into `/verticles` and then launch the `vertx run` command. Notice the `-cp`
 parameter reusing the `/verticles` directory.
 
-=== Deploying a vert.x application packaged as a fat jar in a docker container
+== Deploying a vert.x application packaged as a fat jar in a docker container
 
 It is also possible to deploy a Vert.x application packaged as a _fat jar_ into a docker container. For this no need
 of the image provided by Vert.x, you can directly use a base _Java_ image. Let's have a look.
