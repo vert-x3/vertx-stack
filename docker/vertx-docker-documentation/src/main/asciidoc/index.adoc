@@ -1,0 +1,555 @@
+# Vert.x Docker Images
+
+Execute Vert.x application in Docker containers.
+
+== Introduction
+
+https://www.docker.com/[Docker] lets you deploy applications inside lightweight and isolated software containers.
+Applications run side by side in isolated Linux containers. If you never used Docker before check this online https://www.docker.com/tryit/[tutorial]. Vert.x provides Docker images that you can use to run your applications.
+
+Two Docker images are provided:
+
+* `vertx/vertx3` is the base image you need to extend to run your own application
+* `vertx/vertx3-exec` is providing the `vertx` command to your system without having to install `vert.x` yourself.
+
+The images are available from https://registry.hub.docker.com/repos/vertx/[Docker Hub].
+
+== The base image
+
+The base image (`vertx/vertx3`) let you run your vert.x application in a Docker container. For this, you must
+_extend_ the image to deploy your own application. Your application is then launched using the `vertx` command (but in
+ the container).
+
+=== Deploying a JavaScript verticle in a docker container
+
+Let's start with a simple JavaScript verticle such as:
+
+.hello-verticle.js
+[source, javascript]
+----
+vertx.createHttpServer().requestHandler(function (request) {
+    request.response().end("Hello world");
+}).listen(8080);
+----
+
+Create in the same directory a `Dockerfile` with the following content:
+
+.Dockerfile
+[source]
+----
+# Extend vert.x image                       <1>
+FROM vertx/vertx3
+
+# Set the name of the verticle to deploy    <2>
+ENV VERTICLE_NAME hello-verticle.js
+
+# Set the location of the verticles         <3>
+ENV VERTICLE_HOME /usr/verticles
+
+EXPOSE 8080
+
+# Copy your verticle to the container       <4>
+COPY $VERTICLE_NAME $VERTICLE_HOME/
+
+# Launch the verticle                       <5>
+WORKDIR $VERTICLE_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+----
+<1> First extend the image provided by vert.x
+<2> Set the name of the verticle
+<3> It sets the location in the container where the verticle file is placed
+<4> Copy the verticle
+<5> Instructions to launch the verticle
+
+Then do build the image, just launch: `docker build -t sample/vertx-javascript .`. Then, run it with `docker run -t -i -p 8080:8080 sample/vertx-javascript`:
+
+[source]
+----
+> docker run -t -i -p 8080:8080 sample/vertx-javascript
+Succeeded in deploying verticle
+----
+
+To see the result open a browser to http://localhost:8080 or http://192.168.59.103:8080 if your are using boot2docker.
+
+You may have notice the `EXPOSE 8080` in the `Dockerfile` and the `-p 8080:8080` in the `run` command. The first one
+is just an optional information telling that the application wants to listen the port 8080. The second one is
+mandatory and instructs docker to forward the port 8080 from the host to the 8080 of the container.
+
+=== Deploying a Groovy verticle in a docker container
+
+Running a groovy verticle in a docker container is not much different. Instead of the `hello-verticle.js` from the
+previous example, we now have a `hello-verticle.groovy`:
+
+.hello-verticle.groovy
+[source, groovy]
+----
+vertx.createHttpServer().requestHandler({ request ->
+    request.response().end("Groovy world")
+}).listen(8080)
+----
+
+So, in the `Dockerfile` we just change the file name:
+
+.Dockerfile
+[source]
+----
+# Extend vert.x image
+FROM vertx/vertx3
+
+# Set the name of the verticle to deploy
+ENV VERTICLE_NAME hello-verticle.groovy
+
+# Set the location of the verticles
+ENV VERTICLE_HOME /usr/verticles
+
+EXPOSE 8080
+
+# Copy your verticle to the container
+COPY $VERTICLE_NAME $VERTICLE_HOME/
+
+# Launch the verticle
+WORKDIR $VERTICLE_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+----
+
+The build an run instructions are very close to the previous ones:
+
+[source]
+----
+> docker build -t sample/vertx-groovy .
+....
+> docker run -t -i -p 8080:8080 sample/vertx-groovy
+----
+
+=== Deploying a Ruby verticle in a docker container
+
+Running a groovy verticle in a docker container is not much different. Instead of the `hello-verticle.js/groovy` from
+ the previous examples, we now have a `hello-verticle.rb`:
+
+.hello-verticle.groovy
+[source, ruby]
+----
+$vertx.create_http_server().request_handler() { |request|
+    request.response().end("A ruby world full of gems")
+}.listen(8080)
+----
+
+So, in the `Dockerfile` we just change the file name:
+
+.Dockerfile
+[source]
+----
+# Extend vert.x image
+FROM vertx/vertx3
+
+# Set the name of the verticle to deploy
+ENV VERTICLE_NAME hello-verticle.rb
+
+# Set the location of the verticles
+ENV VERTICLE_HOME /usr/verticles
+
+EXPOSE 8080
+
+# Copy your verticle to the container
+COPY $VERTICLE_NAME $VERTICLE_HOME/
+
+# Launch the verticle
+WORKDIR $VERTICLE_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+----
+
+The build and run instructions are very close to the previous ones:
+
+[source]
+----
+> docker build -t sample/vertx-ruby .
+....
+> docker run -t -i -p 8080:8080 sample/vertx-ruby
+----
+
+=== Deploying a Java verticle in a docker container
+
+So, now let's see how to deploy a Java verticle. Again it's not different from the previous example, except that we
+copy the verticle _jar_ file to the container. Let's take the following verticle:
+
+.io.vertx.sample.hello.HelloVerticle
+[source, java]
+----
+package io.vertx.sample.hello;
+
+import io.vertx.core.AbstractVerticle;
+
+public class HelloVerticle extends AbstractVerticle {
+
+  @Override
+  public void start() throws Exception {
+    vertx.createHttpServer().requestHandler(request -> {
+      request.response().end("Hello Java world");
+    }).listen(8080);
+  }
+}
+----
+
+Let's now image that this verticle is packaged into `target/hello-verticle-1.0.-SNAPSHOT.jar`. So the `Dockerfile`
+needs to copy this file but also gives to vert.x the verticle class name:
+
+.Dockerfile
+----
+# Extend vert.x image
+FROM vertx/vertx3
+
+#                                                       <1>
+ENV VERTICLE_NAME io.vertx.sample.hello.HelloVerticle
+ENV VERTICLE_FILE target/hello-verticle-1.0-SNAPSHOT.jar
+
+# Set the location of the verticles
+ENV VERTICLE_HOME /usr/verticles
+
+EXPOSE 8080
+
+# Copy your verticle to the container
+COPY $VERTICLE_FILE $VERTICLE_HOME/
+
+# Launch the verticle
+WORKDIR $VERTICLE_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+----
+<1> Unlike the previous examples, here we set the verticle class name and the jar file
+
+Build and run instructions do not change:
+
+[source]
+----
+> docker build -t sample/vertx-java .
+....
+> docker run -t -i -p 8080:8080 sample/vertx-java
+----
+
+=== Configuration
+
+The previous `Dockerfile`s did not configure vert.x. Let's see how such configuration can be added.
+
+==== Configuring the Java Virtual Machine
+
+You can configure the Java Virtual Machine using the `JAVA_OPTS` environment variable. So in the `Dockerfile` adds:
+
+[source]
+----
+ENV JAVA_OPTS "-Dfoo=bar"
+----
+
+==== VERTX_OPTS
+
+System variable specific to vert.x can be configure using the `VERTX_OPTS` environment variable:
+
+[source]
+----
+ENV VERTX_OPTS "-Dvertx.options.eventLoopPoolSize=26 -Dvertx.options.deployment.worker=true"
+----
+
+==== Classpath
+
+You can configure the classpath of the application using either the `-cp` parameter of the vert.x command or the
+`CLASSPATH` environment variable:
+
+[source]
+----
+ENV CLASSPATH "/usr/verticles/libs/foo.jar:/usr/verticles/libs/bar.jar:"
+----
+
+==== Logging
+
+To configure the `logging.properties` file (that let you customize JUL loggers`), set the `VERTX_JUL_CONFIG`
+environment variables:
+
+[source]
+----
+COPY ./logging.properties $VERTICLE_HOME/
+ENV VERTX_JUL_CONFIG $VERTICLE_HOME/logging.properties
+----
+
+==== Clustering
+
+You can provide your own `cluster.xml` file, and add it to the classpath. To build a dynamic classpath from all the
+file contained in `$VERTICLE_HOME` you can use:
+
+[source]
+----
+COPY ./cluster.xml $VERTICLE_HOME/
+# ...
+CMD [export CLASSPATH=`find $VERTICLE_HOME -printf '%p:' | sed 's/:$//'`; vertx run $VERTICLE_NAME $VERTX_OPTIONS"]
+----
+
+=== Build Docker Images with Maven
+
+There are a couple of Maven plugin to build your Docker image during your Maven build process. This example uses the https://github.com/spotify/docker-maven-plugin[docker-maven-plugin] from Spotify.
+
+First, create your Java project as usual. So your sources are located in `src/main/java`... Then create a
+`src/main/docker` directory and create a `Dockerfile` inside:
+
+[source]
+----
+.
+├── pom.xml
+├── src
+│   └── main
+│       ├── docker
+│       │   └── Dockerfile
+│       └── java
+│           └── io
+│               └── vertx
+│                   └── example
+│                       └── HelloWorldVerticle.java
+├── target
+----
+
+In the `pom.xml` file add the following plugin configuration
+
+[source, xml]
+----
+<groupId>com.spotify</groupId>
+<artifactId>docker-maven-plugin</artifactId>
+<version>0.2.8</version>
+<executions>
+  <execution>
+    <id>docker</id>
+    <phase>package</phase>
+    <goals>
+      <goal>build</goal>
+    </goals>
+  </execution>
+</executions>
+<configuration>
+  <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+  <!-- Configure the image name -->
+  <imageName>sample/vertx-hello</imageName>
+  <resources>
+    <resource>
+      <targetPath>/verticles</targetPath>
+      <directory>${project.build.directory}</directory>
+      <includes>
+        <include>${project.artifactId}-${project.version}.jar</include>
+      </includes>
+    </resource>
+    <!-- don't forget to also add all the dependencies required by your application -->
+  </resources>
+</configuration>
+</plugin>
+----
+
+The plugin copy the listed content into `target/docker`. Each resource is copied into the set `targetPath`. So edit the
+ `src/main/docker/Dockerfile` and add the following content:
+
+[source]
+----
+FROM vertx/vertx3
+
+ENV VERTICLE_HOME /usr/verticles
+ENV VERTICLE_NAME io.vertx.example.HelloWorldVerticle
+
+COPY ./verticles $VERTICLE_HOME
+
+ENTRYPOINT ["sh", "-c"]
+CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+----
+
+It's basically the `Dockerfiles` we saw above. The copy is a bit different as the plugin have placed files in the
+same directory as the `Dockerfile`.
+
+Once configured the image is built using: `mvn clean package`
+
+=== Build Docker Images for Fabric 8
+
+http://fabric8.io/[Fabric 8] is an open source set of micro-services that run on top of Kubernetes and OpenShift V3 to
+ provide management, continuous delivery and iPaas facilities. You can execute vert.x application on top of Fabric 8
+ by packaging them into a Docker image. However, additional metadata is required. In this example, we are going to
+ use the https://github.com/rhuss/docker-maven-plugin[docker-maven-plugin] from jolokia.
+
+Let's set up the following structure:
+
+[source]
+----
+.
+├── pom.xml
+├── src
+│   └── main
+│       ├── docker
+│       │   └── assembly.xml
+│       └── java
+│           └── io
+│               └── vertx
+│                   └── example
+│                       └── HelloWorldVerticle.java
+└── target
+----
+
+Unlike the maven plugin from Spotify, this plugin takes an `assembly.xml` as input. The file lists all the files that
+ need to be copied to the docker container such as:
+
+[source, xml]
+----
+ <assembly>
+   <dependencySets>
+     <dependencySet>
+       <includes>
+         <include>:${project.artifactId}</include>
+       </includes>
+       <outputDirectory>.</outputDirectory>
+     </dependencySet>
+   </dependencySets>
+ </assembly>
+----
+
+The rest of the `Dockerfile configuration is given in the `pom.xml` file. Add the following plugin to the `pom.xml`
+ file:
+
+[source,xml]
+----
+ <plugin>
+  <groupId>org.jolokia</groupId>
+  <artifactId>docker-maven-plugin</artifactId>
+  <version>0.11.5</version>
+  <executions>
+    <execution>
+      <id>build</id>
+      <phase>package</phase>
+      <goals>
+        <goal>build</goal>
+      </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <images>
+      <image>
+        <name>${docker.image}</name>
+        <build>
+          <from>vertx/vertx3</from>
+          <tags>
+            <tag>${project.version}</tag>
+          </tags>
+          <ports>
+            <port>8080</port>
+          </ports>
+          <command>vertx run io.vertx.example.HelloWorldVerticle -cp
+            /usr/verticles/${project.artifactId}-${project.version}.jar
+          </command>
+          <assembly>
+            <mode>dir</mode>
+            <basedir>/usr/verticles</basedir>
+            <descriptor>assembly.xml</descriptor>
+          </assembly>
+        </build>
+      </image>
+    </images>
+  </configuration>
+ </plugin>
+----
+
+To configure the container more finally, check the plugin page. All the _instructions_ we put in the `Dockerfile` can
+be set from the plugin.
+
+Once you have this configuration in place, we need a second plugin to generate the metadata required by Fabric8:
+
+[source, xml]
+----
+<plugin>
+<groupId>io.fabric8</groupId>
+<artifactId>fabric8-maven-plugin</artifactId>
+<version>2.1.4</version>
+<executions>
+  <execution>
+    <id>json</id>
+    <phase>generate-resources</phase>
+    <goals>
+      <goal>json</goal>
+    </goals>
+  </execution>
+  <execution>
+    <id>attach</id>
+    <phase>package</phase>
+    <goals>
+      <goal>attach</goal>
+    </goals>
+  </execution>
+</executions>
+</plugin>
+----
+
+Once set up, you can build your docker image with: `mvn clean package`. It creates the `kubernates.json` file
+required by Fabric8. Then push your image on the Docker Registry provided by Fabric8:
+
+[source, sh]
+----
+docker push $DOCKER_REGISTRY/sample/vertx-hello
+----
+
+The last step is to apply it with:
+
+[source,sh]
+----
+mvn io.fabric8:fabric8-maven-plugin:2.1.4:apply
+----
+
+== The executable image
+
+The `vertx/vertx3-exec` image provides the `vertx` command to the host. So no need to install vert.x on your machine,
+ you can just use this docker image.
+
+For instance:
+
+[source, shell]
+----
+> docker run -i -t vertx/vertx3-exec -version
+3.0.0-SNAPSHOT
+----
+
+To run a verticle, launch:
+
+If you want to run a verticle:
+
+[source, shell]
+----
+docker run -i -t -p 8080:8080 \
+    -v $PWD:/verticles vertx/vertx3-exec \
+    run io.vertx.sample.RandomGeneratorVerticle \
+    -cp /verticles/MY_VERTICLE.jar
+----
+
+This command mount the current directory into `/verticles` and then launch the `vertx run` command. Notice the `-cp`
+parameter reusing the `/verticles` directory.
+
+=== Deploying a vert.x application packaged as a fat jar in a docker container
+
+It is also possible to deploy a Vert.x application packaged as a _fat jar_ into a docker container. For this no need
+of the image provided by Vert.x, you can directly use a base _Java_ image. Let's have a look.
+
+First, be sure your application is packaged as a _fat jar_. Then, use the followinf `Dockerfile`:
+
+[source]
+----
+FROM java:8
+
+ENV VERTICLE_FILE hello-verticle-fatjar-3.0.0-SNAPSHOT-fat.jar
+
+# Set the location of the verticles
+ENV VERTICLE_HOME /usr/verticles
+
+EXPOSE 8080
+
+# Copy your fat jar to the container
+COPY target/$VERTICLE_FILE $VERTICLE_HOME/
+
+# Launch the verticle
+WORKDIR $VERTICLE_HOME
+ENTRYPOINT ["sh", "-c"]
+CMD ["java -jar $VERTICLE_FILE"]
+----
+
+It's basically the same `Dockerfile` as before. However, this time we extend `java:8` instead of the `vertx/vertx3`
+image. We then copy the fat jar to the container, and launch it directly. All the configuration settings presented
+above are still valid.
+
