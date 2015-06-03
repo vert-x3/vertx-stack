@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-stack-parent</artifactId>
+    <artifactId>vertx-docker-images</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
@@ -64,7 +64,7 @@
               <targetPath>/verticles</targetPath>
               <directory>${project.build.directory}</directory>
               <includes>
-                <include>vertx-docker-example-${project.version}.jar</include>
+                <include>${project.artifactId}-${project.version}.jar</include>
               </includes>
             </resource>
           </resources>
