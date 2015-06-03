@@ -102,9 +102,15 @@
         </plugins>
       </build>
     </profile>
+
     <profile>
-      <!-- as the docker module requires docker to be installed, there are built an their own profile -->
+      <!-- Use -DskipDocker as the docker module requires docker to be installed, there are built an their own profile -->
       <id>docker</id>
+      <activation>
+        <property>
+          <name>!skipDocker</name>
+        </property>
+      </activation>
       <modules>
         <module>docker/vertx-docker-base-image</module>
         <module>docker/vertx-docker-executable</module>
