@@ -62,12 +62,18 @@ CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 <4> Copy the verticle
 <5> Instructions to launch the verticle
 
-Then do build the image, just launch: `docker build -t sample/vertx-javascript .`. Then, run it with `docker run -t -i -p 8080:8080 sample/vertx-javascript`:
+Then do build the image, just launch:
 
-[source]
+[source, shell]
 ----
-> docker run -t -i -p 8080:8080 sample/vertx-javascript
-Succeeded in deploying verticle
+docker build -t sample/vertx-javascript .
+----
+
+Then, run it with:
+
+[source, shell]
+----
+docker run -t -i -p 8080:8080 sample/vertx-javascript
 ----
 
 To see the result open a browser to http://localhost:8080 or http://192.168.59.103:8080 if your are using boot2docker.
