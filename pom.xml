@@ -66,10 +66,10 @@
 
   <modules>
     <!-- docker documentation must be built regardless we build the image -->
-    <module>docker/vertx-docker-documentation</module>
     <module>stack-depchain</module>
-    <module>stack-docs</module>
     <module>stack-dist</module>
+    <module>stack-docker</module>
+    <module>stack-docs</module>
   </modules>
 
   <!-- Relax the enforce rule in order to allow mongodb driver snapshtos -->
@@ -114,7 +114,10 @@
         </property>
       </activation>
       <modules>
-        <module>docker</module>
+        <module>docker-examples/vertx-docker-java</module>
+        <module>docker-examples/vertx-docker-java-fatjar</module>
+        <module>docker-examples/vertx-docker-example</module>
+        <module>docker-examples/vertx-docker-example-fabric8</module>
       </modules>
     </profile>
   </profiles>

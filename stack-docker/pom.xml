@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-stack-parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>vertx-stack-docker</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+
+  <name>Vert.x Stack - Base Docker Image</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-stack-dist</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+      <classifier>full</classifier>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+
+    <profile>
+      <!-- Use -DskipDocker as the docker module requires docker to be installed, there are built an their own profile -->
+      <id>docker</id>
+      <activation>
+        <property>
+          <name>!skipDocker</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- Copy the vert.x stack to target/work -->
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.10</version>
+            <executions>
+              <execution>
+                <id>unzip-vertx-stack</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>unpack-dependencies</goal>
+                </goals>
+                <configuration>
+                  <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+                  <includeClassifiers>full</includeClassifiers>
+                  <outputDirectory>${project.build.directory}/work</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <!--
+            Copy a filtered version of the docker file, the output directory is used as dockerDirectory in the
+            docker maven plugin
+            -->
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.7</version>
+            <executions>
+              <execution>
+                <id>prepare-dockerfile</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/docker-filtered</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/docker/base</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.2.8</version>
+            <executions>
+
+              <execution>
+                <id>base-image</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
+                  <imageName>vertx/vertx3</imageName>
+                  <!-- Tags should only be enabled during release -->
+                  <!--<imageTags>-->
+                  <!--<tag>${project.version}</tag>-->
+                  <!--</imageTags>-->
+                  <resources>
+                    <resource>
+                      <targetPath>/usr/local</targetPath>
+                      <directory>${project.build.directory}/work</directory>
+                    </resource>
+                  </resources>
+                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+                  <serverId>docker-hub</serverId>
+                  <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>exec</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <dockerDirectory>${project.basedir}/src/main/docker/exec</dockerDirectory>
+                  <imageName>vertx/vertx3-exec</imageName>
+                  <!-- Tags should only be enabled during release -->
+                  <!--<imageTags>-->
+                  <!--<tag>${project.version}</tag>-->
+                  <!--</imageTags>-->
+                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+                  <serverId>docker-hub</serverId>
+                  <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
+              </execution>
+
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <!-- Use -DskipDoc to avoid building doc -->
+      <id>doc</id>
+      <activation>
+        <property>
+          <name>!skipDoc</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>1.5.2</version>
+            <executions>
+              <execution>
+                <id>output-html</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>process-asciidoc</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <sourceDirectory>${asciidoc.dir}</sourceDirectory>
+              <outputDirectory>${project.build.directory}/docs/docker</outputDirectory>
+              <backend>html</backend>
+              <doctype>book</doctype>
+              <preserveDirectories>true</preserveDirectories>
+              <relativeBaseDir>true</relativeBaseDir>
+              <sourceHighlighter>prettify</sourceHighlighter>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>assemble</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <attach>true</attach>
+                  <descriptors>
+                    <descriptor>${basedir}/src/main/assembly/docs.xml</descriptor>
+                  </descriptors>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
