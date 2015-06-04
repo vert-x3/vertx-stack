@@ -10,7 +10,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <name>Vert.x Stack - Sample Docker Image for Java - Fat Jar</name>
+  <name>Vert.x Stack - Sample Docker Image for Java - FatJar</name>
   <artifactId>hello-verticle-fatjar</artifactId>
 
   <dependencies>
@@ -58,7 +58,7 @@
               </transformers>
               <artifactSet>
               </artifactSet>
-              <outputFile>${project.build.directory}/${artifactId}-${project.version}-fat.jar</outputFile>
+              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
             </configuration>
           </execution>
         </executions>
