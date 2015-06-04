@@ -14,14 +14,14 @@ Notice that you need to have docker installed on your machine.
 
 Just launch:
  
-`docker run -i -t vertx/vertx3-executable`
+`docker run -i -t vertx/vertx3-exec`
 
 Append the `vertx` command parameter you need.
 
 for instance:
 
 ```
-> docker run -i -t vertx/vertx3-executable -version
+> docker run -i -t vertx/vertx3-exec -version
 3.0.0-SNAPSHOT 
 ```
 
@@ -29,7 +29,7 @@ If you want to run a verticle:
 
 ```
 docker run -i -t -p 8080:8080 \ 
-    -v $PWD:/verticles vertx/vertx3-executable \  
+    -v $PWD:/verticles vertx/vertx3-exec \  
     run io.vertx.sample.RandomGeneratorVerticle \ 
     -cp /verticles/MY_VERTICLE.jar 
 ```

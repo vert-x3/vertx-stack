@@ -20,6 +20,6 @@ First, deploy the image on the Docker registry manage by fabric8:
 
 Then, apply it:
 
-`mvn mvn io.fabric8:fabric8-maven-plugin:2.1.4:apply`
+`mvn io.fabric8:fabric8-maven-plugin:2.1.4:apply`
 
 That's all.

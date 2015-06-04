@@ -112,10 +112,7 @@
         </property>
       </activation>
       <modules>
-        <module>docker/vertx-docker-base-image</module>
-        <module>docker/vertx-docker-executable</module>
-        <module>docker/vertx-docker-example</module>
-        <module>docker/vertx-docker-example-fabric8</module>
+        <module>docker</module>
       </modules>
     </profile>
   </profiles>
