@@ -65,6 +65,8 @@
   </build>
 
   <modules>
+    <!-- docker documentation must be built regardless we build the image -->
+    <module>docker/vertx-docker-documentation</module>
     <module>stack-depchain</module>
     <module>stack-docs</module>
     <module>stack-dist</module>

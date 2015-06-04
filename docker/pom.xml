@@ -19,7 +19,6 @@
   <modules>
     <module>vertx-docker-base-image</module>
     <module>vertx-docker-executable</module>
-    <module>vertx-docker-documentation</module>
 
     <module>examples/vertx-docker-java</module>
     <module>examples/vertx-docker-java-fatjar</module>
