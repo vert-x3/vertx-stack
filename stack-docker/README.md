@@ -14,7 +14,7 @@ Notice that you need to have docker installed on your machine.
 
 The built image contains the `vertx` command in the system path.
  
-## Using the base image
+### Using the base image
 
 The image is intended to be used by extension using the Docker `FROM` directive. Here is an example:
 
@@ -41,7 +41,7 @@ ENTRYPOINT ["sh", "-c"]
 CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/* $VERTX_OPTIONS"]
 ```
 
-## Launching the base image
+### Launching the base image
 
 The resulting image is not made to be launched directly (as it contains only vert.x and no applications). If you 
 still want to launch it uses:
@@ -58,7 +58,7 @@ You can access the `vertx` command directly using:
 
 A Docker image providing the `vertx` command
 
-## Launching the executable image
+### Launching the executable image
 
 Just launch:
 
