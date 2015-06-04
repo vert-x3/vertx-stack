@@ -19,11 +19,6 @@
   <modules>
     <module>vertx-docker-base-image</module>
     <module>vertx-docker-executable</module>
-
-    <module>examples/vertx-docker-java</module>
-    <module>examples/vertx-docker-java-fatjar</module>
-    <module>examples/vertx-docker-example</module>
-    <module>examples/vertx-docker-example-fabric8</module>
   </modules>
 
 </project>

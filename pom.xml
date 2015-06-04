@@ -106,17 +106,17 @@
     </profile>
 
     <profile>
-      <!-- Use -DskipDocker as the docker module requires docker to be installed, there are built an their own profile -->
-      <id>docker</id>
-      <activation>
-        <property>
-          <name>!skipDocker</name>
-        </property>
-      </activation>
-      <modules>
-        <module>docker</module>
-      </modules>
-    </profile>
+    <!-- Use -DskipDocker as the docker module requires docker to be installed, there are built an their own profile -->
+    <id>docker</id>
+    <activation>
+      <property>
+        <name>!skipDocker</name>
+      </property>
+    </activation>
+    <modules>
+      <module>docker</module>
+    </modules>
+  </profile>
   </profiles>
 
 </project>
