@@ -81,14 +81,14 @@ Therefore it should be used with explicit dependencies:
 ### Docker
 
 To build docker images, you need docker1.3+ and run `mvn clean install -Pdocker`
-It builds four images :
+It builds the 2 main images :
 - vert.x3 base - the base image provisionning the vert.x stack (`vertx/vertx3`)
 - vert.x3 executable - an image providing the vert.x command (`vertx/vertx3-executable`)
-- vert.x3 docker example - an example of verticle using the base image (`vertx/vertx3-example`)
-- vert.x3 docker example for fabric 8 - an example of verticle that you can deploy on fabric8 
-(`vertx/vertx3-example-fabric8`) 
 
 All images have a _readme_ file containing their documentation and build instructions.
+
+There is also a couple of examples in docker/examples.
+
 
 #### Pushing Docker image to Docker Hub
 
