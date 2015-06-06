@@ -14,7 +14,6 @@
         <include>com.fasterxml.jackson.core:jackson-annotations</include>
 
         <include>io.vertx:vertx-hazelcast</include>
-        <include>io.vertx:vertx-hazelcast</include>
         <include>com.hazelcast:hazelcast</include>
 
         <include>io.vertx:vertx-service-proxy</include>
