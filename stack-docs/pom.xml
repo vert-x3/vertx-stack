@@ -478,9 +478,6 @@
                 <copy todir="${project.build.directory}/docs/vertx-redis-client/">
                   <fileset dir="${project.build.directory}/work/vertx-redis-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-redis-client/">
-                  <fileset dir="${project.build.directory}/work/vertx-redis-client-docs-zip"/>
-                </copy>
               </target>
             </configuration>
             <goals>

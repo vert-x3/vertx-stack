@@ -26,6 +26,7 @@
         <include>io.vertx:vertx-jdbc-client</include>
 
         <include>io.vertx:vertx-mysql-postgresql-client</include>
+        <include>io.vertx:vertx-redis-client</include>
         <include>org.scala-lang:scala-library</include>
         <include>com.github.mauricio:postgresql-async_2.11</include>
         <include>com.github.mauricio:mysql-async_2.11</include>
