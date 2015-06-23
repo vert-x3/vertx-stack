@@ -12,6 +12,7 @@
         <include>io.netty:netty-buffer</include>
         <include>io.netty:netty-transport</include>
         <include>io.netty:netty-handler</include>
+        <include>io.netty:netty-codec</include>
         <include>io.netty:netty-codec-http</include>
         <include>com.fasterxml.jackson.core:jackson-core</include>
         <include>com.fasterxml.jackson.core:jackson-databind</include>
