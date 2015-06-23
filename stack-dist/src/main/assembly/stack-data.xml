@@ -11,13 +11,6 @@
         <include>org.mongodb:mongodb-driver-async</include>
         <include>org.mongodb:mongodb-driver-core</include>
         <include>org.mongodb:bson</include>
-        <include>de.flapdoodle.embed:de.flapdoodle.embed.mongo</include>
-        <include>de.flapdoodle.embed:de.flapdoodle.embed.process</include>
-        <include>commons-io:commons-io</include>
-        <include>org.apache.commons:commons-lang3</include>
-        <include>net.java.dev.jna:jna</include>
-        <include>net.java.dev.jna:jna-platform</include>
-        <include>org.apache.commons:commons-compress</include>
 
         <include>io.vertx:vertx-sql-common</include>
         <include>com.mchange:c3p0</include>
