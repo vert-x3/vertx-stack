@@ -11,251 +11,189 @@
   </parent>
 
   <artifactId>vertx-stack-npm</artifactId>
-  <version>3.1.0-SNAPSHOT</version>
 
   <name>Vert.x Stack - NPM packages</name>
   <packaging>pom</packaging>
-
-  <properties>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
-  </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-dist</artifactId>
-      <version>3.1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <classifier>full</classifier>
       <type>tar.gz</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-dist</artifactId>
-      <version>3.1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <classifier>base</classifier>
       <type>tar.gz</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-dist</artifactId>
-      <version>3.1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <classifier>min</classifier>
       <type>tar.gz</type>
     </dependency>
   </dependencies>
 
-  <profiles>
-
-    <profile>
-      <!-- Use -DskipNPM as the NPM module requires npm to be installed, there are built an their own profile -->
-      <id>npm</id>
-      <activation>
-        <property>
-          <name>!skipNPM</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <!-- Copy the vert.x stack to target/work -->
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.10</version>
-            <executions>
-              <execution>
-                <id>unzip-vertx-stack-min</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>unpack-dependencies</goal>
-                </goals>
-                <configuration>
-                  <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-                  <includeClassifiers>min</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>unzip-vertx-stack-base</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>unpack-dependencies</goal>
-                </goals>
-                <configuration>
-                  <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-                  <includeClassifiers>base</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/npm/base</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>unzip-vertx-stack-full</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>unpack-dependencies</goal>
-                </goals>
-                <configuration>
-                  <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-                  <includeClassifiers>full</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <!--
-            Copy a filtered version of the package.json file
-            -->
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
-            <executions>
-              <execution>
-                <id>prepare-npm-min</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/npm/min</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>prepare-npm-base</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/npm/base</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>prepare-npm-full</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/npm/full</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>exec-maven-plugin</artifactId>
-            <groupId>org.codehaus.mojo</groupId>
-            <executions>
-              <execution>
-                <id>deploy-to-npm-min</id>
-                <phase>deploy</phase>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <configuration>
-                  <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
-                  <executable>npm</executable>
-                  <argument>publish</argument>
-                </configuration>
-              </execution>
-              <execution>
-                <id>deploy-to-npm-base</id>
-                <phase>deploy</phase>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <configuration>
-                  <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
-                  <executable>npm</executable>
-                  <argument>publish</argument>
-                </configuration>
-              </execution>
-              <execution>
-                <id>deploy-to-npm-full</id>
-                <phase>deploy</phase>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <configuration>
-                  <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
-                  <executable>npm</executable>
-                  <argument>publish</argument>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <!-- Use -DskipDoc to avoid building doc -->
-      <id>doc</id>
-      <activation>
-        <property>
-          <name>!skipDoc</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.asciidoctor</groupId>
-            <artifactId>asciidoctor-maven-plugin</artifactId>
-            <version>1.5.2</version>
-            <executions>
-              <execution>
-                <id>output-html</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>process-asciidoc</goal>
-                </goals>
-              </execution>
-            </executions>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Copy the vert.x stack to target/work -->
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+        <executions>
+          <execution>
+            <id>unzip-vertx-stack-min</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
             <configuration>
-              <sourceDirectory>${asciidoc.dir}</sourceDirectory>
-              <outputDirectory>${project.build.directory}/docs/npm</outputDirectory>
-              <backend>html</backend>
-              <doctype>book</doctype>
-              <preserveDirectories>true</preserveDirectories>
-              <relativeBaseDir>true</relativeBaseDir>
-              <sourceHighlighter>prettify</sourceHighlighter>
+              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <includeClassifiers>min</includeClassifiers>
+              <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
             </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>assemble</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <attach>true</attach>
-                  <descriptors>
-                    <descriptor>${basedir}/src/main/assembly/docs.xml</descriptor>
-                  </descriptors>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
+          </execution>
+          <execution>
+            <id>unzip-vertx-stack-base</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <includeClassifiers>base</includeClassifiers>
+              <outputDirectory>${project.build.directory}/npm/base</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>unzip-vertx-stack-full</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <includeClassifiers>full</includeClassifiers>
+              <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!--
+        Copy a filtered version of the package.json file
+        -->
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>prepare-npm-min</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/npm/min</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>prepare-npm-base</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/npm/base</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>prepare-npm-full</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/npm/full</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>0.0.24</version>
+        <executions>
+          <execution>
+            <id>install-node-and-npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <nodeVersion>v0.12.6</nodeVersion>
+              <npmVersion>2.12.1</npmVersion>
+              <workingDirectory>${project.build.directory}/client</workingDirectory>
+              <installDirectory>${project.build.directory}/node</installDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-publish-min</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>deploy</phase>
+            <configuration>
+              <arguments>publish</arguments>
+              <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-publish-base</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>deploy</phase>
+            <configuration>
+              <arguments>publish</arguments>
+              <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-publish-full</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>deploy</phase>
+            <configuration>
+              <arguments>publish</arguments>
+              <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

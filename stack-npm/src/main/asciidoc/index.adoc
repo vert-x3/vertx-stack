@@ -1,3 +1,0 @@
-# Vert.x NPM Packages
-
-Use NPM as your package manager.
