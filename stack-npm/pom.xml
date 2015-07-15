@@ -37,10 +37,55 @@
       <classifier>min</classifier>
       <type>tar.gz</type>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web</artifactId>
+      <version>${project.version}</version>
+      <classifier>client</classifier>
+      <type>js</type>
+    </dependency>
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/npm/client</directory>
+        <filtering>true</filtering>
+        <targetPath>${project.build.directory}/npm/client/vert.x-${project.version}</targetPath>
+      </resource>
+
+      <resource>
+        <directory>${project.basedir}/src/main/npm/base</directory>
+        <filtering>true</filtering>
+        <targetPath>${project.build.directory}/npm/base/vert.x-${project.version}</targetPath>
+      </resource>
+
+      <resource>
+        <directory>${project.basedir}/src/main/npm/full</directory>
+        <filtering>true</filtering>
+        <targetPath>${project.build.directory}/npm/full/vert.x-${project.version}</targetPath>
+      </resource>
+
+      <resource>
+        <directory>${project.basedir}/src/main/npm/min</directory>
+        <filtering>true</filtering>
+        <targetPath>${project.build.directory}/npm/min/vert.x-${project.version}</targetPath>
+      </resource>
+    </resources>
+
     <plugins>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+            <phase>process-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <!-- Copy the vert.x stack to target/work -->
         <artifactId>maven-dependency-plugin</artifactId>
@@ -82,65 +127,22 @@
               <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
             </configuration>
           </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <!--
-        Copy a filtered version of the package.json file
-        -->
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.7</version>
-        <executions>
           <execution>
-            <id>prepare-npm-min</id>
-            <phase>validate</phase>
+            <id>copy-vertxbus-js</id>
+            <phase>compile</phase>
             <goals>
-              <goal>copy-resources</goal>
+              <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/npm/min</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>prepare-npm-base</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/npm/base</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>prepare-npm-full</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/npm/full</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
+              <includeArtifactIds>vertx-web</includeArtifactIds>
+              <includeClassifiers>client</includeClassifiers>
+              <outputDirectory>${project.build.directory}/npm/client</outputDirectory>
+              <stripVersion>true</stripVersion>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
@@ -155,45 +157,142 @@
             <configuration>
               <nodeVersion>v0.12.6</nodeVersion>
               <npmVersion>2.12.1</npmVersion>
-              <workingDirectory>${project.build.directory}/client</workingDirectory>
               <installDirectory>${project.build.directory}/node</installDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>npm-publish-min</id>
+            <id>npm-install-min</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <phase>deploy</phase>
+            <phase>package</phase>
             <configuration>
-              <arguments>publish</arguments>
+              <arguments>install</arguments>
               <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>npm-publish-base</id>
+            <id>npm-install-base</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <phase>deploy</phase>
+            <phase>package</phase>
             <configuration>
-              <arguments>publish</arguments>
+              <arguments>install</arguments>
               <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>npm-publish-full</id>
+            <id>npm-install-full</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <phase>deploy</phase>
+            <phase>package</phase>
             <configuration>
-              <arguments>publish</arguments>
+              <arguments>install</arguments>
               <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-install-client</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <arguments>install</arguments>
+              <workingDirectory>${project.build.directory}/npm/client/vert.x-${project.version}</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <installDirectory>${project.build.directory}/node</installDirectory>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>move-vertxbus</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <target>
+                <move file="${project.build.directory}/npm/client/vertx-web-client.js" todir="${project.build.directory}/npm/client/vert.x-${project.version}/vertxbus.js"/>
+              </target>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>deploy-npm</id>
+      <properties>
+        <!-- Skip Maven deployment -->
+        <maven.deploy.skip>true</maven.deploy.skip>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>0.0.24</version>
+            <executions>
+              <execution>
+                <id>npm-publish-min</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>deploy</phase>
+                <configuration>
+                  <arguments>publish</arguments>
+                  <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-publish-base</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>deploy</phase>
+                <configuration>
+                  <arguments>publish</arguments>
+                  <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-publish-full</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>deploy</phase>
+                <configuration>
+                  <arguments>publish</arguments>
+                  <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-publish-client</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>deploy</phase>
+                <configuration>
+                  <arguments>publish</arguments>
+                  <workingDirectory>${project.build.directory}/npm/client/vert.x-${project.version}</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
