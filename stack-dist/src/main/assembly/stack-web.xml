@@ -13,6 +13,7 @@
 
         <include>io.vertx:vertx-web:jar</include>
         <include>org.thymeleaf:thymeleaf</include>
+        <include>org.javassist:javassist</include>
         <include>ognl:ognl</include>
         <include>com.github.jknack:handlebars</include>
         <include>org.apache.commons:commons-lang3</include>
