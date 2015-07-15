@@ -1,9 +1,13 @@
 {
   "name": "vertx3-base",
+  "author": "The Vert.x Team",
   "version": "${project.version}",
   "description": "Vert.x: A tool-kit for building reactive applications on the JVM.",
   "main": "index.js",
-  "repository": "vert-x3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vert-x3/vertx-stack.git"
+  },
   "keywords": [
     "vert.x",
     "framework",
