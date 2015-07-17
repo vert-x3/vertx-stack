@@ -1,0 +1,32 @@
+{
+  "name": "vertx3-base",
+  "author": "The Vert.x Team",
+  "version": "${project.version}",
+  "description": "Vert.x: A tool-kit for building reactive applications on the JVM.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vert-x3/vertx-stack.git"
+  },
+  "keywords": [
+    "vert.x",
+    "framework",
+    "polyglot",
+    "reactive"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "bin": {
+    "vertx": "./bin/vertx",
+    "vertx.bat": "./bin/vertx.bat"
+  },
+  "homepage": "http://vertx.io",
+  "engines": {},
+  "files": [
+    "bin",
+    "conf",
+    "lib",
+    "README.md",
+    "index.js"
+  ]
+}
