@@ -222,7 +222,8 @@
             <phase>prepare-package</phase>
             <configuration>
               <target>
-                <move file="${project.build.directory}/npm/client/vertx-web-client.js" todir="${project.build.directory}/npm/client/vert.x-${project.version}/vertxbus.js"/>
+                <move file="${project.build.directory}/npm/client/vertx-web-client.js"
+                      tofile="${project.build.directory}/npm/client/vert.x-${project.version}/vertxbus.js"/>
               </target>
             </configuration>
           </execution>
