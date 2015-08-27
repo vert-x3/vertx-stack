@@ -1,0 +1,25 @@
+<stack>
+  <from>
+    <id>min</id>
+  </from>
+  <directory>target/stack/xml</directory>
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>3.0.0</version>
+      <ignoreTransitive>true</ignoreTransitive>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.3.3</version>
+    </dependency>
+  </dependencies>
+  <files>
+    <file>
+      <file>src/test/resources/hello.html</file>
+      <targetDirectory>files</targetDirectory>
+    </file>
+  </files>
+</stack>

@@ -1,0 +1,211 @@
+= Vert.x Stack Builder
+
+This tool lets you build your own Vert.x stack with the components you want.
+
+== Stack structure
+
+The stack is organized as follows:
+
+* `bin` - the vert.x executable files
+* `client` - the vert.x bus client (if any)
+* `conf` - the configuration files
+* `lib` - the jar files
+
+When defining a stack, you:
+
+1. can inherit from an existing stack or extend an already existing stack
+2. add `jars` file added as _Maven_ / _Gradle_ dependency
+3. add _additional_ files and directories
+
+== Example of stack
+
+Stack can be described in json, xml or yaml. Here is an example using yaml:
+
+[source]
+----
+directory: target/stack/yaml
+from:
+    id: full
+dependencies:
+    - groupId: io.vertx
+      artifactId: vertx-sync
+      version: 3.1.0-SNAPSHOT
+      ignoreTransitive: true
+    - groupId: org.hsqldb
+      artifactId: hsqldb
+      version: 2.3.3
+files:
+    - file: src/test/resources/hello.html
+      targetDirectory: files
+----
+
+* The `directory` element defines where the stack is installed or where it is going to be unpacked. It's mandatory
+* The `from` element lets you define the inherited stack if any (see <<Creating a new stack>>)
+* The `dependencies` element defines the dependencies to add to the stack (see <<Adding dependencies>>)
+* The `files` element defines the additional file to add to the stack
+
+To build this stack runs:
+
+----
+java -jar stack-builder-standalone.jar my-stack.yaml
+----
+
+== Creating a new stack
+
+when creating a new stack, you need to define the `from` attribute. If your base is one of the official vert.x
+distros you can identify them by _id_:
+
+----
+<from>
+   <id>full</id>
+</from>
+----
+
+Are supported `full`, `min` and `base`.
+
+The version of the stack would be the same as the version of the stack builder.
+
+To use another version, or use your own stack, configure it using:
+
+----
+<from>
+  <!-- GAVC: -->
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-stack-dist</artifactId>
+  <version>3.0.0</version>
+  <classifier>full</classifier>
+
+  <!-- Strip -->
+  <strip>1</strip>
+</from>
+----
+
+The `GAVC` attributes let you define the stack you want. The `strip` element defines the number of directory to strip
+ when unpacking the stack in the target directory.
+
+== Extending an existing stack
+
+When a stack is already installed, you can ignore the `from` element and just set `directory` to the stack directory.
+
+== Adding dependencies
+
+If you need to add jar files to the stack, the easiest and safest is to use `dependencies`. The stack-builder reuse
+the Maven dependency syntax and semantic:
+
+----
+<dependency>
+  <groupId>org.hsqldb</groupId>
+  <artifactId>hsqldb</artifactId>
+  <version>2.3.3</version>
+</dependency>
+----
+
+Per dependency, you can:
+
+* exclude dependencies
+* ignore transitive dependencies
+
+
+[source, xml]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-sync</artifactId>
+  <version>3.1.0-SNAPSHOT</version>
+  <ignoreTransitive>true</ignoreTransitive>
+</dependency>
+<dependency>
+  <groupId>org.acme</groupId>
+  <artifactId>my-library</artifactId>
+  <version>1.0</version>
+  <exclusions>
+      <exclusion>
+        <groupId>org.acme</groupId>
+        <artifactId>to-exclude</artifactId>
+      </exclusion>
+  </exclusion>
+</dependency>
+----
+
+Optional dependencies are not resolved (and so not part of the stack).
+
+The stack builder tool tries to detect conflicts. If a version conflict is detected (two versions of the same library),
+ an error is thrown. When two snapshots are compared, the newer file is used.
+
+== Adding files
+
+You can also add files or directories to a stack:
+
+[source, xml]
+----
+<files>
+  <file>
+    <file>src/test/resources/hello.html</file>
+    <targetDirectory>files</targetDirectory>
+  </file>
+</files>
+----
+
+It copies the given file or directory to the target directory. The target directory is relative to the stack root.
+
+== Examples in XML and JSON
+
+This section gives the XML and JSON version of the previous example:
+
+[source,json]
+----
+{
+  "directory": "target/stack/json",
+  "from": {
+    "id" : "full"
+  },
+  "dependencies": [
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-sync",
+      "version": "3.1.0-SNAPSHOT",
+      "ignoreTransitive": true
+    },
+    {
+      "groupId": "org.hsqldb",
+      "artifactId": "hsqldb",
+      "version": "2.3.3"
+    }
+  ],
+  "files": [
+    {
+      "file": "src/test/resources/hello.html",
+      "targetDirectory": "files"
+    }
+  ]
+}
+----
+
+[source, xml]
+----
+<stack>
+  <from>
+    <id>full</id>
+  </from>
+  <directory>target/stack/xml</directory>
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sync</artifactId>
+      <version>3.1.0-SNAPSHOT</version>
+      <ignoreTransitive>true</ignoreTransitive>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.3.3</version>
+    </dependency>
+  </dependencies>
+  <files>
+    <file>
+      <file>src/test/resources/hello.html</file>
+      <targetDirectory>files</targetDirectory>
+    </file>
+  </files>
+</stack>
+----
