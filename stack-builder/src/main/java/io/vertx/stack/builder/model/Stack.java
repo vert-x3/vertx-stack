@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 public class Stack {
 
+  public final static String DOT_STACK_FILE_NAME = ".stack.json";
 
   /**
    * The output directory.
@@ -33,6 +34,19 @@ public class Stack {
    */
   private List<AdditionalFile> files = new ArrayList<>();
 
+  public List<StackArtifact> getArtifacts() {
+    return artifacts;
+  }
+
+  public Stack setArtifacts(List<StackArtifact> artifacts) {
+    this.artifacts = artifacts;
+    return this;
+  }
+
+  /**
+   * The list of artifacts, usually read from
+   */
+  private List<StackArtifact> artifacts = new ArrayList<>();
 
   /**
    * Gets the 'inherited' stack. It can be {@code null} if the stack is already installed the the specified directory.
@@ -135,5 +149,9 @@ public class Stack {
   public Stack addFile(AdditionalFile file) {
     this.files.add(file);
     return this;
+  }
+
+  public void addArtifact(StackArtifact stackArtifact) {
+    this.artifacts.add(stackArtifact);
   }
 }

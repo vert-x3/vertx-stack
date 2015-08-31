@@ -24,6 +24,11 @@ public class StackDependency extends Dependency {
     setVersion(version);
   }
 
+  public StackDependency(String gacv) {
+    super();
+    setGACV(gacv);
+  }
+
   /**
    * @return whether or not the transitive dependencies need to be resolved for this dependency.
    */

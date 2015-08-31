@@ -94,4 +94,10 @@ public class Artifacts {
       return files[0];
     }
   }
+
+  public static String getFileName(Artifact artifact) {
+    return artifact.getArtifactId() + "-" + artifact.getVersion()
+        + (artifact.getClassifier() != null && artifact.getClassifier().length() > 0 ? "-" + artifact.getClassifier() : "")
+        + "." + artifact.getExtension();
+  }
 }

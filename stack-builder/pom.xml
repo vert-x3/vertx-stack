@@ -124,55 +124,6 @@
 
     <plugins>
       <plugin>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>2.5.2</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <phase>process-test-resources</phase>
-            <id>install-test-release-1.0</id>
-            <configuration>
-              <artifactId>test-artifact</artifactId>
-              <groupId>org.acme</groupId>
-              <file>${project.basedir}/src/test/resources/artifact/file.txt</file>
-              <version>1.0</version>
-              <packaging>txt</packaging>
-            </configuration>
-          </execution>
-          <execution>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <phase>process-test-resources</phase>
-            <id>install-test-snapshot-1.1</id>
-            <configuration>
-              <artifactId>test-artifact</artifactId>
-              <groupId>org.acme</groupId>
-              <file>${project.basedir}/src/test/resources/artifact/file.txt</file>
-              <version>1.1-SNAPSHOT</version>
-              <packaging>txt</packaging>
-            </configuration>
-          </execution>
-          <execution>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <phase>process-test-resources</phase>
-            <id>install-test-snapshot-1.2</id>
-            <configuration>
-              <artifactId>test-artifact</artifactId>
-              <groupId>org.acme</groupId>
-              <file>${project.basedir}/src/test/resources/artifact/file.txt</file>
-              <version>1.2-SNAPSHOT</version>
-              <packaging>txt</packaging>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>2.3</version>

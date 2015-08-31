@@ -1,12 +1,9 @@
 package io.vertx.stack.builder;
 
-import io.vertx.stack.builder.model.BaseStackDependency;
-import io.vertx.stack.builder.model.Stack;
-import io.vertx.stack.builder.model.StackDependency;
+import com.google.common.collect.ImmutableList;
+import io.vertx.stack.builder.model.*;
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -18,7 +15,7 @@ import static org.assertj.core.api.Fail.fail;
 /**
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  */
-public class ConflictTest {
+public class ConflictTest extends ResolverTestBase {
 
   public static File BASE = new File("target/base/min");
 
@@ -26,23 +23,19 @@ public class ConflictTest {
 
   @Before
   public void setup() throws IOException {
-    if (BASE.isDirectory()) {
-      return;
-    } else {
+    if (!BASE.isDirectory()) {
+      BaseStackDependency base = new BaseStackDependency();
+      base.setGACV("io.vertx:vertx-stack-dist:zip:min:3.0.0");
+      base.setStrip(1);
       StackBuilder builder = new StackBuilder()
           .setStack(
               new Stack()
-                  .setFrom(BaseStackDependency.MIN)
+                  .setFrom(base)
                   .setDirectory(BASE));
       builder.build();
     }
     FileUtils.deleteQuietly(ROOT);
     FileUtils.copyDirectory(BASE, ROOT);
-  }
-
-  @After
-  public void tearDown() {
-    FileUtils.deleteQuietly(ROOT);
   }
 
   @Test
@@ -205,7 +198,7 @@ public class ConflictTest {
             .addDependency(new StackDependency()
                 .setGACV("org.acme:test-artifact:txt:1.2-SNAPSHOT")));
     builder.build();
-    assertThat(new File(ROOT, "lib/test-artifact-1.2-20150827.080600-1.txt")).isFile();
+    assertThat(new File(ROOT, "lib/test-artifact-1.2-SNAPSHOT.txt")).isFile();
   }
 
   @Test
@@ -231,6 +224,107 @@ public class ConflictTest {
       fail("Conflict expected");
     } catch (IllegalStateException e) {
       // OK
+    }
+  }
+
+  @Test
+  public void testStackConflictInTheSameStackUsingReleases() {
+    try {
+      StackBuilder builder = new StackBuilder().setStack(
+          new Stack()
+              .setDirectory(ROOT)
+              .setDependencies(
+                  ImmutableList.of(
+                      new StackDependency("io.vertx", "vertx-rx-java", "3.0.0"),
+                      new StackDependency("org.hsqldb", "hsqldb", "2.3.3"),
+                      new StackDependency("org.hsqldb", "hsqldb", "2.3.2")))
+              .setFiles(ImmutableList.of(
+                  new AdditionalFile().setFile(new File("src/test/resources/hello.html")).setTargetDirectory("files")))
+      );
+      builder.build();
+      fail("A conflict should have been detected");
+    } catch (IllegalStateException e) {
+      assertThat(e)
+          .hasMessageContaining("org.hsqldb:hsqldb:jar:2.3.2")
+          .hasMessageContaining("org.hsqldb:hsqldb:jar:2.3.3");
+    }
+  }
+
+  @Test
+  public void testStackConflictInTheSameStackOnDependenciesUsingReleases() {
+    try {
+      StackBuilder builder = new StackBuilder().setStack(
+          new Stack()
+              .setDirectory(ROOT)
+              .setDependencies(
+                  ImmutableList.of(
+                      new StackDependency("io.reactivex", "rxjava", "1.0.14"),
+                      new StackDependency("io.vertx", "vertx-rx-java", "3.0.0"),
+                      new StackDependency("org.hsqldb", "hsqldb", "2.3.3")
+                  ))
+              .setFiles(ImmutableList.of(
+                  new AdditionalFile().setFile(new File("src/test/resources/hello.html")).setTargetDirectory("files")))
+      );
+      builder.build();
+      fail("A conflict should have been detected");
+    } catch (IllegalStateException e) {
+      assertThat(e)
+          .hasMessageContaining("io.reactivex:rxjava:jar:1.0.8")
+          .hasMessageContaining("io.vertx:vertx-rx-java:jar:3.0.0")
+          .hasMessageContaining("io.reactivex:rxjava:jar:1.0.14");
+    }
+  }
+
+  @Test
+  public void testStackConflictInTheSameStackOnDependenciesInvertedUsingReleases() {
+    try {
+      StackBuilder builder = new StackBuilder().setStack(
+          new Stack()
+              .setDirectory(ROOT)
+              .setDependencies(
+                  ImmutableList.of(
+                      new StackDependency("io.vertx", "vertx-rx-java", "3.0.0"),
+                      new StackDependency("io.reactivex", "rxjava", "1.0.14"),
+                      new StackDependency("org.hsqldb", "hsqldb", "2.3.3")
+                  ))
+              .setFiles(ImmutableList.of(
+                  new AdditionalFile().setFile(new File("src/test/resources/hello.html")).setTargetDirectory("files")))
+      );
+      builder.build();
+      fail("A conflict should have been detected");
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      assertThat(e)
+          .hasMessageContaining("io.reactivex:rxjava:jar:1.0.8")
+          .hasMessageContaining("io.vertx:vertx-rx-java:jar:3.0.0")
+          .hasMessageContaining("io.reactivex:rxjava:jar:1.0.14");
+    }
+  }
+
+  @Test
+  public void testStackConflictInTheSameStackOnTransitiveDependencies() {
+    // The setup is a bit tricky here. The conflicts is going to happen on SLF4J API as two dependencies are using
+    // different version of this artifacts.
+    try {
+      StackBuilder builder = new StackBuilder().setStack(
+          new Stack()
+              .setDirectory(ROOT)
+              .setDependencies(
+                  ImmutableList.of(
+                      new StackDependency("uk.co.jemos.podam", "podam", "5.5.1.RELEASE"),
+                      new StackDependency("org.apache.logging.log4j", "log4j-slf4j-impl", "2.3")
+                  ))
+              .setFiles(ImmutableList.of(
+                  new AdditionalFile().setFile(new File("src/test/resources/hello.html")).setTargetDirectory("files")))
+      );
+      builder.build();
+      fail("A conflict should have been detected");
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      assertThat(e)
+          .hasMessageContaining("org.slf4j:slf4j-api:jar:1.7.12")
+          .hasMessageContaining("uk.co.jemos.podam:podam:jar:5.5.1.RELEASE")
+          .hasMessageContaining("org.slf4j:slf4j-api:jar:1.7.7");
     }
   }
 }
