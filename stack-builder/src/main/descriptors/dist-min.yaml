@@ -1,0 +1,37 @@
+--- # vert.x min stack.
+directory: target/distributions/min
+dependencies:
+    - groupId: io.vertx
+      artifactId: vertx-core
+      version: ${vertx.version}
+    - groupId: io.vertx
+      artifactId: vertx-hazelcast
+      version: ${vertx.version}
+    - groupId: io.vertx
+      artifactId: vertx-service-proxy
+      version: ${vertx.version}
+    - groupId: io.vertx
+      artifactId: vertx-lang-js
+      version: ${vertx.version}
+    - groupId: io.vertx
+      artifactId: vertx-lang-ruby
+      version: ${vertx.version}
+      exclusions:
+        - groupId: com.fasterxml.jackson.core
+          artifactId: jackson-core
+        - groupId: com.fasterxml.jackson.core
+          artifactId: jackson-databind
+        - groupId: com.fasterxml.jackson.core
+          artifactId: jackson-annotations
+        - groupId: io.vertx
+          artifactId: vertx-codegen
+        - groupId: org.slf4j
+          artifactId: slf4j-api
+    - groupId: io.vertx
+      artifactId: vertx-lang-groovy
+      version: ${vertx.version}
+files:
+    - file: src/main/descriptors/bin
+      targetDirectory: bin
+    - file: src/main/descriptors/conf
+      targetDirectory: conf
