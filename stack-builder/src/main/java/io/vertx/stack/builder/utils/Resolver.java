@@ -14,9 +14,7 @@ import org.eclipse.aether.graph.DependencyNode;
 import org.eclipse.aether.graph.Exclusion;
 import org.eclipse.aether.impl.DefaultServiceLocator;
 import org.eclipse.aether.repository.*;
-import org.eclipse.aether.resolution.ArtifactResult;
-import org.eclipse.aether.resolution.DependencyRequest;
-import org.eclipse.aether.resolution.DependencyResolutionException;
+import org.eclipse.aether.resolution.*;
 import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
@@ -27,10 +25,7 @@ import org.eclipse.aether.util.repository.AuthenticationBuilder;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -148,48 +143,84 @@ public class Resolver {
     session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
 
     LOGGER.info("Resolving " + dep.getGACV());
+
     Artifact artifact = new DefaultArtifact(dep.getGACV());
-    DependencyFilter classpathFilter =
+    DependencyFilter filter =
         DependencyFilterUtils.andFilter(
             DependencyFilterUtils.classpathFilter(
-                dep.isIgnoreTransitive() ? JavaScopes.PROVIDED : JavaScopes.COMPILE
+                JavaScopes.COMPILE
             ),
-            // Remove optionals
-            (dependencyNode, list) ->
-                !dependencyNode.getDependency().isOptional(),
-            // Remove excluded dependencies
+            // Remove optionals and dependencies of optionals
             (dependencyNode, list) -> {
               for (DependencyNode parent : list) {
-                Collection<Exclusion> exclusions = parent.getDependency().getExclusions();
-                for (Exclusion e : exclusions) {
-                  if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
-                      && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
+                if (parent.getDependency().isOptional()) {
+                  return false;
+                }
+              }
+
+              return !dependencyNode.getDependency().isOptional();
+            },
+
+            // Remove excluded dependencies
+            (dependencyNode, list) -> {
+              // Build the list of exclusion, traverse the tree.
+              Collection<Exclusion> exclusions = new ArrayList<>();
+              for (DependencyNode parent : list) {
+                exclusions.addAll(parent.getDependency().getExclusions());
+              }
+
+              for (Exclusion e : exclusions) {
+                // Check the the passed artifact is excluded
+                if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
+                    && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
+                  return false;
+                }
+
+                // Check if a parent artifact is excluded
+                for (DependencyNode parent : list) {
+                  if (e.getArtifactId().equals(parent.getArtifact().getArtifactId())
+                      && e.getGroupId().equals(parent.getArtifact().getGroupId())) {
                     return false;
                   }
                 }
               }
               return true;
+            },
+
+            // Remove provided dependencies and transitive dependencies of provided dependencies
+            (dependencyNode, list) -> {
+              for (DependencyNode parent : list) {
+                if (! parent.getDependency().getScope().toLowerCase().equals("compile")) {
+                  return false;
+                }
+              }
+              return dependencyNode.getDependency().getScope().toLowerCase().equals("compile");
             }
         );
 
-    CollectRequest collectRequest = new CollectRequest();
-    Dependency root = new Dependency(artifact,
-        dep.isIgnoreTransitive() ? JavaScopes.PROVIDED : JavaScopes.COMPILE)
-        .setExclusions(
-            dep.getExclusions().stream()
-                .map(e -> new Exclusion(e.getGroupId(), e.getArtifactId(), null, null))
-                .collect(Collectors.toList()));
-    collectRequest.setRoot(root);
-    collectRequest.setRepositories(remotes);
 
-    DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, classpathFilter);
+
 
     List<ArtifactResult> artifactResults;
     try {
-      artifactResults =
-          system.resolveDependencies(session, dependencyRequest).getArtifactResults();
-    } catch (DependencyResolutionException e) {
-      throw new IllegalArgumentException("Cannot resolve module " + dep.getGACV() +
+      if (dep.isIgnoreTransitive()) {
+        ArtifactRequest artifactRequest = new ArtifactRequest(artifact, remotes, null);
+        artifactResults = Collections.singletonList(system.resolveArtifact(session, artifactRequest));
+      } else {
+        CollectRequest collectRequest = new CollectRequest();
+        Dependency root = new Dependency(artifact, JavaScopes.COMPILE)
+            .setExclusions(
+                dep.getExclusions().stream()
+                    .map(e -> new Exclusion(e.getGroupId(), e.getArtifactId(), null, null))
+                    .collect(Collectors.toList()));
+        collectRequest.setRoot(root);
+        collectRequest.setRepositories(remotes);
+        DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, filter);
+        artifactResults =
+            system.resolveDependencies(session, dependencyRequest).getArtifactResults();
+      }
+    } catch (DependencyResolutionException | ArtifactResolutionException e) {
+      throw new IllegalArgumentException("Cannot resolve artifact " + dep.getGACV() +
           " in maven repositories: " + e.getMessage());
     } catch (NullPointerException e) {
       // Sucks, but aether throws a NPE if repository name is invalid....

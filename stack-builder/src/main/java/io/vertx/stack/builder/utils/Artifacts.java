@@ -96,7 +96,7 @@ public class Artifacts {
   }
 
   public static String getFileName(Artifact artifact) {
-    return artifact.getArtifactId() + "-" + artifact.getVersion()
+    return artifact.getArtifactId() + "-" + artifact.getBaseVersion()
         + (artifact.getClassifier() != null && artifact.getClassifier().length() > 0 ? "-" + artifact.getClassifier() : "")
         + "." + artifact.getExtension();
   }

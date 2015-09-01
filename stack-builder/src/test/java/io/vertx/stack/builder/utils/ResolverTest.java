@@ -1,5 +1,6 @@
 package io.vertx.stack.builder.utils;
 
+import com.google.common.collect.ImmutableList;
 import io.vertx.stack.builder.model.StackDependency;
 import org.apache.maven.model.Exclusion;
 import org.eclipse.aether.artifact.Artifact;
@@ -76,6 +77,47 @@ public class ResolverTest {
         .doesNotContain("vertx-docgen-3.0.0.jar")
         .doesNotContain("log4j-1.2.17.jar")
         .doesNotContain("jackson-annotations-2.5.0.jar");
+  }
+
+  @Test
+  public void resolutionOfVertxHazelcast() {
+    StackDependency dependency = new StackDependency("io.vertx", "vertx-hazelcast", "3.0.0");
+    List<String> list = resolver.resolve(dependency).stream().map(a -> a.getFile().getName()).collect(Collectors
+        .toList());
+    assertThat(list)
+        .contains("vertx-hazelcast-3.0.0.jar")
+        .contains("hazelcast-3.5.jar")
+        .doesNotContain("vertx-codetrans-3.0.0.jar");
+  }
+
+  @Test
+  public void resolutionOfVertxLangRuby() {
+    Exclusion codegen = new Exclusion();
+    codegen.setGroupId("io.vertx");
+    codegen.setArtifactId("vertx-codegen");
+    StackDependency dependency = new StackDependency("io.vertx", "vertx-lang-ruby", "3.0.0");
+    dependency.setExclusions(ImmutableList.of(codegen));
+    List<String> list = resolver.resolve(dependency).stream().map(a -> a.getFile().getName()).collect(Collectors
+        .toList());
+    assertThat(list)
+        .contains("vertx-core-3.0.0.jar")
+        .contains("jruby-complete-1.7.20.jar")
+        .doesNotContain("vertx-codetrans-3.0.0.jar")
+        .doesNotContain("vertx-codegen-3.0.0.jar")
+        .doesNotContain("mvel2-2.2.0.Final.jar");
+  }
+
+  @Test
+  public void resolutionOfVertxLangGroovy() {
+    StackDependency dependency = new StackDependency("io.vertx", "vertx-lang-groovy", "3.0.0");
+    List<String> list = resolver.resolve(dependency).stream().map(a -> a.getFile().getName()).collect(Collectors
+        .toList());
+    assertThat(list)
+        .contains("vertx-core-3.0.0.jar")
+        .contains("groovy-all-2.3.10.jar")
+        .doesNotContain("vertx-codetrans-3.0.0.jar")
+        .doesNotContain("vertx-codegen-3.0.0.jar")
+        .doesNotContain("mvel2-2.2.0.Final.jar");
   }
 
 }

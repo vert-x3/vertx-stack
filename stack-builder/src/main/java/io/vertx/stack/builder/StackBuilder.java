@@ -36,6 +36,7 @@ public class StackBuilder {
 
   private Stack stack;
   private Resolver resolver = new Resolver();
+  private StackBuilderOptions options;
 
   /**
    * Reads the stack description from a json file.
@@ -48,7 +49,7 @@ public class StackBuilder {
         .configure(JsonParser.Feature.ALLOW_COMMENTS, true)
         .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     try {
-      stack = mapper.readValue(json, Stack.class);
+      stack = mapper.readValue(json, Stack.class).setDescriptor(json);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot load stack from " + json.getAbsolutePath(), e);
     }
@@ -61,15 +62,15 @@ public class StackBuilder {
   /**
    * Reads the stack description from a xml file.
    *
-   * @param json the xml file
+   * @param xml the xml file
    * @return the current {@link StackBuilder}
    */
-  public StackBuilder fromXmlFile(File json) {
+  public StackBuilder fromXmlFile(File xml) {
     XmlMapper mapper = new XmlMapper();
     try {
-      stack = mapper.readValue(json, Stack.class);
+      stack = mapper.readValue(xml, Stack.class).setDescriptor(xml);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Cannot load stack from " + json.getAbsolutePath(), e);
+      throw new IllegalArgumentException("Cannot load stack from " + xml.getAbsolutePath(), e);
     }
     if (!stack.getArtifacts().isEmpty()) {
       throw new IllegalArgumentException("Stack descriptor cannot define the artifact set");
@@ -80,15 +81,15 @@ public class StackBuilder {
   /**
    * Reads the stack description from a yaml file.
    *
-   * @param json the yaml file
+   * @param yaml the yaml file
    * @return the current {@link StackBuilder}
    */
-  public StackBuilder fromYamlFile(File json) {
+  public StackBuilder fromYamlFile(File yaml) {
     YAMLMapper mapper = new YAMLMapper();
     try {
-      stack = mapper.readValue(json, Stack.class);
+      stack = mapper.readValue(yaml, Stack.class).setDescriptor(yaml);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Cannot load stack from " + json.getAbsolutePath(), e);
+      throw new IllegalArgumentException("Cannot load stack from " + yaml.getAbsolutePath(), e);
     }
     if (!stack.getArtifacts().isEmpty()) {
       throw new IllegalArgumentException("Stack descriptor cannot define the artifact set");
@@ -144,7 +145,7 @@ public class StackBuilder {
                 + " - it belongs to another artifact");
           } else {
             List<StackArtifact> users = getArtifactUsingDependency(dependency, artifact);
-            if (! users.isEmpty()) {
+            if (!users.isEmpty()) {
               LOGGER.info("Skip deletion of " + dependency.getFile().getName()
                   + " - it is used by " + users);
             } else {
@@ -181,10 +182,15 @@ public class StackBuilder {
   }
 
   public Stack build() {
+    return build(new StackBuilderOptions());
+  }
+
+  public Stack build(StackBuilderOptions options) {
     Objects.requireNonNull(stack, "Stack not defined");
+    this.options = options;
     createOutputDirectory();
+    manageFromStack();
     readDotStack();
-    downloadBaseStack();
     resolveDependencies();
     writeDotStack();
     copyAdditionalFiles();
@@ -198,7 +204,6 @@ public class StackBuilder {
         ObjectMapper mapper = new ObjectMapper();
         JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, StackArtifact.class);
         stack.setArtifacts(mapper.readValue(file, type));
-        System.out.println("Reloaded : " + stack.getArtifacts());
       } catch (IOException e) {
         throw new IllegalStateException("Cannot read " + file.getAbsolutePath(), e);
       }
@@ -252,8 +257,10 @@ public class StackBuilder {
       Artifact main = artifacts.get(0);
       List<Artifact> dependencies = new ArrayList<>();
       if (artifacts.size() > 1) {
-        dependencies = artifacts.subList(1, artifacts.size() - 1);
+        dependencies = artifacts.subList(1, artifacts.size());
       }
+
+      LOGGER.info("Resolution result for " + main + ": " + dependencies);
 
       computeActionsAndEnsureNoConflicts(main, dependencies, actions);
     }
@@ -276,34 +283,45 @@ public class StackBuilder {
     updateArtifactList(main, dependencies, lib);
   }
 
-  private void computeActionForArtifact(List<Runnable> actions, File lib, Artifact artifact, Artifact maybeMain) {
+  private void computeActionForArtifact(List<Runnable> actions, File lib, Artifact artifact,
+                                        Artifact maybeMain) {
     ensureNoStackConflict(artifact, maybeMain);
     File maybeFile = Artifacts.getArtifactFile(lib, artifact);
     if (maybeFile == null) {
       // No conflict, the file does not exit
-      actions.add(copyArtifactAction(lib, artifact));
+      actions.add(copyArtifactAction(lib, artifact, actions));
     } else if (artifact.getFile().getName().equals(maybeFile.getName())) {
       // Ok same file name
       if (artifact.isSnapshot()) {
-        actions.add(copyArtifactAction(lib, artifact));
+        actions.add(copyArtifactAction(lib, artifact, actions));
       } else {
         actions.add(skippingArtifactAction(artifact));
       }
     } else if (!artifact.isSnapshot()) {
       // Release conflict
-      throw new IllegalStateException("Cannot build stack - conflict detected between " + artifact + " and " +
-          maybeFile.getName());
+      String message = "conflict detected between " + artifact + " and " +
+          maybeFile.getName() + ".";
+      if (options.isIgnoreArtifactConflict()) {
+        LOGGER.warning(message + " Ignoring " + artifact);
+      } else {
+        throw new IllegalStateException("Cannot build stack - " + message);
+      }
     } else {
       // The artifact is a SNAPSHOT
       String version = Artifacts.getSnapshotVersion(artifact, maybeFile.getName());
       if (version != null && version.equals(artifact.getVersion())) {
         // Same SNAPSHOT version
         actions.add(removeArtifactAction(maybeFile));
-        actions.add(copyArtifactAction(lib, artifact));
+        actions.add(copyArtifactAction(lib, artifact, actions));
       } else {
         // Snapshot conflicts
-        throw new IllegalStateException("Cannot build stack - conflict detected between " + artifact + " and " +
-            maybeFile.getName());
+        String message = "conflict detected between " + artifact + " and " +
+            maybeFile.getName() + ".";
+        if (options.isIgnoreArtifactConflict()) {
+          LOGGER.warning(message + " Ignoring " + artifact);
+        } else {
+          throw new IllegalStateException("Cannot build stack - " + message);
+        }
       }
     }
   }
@@ -312,16 +330,17 @@ public class StackBuilder {
     return () -> FileUtils.deleteQuietly(file);
   }
 
-  private Runnable copyArtifactAction(File lib, Artifact artifact) {
-    return () -> {
-      File output = new File(lib, Artifacts.getFileName(artifact));
-      try {
-        LOGGER.info("Copy artifact " + artifact + " to " + output.getAbsolutePath());
-        FileUtils.copyFile(artifact.getFile(), output);
-      } catch (IOException e) {
-        throw new IllegalStateException("Cannot copy artifact " + artifact + " to the 'lib' directory", e);
+  private Runnable copyArtifactAction(File lib, Artifact artifact, List<Runnable> actions) {
+    // Check the that artifact was not already enqueued.
+    for (Runnable runnable : actions) {
+      if (runnable instanceof CopyFileAction
+          && ((CopyFileAction) runnable).artifact.getFile().getAbsolutePath().equals(artifact.getFile().getAbsolutePath())) {
+        // There is another task that will copy the artifact, so noop:
+        return () -> {
+        };
       }
-    };
+    }
+    return new CopyFileAction(lib, artifact);
   }
 
   private Runnable skippingArtifactAction(Artifact artifact) {
@@ -330,26 +349,34 @@ public class StackBuilder {
 
   private void ensureNoStackConflict(Artifact artifact, Artifact maybeMain) {
     List<StackArtifact> artifacts = stack.getArtifacts();
-    System.out.println("Checking conflict for " + artifact + " / " + artifacts);
     for (StackArtifact a : artifacts) {
-      System.out.println(a + " Complete match " + a.matches(artifact));
-      System.out.println(a + " Partial match " + a.matchesPartially(artifact));
       if (!a.matches(artifact) && a.matchesPartially(artifact)) {
         // Conflict
+        String message;
         if (maybeMain != null) {
-          throw new IllegalStateException("Cannot build stack: conflict detected between " + artifact
-              + " (a dependency of " + maybeMain + ") and the existing artifact " + a);
+          message = "conflict detected between " + artifact
+              + " (a dependency of " + maybeMain + ") and the existing artifact " + a + ".";
+        } else {
+          message = "conflict detected between " + artifact
+              + " and the existing artifact " + a + ".";
         }
-        throw new IllegalStateException("Cannot build stack: conflict detected between " + artifact + " and the " +
-            "existing artifact " + a);
+        if (options.isIgnoreArtifactConflict()) {
+          LOGGER.warning(message + " Ignoring " + artifact);
+        } else {
+          throw new IllegalStateException("Cannot build stack - " + message);
+        }
       }
 
-      System.out.println(artifact + " - Checking conflict against dependencies: " + a.getDependencies());
       for (StackArtifact dependency : a.getDependencies()) {
         if (!dependency.matches(artifact) && dependency.matchesPartially(artifact)) {
           // Conflict
-          throw new IllegalStateException("Cannot build stack: conflict detected between " + artifact + " and a " +
-              "dependency of " + a + " (" + dependency + ")");
+          String message = "conflict detected between " + artifact + " and a " +
+              "dependency of " + a + " (" + dependency + ").";
+          if (options.isIgnoreArtifactConflict()) {
+            LOGGER.warning(message + " Ignoring " + artifact);
+          } else {
+            throw new IllegalStateException("Cannot build stack - " + message);
+          }
         }
       }
 
@@ -378,10 +405,33 @@ public class StackBuilder {
     stack.addArtifact(sa);
   }
 
-  private void downloadBaseStack() {
+  private void manageFromStack() {
     BaseStackDependency from = stack.getFrom();
     if (from == null) {
       LOGGER.fine("No 'from' stack specified");
+      return;
+    }
+
+    if (from.getDescriptor() != null) {
+      // If the stack is loaded form a descriptor, compute the path relative to this descriptor
+      // else, use the current directory
+      File descriptorFile = null;
+      if (stack.getDescriptor() == null) {
+        descriptorFile = new File(from.getDescriptor());
+      } else {
+        descriptorFile = new File(stack.getDescriptor().getParent(), from.getDescriptor());
+      }
+      LOGGER.info("'from' stack is a descriptor: " + descriptorFile.getAbsolutePath());
+      if (!descriptorFile.isFile()) {
+        throw new IllegalArgumentException("The 'from' descriptor must be a file: " + descriptorFile.getAbsolutePath());
+      }
+
+      LOGGER.info("Resolving parent stack");
+      StackBuilder builder = new StackBuilder().fromDescriptor(descriptorFile);
+      // Override directory.
+      builder.stack.setDirectory(stack.getDirectory());
+
+      builder.build();
       return;
     }
 
@@ -477,4 +527,38 @@ public class StackBuilder {
   }
 
 
+  public StackBuilder fromDescriptor(File descriptor) {
+    if (descriptor.getName().endsWith(".xml")) {
+      fromXmlFile(descriptor);
+    } else if (descriptor.getName().endsWith(".json")) {
+      fromJsonFile(descriptor);
+    } else if (descriptor.getName().endsWith(".yaml")) {
+      fromYamlFile(descriptor);
+    } else {
+      throw new IllegalArgumentException("Not supported file type " + descriptor.getName());
+    }
+    return this;
+  }
+
+
+  private class CopyFileAction implements Runnable {
+
+    private final File lib;
+    private final Artifact artifact;
+
+    private CopyFileAction(File lib, Artifact artifact) {
+      this.lib = lib;
+      this.artifact = artifact;
+    }
+
+    public void run() {
+      File output = new File(lib, Artifacts.getFileName(artifact));
+      try {
+        LOGGER.info("Copy artifact " + artifact + " to " + output.getAbsolutePath());
+        FileUtils.copyFile(artifact.getFile(), output);
+      } catch (IOException e) {
+        throw new IllegalStateException("Cannot copy artifact " + artifact + " to the 'lib' directory", e);
+      }
+    }
+  }
 }

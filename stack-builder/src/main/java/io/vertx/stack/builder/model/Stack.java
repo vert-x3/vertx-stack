@@ -19,6 +19,8 @@ public class Stack {
    */
   private File directory;
 
+  private File descriptor;
+
   /**
    * The base / from stack.
    */
@@ -153,5 +155,14 @@ public class Stack {
 
   public void addArtifact(StackArtifact stackArtifact) {
     this.artifacts.add(stackArtifact);
+  }
+
+  public File getDescriptor() {
+    return descriptor;
+  }
+
+  public Stack setDescriptor(File descriptor) {
+    this.descriptor = descriptor;
+    return this;
   }
 }

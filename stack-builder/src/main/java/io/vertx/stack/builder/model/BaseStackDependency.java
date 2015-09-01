@@ -2,6 +2,8 @@ package io.vertx.stack.builder.model;
 
 import io.vertx.stack.builder.utils.StackVersion;
 
+import java.io.File;
+
 /**
  * Represent the inherited / from / base stack. It can be ommited if the stack is already installed.
  *
@@ -59,6 +61,7 @@ public class BaseStackDependency extends StackDependency {
 
   private int strip;
   private String id;
+  private String descriptor;
 
   /**
    * In the case of an official stack provided by vert.x, the id of the stack. Are supported {@code full, min} and
@@ -104,4 +107,12 @@ public class BaseStackDependency extends StackDependency {
   }
 
 
+  public String getDescriptor() {
+    return descriptor;
+  }
+
+  public BaseStackDependency setDescriptor(String descriptor) {
+    this.descriptor = descriptor;
+    return this;
+  }
 }
