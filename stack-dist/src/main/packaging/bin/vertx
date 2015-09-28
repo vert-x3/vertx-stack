@@ -11,6 +11,9 @@
 # You can configure any property on VertxOptions or DeploymentOptions by setting system properties e.g.
 # VERTX_OPTS="-Dvertx.options.eventLoopPoolSize=26 -Dvertx.options.deployment.worker=true"
 
+# To enable vert.x sync agent, set the "ENABLE_VERTX_SYNC_AGENT" environment variable to "true". Be aware that you
+# need to install vert.x sync in the $VERTX_HOME/lib directory before.
+
 # If you're deploying and undeploying a lot of verticles with dynamic languages it's recommended to enable GC'ing
 # of generated classes and prevent OOM due to a lot of gc
 # JVM_OPTS="-XX:+CMSClassUnloadingEnabled -XX:-UseGCOverheadLimit"
@@ -167,6 +170,19 @@ fi
 
 if [ "x" != "x$VERTX_MODS" ]; then
   VERTX_OPTS="$VERTX_OPTS -Dvertx.mods=$VERTX_MODS"
+fi
+
+if [ "true" == "$ENABLE_VERTX_SYNC_AGENT" ]; then
+  warn "Enabling vert.x sync agent - please make sure vert.x sync and its dependencies have been installed in the
+  'lib' directory"
+  quasar="$(find $VERTX_HOME/lib -name 'quasar-core-*.jar')"
+
+  if [ -z "$quasar" ]; then
+    die "Cannot find quasar in the 'lib' directory"
+  else
+    VERTX_OPTS="$VERTX_OPTS -javaagent:$quasar"
+  fi
+
 fi
 
 # Split up the JVM_OPTS And VERTX_OPTS values into an array, following the shell quoting and substitution rules
