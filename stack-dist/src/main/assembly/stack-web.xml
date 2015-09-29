@@ -12,18 +12,10 @@
         <include>commons-beanutils:commons-beanutils</include>
 
         <include>io.vertx:vertx-web:jar</include>
-        <include>org.thymeleaf:thymeleaf</include>
-        <include>org.javassist:javassist</include>
-        <include>ognl:ognl</include>
-        <include>com.github.jknack:handlebars</include>
-        <include>org.apache.commons:commons-lang3</include>
-        <include>org.antlr:antlr4-runtime</include>
-        <include>org.mozilla:rhino</include>
-        <include>de.neuland-bfi:jade4j</include>
-        <include>org.apache.commons:commons-jexl</include>
-        <include>commons-collections:commons-collections</include>
-        <include>com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru</include>
-        <include>org.mvel:mvel2</include>
+        <include>io.vertx:vertx-web-templ-thymeleaf:jar:shaded</include>
+        <include>io.vertx:vertx-web-templ-jade:jar:shaded</include>
+        <include>io.vertx:vertx-web-templ-handlebars:jar:shaded</include>
+        <include>io.vertx:vertx-web-templ-mvel:jar:shaded</include>
 
       </includes>
     </dependencySet>
