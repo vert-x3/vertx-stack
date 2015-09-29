@@ -319,6 +319,28 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <!-- dependencies required by the javadoc -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.stephenc.findbugs</groupId>
+      <artifactId>findbugs-annotations</artifactId>
+      <version>1.3.9-1</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <type>test-jar</type>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -363,7 +385,9 @@
             <phase>process-resources</phase>
             <configuration>
               <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-shiro,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-redis-client</includeArtifactIds>
+              <includeArtifactIds>
+                vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-shiro,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-redis-client
+              </includeArtifactIds>
               <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
               <includeClassifiers>docs</includeClassifiers>
               <stripClassifier>true</stripClassifier>
@@ -377,6 +401,7 @@
       <!-- Process Javadoc from sources to target/docs/apidocs -->
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
         <executions>
           <execution>
             <goals>
