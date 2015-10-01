@@ -13,7 +13,7 @@
     <componentDescriptor>src/main/assembly/stack-base.xml</componentDescriptor>
     <componentDescriptor>src/main/assembly/stack-data.xml</componentDescriptor>
     <componentDescriptor>src/main/assembly/stack-web.xml</componentDescriptor>
-    <componentDescriptor>src/main/assembly/stack-mail.xml</componentDescriptor>
+    <componentDescriptor>src/main/assembly/stack-shell.xml</componentDescriptor>
   </componentDescriptors>
 
 </assembly>

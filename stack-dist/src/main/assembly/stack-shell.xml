@@ -1,0 +1,29 @@
+<component xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.2 http://maven.apache.org/xsd/component-1.1.2.xsd">
+
+  <dependencySets>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>/lib/</outputDirectory>
+      <includes>
+
+        <include>io.vertx:vertx-auth-*</include>
+        <include>org.apache.shiro:shiro-core</include>
+
+        <include>io.vertx:vertx-shell</include>
+        <include>io.termd:termd-core</include>
+        <include>org.apache.sshd:sshd-core</include>
+
+      </includes>
+    </dependencySet>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>/client</outputDirectory>
+      <includes>
+        <include>io.vertx:vertx-web:js:client</include>
+      </includes>
+      <outputFileNameMapping>vertxbus-${project.version}.js</outputFileNameMapping>
+    </dependencySet>
+  </dependencySets>
+
+</component>
