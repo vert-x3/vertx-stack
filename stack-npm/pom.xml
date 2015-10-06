@@ -223,7 +223,7 @@
             <configuration>
               <target>
                 <move file="${project.build.directory}/npm/client/vertx-web-client.js"
-                      tofile="${project.build.directory}/npm/client/vert.x-${project.version}/vertxbus.js"/>
+                      tofile="${project.build.directory}/npm/client/vert.x-${project.version}/vertx-eventbus.js"/>
               </target>
             </configuration>
           </execution>
