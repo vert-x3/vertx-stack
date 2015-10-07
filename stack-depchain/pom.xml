@@ -158,10 +158,12 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stomp</artifactId>
     </dependency>
+<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jgroups</artifactId>
     </dependency>
+-->
   </dependencies>
 
 </project>
