@@ -12,7 +12,7 @@
   "description": "Vert.x 3 Event Bus Client as NPM",
   "license": "Apache-2.0",
   "files": [
-    "vertxbus.js",
+    "vertx-eventbus.js",
     "README.md"
   ]
 }
