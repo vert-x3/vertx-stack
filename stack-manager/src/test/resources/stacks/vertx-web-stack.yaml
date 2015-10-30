@@ -1,0 +1,149 @@
+dependencies:
+  - groupId: io.vertx
+    artifactId: vertx-core
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-hazelcast
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-lang-groovy
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-lang-js
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-lang-ruby
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-service-proxy
+    version: ${vertx.version}
+    included: true
+
+  - groupId: io.vertx
+    artifactId: vertx-http-service-factory
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-dropwizard-metrics
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-maven-service-factory
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-reactive-streams
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-rx-java
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-rx-groovy
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-rx-js
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-service-factory
+    version: ${vertx.version}
+    included: false
+
+  - groupId: io.vertx
+    artifactId: vertx-auth-common
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-auth-jdbc
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-auth-jwt
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-shiro
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-sql-common
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-jdbc-client
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-mongo-client
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-mongo-embedded-db
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-mongo-service
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-reactive-streams
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-redis-client
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-unit
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-web
+    version: ${vertx.version}
+    included: true
+
+  - groupId: io.vertx
+    artifactId: vertx-web-templ-handlebars
+    version: ${vertx.version}
+    classifier: shaded
+    transitive: false
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-web-templ-jade
+    version: ${vertx.version}
+    classifier: shaded
+    transitive: false
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-web-templ-mvel
+    version: ${vertx.version}
+    classifier: shaded
+    transitive: false
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-web-templ-thymeleaf
+    version: ${vertx.version}
+    classifier: shaded
+    transitive: false
+    included: true
+
+  - groupId: io.vertx
+    artifactId: vertx-stomp
+    version: ${vertx.version}
+    included: false
+  - groupId: io.vertx
+    artifactId: vertx-shell
+    version: ${vertx.version}
+    included: true
+  - groupId: io.vertx
+    artifactId: vertx-sync
+    version: ${vertx.version}
+    included: false
