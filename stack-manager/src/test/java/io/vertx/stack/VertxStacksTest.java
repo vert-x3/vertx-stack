@@ -97,10 +97,10 @@ public class VertxStacksTest {
   }
 
   /**
-   * This test check that we can still resolved the former full stack.
+   * This tests checks that all our dependencies converge to the same version.
    */
   @Test
-  public void testTheResolutionOfTheFullStack() {
+  public void testConvergence() {
     System.setProperty("vertx.version", new VersionCommand().getVersion());
     Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/simili-full-stack.yaml"));
 

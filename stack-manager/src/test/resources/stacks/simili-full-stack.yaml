@@ -138,11 +138,11 @@ dependencies:
   - groupId: io.vertx
     artifactId: vertx-stomp
     version: ${vertx.version}
-    included: false
+    included: true
   - groupId: io.vertx
     artifactId: vertx-shell
     version: ${vertx.version}
-    included: false
+    included: true
   - groupId: io.vertx
     artifactId: vertx-sync
     version: ${vertx.version}
