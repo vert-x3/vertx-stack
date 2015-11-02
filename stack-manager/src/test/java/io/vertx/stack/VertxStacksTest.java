@@ -17,7 +17,6 @@
 package io.vertx.stack;
 
 import io.vertx.core.impl.launcher.commands.VersionCommand;
-import io.vertx.stack.model.Dependency;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
 import io.vertx.stack.model.StackResolutionOptions;
@@ -53,10 +52,14 @@ public class VertxStacksTest {
 
 
   private File root = new File("target/stack");
+  private String vertxVersion;
 
   @Before
   public void setUp() {
     FileUtils.delete(root);
+    vertxVersion = new VersionCommand().getVersion();
+    assertThat(vertxVersion).isNotEmpty();
+    System.setProperty("vertx.version", vertxVersion);
   }
 
   @After
@@ -101,7 +104,6 @@ public class VertxStacksTest {
    */
   @Test
   public void testConvergence() {
-    System.setProperty("vertx.version", new VersionCommand().getVersion());
     Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/simili-full-stack.yaml"));
 
     StackResolution resolution = new StackResolution(stack, root,
@@ -112,7 +114,6 @@ public class VertxStacksTest {
 
   @Test
   public void testTheResolutionOfTheWebStack() {
-    System.setProperty("vertx.version", new VersionCommand().getVersion());
     Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-web-stack.yaml"));
 
     StackResolution resolution = new StackResolution(stack, root,
@@ -123,7 +124,6 @@ public class VertxStacksTest {
 
   @Test
   public void testTheCoreWithoutNettyBufferStack() {
-    System.setProperty("vertx.version", new VersionCommand().getVersion());
     Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-core-only.yaml"));
 
     StackResolution resolution = new StackResolution(stack, root,
