@@ -41,7 +41,7 @@ import java.util.List;
 @Name("resolve")
 @Summary("Resolve the vert.x stack according to the content the stack description.")
 @Description("Synchronize the content of a vert.x distribution based on the description given in a 'yaml' file. From " +
-    "the VERTX_HOME directory, launch it with: 'bin/vertx resolve'")
+    "the 'VERTX_HOME' directory, launch it with: 'bin/vertx resolve'.")
 public class ResolveCommand extends DefaultCommand {
 
   /**
@@ -68,7 +68,7 @@ public class ResolveCommand extends DefaultCommand {
 
   @Option(longName = "dir")
   @DefaultValue("lib")
-  @Description("The directory containing the artifacts composing the stack. Defaults to the './lib' directory")
+  @Description("The directory containing the artifacts composing the stack. Defaults to the './lib' directory.")
   public void setDirectory(File file) {
     this.directory = file.getAbsoluteFile();
   }
@@ -88,13 +88,13 @@ public class ResolveCommand extends DefaultCommand {
   }
 
   @Option(longName = "local-repo")
-  @Description("Set the path to the local Maven repository. Defaults to ~/.m2/repository")
+  @Description("Set the path to the local Maven repository. Defaults to '~/.m2/repository'.")
   public void setLocalRepository(String localRepository) {
     this.localRepository = localRepository;
   }
 
   @Option(longName = "remote-repo", acceptMultipleValues = true)
-  @Description("Set the path to a remote Maven repository. Can be set multiple times")
+  @Description("Set the path to a remote Maven repository. Can be set multiple times.")
   public void setRemoteRepositories(List<String> remoteRepositories) {
     this.remoteRepositories = remoteRepositories;
   }
@@ -121,7 +121,7 @@ public class ResolveCommand extends DefaultCommand {
   public void setUp(ExecutionContext ec) throws CLIException {
     super.setUp(ec);
     if (!descriptor.isFile()) {
-      throw new CLIException("The descriptor '" + descriptor.getAbsolutePath() + "' is not a file");
+      throw new CLIException("The descriptor '" + descriptor.getAbsolutePath() + "' is not a file.");
     }
   }
 
