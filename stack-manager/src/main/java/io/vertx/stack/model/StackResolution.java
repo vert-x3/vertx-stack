@@ -119,7 +119,7 @@ public class StackResolution {
 
     // Schedule the deletion of all non-marked file.
     marks.forEach((fileName, mark) -> {
-      if (!mark && !fileName.startsWith("stack-manager-")) { // Do not delete me
+      if (!mark && !fileName.startsWith("vertx-stack-manager-")) { // Do not delete me
         chain.add(Actions.remove(new File(directory, fileName)));
       }
     });
