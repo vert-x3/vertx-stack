@@ -31,6 +31,9 @@
         <include>io.vertx:vertx-lang-groovy</include>
         <include>org.codehaus.groovy:groovy-all</include>
 
+        <include>io.vertx:vertx-lang-ceylon</include>
+        <include>org.ceylon-lang:ceylon-complete</include>
+
       </includes>
     </dependencySet>
     <dependencySet>
