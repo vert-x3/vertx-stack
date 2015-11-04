@@ -17,8 +17,7 @@
 package io.vertx.stack.model;
 
 import io.vertx.stack.resolver.Resolver;
-import io.vertx.stack.transaction.Actions;
-import io.vertx.stack.transaction.Transaction;
+import io.vertx.stack.utils.Actions;
 import org.eclipse.aether.artifact.Artifact;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * Object responsible for resolving a stack. This object is stateful, and must be used only for 1 resolution.
+ * Object responsible for resolving a stack. This object is stateful, and must be used only for a single resolution.
  *
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  */
@@ -68,13 +67,9 @@ public class StackResolution {
     selectedVersions.clear();
     init();
     stack.getDependencies().forEach(this::resolve);
-    Transaction transaction = computeAction();
+    List<Actions.Action> chain = computeChainOfActions();
 
-    try {
-      transaction.apply();
-    } catch (Exception e) {
-      throw new IllegalStateException("Exception when apply stack modification", e);
-    }
+    chain.stream().forEach(Actions.Action::execute);
 
     Map<String, File> resolved = new LinkedHashMap<>();
     for (ResolvedArtifact artifact : selectedArtifacts.values()) {
@@ -89,16 +84,16 @@ public class StackResolution {
   private void init() {
     if (!directory.isDirectory()) {
       LOGGER.info("Creating directory " + directory.getAbsolutePath());
-      directory.mkdirs();
+      boolean mkdirs = directory.mkdirs();
+      LOGGER.fine("Directory created: " + mkdirs);
     }
     stack.applyFiltering();
-    stack.getDependencies().stream().filter(Dependency::isIncluded).forEach(dependency -> {
-      selectedVersions.put(dependency.getManagementKey(), dependency.getVersion());
-    });
+    stack.getDependencies().stream().filter(Dependency::isIncluded).forEach(
+        dependency -> selectedVersions.put(dependency.getManagementKey(), dependency.getVersion()));
     resolver = Resolver.create(options);
   }
 
-  private Transaction computeAction() {
+  private List<Actions.Action> computeChainOfActions() {
     File[] files = directory.listFiles((dir, name) -> {
       return name.endsWith(".jar");
     });
@@ -108,7 +103,7 @@ public class StackResolution {
       marks.put(file.getName(), false);
     }
 
-    Transaction transaction = Transaction.create();
+    List<Actions.Action> chain = new ArrayList<>();
 
     selectedArtifacts.forEach((key, artifact) -> {
       String fileName = artifact.getArtifact().getFile().getName();
@@ -116,20 +111,20 @@ public class StackResolution {
       if (marks.containsKey(fileName)) {
         // Mark the file.
         marks.put(fileName, true);
-        transaction.append(Actions.skip(artifact.getArtifact()));
+        chain.add(Actions.skip(artifact.getArtifact()));
       } else {
-        transaction.append(Actions.copy(artifact.getArtifact(), directory));
+        chain.add(Actions.copy(artifact.getArtifact(), directory));
       }
     });
 
     // Schedule the deletion of all non-marked file.
     marks.forEach((fileName, mark) -> {
       if (!mark && !fileName.startsWith("stack-manager-")) { // Do not delete me
-        transaction.append(Actions.remove(new File(directory, fileName)));
+        chain.add(Actions.remove(new File(directory, fileName)));
       }
     });
 
-    return transaction;
+    return chain;
   }
 
   private void resolve(Dependency dependency) {
@@ -201,6 +196,7 @@ public class StackResolution {
       return this;
     }
 
+    @SuppressWarnings("unused")
     public String getSelectedVersion() {
       return selectedVersion;
     }
@@ -215,6 +211,7 @@ public class StackResolution {
       return this;
     }
 
+    @SuppressWarnings("unused")
     public Set<String> getUsages() {
       return usages;
     }

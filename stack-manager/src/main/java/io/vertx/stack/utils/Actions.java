@@ -14,11 +14,12 @@
  *  You may elect to redistribute this code under either of these licenses.
  */
 
-package io.vertx.stack.transaction;
+package io.vertx.stack.utils;
 
 import org.eclipse.aether.artifact.Artifact;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -30,7 +31,19 @@ import java.util.logging.Logger;
  */
 public class Actions {
 
-  private static final Logger logger = Logger.getLogger("Stack Resolver");
+  /**
+   * Wraps an action that is applied when the resolution is completed.
+   */
+  public interface Action {
+
+    /**
+     * Executes the action.
+     * Actions may throw a runtime exception if something bad happened when the action is executed.
+     */
+    void execute();
+  }
+
+  private static final Logger LOGGER = Logger.getLogger("Stack Resolver");
 
   /**
    * Action to copy an artifact to a directory.
@@ -43,8 +56,12 @@ public class Actions {
     return () -> {
       Path source = artifact.getFile().toPath();
       Path output = directory.toPath().resolve(source.getFileName());
-      logger.info("Copying " + source.getFileName());
-      Files.copy(source, output);
+      LOGGER.info("Copying " + source.getFileName());
+      try {
+        Files.copy(source, output);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     };
   }
 
@@ -55,7 +72,7 @@ public class Actions {
    * @return the created {@link Action}
    */
   public static Action skip(Artifact artifact) {
-    return () -> logger.info("Skipping " + artifact.toString());
+    return () -> LOGGER.info("Skipping " + artifact.toString());
   }
 
   /**
@@ -67,7 +84,7 @@ public class Actions {
   public static Action remove(File file) {
     return () -> {
       if (file.isFile()) {
-        logger.info("Deleting " + file.getName());
+        LOGGER.info("Deleting " + file.getName());
         file.delete();
       }
     };
