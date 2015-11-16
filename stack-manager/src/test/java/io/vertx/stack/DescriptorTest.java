@@ -47,7 +47,7 @@ public class DescriptorTest {
     ResolveCommand cmd = new ResolveCommand();
     cmd.setFailOnConflict(false);
     cmd.setDirectory(root);
-    cmd.setStackDescriptor(new File("src/test/resources/stacks/core.yaml"));
+    cmd.setStackDescriptor(new File("src/test/resources/stacks/core.json"));
     cmd.run();
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
   }
@@ -57,7 +57,7 @@ public class DescriptorTest {
     ResolveCommand cmd = new ResolveCommand();
     cmd.setFailOnConflict(false);
     cmd.setDirectory(root);
-    cmd.setStackDescriptor(new File("src/test/resources/stacks/core-with-variable.yaml"));
+    cmd.setStackDescriptor(new File("src/test/resources/stacks/core-with-variable.json"));
     cmd.run();
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
   }
@@ -68,7 +68,7 @@ public class DescriptorTest {
     args.add("resolve");
     args.add("--dir=" + root.getAbsolutePath());
     args.add("-Dvertx.version=3.1.0");
-    args.add("--stack=" + new File("src/test/resources/stacks/core-with-system-variable.yaml").getAbsolutePath());
+    args.add("--stack=" + new File("src/test/resources/stacks/core-with-system-variable.json").getAbsolutePath());
     Launcher.main(args.toArray(new String[args.size()]));
 
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();

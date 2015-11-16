@@ -1,5 +1,0 @@
-dependencies:
-    - groupId: io.vertx
-      artifactId: vertx-core
-      version: ${vertx.version}
-      included: true

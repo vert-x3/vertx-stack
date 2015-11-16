@@ -22,7 +22,7 @@
  * included in the stack. Then, during the resolution it resolves new dependencies and delete the files that are not
  * used anymore.
  *
- * If you have downloaded a vert.x distribution, it comes with a `vertx-stack.yaml` in the root directory. This file
+ * If you have downloaded a vert.x distribution, it comes with a `vertx-stack.json` in the root directory. This file
  * contains all the official dependencies you can add. By default it _includes_ only the minimal stack.
  *
  * === Adding artifacts
@@ -32,10 +32,12 @@
  *
  * [source]
  * ----
- *   - groupId: io.vertx
- *     artifactId: vertx-sync
- *     version: ${vertx.version}
- *     included: true
+ * {
+ *  "groupId": "io.vertx",
+ *  "artifactId": "vertx-sync",
+ *  "version": "${vertx.version}",
+ *  "included": true
+ * }
  * ----
  *
  * The dependency is described using the Maven coordinates. The `groupId`, `artifactId` and `versions` attributes are
@@ -47,10 +49,12 @@
  *
  * [source]
  * ----
- *   - groupId: io.vertx
- *     artifactId: vertx-sync
- *     version: ${vertx.version}
- *     included: false
+ * {
+ *  "groupId": "io.vertx",
+ *  "artifactId": "vertx-sync",
+ *  "version": "${vertx.version}",
+ *  "included": false
+ * }
  * ----
  *
  * During the resolution, all files that are not associated to a dependency (or a transitive dependency) are removed.
@@ -74,7 +78,7 @@
  * * `--https-proxy &lt;value&gt;` - Set the HTTPS proxy address if any.
  * * `--local-repo &lt;value&gt;` - Set the path to the local Maven repository. Defaults to `~/.m2/repository`
  * * `--remote-repo &lt;value&gt;` -  Set the path to a remote Maven repository. Can be set multiple times
- * * `--stack &lt;value&gt;` - The path to the stack descriptor. Defaults to `vertx-stack.yaml`.
+ * * `--stack &lt;value&gt;` - The path to the stack descriptor. Defaults to `vertx-stack.json`.
  *
  * === Exclusions and Transitives
  *
@@ -82,13 +86,16 @@
  *
  * [source]
  * ----
- *   - groupId: org.acme
- *     artifactId: acme-lib
- *     version: 1.0.0
- *     included: true
- *     exclusions:
- *       - groupId: org.acme
- *         artifactId: acme-not-required
+ * {
+ *  "groupId": "org.acme",
+ *  "artifactId": "acme-lib",
+ *  "version": "1.0.0",
+ *  "included": true,
+ *  "exclusions": [{
+ *    "groupId": "org.acme",
+ *    "artifactId": "acme-not-required"
+ *  }]
+ * }
  * ----
  *
  * You can also set the `transitive` attribute to `false` on a dependency to not resolve the transitive dependencies.
@@ -96,12 +103,14 @@
  *
  * [source]
  * ----
- *   - groupId: io.vertx
- *     artifactId: vertx-web-templ-thymeleaf
- *     version: ${vertx.version}
- *     classifier: shaded
- *     transitive: false
- *     included: true
+ * {
+ *  "groupId": "io.vertx",
+ *  "artifactId": "vertx-web-templ-thymeleaf",
+ *  "version": "${vertx.version}",
+ *  "included": true,
+ *  "classifier": "shaded",
+ *  "transitive": false
+ * }
  * ----
  *
  * === Using variables
@@ -110,13 +119,23 @@
  *
  * [source]
  * ----
- * variables:
- *   vertx.version: 3.2.0
+ * {
+ * "variables": {
+ *   "vertx.version": "3.2.0"
+ * }
  * ----
  *
- * Then your dependency can uses this varialbe using the `${}` notation.
+ * Then your dependency can uses this variable using the `${}` notation.
  *
  * Variables can be set or overridden using system variables. System variables can be set with `-D`
+ *
+ * === A note about the JSON format
+ *
+ * The descriptor format supports:
+ *
+ * * comments using `//`
+ * * non quoted keys (such as `groupId : "org.acme"`)
+ * * single quotes for values (such as `groupId : 'org.acme'`)
  *
  */
 @Document(fileName = "index.adoc")

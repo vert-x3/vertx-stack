@@ -40,7 +40,7 @@ import java.util.List;
  */
 @Name("resolve")
 @Summary("Resolve the vert.x stack according to the content the stack description.")
-@Description("Synchronize the content of a vert.x distribution based on the description given in a 'yaml' file. From " +
+@Description("Synchronize the content of a vert.x distribution based on the description given in a 'json' file. From " +
     "the 'VERTX_HOME' directory, launch it with: 'bin/vertx resolve'.")
 public class ResolveCommand extends DefaultCommand {
 
@@ -74,8 +74,8 @@ public class ResolveCommand extends DefaultCommand {
   }
 
   @Option(longName = "stack")
-  @DefaultValue("vertx-stack.yaml")
-  @Description("The path to the stack descriptor. Defaults to 'vertx-stack.yaml'.")
+  @DefaultValue("vertx-stack.json")
+  @Description("The path to the stack descriptor. Defaults to 'vertx-stack.json'.")
   public void setStackDescriptor(File file) {
     this.descriptor = file;
   }

@@ -16,8 +16,8 @@
 
 package io.vertx.stack.model;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import io.vertx.stack.utils.Filtering;
 
 import java.io.File;
@@ -127,7 +127,12 @@ public class Stack {
    * @return the created stack
    */
   public static Stack fromDescriptor(File descriptor) {
-    ObjectMapper mapper = new YAMLMapper();
+    ObjectMapper mapper = new ObjectMapper();
+    mapper = mapper
+        .enable(JsonParser.Feature.ALLOW_COMMENTS)
+        .enable(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES)
+        .enable(JsonParser.Feature.ALLOW_SINGLE_QUOTES)
+        .enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION);
     try {
       return mapper.readValue(descriptor, Stack.class);
     } catch (IOException e) {

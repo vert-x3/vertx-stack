@@ -69,7 +69,7 @@ public class VertxStacksTest {
 
   @Test
   public void testResolutionOfMinSwitchToBaseAndRevertToMin() {
-    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack.yaml"));
+    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack.json"));
 
     // Min stack
     StackResolution resolution = new StackResolution(stack, root,
@@ -104,7 +104,7 @@ public class VertxStacksTest {
    */
   @Test
   public void testConvergence() {
-    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/simili-full-stack.yaml"));
+    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/convergence.json"));
 
     StackResolution resolution = new StackResolution(stack, root,
         new StackResolutionOptions().setFailOnConflicts(true));
@@ -114,7 +114,7 @@ public class VertxStacksTest {
 
   @Test
   public void testTheResolutionOfTheWebStack() {
-    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-web-stack.yaml"));
+    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-web-stack.json"));
 
     StackResolution resolution = new StackResolution(stack, root,
         new StackResolutionOptions().setFailOnConflicts(true));
@@ -124,7 +124,7 @@ public class VertxStacksTest {
 
   @Test
   public void testTheCoreWithoutNettyBufferStack() {
-    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-core-only.yaml"));
+    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-core-only.json"));
 
     StackResolution resolution = new StackResolution(stack, root,
         new StackResolutionOptions().setFailOnConflicts(true));

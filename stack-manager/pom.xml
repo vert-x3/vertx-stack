@@ -46,12 +46,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-yaml</artifactId>
-      <!-- must be the version used by vert.x core -->
-      <version>2.6.1</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-aether-provider</artifactId>
       <version>3.2.5</version>
@@ -166,7 +160,7 @@
             <configuration>
               <mainClass>io.vertx.stack.command.ResolveCommand</mainClass>
               <arguments>
-                <argument>--stack=${project.basedir}/target/vertx-stack/vertx-stack.yaml</argument>
+                <argument>--stack=${project.basedir}/target/vertx-stack/vertx-stack.json</argument>
                 <argument>--dir=${project.basedir}/target/min-lib</argument>
               </arguments>
             </configuration>
