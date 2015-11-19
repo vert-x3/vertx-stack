@@ -2,7 +2,7 @@
 
 FROM java:8
 
-MAINTAINER Julien Viet <julien@julienviet.com>
+MAINTAINER Clement Escoffier <clement@apache.org>
 
 COPY ./usr /usr/
 

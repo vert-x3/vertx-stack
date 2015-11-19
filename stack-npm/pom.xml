@@ -18,23 +18,15 @@
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-dist</artifactId>
+      <artifactId>vertx-stack-manager</artifactId>
       <version>${project.version}</version>
       <classifier>full</classifier>
       <type>tar.gz</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-dist</artifactId>
+      <artifactId>vertx-stack-manager</artifactId>
       <version>${project.version}</version>
-      <classifier>base</classifier>
-      <type>tar.gz</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-dist</artifactId>
-      <version>${project.version}</version>
-      <classifier>min</classifier>
       <type>tar.gz</type>
     </dependency>
     <dependency>
@@ -52,12 +44,6 @@
         <directory>${project.basedir}/src/main/npm/client</directory>
         <filtering>true</filtering>
         <targetPath>${project.build.directory}/npm/client/vert.x-${project.version}</targetPath>
-      </resource>
-
-      <resource>
-        <directory>${project.basedir}/src/main/npm/base</directory>
-        <filtering>true</filtering>
-        <targetPath>${project.build.directory}/npm/base/vert.x-${project.version}</targetPath>
       </resource>
 
       <resource>
@@ -101,18 +87,6 @@
               <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
               <includeClassifiers>min</includeClassifiers>
               <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>unzip-vertx-stack-base</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-              <includeClassifiers>base</includeClassifiers>
-              <outputDirectory>${project.build.directory}/npm/base</outputDirectory>
             </configuration>
           </execution>
           <execution>
@@ -169,17 +143,6 @@
             <configuration>
               <arguments>install</arguments>
               <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm-install-base</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
             </configuration>
           </execution>
           <execution>
@@ -255,17 +218,6 @@
                 <configuration>
                   <arguments>publish</arguments>
                   <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>npm-publish-base</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <phase>deploy</phase>
-                <configuration>
-                  <arguments>publish</arguments>
-                  <workingDirectory>${project.build.directory}/npm/base/vert.x-${project.version}</workingDirectory>
                 </configuration>
               </execution>
               <execution>
