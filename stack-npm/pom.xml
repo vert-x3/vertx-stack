@@ -84,8 +84,7 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
-              <includeClassifiers>min</includeClassifiers>
+              <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
               <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
             </configuration>
           </execution>
@@ -96,7 +95,7 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>vertx-stack-dist</includeArtifactIds>
+              <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
               <includeClassifiers>full</includeClassifiers>
               <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
             </configuration>
