@@ -1,0 +1,16 @@
+{
+"dependencies": [
+    {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-core",
+    "version": "3.1.0",
+    "included" : true,
+    "exclusions": [
+      {
+        "groupId": "io.netty",
+        "artifactId": "netty-buffer"
+      }
+    ]
+    }
+  ]
+}
