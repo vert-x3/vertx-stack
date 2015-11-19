@@ -85,7 +85,9 @@
             </goals>
             <configuration>
               <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
-              <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
+              <includeTypes>tar.gz</includeTypes>
+              <excludeClassifiers>full</excludeClassifiers>
+              <outputDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</outputDirectory>
             </configuration>
           </execution>
           <execution>
@@ -97,7 +99,8 @@
             <configuration>
               <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
               <includeClassifiers>full</includeClassifiers>
-              <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
+              <includeTypes>tar.gz</includeTypes>
+              <outputDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</outputDirectory>
             </configuration>
           </execution>
           <execution>
