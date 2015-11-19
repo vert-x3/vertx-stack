@@ -16,9 +16,9 @@
 
 package io.vertx.stack;
 
+import com.jayway.awaitility.Awaitility;
 import io.vertx.core.Launcher;
 import io.vertx.stack.command.ResolveCommand;
-import io.vertx.stack.model.StackResolutionOptions;
 import io.vertx.stack.utils.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +26,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,7 +40,7 @@ public class DescriptorTest {
   @Before
   public void setUp() {
     FileUtils.delete(root);
-    // TODO wait until we are sure the directory is deleted
+    Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !root.exists());
   }
 
   @Test

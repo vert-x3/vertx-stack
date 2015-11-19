@@ -16,6 +16,7 @@
 
 package io.vertx.stack;
 
+import com.jayway.awaitility.Awaitility;
 import io.vertx.core.impl.launcher.commands.VersionCommand;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
@@ -30,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -52,12 +54,12 @@ public class VertxStacksTest {
 
 
   private File root = new File("target/stack");
-  private String vertxVersion;
 
   @Before
   public void setUp() {
     FileUtils.delete(root);
-    vertxVersion = new VersionCommand().getVersion();
+    Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !root.exists());
+    String vertxVersion = new VersionCommand().getVersion();
     assertThat(vertxVersion).isNotEmpty();
     System.setProperty("vertx.version", vertxVersion);
   }

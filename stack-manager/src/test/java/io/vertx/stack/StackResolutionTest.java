@@ -16,6 +16,7 @@
 
 package io.vertx.stack;
 
+import com.jayway.awaitility.Awaitility;
 import io.vertx.stack.model.*;
 import io.vertx.stack.utils.FileUtils;
 import io.vertx.stack.utils.LocalArtifact;
@@ -28,6 +29,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -44,6 +46,7 @@ public class StackResolutionTest {
   @Before
   public void setUp() {
     FileUtils.delete(root);
+    Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !root.exists());
   }
 
   @After
