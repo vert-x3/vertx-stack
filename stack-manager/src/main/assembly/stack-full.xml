@@ -18,7 +18,7 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
 
-  <id>stack</id>
+  <id>full</id>
   <formats>
     <format>dir</format>
     <format>tar.gz</format>
@@ -30,7 +30,7 @@
 
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}/target/min-lib</directory>
+      <directory>${project.basedir}/target/full-lib</directory>
       <outputDirectory>/lib/</outputDirectory>
     </fileSet>
 
@@ -41,10 +41,10 @@
 
     <fileSet>
       <directory>${project.basedir}/target/vertx-stack</directory>
-      <includes>
-        <include>vertx-stack.json</include>
-      </includes>
       <outputDirectory>.</outputDirectory>
+      <includes>
+        <include>vertx-stack-full.json</include>
+      </includes>
     </fileSet>
   </fileSets>
 

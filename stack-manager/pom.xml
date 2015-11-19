@@ -165,6 +165,20 @@
               </arguments>
             </configuration>
           </execution>
+          <execution>
+            <id>build-full-stack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>io.vertx.stack.command.ResolveCommand</mainClass>
+              <arguments>
+                <argument>--stack=${project.basedir}/target/vertx-stack/vertx-stack-full.json</argument>
+                <argument>--dir=${project.basedir}/target/full-lib</argument>
+              </arguments>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -230,6 +244,35 @@
             </configuration>
             <phase>package</phase>
           </execution>
+
+          <execution>
+            <id>vertx-stack-full</id>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>${finalName}</finalName>
+              <appendAssemblyId>true</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/main/assembly/stack-full.xml</descriptor>
+              </descriptors>
+            </configuration>
+            <phase>package</phase>
+          </execution>
+
+          <execution>
+            <id>doc</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <attach>true</attach>
+              <descriptors>
+                <descriptor>${basedir}/src/main/assembly/docs.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -243,7 +286,7 @@
             </annotationProcessors>
             <generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>
             <compilerArgs>
-              <arg>-Adocgen.output=${asciidoc.dir}/stack-builder</arg>
+              <arg>-Adocgen.output=${asciidoc.dir}/stack-manager</arg>
               <arg>-AoutputDirectory=${project.basedir}/src/main</arg>
             </compilerArgs>
         </configuration>

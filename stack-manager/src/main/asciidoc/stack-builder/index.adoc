@@ -119,5 +119,5 @@ Variables can be set or overridden using system variables. System variables can 
 The descriptor format supports:
 
 * comments using `//`
-* non quoted keys (such as `groupId : "org.acme"`
+* non quoted keys (such as `groupId : "org.acme"`)
 * single quotes for values (such as `groupId : 'org.acme'`)
