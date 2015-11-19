@@ -67,11 +67,10 @@
   <modules>
     <!-- docker documentation must be built regardless we build the image -->
     <module>stack-depchain</module>
-    <module>stack-dist</module>
+    <module>stack-manager</module>
     <module>stack-docker</module>
     <module>stack-docs</module>
     <module>stack-npm</module>
-    <module>stack-manager</module>
   </modules>
 
   <!-- Relax the enforce rule in order to allow mongodb driver snapshtos -->
