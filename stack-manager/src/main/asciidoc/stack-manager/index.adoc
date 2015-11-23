@@ -63,7 +63,10 @@ directory
 * `--https-proxy &lt;value&gt;` - Set the HTTPS proxy address if any.
 * `--local-repo &lt;value&gt;` - Set the path to the local Maven repository. Defaults to `~/.m2/repository`
 * `--remote-repo &lt;value&gt;` -  Set the path to a remote Maven repository. Can be set multiple times
-* `--stack &lt;value&gt;` - The path to the stack descriptor. Defaults to `vertx-stack.json`.
+* `&lt;vertx-stack.json&gt;` - The path to the stack descriptor. Defaults to `vertx-stack.json`.
+
+If you have set `VERTX_HOME` as environment variable (or system variable), it uses: `$VERTX_HOME/lib` and
+`$VERTX_HOME/vertx-stack.json`.
 
 === Exclusions and Transitives
 

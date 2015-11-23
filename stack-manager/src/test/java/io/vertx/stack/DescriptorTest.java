@@ -18,6 +18,8 @@ package io.vertx.stack;
 
 import com.jayway.awaitility.Awaitility;
 import io.vertx.core.Launcher;
+import io.vertx.core.impl.launcher.VertxCommandLauncher;
+import io.vertx.core.spi.launcher.ExecutionContext;
 import io.vertx.stack.command.ResolveCommand;
 import io.vertx.stack.utils.FileUtils;
 import org.junit.Before;
@@ -47,8 +49,9 @@ public class DescriptorTest {
   public void testResolutionOfCore() {
     ResolveCommand cmd = new ResolveCommand();
     cmd.setFailOnConflict(false);
-    cmd.setDirectory(root);
-    cmd.setStackDescriptor(new File("src/test/resources/stacks/core.json"));
+    cmd.setDirectory(root.getAbsolutePath());
+    cmd.setStackDescriptor(new File("src/test/resources/stacks/core.json").getAbsolutePath());
+    cmd.setUp(new ExecutionContext(cmd, new VertxCommandLauncher(), null));
     cmd.run();
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
   }
@@ -57,8 +60,9 @@ public class DescriptorTest {
   public void testResolutionOfCoreWithVariable() {
     ResolveCommand cmd = new ResolveCommand();
     cmd.setFailOnConflict(false);
-    cmd.setDirectory(root);
-    cmd.setStackDescriptor(new File("src/test/resources/stacks/core-with-variable.json"));
+    cmd.setDirectory(root.getAbsolutePath());
+    cmd.setStackDescriptor(new File("src/test/resources/stacks/core-with-variable.json").getAbsolutePath());
+    cmd.setUp(new ExecutionContext(cmd, new VertxCommandLauncher(), null));
     cmd.run();
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
   }
@@ -69,10 +73,44 @@ public class DescriptorTest {
     args.add("resolve");
     args.add("--dir=" + root.getAbsolutePath());
     args.add("-Dvertx.version=3.1.0");
-    args.add("--stack=" + new File("src/test/resources/stacks/core-with-system-variable.json").getAbsolutePath());
+    args.add(new File("src/test/resources/stacks/core-with-system-variable.json").getAbsolutePath());
     Launcher.main(args.toArray(new String[args.size()]));
 
     assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
+  }
+
+  @Test
+  public void testResolutionWithDefaultDescriptor() {
+    File defaultStack = new File("vertx-stack.json");
+    FileUtils.copyFile(new File("src/test/resources/stacks/core-with-system-variable.json"),
+        defaultStack);
+
+    List<String> args = new ArrayList<>();
+    args.add("resolve");
+    args.add("--dir=" + root.getAbsolutePath());
+    args.add("-Dvertx.version=3.1.0");
+    Launcher.main(args.toArray(new String[args.size()]));
+
+    assertThat(new File(root, "vertx-core-3.1.0.jar")).isFile();
+    defaultStack.delete();
+  }
+
+  @Test
+  public void testResolutionWithDefaultDescriptorInVertxHome() {
+    File home = new File("target/home");
+    home.mkdirs();
+    System.setProperty("vertx.home", home.getAbsolutePath());
+
+    FileUtils.copyFile(new File("src/test/resources/stacks/core-with-system-variable.json"),
+        new File(home, "vertx-stack.json"));
+
+    List<String> args = new ArrayList<>();
+    args.add("resolve");
+    args.add("-Dvertx.version=3.1.0");
+    Launcher.main(args.toArray(new String[args.size()]));
+
+    assertThat(new File(home, "lib/vertx-core-3.1.0.jar")).isFile();
+    System.clearProperty("vertx.home");
   }
 
 

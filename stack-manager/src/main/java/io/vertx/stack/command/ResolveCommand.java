@@ -25,6 +25,7 @@ import io.vertx.core.spi.launcher.ExecutionContext;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
 import io.vertx.stack.model.StackResolutionOptions;
+import io.vertx.stack.utils.Home;
 
 import java.io.File;
 import java.util.Arrays;
@@ -44,22 +45,8 @@ import java.util.List;
     "the 'VERTX_HOME' directory, launch it with: 'bin/vertx resolve'.")
 public class ResolveCommand extends DefaultCommand {
 
-  /**
-   * Main method using in the build process to generate the min lib directory.
-   * We cannot use the Launcher because the exec:java does not let us look for commands in the classpath and in target
-   *
-   * @param args the arguments
-   */
-  public static void main(String[] args) {
-    CLI cli = CLIConfigurator.define(ResolveCommand.class);
-    ResolveCommand command = new ResolveCommand();
-    CommandLine commandLine = cli.parse(Arrays.asList(args));
-    CLIConfigurator.inject(commandLine, command);
-    command.run();
-  }
-
-  private File directory;
-  private File descriptor;
+  private String directory;
+  private String descriptor;
   private boolean failOnConflict;
   private String localRepository;
   private List<String> remoteRepositories;
@@ -67,16 +54,17 @@ public class ResolveCommand extends DefaultCommand {
   private String httpsProxy;
 
   @Option(longName = "dir")
-  @DefaultValue("lib")
-  @Description("The directory containing the artifacts composing the stack. Defaults to the './lib' directory.")
-  public void setDirectory(File file) {
-    this.directory = file.getAbsoluteFile();
+  @Description("The directory containing the artifacts composing the stack. Defaults to the '$VERTX_HOME/lib' " +
+      "directory, if $VERTX_HOME is set, './lib' otherwise.")
+  public void setDirectory(String file) {
+    this.directory = file;
   }
 
-  @Option(longName = "stack")
+  @Argument(index = 0, required = false, argName = "stack-descriptor")
   @DefaultValue("vertx-stack.json")
-  @Description("The path to the stack descriptor. Defaults to 'vertx-stack.json'.")
-  public void setStackDescriptor(File file) {
+  @Description("The path to the stack descriptor. Defaults to '$VERTX_HOME/vertx-stack.json', if $VERTX_HOME is set, " +
+      "'./vertx-stack.json' otherwise.")
+  public void setStackDescriptor(String file) {
     this.descriptor = file;
   }
 
@@ -112,26 +100,41 @@ public class ResolveCommand extends DefaultCommand {
   }
 
   /**
-   * Checks whether or not the descriptor file exists. Fails if not.
-   *
-   * @param ec the execution environment
-   * @throws CLIException thrown if the descriptor file does not exist.
-   */
-  @Override
-  public void setUp(ExecutionContext ec) throws CLIException {
-    super.setUp(ec);
-    if (!descriptor.isFile()) {
-      throw new CLIException("The descriptor '" + descriptor.getAbsolutePath() + "' is not a file.");
-    }
-  }
-
-  /**
    * Executes the command.
    * @throws CLIException if something bad happened during the execution.
    */
   @Override
   public void run() throws CLIException {
-    Stack stack = Stack.fromDescriptor(descriptor);
+    File descriptorFile = new File(descriptor);
+    if (! descriptorFile.isFile()) {
+      // Try with vert.x home
+      if (Home.getVertxHome() != null) {
+        descriptorFile = new File(Home.getVertxHome(), descriptor);
+      }
+    }
+
+    if (! descriptorFile.isFile()) {
+      String message = "Cannot find the stack descriptor. Have been tried: ./" + descriptorFile;
+      if (Home.getVertxHome() != null) {
+        message += " and " + descriptorFile.getAbsolutePath() + ".";
+      }
+      throw new CLIException(message);
+    }
+
+    File lib;
+    if (directory == null) {
+      if (Home.getVertxHome() != null) {
+        lib = new File(Home.getVertxHome(), "lib");
+      } else {
+        lib = new File("lib");
+      }
+    } else {
+      lib = new File(directory);
+    }
+
+    out().println("lib directory set to: " + lib.getAbsolutePath());
+
+    Stack stack = Stack.fromDescriptor(descriptorFile);
     StackResolutionOptions options = new StackResolutionOptions().setFailOnConflicts(failOnConflict);
 
     if (localRepository != null) {
@@ -145,7 +148,8 @@ public class ResolveCommand extends DefaultCommand {
     options.setHttpProxy(httpProxy);
     options.setHttpsProxy(httpsProxy);
 
-    StackResolution resolution = new StackResolution(stack, directory, options);
+    StackResolution resolution = new StackResolution(stack, lib, options);
     resolution.resolve();
   }
+
 }
