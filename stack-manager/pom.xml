@@ -164,9 +164,10 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>io.vertx.stack.command.ResolveCommand</mainClass>
+              <mainClass>io.vertx.core.Launcher</mainClass>
               <arguments>
-                <argument>--stack=${project.basedir}/target/vertx-stack/vertx-stack.json</argument>
+                <argument>resolve</argument>
+                <argument>${project.basedir}/target/vertx-stack/vertx-stack.json</argument>
                 <argument>--dir=${project.basedir}/target/min-lib</argument>
               </arguments>
             </configuration>
@@ -178,9 +179,10 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>io.vertx.stack.command.ResolveCommand</mainClass>
+              <mainClass>io.vertx.core.Launcher</mainClass>
               <arguments>
-                <argument>--stack=${project.basedir}/target/vertx-stack/vertx-stack-full.json</argument>
+                <argument>resolve</argument>
+                <argument>${project.basedir}/target/vertx-stack/vertx-stack-full.json</argument>
                 <argument>--dir=${project.basedir}/target/full-lib</argument>
               </arguments>
             </configuration>
