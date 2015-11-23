@@ -38,15 +38,17 @@
       <directory>${project.basedir}/src/main/packaging</directory>
       <outputDirectory>.</outputDirectory>
     </fileSet>
-
-    <fileSet>
-      <directory>${project.basedir}/target/vertx-stack</directory>
-      <outputDirectory>.</outputDirectory>
-      <includes>
-        <include>vertx-stack-full.json</include>
-      </includes>
-    </fileSet>
   </fileSets>
+
+
+  <files>
+    <file>
+      <source>${project.basedir}/target/vertx-stack/vertx-stack-full.json</source>
+      <outputDirectory>.</outputDirectory>
+      <destName>vertx-stack.json</destName>
+    </file>
+  </files>
+
 
   <dependencySets>
     <dependencySet>
