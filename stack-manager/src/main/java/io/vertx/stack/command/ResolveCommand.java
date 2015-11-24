@@ -52,6 +52,9 @@ public class ResolveCommand extends DefaultCommand {
   private List<String> remoteRepositories;
   private String httpProxy;
   private String httpsProxy;
+  private boolean disableCache;
+  private boolean disableCacheForSnapshots;
+  private File cacheFile;
 
   @Option(longName = "dir")
   @Description("The directory containing the artifacts composing the stack. Defaults to the '$VERTX_HOME/lib' " +
@@ -99,6 +102,24 @@ public class ResolveCommand extends DefaultCommand {
     this.httpsProxy = p;
   }
 
+  @Option(longName = "no-cache", flag = true)
+  @Description("Disable the resolver cache")
+  public void setDisableCache(boolean disableCache) {
+    this.disableCache = disableCache;
+  }
+
+  @Option(longName = "no-cache-for-snapshots", flag = true)
+  @Description("Disable the caching of snapshot resolution")
+  public void setDisableCacheForSnapshots(boolean disableCache) {
+    this.disableCacheForSnapshots = disableCache;
+  }
+
+  @Option(longName = "cache-file")
+  @Hidden
+  public void setCacheLocation(File cache) {
+    this.cacheFile = cache;
+  }
+
   /**
    * Executes the command.
    * @throws CLIException if something bad happened during the execution.
@@ -135,7 +156,11 @@ public class ResolveCommand extends DefaultCommand {
     out().println("lib directory set to: " + lib.getAbsolutePath());
 
     Stack stack = Stack.fromDescriptor(descriptorFile);
-    StackResolutionOptions options = new StackResolutionOptions().setFailOnConflicts(failOnConflict);
+    StackResolutionOptions options = new StackResolutionOptions()
+        .setFailOnConflicts(failOnConflict)
+        .setCacheDisabled(disableCache)
+        .setCacheDisabledForSnapshots(disableCacheForSnapshots)
+        .setCacheFile(cacheFile);
 
     if (localRepository != null) {
       options.setLocalRepository(localRepository);

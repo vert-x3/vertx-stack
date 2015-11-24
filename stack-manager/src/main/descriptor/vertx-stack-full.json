@@ -157,12 +157,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-reactive-streams",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-redis-client",
       "version": "\${vertx.version}",
       "included": true

@@ -73,12 +73,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-reactive-streams",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-rx-java",
       "version": "\${vertx.version}",
       "included": false

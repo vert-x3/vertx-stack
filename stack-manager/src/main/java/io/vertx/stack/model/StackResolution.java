@@ -18,6 +18,7 @@ package io.vertx.stack.model;
 
 import io.vertx.stack.resolver.Resolver;
 import io.vertx.stack.utils.Actions;
+import io.vertx.stack.utils.Cache;
 import org.eclipse.aether.artifact.Artifact;
 
 import java.io.File;
@@ -42,6 +43,8 @@ public class StackResolution {
   private final StackResolutionOptions options;
   private Resolver resolver;
 
+  private Cache cache;
+
   /**
    * Creates an instance of {@link StackResolution}.
    *
@@ -56,6 +59,7 @@ public class StackResolution {
     this.stack = stack;
     this.options = options;
     this.directory = directory;
+    this.cache = new Cache(options.isCacheDisabled(), options.isCacheDisabledForSnapshots(), options.getCacheFile());
   }
 
   /**
@@ -130,12 +134,19 @@ public class StackResolution {
   private void resolve(Dependency dependency) {
     List<Artifact> list;
     if (dependency.isIncluded()) {
-      list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
+      list = cache.get(dependency.getGACV(), dependency.getResolutionOptions());
+      if (list == null || list.isEmpty()) {
+        list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
+        cache.put(dependency.getGACV(), dependency.getResolutionOptions(), list);
+        cache.writeCacheOnFile();
+      } else {
+        LOGGER.info("Dependency " + dependency + " loaded from cache");
+      }
     } else {
       return;
     }
 
-    if (list.isEmpty()) {
+    if (list == null || list.isEmpty()) {
       throw new IllegalArgumentException("Cannot resolve " + dependency.toString());
     }
 

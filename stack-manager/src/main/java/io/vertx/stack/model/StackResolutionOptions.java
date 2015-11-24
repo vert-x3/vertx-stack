@@ -18,6 +18,7 @@ package io.vertx.stack.model;
 
 import io.vertx.stack.resolver.ResolverOptions;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -28,6 +29,12 @@ import java.util.List;
 public class StackResolutionOptions extends ResolverOptions {
 
   private boolean failOnConflicts;
+
+  private boolean cacheDisabled;
+
+  private boolean cacheDisabledForSnapshots;
+
+  private File cacheFile;
 
   /**
    * @return whether or not the resolution fails on conflicts or just prints a warning.
@@ -68,6 +75,61 @@ public class StackResolutionOptions extends ResolverOptions {
   @Override
   public StackResolutionOptions setRemoteRepositories(List<String> remoteRepositories) {
     super.setRemoteRepositories(remoteRepositories);
+    return this;
+  }
+
+  /**
+   * @return whether or not the cache is disabled.
+   */
+  public boolean isCacheDisabled() {
+    return cacheDisabled;
+  }
+
+  /**
+   * Sets whether or not the cache is disabled.
+   *
+   * @param cacheDisabled {@code true} to disable the cache, {@code false} to enable it (default)
+   * @return the current {@link StackResolutionOptions} instance
+   */
+  public StackResolutionOptions setCacheDisabled(boolean cacheDisabled) {
+    this.cacheDisabled = cacheDisabled;
+    return this;
+  }
+
+  /**
+   * @return whether or not the cache is disabled for snapshots
+   */
+  public boolean isCacheDisabledForSnapshots() {
+    return cacheDisabledForSnapshots;
+  }
+
+  /**
+   * Sets whether or not the cache is disabled for snapshot.
+   *
+   * @param cacheDisabledForSnapshots {@code true} to disable the cache for snapshot, {@code false} to enable it
+   *                                  (default)
+   * @return the current {@link StackResolutionOptions} instance
+   */
+  public StackResolutionOptions setCacheDisabledForSnapshots(boolean cacheDisabledForSnapshots) {
+    this.cacheDisabledForSnapshots = cacheDisabledForSnapshots;
+    return this;
+  }
+
+  /**
+   * @return the location of the cache file is set.
+   */
+  public File getCacheFile() {
+    return cacheFile;
+  }
+
+  /**
+   * Sets the cache file location (json file).
+   *
+   * @param cacheFile the cache file
+   * @return the current {@link StackResolutionOptions} instance
+   */
+  public StackResolutionOptions setCacheFile(File cacheFile) {
+    this.cacheFile = cacheFile;
     return this;
   }
 }

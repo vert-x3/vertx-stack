@@ -16,8 +16,7 @@
 
 package io.vertx.stack.resolver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Options configuring the resolution of a single dependency.
@@ -77,5 +76,28 @@ public class ResolutionOptions {
    */
   public List<String> getExclusions() {
     return exclusions;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ResolutionOptions that = (ResolutionOptions) o;
+
+    if (isWithTransitive() != that.isWithTransitive()) return false;
+
+    Set<String> set1 = new HashSet<>();
+    set1.addAll(that.getExclusions());
+    Set<String> set2 = new HashSet<>();
+    set2.addAll(getExclusions());
+    return set1.equals(set2);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = (isWithTransitive() ? 1 : 0);
+    result = 31 * result + getExclusions().hashCode();
+    return result;
   }
 }
