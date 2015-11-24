@@ -395,7 +395,7 @@
       <classifier>sources</classifier>
     </dependency>
 
-    <!-- dependencies required by the javadoc -->
+    <!-- Dependencies required by the javadoc -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
@@ -417,6 +417,24 @@
       <type>test-jar</type>
       <version>${project.version}</version>
     </dependency>
+
+    <!-- Dependencies required by groovydoc -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <!-- any version of Groovy \>= 1.5.0 (except 1.6 RC 1) should work here -->
+      <version>2.4.4</version>
+    </dependency>
+
+    <!-- Dependencies requires by yardoc -->
+    <dependency>
+      <groupId>rubygems</groupId>
+      <artifactId>yard</artifactId>
+      <version>0.8.7.6</version>
+      <type>gem</type>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -436,19 +454,66 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
 
-          <!-- Unpack sources for Javadoc generation to target/sources -->
+          <!-- Unpack sources for Javadoc generation to target/java -->
           <execution>
-            <id>unpack-sources</id>
+            <id>unpack-java</id>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
-            <phase>process-resources</phase>
+            <phase>generate-resources</phase>
             <configuration>
+              <markersDirectory>${project.build.directory}/java-dependency-maven-plugin-markers</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
               <includeClassifiers>sources</includeClassifiers>
-              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+              <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
               <excludes>examples\/**,**\/impl\/**,**\/package-info.java</excludes>
+            </configuration>
+          </execution>
+
+          <!-- Unpack sources for Groovydoc generation to target/groovy -->
+          <execution>
+            <id>unpack-groovy</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/groovy-dependency-maven-plugin-markers</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeClassifiers>sources</includeClassifiers>
+              <outputDirectory>${project.build.directory}/groovy</outputDirectory>
+              <includes>**/*.groovy</includes>
+            </configuration>
+          </execution>
+
+          <!-- Unpack js for jsdoc generation to target/js -->
+          <execution>
+            <id>unpack-js</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/js-dependency-maven-plugin-markers</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <outputDirectory>${project.build.directory}/js</outputDirectory>
+              <includes>vertx-*/*.js</includes>
+            </configuration>
+          </execution>
+
+          <!-- Unpack js for jsdoc generation to target/rb -->
+          <execution>
+            <id>unpack-rb</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/rb-dependency-maven-plugin-markers</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <outputDirectory>${project.build.directory}/rb</outputDirectory>
+              <includes>vertx-*/*.rb</includes>
             </configuration>
           </execution>
 
@@ -458,8 +523,9 @@
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
-            <phase>process-resources</phase>
+            <phase>generate-resources</phase>
             <configuration>
+              <markersDirectory>${project.build.directory}/work-dependency-maven-plugin-markers</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
               <includeArtifactIds>
                 vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-mongo,vertx-auth-shiro,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-redis-client,vertx-shell,vertx-stomp,<!--vertx-jgroups,-->vertx-sync,vertx-stack-manager
@@ -474,7 +540,7 @@
         </executions>
       </plugin>
 
-      <!-- Process Javadoc from sources to target/docs/apidocs -->
+      <!-- Process Javadoc from target/java to target/docs/apidocs -->
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.9.1</version>
@@ -487,10 +553,88 @@
             <configuration>
               <reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>
               <additionalparam>-Xdoclint:none</additionalparam>
-              <sourcepath>${project.build.directory}/sources</sourcepath>
+              <sourcepath>${project.build.directory}/java</sourcepath>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Process GroovyDoc from target/groovy to target/docs/groovydoc -->
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>groovydoc</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <sources>
+                <source>
+                  <directory>${project.build.directory}/groovy</directory>
+                </source>
+              </sources>
+              <scope>public</scope>
+              <groovydocOutputDirectory>${project.build.directory}/docs/groovydoc</groovydocOutputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Process JsDoc from target/java to target/docs/apidocs -->
+      <plugin>
+        <groupId>com.phasebash.jsdoc</groupId>
+        <artifactId>jsdoc3-maven-plugin</artifactId>
+        <version>1.1.0</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>jsdoc3</goal>
+            </goals>
+            <configuration>
+              <recursive>true</recursive>
+              <directoryRoots>
+                <directoryRoot>${project.build.directory}/js</directoryRoot>
+              </directoryRoots>
+              <outputDirectory>${project.build.directory}/docs/jsdoc</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Process YarDoc from target/rb to target/docs/yardoc -->
+      <plugin>
+        <groupId>de.saumya.mojo</groupId>
+        <artifactId>gem-maven-plugin</artifactId>
+        <version>1.0.9</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <execArgs>${project.build.directory}/rubygems/bin/yardoc &#45;&#45;no-private -m html -o ${project.build.directory}/docs/yardoc ${project.build.directory}/rb/**/*.rb</execArgs>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>rubygems</groupId>
+            <artifactId>yard</artifactId>
+            <version>0.8.7.6</version>
+            <type>gem</type>
+          </dependency>
+          <dependency>
+            <groupId>rubygems</groupId>
+            <artifactId>asciidoctor</artifactId>
+            <version>1.5.2</version>
+            <type>gem</type>
+          </dependency>
+        </dependencies>
       </plugin>
 
       <!-- Copy target/work to final doc structure in target/docs -->
@@ -646,5 +790,28 @@
 
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>repo</id>
+      <activation>
+        <property>
+          <name>!skipRepo</name>
+        </property>
+      </activation>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>rubygems-releases</id>
+          <url>http://rubygems-proxy.torquebox.org/releases</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <repositories>
+        <repository>
+          <id>rubygems-releases</id>
+          <url>http://rubygems-proxy.torquebox.org/releases</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
 
 </project>
