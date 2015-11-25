@@ -665,6 +665,8 @@
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-unit/">
