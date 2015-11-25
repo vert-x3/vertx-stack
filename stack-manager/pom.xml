@@ -169,6 +169,7 @@
                 <argument>resolve</argument>
                 <argument>${project.basedir}/target/vertx-stack/vertx-stack.json</argument>
                 <argument>--dir=${project.basedir}/target/min-lib</argument>
+                <argument>--no-cache</argument>
               </arguments>
             </configuration>
           </execution>
@@ -184,6 +185,7 @@
                 <argument>resolve</argument>
                 <argument>${project.basedir}/target/vertx-stack/vertx-stack-full.json</argument>
                 <argument>--dir=${project.basedir}/target/full-lib</argument>
+                <argument>--no-cache</argument>
               </arguments>
             </configuration>
           </execution>

@@ -121,6 +121,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-auth-oauth2",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-sql-common",
       "version": "\${vertx.version}",
       "included": false

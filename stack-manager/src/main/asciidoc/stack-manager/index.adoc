@@ -64,6 +64,8 @@ directory
 * `--local-repo &lt;value&gt;` - Set the path to the local Maven repository. Defaults to `~/.m2/repository`
 * `--remote-repo &lt;value&gt;` -  Set the path to a remote Maven repository. Can be set multiple times
 * `&lt;vertx-stack.json&gt;` - The path to the stack descriptor. Defaults to `vertx-stack.json`.
+* `--no-cache` -  Disable the resolver cache
+* `--no-cache-for-snapshots` - Disable the caching of snapshot resolution
 
 If you have set `VERTX_HOME` as environment variable (or system variable), it uses: `$VERTX_HOME/lib` and
 `$VERTX_HOME/vertx-stack.json`.
