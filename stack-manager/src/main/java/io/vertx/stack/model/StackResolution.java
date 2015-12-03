@@ -24,7 +24,9 @@ import org.eclipse.aether.artifact.Artifact;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Object responsible for resolving a stack. This object is stateful, and must be used only for a single resolution.
@@ -149,6 +151,9 @@ public class StackResolution {
     if (list == null || list.isEmpty()) {
       throw new IllegalArgumentException("Cannot resolve " + dependency.toString());
     }
+
+    LOGGER.log(Level.FINE, "Artifacts resolved for " + dependency.getGACV() + " : "
+        + list.stream().map(Object::toString).collect(Collectors.toList()));
 
     list.stream().forEach(artifact -> {
       String key = getManagementKey(artifact);
