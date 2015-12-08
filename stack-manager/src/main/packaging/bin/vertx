@@ -198,4 +198,4 @@ exec "$JAVACMD" \
     -Dvertx.cli.usage.prefix=vertx\
     -Dvertx.clusterManagerFactory=io.vertx.spi.cluster.impl.hazelcast.HazelcastClusterManagerFactory\
     -classpath "$CLASSPATH" \
-    io.vertx.core.Launcher "$@"
+    io.vertx.core.Launcher --launcher-class=io.vertx.core.Launcher "$@"
