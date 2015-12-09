@@ -49,6 +49,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-lang-ceylon",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-service-proxy",
       "version": "\${vertx.version}",
       "included": true
