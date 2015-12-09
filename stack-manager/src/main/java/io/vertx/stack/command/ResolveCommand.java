@@ -135,9 +135,9 @@ public class ResolveCommand extends DefaultCommand {
     }
 
     if (! descriptorFile.isFile()) {
-      String message = "Cannot find the stack descriptor. Have been tried: ./" + descriptorFile;
+      String message = "Cannot find the stack descriptor. Have been tried: \n\t - ./" + descriptorFile;
       if (Home.getVertxHome() != null) {
-        message += " and " + descriptorFile.getAbsolutePath() + ".";
+        message += "\n\t - " + descriptorFile.getAbsolutePath();
       }
       throw new CLIException(message);
     }
