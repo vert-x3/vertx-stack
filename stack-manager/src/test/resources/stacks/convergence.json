@@ -56,6 +56,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-hawkular-metrics",
+      "version": "${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-maven-service-factory",
       "version": "${vertx.version}",
       "included": true
@@ -141,12 +147,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-mongo-service",
-      "version": "${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-reactive-streams",
       "version": "${vertx.version}",
       "included": true
     },
