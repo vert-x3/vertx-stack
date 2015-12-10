@@ -27,6 +27,7 @@
   </parent>
 
   <artifactId>vertx-stack-manager</artifactId>
+  <name>Vert.x Stack - Stack Manager</name>
 
   <properties>
     <aether.version>1.0.2.v20150114</aether.version>
