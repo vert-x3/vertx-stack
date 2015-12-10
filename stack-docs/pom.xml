@@ -100,6 +100,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-hawkular-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mail-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -342,6 +349,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-dropwizard-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-hawkular-metrics</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -595,7 +608,7 @@
               <markersDirectory>${project.build.directory}/work-dependency-maven-plugin-markers</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
               <includeArtifactIds>
-                vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-lang-ceylon,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-mongo,vertx-auth-shiro,vertx-auth-oauth2,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-jgroups,vertx-redis-client,vertx-shell,vertx-stomp,vertx-tcp-eventbus-bridge,<!--vertx-jgroups,-->vertx-sync,vertx-stack-manager,vertx-lang-ceylon-stack,vertx-bridge-common,vertx-service-proxy
+                vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-lang-ceylon,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-mongo,vertx-auth-shiro,vertx-auth-oauth2,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-jgroups,vertx-redis-client,vertx-shell,vertx-stomp,vertx-tcp-eventbus-bridge,vertx-jgroups,vertx-sync,vertx-stack-manager,vertx-lang-ceylon-stack,vertx-bridge-common,vertx-service-proxy,vertx-hawkular-metrics
               </includeArtifactIds>
               <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
               <includeClassifiers>docs</includeClassifiers>
@@ -798,18 +811,18 @@
                 <copy todir="${project.build.directory}/docs/vertx-shell/">
                   <fileset dir="${project.build.directory}/work/vertx-shell-docs-zip"/>
                 </copy>
-<!--
                 <copy todir="${project.build.directory}/docs/vertx-jgroups/">
                   <fileset dir="${project.build.directory}/work/vertx-jgroups-docs-zip"/>
                 </copy>
--->
                 <copy todir="${project.build.directory}/docs/vertx-sync/">
                   <fileset dir="${project.build.directory}/work/vertx-sync-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-stack-docs-zip"/>
                 </copy>
-
+                <copy todir="${project.build.directory}/docs/vertx-hawkular-metrics/">
+                  <fileset dir="${project.build.directory}/work/vertx-hawkular-metrics-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-stack-manager/">
                   <fileset dir="${project.build.directory}/work/vertx-stack-manager-docs-zip"/>
                 </copy>
