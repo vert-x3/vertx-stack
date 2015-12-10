@@ -5,32 +5,6 @@ vertx-stack
 
 The Vert.x stack : Vert.x + the endorsed modules
 
-### Distributions
-
-#### Vert.x min
-
-- Vert.x Core
-- Groovy, JS and Ruby languages
-- Hazelcast clustering
-- Service proxy
-
-#### Vert.x base
-
-Based on Vert.x min:
-
-- Reactive programming
-- Services deployment
-- Vert.x Unit
-- Dropwizard Metrics
-
-#### Vert.x full
-
-Based on Vert.x base:
-
-- Auth + Web components
-- Data components
-- Mail service
-
 ### Maven
 
 This project provides pre-configured Maven poms for using in your projects, allowing you to consume the Vert.x stack
@@ -45,7 +19,7 @@ the base stack:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>stack-depchain</artifactId>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.1.0</version>
   <type>pom</type>
 </dependency>
 ~~~~
@@ -62,7 +36,7 @@ Therefore it should be used with explicit dependencies:
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>stack-bom</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>3.1.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -112,3 +86,28 @@ mvn docker:push
 
 **WARNING**: This is going to take a while.....
 
+### Adding a new module to the stack
+
+1. Add it to `vertx-dependencies` (open the project, add it to the `pom.xml`, install, commit and push)
+2. Add it in the stack manager:
+  * Open `./stack-manager/src/main/descriptor/vertx-stack.json`
+  * Add the dependency. If the dependency must be embedded in the _min_ distribution, set `included` to `true`. So forget to use the `\${version}`.
+  * Open `./stack-manager/src/main/descriptor/vertx-stack-full.json`
+  * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. So forget to use the `\${version}`.  
+  * Open `./stack-manager/src/test/resources/stacks/convergence.json`
+  * Add the dependency. Set `included` to `true` (used for dependency convergence test). Use `${version}` (no `\`).
+3. Add it to the doc distribution:
+  * Open `./stack-docs/pom.xml`
+  * Add the `docs` dependency (the using `<classifier>docs</classifier>` and `<type>zip</type>`)
+  * Add the `source` dependency (the `<classifier>sources</classifier>`)
+  * Add the artifact id to the `includeArtifactIds` for the `unpack-docs` execution.
+  * Add the _copy_ instruction for the ant execution:
+```
+<copy todir="${project.build.directory}/docs/vertx-hawkular-metrics/">
+    <fileset dir="${project.build.directory}/work/vertx-hawkular-metrics-docs-zip"/>
+</copy>
+```
+  * Save the `pom.xml` file
+4. Build (`mvn clean install` from the root).  
+
+  
