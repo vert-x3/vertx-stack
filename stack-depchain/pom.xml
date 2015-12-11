@@ -64,6 +64,10 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-hawkular-metrics</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-reactive-streams</artifactId>
     </dependency>
     <dependency>
@@ -113,6 +117,10 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-oauth2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-mongo</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -166,12 +174,18 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stomp</artifactId>
     </dependency>
-<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jgroups</artifactId>
     </dependency>
--->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-bridge-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-tcp-eventbus-bridge</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
