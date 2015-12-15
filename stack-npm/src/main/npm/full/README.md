@@ -5,7 +5,7 @@ Vert.x3 + the endorsed modules
 ## Contents
 
 * Vert.x Core
-* Groovy, JS and Ruby languages
+* Groovy, JS, Ruby and Ceylon languages
 * Hazelcast clustering
 * Service proxy
 * Reactive programming
