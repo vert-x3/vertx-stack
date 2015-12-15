@@ -2,5 +2,6 @@
 
 FROM vertx/vertx3
 
+# vertx is added to the PATH in vertx/vertx3
 ENTRYPOINT ["vertx"]
 CMD ["--help"]
