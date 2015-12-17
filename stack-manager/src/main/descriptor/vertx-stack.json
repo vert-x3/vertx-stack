@@ -225,6 +225,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-sockjs-service-proxy",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-stomp",
       "version": "\${vertx.version}",
       "included": false
