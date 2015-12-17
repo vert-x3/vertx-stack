@@ -106,7 +106,9 @@ public class VertxStacksTest {
    */
   @Test
   public void testConvergence() {
-    Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/convergence.json"));
+    // Prepare the stack - use full stack, include everything
+    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-full.json"));
+    stack.getDependencies().stream().forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
         new StackResolutionOptions().setFailOnConflicts(true));
