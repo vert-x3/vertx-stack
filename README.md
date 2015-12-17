@@ -89,14 +89,14 @@ mvn docker:push
 ### Adding a new module to the stack
 
 1. Add it to `vertx-dependencies` (open the project, add it to the `pom.xml`, install, commit and push)
-2. Add it in the stack manager:
+2. Add it to `stack-depchain/pom.xml` (open the project, add the dependency, without the version (inherited from 
+vertx-dependencies))
+3. Add it in the stack manager:
   * Open `./stack-manager/src/main/descriptor/vertx-stack.json`
   * Add the dependency. If the dependency must be embedded in the _min_ distribution, set `included` to `true`. So forget to use the `\${version}`.
   * Open `./stack-manager/src/main/descriptor/vertx-stack-full.json`
   * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. So forget to use the `\${version}`.  
-  * Open `./stack-manager/src/test/resources/stacks/convergence.json`
-  * Add the dependency. Set `included` to `true` (used for dependency convergence test). Use `${version}` (no `\`).
-3. Add it to the doc distribution:
+4. Add it to the doc distribution:
   * Open `./stack-docs/pom.xml`
   * Add the `docs` dependency (the using `<classifier>docs</classifier>` and `<type>zip</type>`)
   * Add the `source` dependency (the `<classifier>sources</classifier>`)
