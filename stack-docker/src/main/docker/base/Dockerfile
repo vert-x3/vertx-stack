@@ -5,8 +5,8 @@ FROM java:8
 MAINTAINER Clement Escoffier <clement@apache.org>
 
 COPY ./usr /usr/
-RUN chmod +x /usr/local/vert.x-${project.version}/bin/vertx
+RUN chmod +x /usr/local/vertx/bin/vertx
 
 # Set path
-ENV VERTX_HOME /usr/local/vert.x-${project.version}
+ENV VERTX_HOME /usr/local/vertx
 ENV PATH $VERTX_HOME/bin:$PATH

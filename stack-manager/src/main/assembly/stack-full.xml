@@ -26,7 +26,8 @@
   </formats>
 
 
-  <includeBaseDirectory>false</includeBaseDirectory>
+  <!-- we use a "stable" base directory, without the version to ease testability -->
+  <baseDirectory>vertx</baseDirectory>
 
   <fileSets>
     <fileSet>

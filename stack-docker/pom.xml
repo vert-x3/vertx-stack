@@ -56,7 +56,7 @@
                 <configuration>
                   <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
                   <includeClassifiers>full</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/work/vert.x-${project.version}</outputDirectory>
+                  <outputDirectory>${project.build.directory}/work</outputDirectory>
                 </configuration>
               </execution>
             </executions>

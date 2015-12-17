@@ -17,15 +17,15 @@
   "license": "Apache-2.0",
   "dependencies": {},
   "bin": {
-    "vertx": "./bin/vertx",
-    "vertx.bat": "./bin/vertx.bat"
+    "vertx": "./vertx/bin/vertx",
+    "vertx.bat": "./vertx/bin/vertx.bat"
   },
   "homepage": "http://vertx.io",
   "engines": {},
   "files": [
-    "bin",
-    "conf",
-    "lib",
+    "vertx/bin",
+    "vertx/conf",
+    "vertx/lib",
     "README.md",
     "index.js"
   ]

@@ -43,19 +43,19 @@
       <resource>
         <directory>${project.basedir}/src/main/npm/client</directory>
         <filtering>true</filtering>
-        <targetPath>${project.build.directory}/npm/client/vert.x-${project.version}</targetPath>
+        <targetPath>${project.build.directory}/npm/client</targetPath>
       </resource>
 
       <resource>
         <directory>${project.basedir}/src/main/npm/full</directory>
         <filtering>true</filtering>
-        <targetPath>${project.build.directory}/npm/full/vert.x-${project.version}</targetPath>
+        <targetPath>${project.build.directory}/npm/full</targetPath>
       </resource>
 
       <resource>
         <directory>${project.basedir}/src/main/npm/min</directory>
         <filtering>true</filtering>
-        <targetPath>${project.build.directory}/npm/min/vert.x-${project.version}</targetPath>
+        <targetPath>${project.build.directory}/npm/min</targetPath>
       </resource>
     </resources>
 
@@ -87,7 +87,7 @@
               <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
               <includeTypes>tar.gz</includeTypes>
               <excludeClassifiers>full</excludeClassifiers>
-              <outputDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</outputDirectory>
+              <outputDirectory>${project.build.directory}/npm/min</outputDirectory>
             </configuration>
           </execution>
           <execution>
@@ -100,7 +100,7 @@
               <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
               <includeClassifiers>full</includeClassifiers>
               <includeTypes>tar.gz</includeTypes>
-              <outputDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</outputDirectory>
+              <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
             </configuration>
           </execution>
           <execution>
@@ -144,7 +144,7 @@
             <phase>package</phase>
             <configuration>
               <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
+              <workingDirectory>${project.build.directory}/npm/min</workingDirectory>
             </configuration>
           </execution>
           <execution>
@@ -155,7 +155,7 @@
             <phase>package</phase>
             <configuration>
               <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
+              <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
             </configuration>
           </execution>
           <execution>
@@ -166,7 +166,7 @@
             <phase>package</phase>
             <configuration>
               <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/client/vert.x-${project.version}</workingDirectory>
+              <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
             </configuration>
           </execution>
         </executions>
@@ -188,7 +188,7 @@
             <configuration>
               <target>
                 <move file="${project.build.directory}/npm/client/vertx-web-client.js"
-                      tofile="${project.build.directory}/npm/client/vert.x-${project.version}/vertx-eventbus.js"/>
+                      tofile="${project.build.directory}/npm/client/vertx-eventbus.js"/>
               </target>
             </configuration>
           </execution>
@@ -219,7 +219,7 @@
                 <phase>deploy</phase>
                 <configuration>
                   <arguments>publish</arguments>
-                  <workingDirectory>${project.build.directory}/npm/min/vert.x-${project.version}</workingDirectory>
+                  <workingDirectory>${project.build.directory}/npm/min</workingDirectory>
                 </configuration>
               </execution>
               <execution>
@@ -230,7 +230,7 @@
                 <phase>deploy</phase>
                 <configuration>
                   <arguments>publish</arguments>
-                  <workingDirectory>${project.build.directory}/npm/full/vert.x-${project.version}</workingDirectory>
+                  <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
                 </configuration>
               </execution>
               <execution>
@@ -241,7 +241,7 @@
                 <phase>deploy</phase>
                 <configuration>
                   <arguments>publish</arguments>
-                  <workingDirectory>${project.build.directory}/npm/client/vert.x-${project.version}</workingDirectory>
+                  <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
                 </configuration>
               </execution>
             </executions>
