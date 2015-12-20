@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/vert-x3/vertx-stack.png?label=ready&title=Ready)](https://waffle.io/vert-x3/vertx-stack)
 vertx-stack
 ========
 
