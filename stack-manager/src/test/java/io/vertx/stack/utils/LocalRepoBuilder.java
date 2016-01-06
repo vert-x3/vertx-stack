@@ -16,19 +16,20 @@
 
 package io.vertx.stack.utils;
 
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  */
 public class LocalRepoBuilder {
 
-  private final static Logger LOGGER = Logger.getLogger(LocalRepoBuilder.class.getName());
+  private final static Logger LOGGER = LoggerFactory.getLogger(LocalRepoBuilder.class.getName());
 
   private final File output;
   private List<LocalArtifact> artifacts = new ArrayList<>();

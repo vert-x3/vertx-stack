@@ -19,6 +19,8 @@ package io.vertx.stack.utils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import io.vertx.stack.resolver.ResolutionOptions;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.DefaultArtifact;
@@ -28,7 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 /**
  * A cache storing the resolution result.
@@ -36,9 +37,9 @@ import java.util.logging.Logger;
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  */
 public class Cache {
-  private static final Logger LOGGER = Logger.getLogger("stack-manager-cache");
+  private final static Logger LOGGER = LoggerFactory.getLogger("stack-manager-cache");
 
-
+  // We don't use the MAPPEr from vert.x because it requires some tuning.
   private static final ObjectMapper MAPPER = new ObjectMapper().registerModule(
       new SimpleModule("artifact-module").addDeserializer(Artifact.class, new JsonDeserializer<Artifact>() {
     @Override
@@ -86,7 +87,7 @@ public class Cache {
       try {
         cache.addAll(MAPPER.readValue(this.cacheFile, type));
       } catch (IOException e) {
-        LOGGER.severe("Cannot read the cache entries from " + this.cacheFile.getAbsolutePath() + ": " + e.getMessage());
+        LOGGER.error("Cannot read the cache entries from " + this.cacheFile.getAbsolutePath() + ": " + e.getMessage());
       }
     }
   }
@@ -99,7 +100,7 @@ public class Cache {
       try {
         MAPPER.writer().writeValue(cacheFile, cache);
       } catch (IOException e) {
-        LOGGER.severe("Cannot write the cache entries to " + cacheFile.getAbsolutePath() + ": " + e.getMessage());
+        LOGGER.error("Cannot write the cache entries to " + cacheFile.getAbsolutePath() + ": " + e.getMessage());
       }
     }
   }

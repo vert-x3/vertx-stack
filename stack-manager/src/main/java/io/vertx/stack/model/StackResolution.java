@@ -16,6 +16,8 @@
 
 package io.vertx.stack.model;
 
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import io.vertx.stack.resolver.Resolver;
 import io.vertx.stack.utils.Actions;
 import io.vertx.stack.utils.Cache;
@@ -24,8 +26,6 @@ import org.eclipse.aether.artifact.Artifact;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  */
 public class StackResolution {
 
-  private final static Logger LOGGER = Logger.getLogger("Stack Resolution");
+  private final static Logger LOGGER = LoggerFactory.getLogger("Stack Resolution");
 
   private final File directory;
   private final Stack stack;
@@ -91,7 +91,7 @@ public class StackResolution {
     if (!directory.isDirectory()) {
       LOGGER.info("Creating directory " + directory.getAbsolutePath());
       boolean mkdirs = directory.mkdirs();
-      LOGGER.fine("Directory created: " + mkdirs);
+      LOGGER.debug("Directory created: " + mkdirs);
     }
     stack.applyFiltering();
     stack.getDependencies().stream().filter(Dependency::isIncluded).forEach(
@@ -152,7 +152,7 @@ public class StackResolution {
       throw new IllegalArgumentException("Cannot resolve " + dependency.toString());
     }
 
-    LOGGER.log(Level.FINE, "Artifacts resolved for " + dependency.getGACV() + " : "
+    LOGGER.debug("Artifacts resolved for " + dependency.getGACV() + " : "
         + list.stream().map(Object::toString).collect(Collectors.toList()));
 
     list.stream().forEach(artifact -> {
@@ -161,7 +161,7 @@ public class StackResolution {
       if (version == null || version.equalsIgnoreCase(artifact.getBaseVersion())) {
         selectedVersions.put(key, artifact.getBaseVersion());
       } else {
-        LOGGER.warning("Conflict detected for artifact " + key + " - version " + version + " was already selected while "
+        LOGGER.warn("Conflict detected for artifact " + key + " - version " + version + " was already selected while "
             + dependency.getGACV() + " depends on version " + artifact.getBaseVersion());
         if (options.isFailOnConflicts()) {
           throw new DependencyConflictException(key, version, dependency.getGACV(), artifact.getBaseVersion());
