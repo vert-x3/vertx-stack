@@ -14,5 +14,8 @@
   "files": [
     "vertx-eventbus.js",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "sockjs-client":"1.0.3"
+  }
 }
