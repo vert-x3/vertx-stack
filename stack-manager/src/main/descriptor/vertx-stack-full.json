@@ -49,12 +49,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-lang-ceylon",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-lang-groovy",
       "version": "\${vertx.version}",
       "included": true
