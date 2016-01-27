@@ -47,6 +47,16 @@
       "version": "\${vertx.version}",
       "included": true
     },
+    // To include ceylon, switch the 'included' boolean to 'true' and launch
+    // `vertx resolve --dir=lib --stack=./vertx-stack.json`.
+    // Be aware that including ceylon breaks the on-the-fly Java compilation
+    // See https://github.com/vert-x3/issues/issues/79 for details.
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-lang-ceylon",
+      "version": "\${vertx.version}",
+      "included": false
+    },
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-service-proxy",
