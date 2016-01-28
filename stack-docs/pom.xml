@@ -316,6 +316,12 @@
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-stack-manager</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
