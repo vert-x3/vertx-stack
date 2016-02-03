@@ -262,6 +262,12 @@
       "artifactId": "vertx-jgroups",
       "version": "\${vertx.version}",
       "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-mysql-postgresql-client",
+      "version": "\${vertx.version}",
+      "included": false
     }
   ]
 }
