@@ -355,6 +355,18 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-groovy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ruby</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-unit</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
@@ -654,7 +666,7 @@
               <markersDirectory>${project.build.directory}/rb-dependency-maven-plugin-markers</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
               <outputDirectory>${project.build.directory}/rb</outputDirectory>
-              <includes>vertx-*/*.rb</includes>
+              <includes>vertx-*/*.rb,vertx/*.rb</includes>
             </configuration>
           </execution>
 
