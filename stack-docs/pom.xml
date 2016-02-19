@@ -576,7 +576,7 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <!-- any version of Groovy \>= 1.5.0 (except 1.6 RC 1) should work here -->
-      <version>2.4.4</version>
+      <version>2.4.5</version>
     </dependency>
 
     <!-- Dependencies requires by yardoc -->
@@ -740,7 +740,6 @@
       <plugin>
         <groupId>com.phasebash.jsdoc</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.1.0</version>
         <executions>
           <execution>
             <phase>process-resources</phase>
@@ -762,7 +761,7 @@
       <plugin>
         <groupId>de.saumya.mojo</groupId>
         <artifactId>gem-maven-plugin</artifactId>
-        <version>1.0.9</version>
+        <version>1.1.4</version>
         <executions>
           <execution>
             <goals>
@@ -784,7 +783,7 @@
           <dependency>
             <groupId>rubygems</groupId>
             <artifactId>asciidoctor</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.3</version>
             <type>gem</type>
           </dependency>
         </dependencies>
@@ -925,14 +924,6 @@
       <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
-        <version>1.5.2</version>
-        <configuration>
-          <backend>html</backend>
-          <doctype>book</doctype>
-          <relativeBaseDir>true</relativeBaseDir>
-          <preserveDirectories>true</preserveDirectories>
-          <sourceHighlighter>prettify</sourceHighlighter>
-        </configuration>
         <executions>
           <execution>
             <id>process-vertx-docs</id>

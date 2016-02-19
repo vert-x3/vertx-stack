@@ -90,7 +90,7 @@
           <plugin>
             <groupId>com.spotify</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>0.4.0</version>
+            <version>0.4.1</version>
             <executions>
 
               <execution>
@@ -156,7 +156,6 @@
           <plugin>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctor-maven-plugin</artifactId>
-            <version>1.5.2</version>
             <executions>
               <execution>
                 <id>output-html</id>
@@ -166,15 +165,6 @@
                 </goals>
               </execution>
             </executions>
-            <configuration>
-              <sourceDirectory>${asciidoc.dir}</sourceDirectory>
-              <outputDirectory>${project.build.directory}/docs/docker</outputDirectory>
-              <backend>html</backend>
-              <doctype>book</doctype>
-              <preserveDirectories>true</preserveDirectories>
-              <relativeBaseDir>true</relativeBaseDir>
-              <sourceHighlighter>prettify</sourceHighlighter>
-            </configuration>
           </plugin>
           <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
