@@ -102,6 +102,8 @@
                 <configuration>
                   <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
                   <imageName>vertx/vertx3</imageName>
+                  <!-- During release, check the pulled java version, and update if needed -->
+
                   <!-- Tags should only be enabled during release -->
                   <!--<imageTags>-->
                   <!--<tag>${project.version}</tag>-->
