@@ -707,6 +707,17 @@
               <reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>
               <additionalparam>-Xdoclint:none</additionalparam>
               <sourcepath>${project.build.directory}/java</sourcepath>
+              <detectLinks/>
+              <detectJavaApiLink/>
+              <links>
+                <link>http://jgroups.org/javadoc</link>
+                <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
+                <link>http://reactivex.io/RxJava/javadoc/</link>
+                <link>http://netty.io/4.0/api/</link>
+                <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.7/</link>
+                <link>http://fasterxml.github.io/jackson-core/javadoc/2.7/</link>
+                <link>http://fasterxml.github.io/jackson-databind/javadoc/2.7/</link>
+              </links>
             </configuration>
           </execution>
         </executions>
