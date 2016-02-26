@@ -274,6 +274,12 @@
       "artifactId": "vertx-mysql-postgresql-client",
       "version": "\${vertx.version}",
       "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-camel-bridge",
+      "version": "\${vertx.version}",
+      "included": false
     }
   ]
 }
