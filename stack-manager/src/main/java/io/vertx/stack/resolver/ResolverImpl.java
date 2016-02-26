@@ -271,8 +271,10 @@ public class ResolverImpl implements Resolver {
       throw new IllegalArgumentException("Cannot find module " + artifact.toString() + ". Maybe repository URL is invalid?");
     }
 
-    return artifactResults.stream().map(ArtifactResult::getArtifact)
+    List<Artifact> artifacts = artifactResults.stream().map(ArtifactResult::getArtifact)
         .collect(Collectors.toList());
+    LOGGER.trace("Dependencies resolved by " + artifact.getArtifactId() + " => " + artifacts);
+    return artifacts;
   }
 
   protected void customizeRemoteRepoBuilder(RemoteRepository.Builder builder) {
