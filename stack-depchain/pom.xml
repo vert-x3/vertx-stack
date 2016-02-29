@@ -198,6 +198,10 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-camel-bridge</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-ignite</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
