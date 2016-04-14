@@ -49,8 +49,6 @@
     },
     // To include ceylon, switch the 'included' boolean to 'true' and launch
     // `vertx resolve --dir=lib --stack=./vertx-stack.json`.
-    // Be aware that including ceylon breaks the on-the-fly Java compilation
-    // See https://github.com/vert-x3/issues/issues/79 for details.
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-lang-ceylon",
@@ -278,6 +276,36 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-ignite",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-service",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-bridge-kubernetes",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-bridge-docker",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-backend-redis",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-circuit-breaker",
       "version": "\${vertx.version}",
       "included": false
     }
