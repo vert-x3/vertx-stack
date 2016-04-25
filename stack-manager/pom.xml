@@ -228,6 +228,7 @@
               <artifactSet>
                 <excludes>
                   <exclude>io.vertx:vertx-core</exclude>
+                  <exclude>io.vertx:vertx-docgen</exclude>
                   <exclude>io.netty:*</exclude>
                   <exclude>com.fasterxml.jackson.core:*</exclude>
                 </excludes>
