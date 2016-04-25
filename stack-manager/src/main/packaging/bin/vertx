@@ -186,7 +186,7 @@ if [ "true" == "$ENABLE_VERTX_SYNC_AGENT" ]; then
 fi
 
 # Split up the JVM_OPTS And VERTX_OPTS values into an array, following the shell quoting and substitution rules
-function splitJvmOpts() {
+function splitJvmOpts ( ) {
     JVM_OPTS=("$@")
 }
 eval splitJvmOpts $JVM_OPTS $JAVA_OPTS $JMX_OPTS $VERTX_OPTS

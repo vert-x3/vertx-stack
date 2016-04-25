@@ -557,7 +557,7 @@ First, be sure your application is packaged as a _fat jar_. Then, use the follow
 
 [source]
 ----
-FROM java:8                                                         <1>
+FROM java:8u77-jre-alpine                                           <1>
 
 ENV VERTICLE_FILE hello-verticle-fatjar-3.0.0-SNAPSHOT-fat.jar      <2>
 
@@ -574,7 +574,7 @@ WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
 CMD ["java -jar $VERTICLE_FILE"]                                    <4>
 ----
-<1> Extend the `java:8` image providing OpenJDK 8
+<1> Extend the image providing OpenJDK 8, use the one you want
 <2> Set the `VERTICLE_FILE` to point on the _fat jar_
 <3> Copy the _Fat jar_ from _target_. Change it if you don't use Maven.
 <4> Launch the application using the `java` executable (instead of `vertx`

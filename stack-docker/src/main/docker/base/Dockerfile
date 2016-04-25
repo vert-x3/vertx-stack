@@ -1,10 +1,11 @@
 # A base Dockerfile for Vert.x 3
 
-FROM java:8u72-jre
+FROM java:8u77-jre-alpine
 
 MAINTAINER Clement Escoffier <clement@apache.org>
 
 COPY ./usr /usr/
+RUN apk add --update bash && rm -rf /var/cache/apk/*
 RUN chmod +x /usr/local/vertx/bin/vertx
 
 # Set path
