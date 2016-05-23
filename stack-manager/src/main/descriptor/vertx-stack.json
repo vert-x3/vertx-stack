@@ -305,6 +305,18 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-bridge-docker-links",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-discovery-bridge-consul",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-circuit-breaker",
       "version": "\${vertx.version}",
       "included": false
