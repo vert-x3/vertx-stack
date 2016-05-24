@@ -1036,7 +1036,7 @@
                 <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-consul/">
                   <fileset dir="${project.build.directory}/work/vertx-discovery-bridge-consul-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-redis/">
+                <copy todir="${project.build.directory}/docs/vertx-discovery-backend-redis/">
                   <fileset dir="${project.build.directory}/work/vertx-discovery-backend-redis-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-docker-links/">
