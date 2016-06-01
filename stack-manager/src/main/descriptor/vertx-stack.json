@@ -281,6 +281,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-rabbitmq-client",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-discovery-service",
       "version": "\${vertx.version}",
       "included": false
