@@ -326,6 +326,12 @@
       "artifactId": "vertx-circuit-breaker",
       "version": "\${vertx.version}",
       "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-rabbitmq-client",
+      "version": "\${vertx.version}",
+      "included": true
     }
   ]
 }

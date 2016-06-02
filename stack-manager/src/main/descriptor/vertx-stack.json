@@ -283,7 +283,7 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-service-discovery",
       "version": "\${vertx.version}",
-      "included": false
+      "included": true
     },
     {
       "groupId": "io.vertx",
@@ -318,6 +318,12 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-circuit-breaker",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-rabbitmq-client",
       "version": "\${vertx.version}",
       "included": false
     }

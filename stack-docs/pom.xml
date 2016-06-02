@@ -298,6 +298,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-rabbitmq-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-shell</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -501,6 +508,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-redis-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rabbitmq-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -995,6 +1008,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-redis-client/">
                   <fileset dir="${project.build.directory}/work/vertx-redis-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-rabbitmq-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-rabbitmq-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-stomp/">
                   <fileset dir="${project.build.directory}/work/vertx-stomp-docs-zip"/>

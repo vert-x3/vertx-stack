@@ -100,7 +100,6 @@ vertx-dependencies))
   * Open `./stack-docs/pom.xml`
   * Add the `docs` dependency (the using `<classifier>docs</classifier>` and `<type>zip</type>`)
   * Add the `source` dependency (the `<classifier>sources</classifier>`)
-  * Add the artifact id to the `includeArtifactIds` for the `unpack-docs` execution.
   * Add the _copy_ instruction for the ant execution:
 ```
 <copy todir="${project.build.directory}/docs/vertx-hawkular-metrics/">
