@@ -287,37 +287,37 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-service",
+      "artifactId": "vertx-service-discovery",
       "version": "\${vertx.version}",
       "included": true
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-bridge-kubernetes",
+      "artifactId": "vertx-service-discovery-bridge-kubernetes",
       "version": "\${vertx.version}",
       "included": false
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-bridge-docker",
+      "artifactId": "vertx-service-discovery-bridge-docker",
       "version": "\${vertx.version}",
       "included": false
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-bridge-docker-links",
+      "artifactId": "vertx-service-discovery-bridge-docker-links",
       "version": "\${vertx.version}",
       "included": false
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-bridge-consul",
+      "artifactId": "vertx-service-discovery-bridge-consul",
       "version": "\${vertx.version}",
       "included": false
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-discovery-backend-redis",
+      "artifactId": "vertx-service-discovery-backend-redis",
       "version": "\${vertx.version}",
       "included": false
     },

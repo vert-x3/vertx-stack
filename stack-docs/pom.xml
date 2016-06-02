@@ -563,7 +563,7 @@
     <!-- microservice toolbox -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-service</artifactId>
+      <artifactId>vertx-service-discovery</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -575,31 +575,31 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-kubernetes</artifactId>
+      <artifactId>vertx-service-discovery-bridge-kubernetes</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-docker-links</artifactId>
+      <artifactId>vertx-service-discovery-bridge-docker-links</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-consul</artifactId>
+      <artifactId>vertx-service-discovery-bridge-consul</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-backend-redis</artifactId>
+      <artifactId>vertx-service-discovery-backend-redis</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-service</artifactId>
+      <artifactId>vertx-service-discovery</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
@@ -613,28 +613,28 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-kubernetes</artifactId>
+      <artifactId>vertx-service-discovery-bridge-kubernetes</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-consul</artifactId>
+      <artifactId>vertx-service-discovery-bridge-consul</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-bridge-docker-links</artifactId>
+      <artifactId>vertx-service-discovery-bridge-docker-links</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-discovery-backend-redis</artifactId>
+      <artifactId>vertx-service-discovery-backend-redis</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
@@ -779,9 +779,6 @@
             <configuration>
               <markersDirectory>${project.build.directory}/work-dependency-maven-plugin-markers</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>
-                vertx-core,vertx-lang-groovy,vertx-lang-ruby,vertx-lang-js,vertx-lang-ceylon,vertx-unit,vertx-dropwizard-metrics,vertx-mail-client,vertx-rx-java,vertx-rx-groovy,vertx-rx-js,vertx-sql-common,vertx-mongo-client,vertx-jdbc-client,vertx-mysql-postgresql-client,vertx-auth-common,vertx-auth-jdbc,vertx-auth-mongo,vertx-auth-shiro,vertx-auth-oauth2,vertx-auth-jwt,vertx-web,vertx-reactive-streams,vertx-mail-service,vertx-http-service-factory,vertx-maven-service-factory,vertx-service-factory,vertx-stack-docker,vertx-hazelcast,vertx-redis-client,vertx-shell,vertx-stomp,vertx-tcp-eventbus-bridge,vertx-jgroups,vertx-ignite,vertx-sync,vertx-camel-bridge,vertx-stack-manager,vertx-lang-ceylon-stack,vertx-bridge-common,vertx-service-proxy,vertx-hawkular-metrics,vertx-sockjs-service-proxy,vertx-circuit-breaker,vertx-discovery-service,vertx-discovery-bridge-kubernetes,vertx-discovery-bridge-consul,vertx-discovery-backend-redis,vertx-discovery-bridge-docker-links
-              </includeArtifactIds>
               <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
               <includeClassifiers>docs</includeClassifiers>
               <stripClassifier>true</stripClassifier>
@@ -1027,20 +1024,20 @@
                 <copy todir="${project.build.directory}/docs/vertx-circuit-breaker/">
                   <fileset dir="${project.build.directory}/work/vertx-circuit-breaker-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-service/">
-                  <fileset dir="${project.build.directory}/work/vertx-discovery-service-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-kubernetes/">
-                  <fileset dir="${project.build.directory}/work/vertx-discovery-bridge-kubernetes-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-kubernetes/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-kubernetes-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-consul/">
-                  <fileset dir="${project.build.directory}/work/vertx-discovery-bridge-consul-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-consul/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-consul-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-backend-redis/">
-                  <fileset dir="${project.build.directory}/work/vertx-discovery-backend-redis-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery-backend-redis/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-backend-redis-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-discovery-bridge-docker-links/">
-                  <fileset dir="${project.build.directory}/work/vertx-discovery-bridge-docker-links-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-docker-links/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
                 </copy>
               </target>
             </configuration>
