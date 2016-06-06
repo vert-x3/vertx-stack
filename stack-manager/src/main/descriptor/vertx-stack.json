@@ -233,6 +233,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-mail-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-stomp",
       "version": "\${vertx.version}",
       "included": false
