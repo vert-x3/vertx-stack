@@ -338,6 +338,12 @@
       "artifactId": "vertx-rabbitmq-client",
       "version": "\${vertx.version}",
       "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-amqp-bridge",
+      "version": "\${vertx.version}",
+      "included": true
     }
   ]
 }
