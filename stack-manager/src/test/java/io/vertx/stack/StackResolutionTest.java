@@ -174,7 +174,8 @@ public class StackResolutionTest {
         .addDependency(new Dependency("io.vertx", "vertx-core", "3.1.0"))
         .addDependency(new Dependency("org.acme", "acme", "1.0", "txt"));
     StackResolutionOptions options = new StackResolutionOptions().setFailOnConflicts(true)
-        .setLocalRepository(local.getAbsolutePath());
+        .setLocalRepository(local.getAbsolutePath())
+        .setCacheDisabled(true);
     StackResolution resolution = new StackResolution(stack, root, options);
     resolution.resolve();
   }
