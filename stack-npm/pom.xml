@@ -39,6 +39,7 @@
   </dependencies>
 
   <build>
+
     <resources>
       <resource>
         <directory>${project.basedir}/src/main/npm/client</directory>
@@ -118,86 +119,101 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>0.0.28</version>
-        <executions>
-          <execution>
-            <id>install-node-and-npm</id>
-            <goals>
-              <goal>install-node-and-npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <nodeVersion>v0.12.6</nodeVersion>
-              <npmVersion>2.12.1</npmVersion>
-              <installDirectory>${project.build.directory}/node</installDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm-install-min</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/min</workingDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm-install-full</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm-install-client</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <arguments>install</arguments>
-              <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <installDirectory>${project.build.directory}/node</installDirectory>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <id>move-vertxbus</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>prepare-package</phase>
-            <configuration>
-              <target>
-                <move file="${project.build.directory}/npm/client/vertx-web-client.js"
-                      tofile="${project.build.directory}/npm/client/vertx-eventbus.js"/>
-              </target>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
+
   </build>
 
   <profiles>
+
+    <profile>
+      <!-- Use -DskipNpm to skip -->
+      <id>npm</id>
+      <activation>
+        <property>
+          <name>!skipNpm</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>0.0.28</version>
+            <executions>
+              <execution>
+                <id>install-node-and-npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <nodeVersion>v0.12.6</nodeVersion>
+                  <npmVersion>2.12.1</npmVersion>
+                  <installDirectory>${project.build.directory}/node</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-install-min</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <arguments>install</arguments>
+                  <workingDirectory>${project.build.directory}/npm/min</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-install-full</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <arguments>install</arguments>
+                  <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm-install-client</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <arguments>install</arguments>
+                  <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+            <configuration>
+              <installDirectory>${project.build.directory}/node</installDirectory>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+              <execution>
+                <id>move-vertxbus</id>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <target>
+                    <move file="${project.build.directory}/npm/client/vertx-web-client.js"
+                          tofile="${project.build.directory}/npm/client/vertx-eventbus.js"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
     <profile>
       <id>deploy-npm</id>
       <properties>
