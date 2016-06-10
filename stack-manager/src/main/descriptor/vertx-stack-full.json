@@ -14,13 +14,20 @@
 //
 {
   "variables": {
-    "vertx.version": "${vertx.version}"
+    "vertx.version": "${vertx.version}",
+    "netty.version": "1.1.33.Fork17"
   },
   "dependencies": [
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-core",
       "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.netty",
+      "artifactId": "netty-tcnative-boringssl-static",
+      "version": "\${netty.version}",
       "included": true
     },
     {
