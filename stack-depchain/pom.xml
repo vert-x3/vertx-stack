@@ -148,6 +148,16 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-pebble</artifactId>
+      <classifier>shaded</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-freemarker</artifactId>
+      <classifier>shaded</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-sockjs-service-proxy</artifactId>
     </dependency>
     <dependency>
