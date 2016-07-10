@@ -111,7 +111,7 @@ The stack definition allows you to declare variables:
 ----
 {
 "variables": {
-  "vertx.version": "3.4.0-SNAPSHOT"
+  "vertx.version": "3.3.2"
 }
 ----
 
