@@ -18,6 +18,7 @@
 
   <properties>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
+    <docker.domain>vertx</docker.domain>
   </properties>
 
   <dependencies>
@@ -27,6 +28,18 @@
       <version>3.4.0-SNAPSHOT</version>
       <classifier>full</classifier>
       <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.restassured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>2.9.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -43,7 +56,188 @@
       <build>
         <plugins>
           <plugin>
-            <!-- Copy the vert.x stack to target/work -->
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.15.9</version>
+            <executions>
+              <execution>
+                <id>build-images</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+              <execution>
+                <id>start-containers</id>
+                <goals>
+                  <goal>start</goal>
+                </goals>
+                <phase>pre-integration-test</phase>
+              </execution>
+              <execution>
+                <id>stop-containers</id>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+                <phase>post-integration-test</phase>
+              </execution>
+            </executions>
+
+            <configuration>
+              <images>
+                <!-- Regular vert.x stack -->
+                <image>
+                  <alias>${docker.domain}/vertx3</alias>
+                  <name>${docker.domain}/vertx3</name>
+                  <build>
+                    <tags>
+                      <tag>latest</tag>
+                      <tag>${project.version}</tag>
+                    </tags>
+                    <dockerFile>base/Dockerfile</dockerFile>
+                  </build>
+                  <run>
+                    <namingStrategy>none</namingStrategy>
+                    <volumes>
+                      <bind>
+                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
+                      </bind>
+                    </volumes>
+                    <ports>
+                      <port>${vertx.host}:${vertx.port}:8080</port>
+                    </ports>
+                    <cmd>vertx run /verticles/MyVerticle.groovy</cmd>
+                    <wait>
+                      <log>Verticle startup - regular</log>
+                      <http>
+                        <url>http://${vertx.host}:${vertx.port}/</url>
+                        <method>GET</method>
+                        <status>200</status>
+                      </http>
+                      <time>30000</time>
+                    </wait>
+                    <log>
+                      <enabled>true</enabled>
+                      <color>red</color>
+                    </log>
+                  </run>
+                </image>
+
+                <image>
+                  <alias>${docker.domain}/vertx3-alpine</alias>
+                  <name>${docker.domain}/vertx3-alpine</name>
+                  <build>
+                    <tags>
+                      <tag>latest</tag>
+                      <tag>${project.version}</tag>
+                    </tags>
+                    <dockerFile>base-alpine/Dockerfile</dockerFile>
+                  </build>
+                  <run>
+                    <namingStrategy>none</namingStrategy>
+                    <volumes>
+                      <bind>
+                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
+                      </bind>
+                    </volumes>
+                    <ports>
+                      <port>${vertx-alpine.host}:${vertx-alpine.port}:8080</port>
+                    </ports>
+                    <cmd>vertx run /verticles/MyVerticle.groovy</cmd>
+                    <wait>
+                      <log>Verticle startup - alpine</log>
+                      <http>
+                        <url>http://${vertx-alpine.host}:${vertx-alpine.port}/</url>
+                        <method>GET</method>
+                        <status>200</status>
+                      </http>
+                      <time>30000</time>
+                    </wait>
+                    <log>
+                      <enabled>true</enabled>
+                      <color>red</color>
+                    </log>
+                  </run>
+                </image>
+
+                <image>
+                  <alias>${docker.domain}/vertx3-exec</alias>
+                  <name>${docker.domain}/vertx3-exec</name>
+                  <build>
+                    <tags>
+                      <tag>latest</tag>
+                      <tag>${project.version}</tag>
+                    </tags>
+                    <dockerFile>exec/Dockerfile</dockerFile>
+                  </build>
+                  <run>
+                    <namingStrategy>none</namingStrategy>
+                    <volumes>
+                      <bind>
+                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
+                      </bind>
+                    </volumes>
+                    <ports>
+                      <port>${vertx-exec.host}:${vertx-exec.port}:8080</port>
+                    </ports>
+                    <cmd>run /verticles/MyVerticle.groovy</cmd>
+                    <wait>
+                      <log>Verticle startup - exec-regular</log>
+                      <http>
+                        <url>http://${vertx-exec.host}:${vertx-exec.port}/</url>
+                        <method>GET</method>
+                        <status>200</status>
+                      </http>
+                      <time>30000</time>
+                    </wait>
+                    <log>
+                      <enabled>true</enabled>
+                      <color>red</color>
+                    </log>
+                  </run>
+                </image>
+
+                <image>
+                  <alias>${docker.domain}/vertx3-exec-alpine</alias>
+                  <name>${docker.domain}/vertx3-exec-alpine</name>
+                  <build>
+                    <tags>
+                      <tag>latest</tag>
+                      <tag>${project.version}</tag>
+                    </tags>
+                    <dockerFile>exec-alpine/Dockerfile</dockerFile>
+                  </build>
+                  <run>
+                    <namingStrategy>none</namingStrategy>
+                    <volumes>
+                      <bind>
+                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
+                      </bind>
+                    </volumes>
+                    <ports>
+                      <port>${vertx-exec-alpine.host}:${vertx-exec-alpine.port}:8080</port>
+                    </ports>
+                    <cmd>run /verticles/MyVerticle.groovy</cmd>
+                    <wait>
+                      <log>Verticle startup - exec-alpine</log>
+                      <http>
+                        <url>http://${vertx-exec-alpine.host}:${vertx-exec-alpine.port}/</url>
+                        <method>GET</method>
+                        <status>200</status>
+                      </http>
+                      <time>30000</time>
+                    </wait>
+                    <log>
+                      <enabled>true</enabled>
+                      <color>red</color>
+                    </log>
+                  </run>
+                </image>
+              </images>
+            </configuration>
+          </plugin>
+
+          <plugin>
             <artifactId>maven-dependency-plugin</artifactId>
             <version>2.10</version>
             <executions>
@@ -56,89 +250,24 @@
                 <configuration>
                   <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
                   <includeClassifiers>full</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/work</outputDirectory>
+                  <outputDirectory>${project.build.directory}/docker/${docker.domain}/vertx3/build</outputDirectory>
+                  <markersDirectory>${project.build.directory}/marker-dependency</markersDirectory>
                 </configuration>
               </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <!--
-            Copy a filtered version of the docker file, the output directory is used as dockerDirectory in the
-            docker maven plugin
-            -->
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
-            <executions>
               <execution>
-                <id>prepare-dockerfile</id>
-                <phase>validate</phase>
+                <id>unzip-vertx-stack-alpine</id>
+                <phase>compile</phase>
                 <goals>
-                  <goal>copy-resources</goal>
+                  <goal>unpack-dependencies</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${project.build.directory}/docker-filtered</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/docker/base</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
+                  <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
+                  <includeClassifiers>full</includeClassifiers>
+                  <outputDirectory>${project.build.directory}/docker/${docker.domain}/vertx3-alpine/build
+                  </outputDirectory>
+                  <markersDirectory>${project.build.directory}/marker-dependency-alpine</markersDirectory>
                 </configuration>
               </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>com.spotify</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>0.4.1</version>
-            <executions>
-
-              <execution>
-                <id>base-image</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-                <configuration>
-                  <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
-                  <imageName>vertx/vertx3</imageName>
-                  <!-- During release, check the pulled java version, and update if needed -->
-
-                  <!-- Tags should only be enabled during release -->
-                  <!--<imageTags>-->
-                  <!--<tag>${project.version}</tag>-->
-                  <!--</imageTags>-->
-                  <resources>
-                    <resource>
-                      <targetPath>/usr/local</targetPath>
-                      <directory>${project.build.directory}/work</directory>
-                    </resource>
-                  </resources>
-                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
-                  <serverId>docker-hub</serverId>
-                  <registryUrl>https://index.docker.io/v1/</registryUrl>
-                </configuration>
-              </execution>
-
-              <execution>
-                <id>exec</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-                <configuration>
-                  <dockerDirectory>${project.basedir}/src/main/docker/exec</dockerDirectory>
-                  <imageName>vertx/vertx3-exec</imageName>
-                  <!-- Tags should only be enabled during release -->
-                  <!--<imageTags>-->
-                  <!--<tag>${project.version}</tag>-->
-                  <!--</imageTags>-->
-                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
-                  <serverId>docker-hub</serverId>
-                  <registryUrl>https://index.docker.io/v1/</registryUrl>
-                </configuration>
-              </execution>
-
             </executions>
           </plugin>
         </plugins>
@@ -186,6 +315,50 @@
               </execution>
             </executions>
           </plugin>
+
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compile-IT</id>
+                <goals>
+                  <goal>testCompile</goal>
+                </goals>
+                <phase>test-compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.17</version>
+            <executions>
+              <execution>
+                <id>failsafe-IT</id>
+                <goals>
+                  <goal>integration-test</goal>
+                </goals>
+                <phase>integration-test</phase>
+              </execution>
+              <execution>
+                <id>failsafe-verify</id>
+                <goals>
+                  <goal>verify</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <systemPropertyVariables>
+                <vertx.url>http://${docker.host.address}:${vertx.port}</vertx.url>
+                <vertx-exec.url>http://${docker.host.address}:${vertx-exec.port}</vertx-exec.url>
+                <vertx-alpine.url>http://${docker.host.address}:${vertx-alpine.port}</vertx-alpine.url>
+                <vertx-exec-alpine.url>http://${docker.host.address}:${vertx-exec-alpine.port}</vertx-exec-alpine.url>
+                <vertx.version>${project.version}</vertx.version>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+
         </plugins>
       </build>
     </profile>
