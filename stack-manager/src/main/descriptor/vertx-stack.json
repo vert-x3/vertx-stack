@@ -296,7 +296,7 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-service-discovery",
       "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
