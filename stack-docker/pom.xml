@@ -139,6 +139,52 @@
                 </configuration>
               </execution>
 
+              <execution>
+                <id>base-image-alpine</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <dockerDirectory>${project.build.directory}/docker-filtered/alpine</dockerDirectory>
+                  <imageName>vertx/vertx3-alpine</imageName>
+                  <!-- During release, check the pulled java version, and update if needed -->
+
+                  <!-- Tags should only be enabled during release -->
+                  <!--<imageTags>-->
+                  <!--<tag>${project.version}</tag>-->
+                  <!--</imageTags>-->
+                  <resources>
+                    <resource>
+                      <targetPath>/usr/local</targetPath>
+                      <directory>${project.build.directory}/work</directory>
+                    </resource>
+                  </resources>
+                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+                  <serverId>docker-hub</serverId>
+                  <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>exec-alpine</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <dockerDirectory>${project.basedir}/src/main/docker/exec/alpine</dockerDirectory>
+                  <imageName>vertx/vertx3-alpine-exec</imageName>
+                  <!-- Tags should only be enabled during release -->
+                  <!--<imageTags>-->
+                  <!--<tag>${project.version}</tag>-->
+                  <!--</imageTags>-->
+                  <!-- configuration to push the image into docker hub - requires credentials in the Maven settings -->
+                  <serverId>docker-hub</serverId>
+                  <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
+              </execution>
+
             </executions>
           </plugin>
         </plugins>
