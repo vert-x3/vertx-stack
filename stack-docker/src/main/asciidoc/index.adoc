@@ -57,7 +57,7 @@ COPY $VERTICLE_NAME $VERTICLE_HOME/
 # Launch the verticle                       <5>
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 ----
 <1> First extend the image provided by vert.x
 <2> Set the name of the verticle
@@ -89,8 +89,11 @@ is an optional information telling that the application wants to listen the port
 *mandatory* and instructs docker to forward the port 8080 from the host to the 8080 of the container.
 
 NOTE: You may also have noticed the convoluted way to launch the application. Instead of calling `vertx` directly, it
- uses `sh -c`. This is to turn around a Docker limitation not expanding variables in `CMD`. This way the launched
- shell does. More details on the Docker http://docs.docker.com/reference/builder/#cmd[builder documentation].
+ uses `sh -c` along with `exec`. `sh -c` is to turn around a Docker limitation not expanding variables in `CMD`.
+ This way the launched shell does. More details on the Docker http://docs.docker.com/reference/builder/#cmd[builder documentation].
+ `exec` is to make the `vertx` command process replace the shell, so that it gets pid 1 and receives signals,
+ like `SIGTERM` when running `docker stop`. Without `exec` the shell keeps running along with the `vertx` command process,
+ and the `vertx` command does not get signals, thus preventing graceful shutdown.
 
 === Deploying a Groovy verticle in a docker container
 
@@ -127,7 +130,7 @@ COPY $VERTICLE_NAME $VERTICLE_HOME/
 # Launch the verticle
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 ----
 
 The build and run instructions are very close to the previous ones:
@@ -174,7 +177,7 @@ COPY $VERTICLE_NAME $VERTICLE_HOME/
 # Launch the verticle
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 ----
 
 The build and run instructions are very close to the previous ones:
@@ -232,7 +235,7 @@ COPY $VERTICLE_FILE $VERTICLE_HOME/
 # Launch the verticle
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 ----
 <1> Unlike the previous examples, here we set the verticle class name and the jar file
 <2> The jar file is copied.
@@ -300,7 +303,7 @@ file contained in `$VERTICLE_HOME` you can use:
 ----
 COPY ./cluster.xml $VERTICLE_HOME/
 # ...
-CMD [export CLASSPATH=`find $VERTICLE_HOME -printf '%p:' | sed 's/:$//'`; vertx run $VERTICLE_NAME"]
+CMD [export CLASSPATH=`find $VERTICLE_HOME -printf '%p:' | sed 's/:$//'`; exec vertx run $VERTICLE_NAME"]
 ----
 
 Notice the `export CLASSPATH=...;` part in the `CMD` instruction. It builds the value of the `CLASSPATH` variable from
@@ -377,7 +380,7 @@ ENV VERTICLE_NAME io.vertx.example.HelloWorldVerticle
 COPY ./verticles $VERTICLE_HOME
 
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
+CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
 ----
 
 It's basically the same content as we saw above. The copy is a bit different as the plugin have placed
@@ -572,7 +575,7 @@ COPY target/$VERTICLE_FILE $VERTICLE_HOME/                          <3>
 # Launch the verticle
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar $VERTICLE_FILE"]                                    <4>
+CMD ["exec java -jar $VERTICLE_FILE"]                               <4>
 ----
 <1> Extend the image providing OpenJDK 8, use the one you want
 <2> Set the `VERTICLE_FILE` to point on the _fat jar_
