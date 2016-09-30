@@ -560,7 +560,7 @@ First, be sure your application is packaged as a _fat jar_. Then, use the follow
 
 [source]
 ----
-FROM java:8u77-jre-alpine                                           <1>
+FROM openjdk:8-jre-alpine                                           <1>
 
 ENV VERTICLE_FILE hello-verticle-fatjar-3.0.0-SNAPSHOT-fat.jar      <2>
 
