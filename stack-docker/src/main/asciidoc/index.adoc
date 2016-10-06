@@ -551,6 +551,67 @@ docker run -i -t -p 8080:8080 \
 This command mounts the current directory (`PWD`) into `/verticles` and then launch the `vertx run` command. Notice the
 `-cp` parameter reusing the `/verticles` directory.
 
+=== Customizing the stack
+
+The `vertx/vertx3-exec` image provides the default "full" Vert.x stack. You may want to customize this stack and create
+ your own exec image. First, create a `vertx-stack.json` file:
+
+[source,json]
+----
+{
+  "variables": {
+    "vertx.version": "3.3.3"
+  },
+  "dependencies": [
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-web",
+      "version": "${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-lang-js",
+      "version": "${vertx.version}",
+      "included": true
+    }
+  ]
+}
+----
+
+You can list any dependency you need, not just the Vert.x artifacts
+(refer to the http://vertx.io/docs/vertx-stack-manager/stack-manager/[Stack Manager documentation] for details).
+
+Then write a `Dockerfile` for your custom executable image:
+
+----
+FROM vertx/vertx3-exec                                     <1>
+
+COPY vertx-stack.json ${VERTX_HOME}/vertx-stack.json       <2>
+
+RUN vertx resolve && rm -rf ${HOME}/.m2                    <3>
+----
+<1> Extend the Vert.x executable image
+<2> Replace the stack file in the Vert.x command installation
+<3> Resolve dependencies
+
+You should know be able to build your custom executable image:
+
+[source,shell]
+----
+docker build -t mycompany/my-vertx3-exec .
+----
+
+And run your verticle:
+
+[source,shell]
+----
+docker run -i -t -p 8080:8080 \
+    -v $PWD:/verticles mycompany/my-vertx3-exec \
+    run io.vertx.sample.RandomGeneratorVerticle \
+    -cp /verticles/MY_VERTICLE.jar
+----
+
 == Deploying a fat jar
 
 It is also possible to deploy a Vert.x application packaged as a _fat jar_ into a docker container. For this you
