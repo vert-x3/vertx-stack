@@ -597,16 +597,19 @@ RUN vertx resolve && rm -rf ${HOME}/.m2                    <3>
 
 You should know be able to build your custom executable image:
 
-[source,bash]
+[source,shell]
 ----
 docker build -t mycompany/my-vertx3-exec .
 ----
 
 And run your verticle:
 
-[source,bash]
+[source,shell]
 ----
-docker run -t -i -p 8080:8080 mycompany/my-vertx3-exec my-web-verticle.js
+docker run -i -t -p 8080:8080 \
+    -v $PWD:/verticles mycompany/my-vertx3-exec \
+    run io.vertx.sample.RandomGeneratorVerticle \
+    -cp /verticles/MY_VERTICLE.jar
 ----
 
 == Deploying a fat jar
