@@ -15,7 +15,7 @@
 {
   "variables": {
     "vertx.version": "${vertx.version}",
-    "netty.version": "1.1.33.Fork17"
+    "netty.version": "1.1.33.Fork21"
   },
   "dependencies": [
     {
@@ -61,12 +61,6 @@
       "artifactId": "vertx-lang-ceylon",
       "version": "\${vertx.version}",
       "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-lang-groovy",
-      "version": "\${vertx.version}",
-      "included": true
     },
     {
       "groupId": "io.vertx",

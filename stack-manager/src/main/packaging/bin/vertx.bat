@@ -20,7 +20,7 @@ set JVM_OPTS=-XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0
 
 set JMX_OPTS=
 @rem To enable JMX uncomment the following
-@rem set JMX_OPTS=-Dcom.sun.management.jmxremote -Dhazelcast.jmx=true -Dvertx.options.jmxEnabled=true
+@rem set JMX_OPTS=-Dcom.sun.management.jmxremote -Dhazelcast.jmx=true -Dvertx.metrics.options.jmxEnabled=true
 
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.

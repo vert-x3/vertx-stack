@@ -42,6 +42,13 @@ public class StackResolution {
 
   private final Map<String, String> selectedVersions = new LinkedHashMap<>();
   private final Map<String, ResolvedArtifact> selectedArtifacts = new LinkedHashMap<>();
+
+  /**
+   * Map keeping a trace from who has resolved which version. It imrpvoes the reporting when a conflict has been
+   * detected.
+   */
+  private final Map<String, List<String>> traces = new LinkedHashMap<>();
+
   private final StackResolutionOptions options;
   private Resolver resolver;
 
@@ -70,12 +77,13 @@ public class StackResolution {
    * @return the map artifact's management key - file composing the stack
    */
   public Map<String, File> resolve() {
+    traces.clear();
     selectedVersions.clear();
     init();
     stack.getDependencies().forEach(this::resolve);
     List<Actions.Action> chain = computeChainOfActions();
 
-    chain.stream().forEach(Actions.Action::execute);
+    chain.forEach(Actions.Action::execute);
 
     Map<String, File> resolved = new LinkedHashMap<>();
     for (ResolvedArtifact artifact : selectedArtifacts.values()) {
@@ -95,14 +103,15 @@ public class StackResolution {
     }
     stack.applyFiltering();
     stack.getDependencies().stream().filter(Dependency::isIncluded).forEach(
-        dependency -> selectedVersions.put(dependency.getManagementKey(), dependency.getVersion()));
+      dependency -> selectedVersions.put(dependency.getManagementKey(), dependency.getVersion()));
     resolver = Resolver.create(options);
   }
 
   private List<Actions.Action> computeChainOfActions() {
-    File[] files = directory.listFiles((dir, name) -> {
-      return name.endsWith(".jar");
-    });
+    File[] files = directory.listFiles((dir, name) -> name.endsWith(".jar"));
+    if (files == null) {
+      throw new IllegalStateException("Unable to read from the file system");
+    }
 
     Map<String, Boolean> marks = new HashMap<>();
     for (File file : files) {
@@ -153,22 +162,35 @@ public class StackResolution {
     }
 
     LOGGER.debug("Artifacts resolved for " + dependency.getGACV() + " : "
-        + list.stream().map(Object::toString).collect(Collectors.toList()));
+      + list.stream().map(Object::toString).collect(Collectors.toList()));
 
-    list.stream().forEach(artifact -> {
-      String key = getManagementKey(artifact);
-      String version = selectedVersions.get(key);
+    list.forEach(artifact -> {
+      String gaec = getManagementKey(artifact);
+      String version = selectedVersions.get(gaec);
       if (version == null || version.equalsIgnoreCase(artifact.getBaseVersion())) {
-        selectedVersions.put(key, artifact.getBaseVersion());
+        selectedVersions.put(gaec, artifact.getBaseVersion());
+        keepATrace(dependency, artifact);
       } else {
-        LOGGER.warn("Conflict detected for artifact " + key + " - version " + version + " was already selected while "
-            + dependency.getGACV() + " depends on version " + artifact.getBaseVersion());
+        LOGGER.warn("Conflict detected for artifact " + gaec + " - version " + version + " was already selected by " + traces.get(gaec + ":" + version) + " while "
+          + dependency.getGACV() + " depends on version " + artifact.getBaseVersion());
         if (options.isFailOnConflicts()) {
-          throw new DependencyConflictException(key, version, dependency.getGACV(), artifact.getBaseVersion());
+          throw new DependencyConflictException(gaec, version, dependency.getGACV(), artifact.getBaseVersion());
         }
       }
       addSelectedArtifact(dependency, artifact, version);
     });
+  }
+
+  /**
+   * Keep a trace of the resolution.
+   *
+   * @param dependency the dependency having triggered the resolution
+   * @param artifact   the resolved artifact
+   */
+  private void keepATrace(Dependency dependency, Artifact artifact) {
+    String traceId = getManagementKey(artifact) + ":" + artifact.getBaseVersion();
+    List<String> deps = traces.computeIfAbsent(traceId, k -> new ArrayList<>());
+    deps.add(dependency.getGACV());
   }
 
   private void addSelectedArtifact(Dependency dependency, Artifact artifact, String version) {
@@ -178,17 +200,17 @@ public class StackResolution {
       resolved.addUsage(getManagementKey(dependency));
     } else {
       selectedArtifacts.put(key,
-          new ResolvedArtifact().addUsage(getManagementKey(dependency))
-              .setSelectedVersion(version).setArtifact(artifact));
+        new ResolvedArtifact().addUsage(getManagementKey(dependency))
+          .setSelectedVersion(version).setArtifact(artifact));
     }
   }
 
   private String getManagementKey(Artifact artifact) {
     return artifact.getGroupId()
-        + ":" + artifact.getArtifactId()
-        + ":" + artifact.getExtension()
-        + (artifact.getClassifier() != null && artifact.getClassifier().length() > 0
-        ? ":" + artifact.getClassifier() : "");
+      + ":" + artifact.getArtifactId()
+      + ":" + artifact.getExtension()
+      + (artifact.getClassifier() != null && artifact.getClassifier().length() > 0
+      ? ":" + artifact.getClassifier() : "");
   }
 
   private String getManagementKey(Dependency dependency) {

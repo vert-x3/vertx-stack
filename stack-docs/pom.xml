@@ -584,6 +584,12 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-reactive-streams</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
 
     <!-- microservice toolbox -->
