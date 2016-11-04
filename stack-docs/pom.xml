@@ -702,14 +702,6 @@
       <version>${project.version}</version>
     </dependency>
 
-    <!-- Dependencies required by groovydoc -->
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <!-- any version of Groovy \>= 1.5.0 (except 1.6 RC 1) should work here -->
-      <version>2.4.5</version>
-    </dependency>
-
     <!-- Dependencies requires by yardoc -->
     <dependency>
       <groupId>rubygems</groupId>
@@ -752,22 +744,6 @@
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
               <excludes>examples\/**,**\/impl\/**,**\/package-info.java</excludes>
-            </configuration>
-          </execution>
-
-          <!-- Unpack sources for Groovydoc generation to target/groovy -->
-          <execution>
-            <id>unpack-groovy</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/groovy-dependency-maven-plugin-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <includeClassifiers>sources</includeClassifiers>
-              <outputDirectory>${project.build.directory}/groovy</outputDirectory>
-              <includes>**/*.groovy</includes>
             </configuration>
           </execution>
 
@@ -846,30 +822,6 @@
                 <link>http://fasterxml.github.io/jackson-core/javadoc/2.7/</link>
                 <link>http://fasterxml.github.io/jackson-databind/javadoc/2.7/</link>
               </links>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Process GroovyDoc from target/groovy to target/docs/groovydoc -->
-      <plugin>
-        <groupId>org.codehaus.gmavenplus</groupId>
-        <artifactId>gmavenplus-plugin</artifactId>
-        <version>1.5</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>groovydoc</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <sources>
-                <source>
-                  <directory>${project.build.directory}/groovy</directory>
-                </source>
-              </sources>
-              <scope>public</scope>
-              <groovydocOutputDirectory>${project.build.directory}/docs/groovydoc</groovydocOutputDirectory>
             </configuration>
           </execution>
         </executions>
