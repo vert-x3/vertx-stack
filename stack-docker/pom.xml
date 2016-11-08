@@ -270,6 +270,36 @@
               </execution>
             </executions>
           </plugin>
+
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.17</version>
+            <executions>
+              <execution>
+                <id>failsafe-IT</id>
+                <goals>
+                  <goal>integration-test</goal>
+                </goals>
+                <phase>integration-test</phase>
+              </execution>
+              <execution>
+                <id>failsafe-verify</id>
+                <goals>
+                  <goal>verify</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <systemPropertyVariables>
+                <vertx.url>http://${docker.host.address}:${vertx.port}</vertx.url>
+                <vertx-exec.url>http://${docker.host.address}:${vertx-exec.port}</vertx-exec.url>
+                <vertx-alpine.url>http://${docker.host.address}:${vertx-alpine.port}</vertx-alpine.url>
+                <vertx-exec-alpine.url>http://${docker.host.address}:${vertx-exec-alpine.port}</vertx-exec-alpine.url>
+                <vertx.version>${project.version}</vertx.version>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -328,37 +358,6 @@
               </execution>
             </executions>
           </plugin>
-
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.17</version>
-            <executions>
-              <execution>
-                <id>failsafe-IT</id>
-                <goals>
-                  <goal>integration-test</goal>
-                </goals>
-                <phase>integration-test</phase>
-              </execution>
-              <execution>
-                <id>failsafe-verify</id>
-                <goals>
-                  <goal>verify</goal>
-                </goals>
-                <phase>verify</phase>
-              </execution>
-            </executions>
-            <configuration>
-              <systemPropertyVariables>
-                <vertx.url>http://${docker.host.address}:${vertx.port}</vertx.url>
-                <vertx-exec.url>http://${docker.host.address}:${vertx-exec.port}</vertx-exec.url>
-                <vertx-alpine.url>http://${docker.host.address}:${vertx-alpine.port}</vertx-alpine.url>
-                <vertx-exec-alpine.url>http://${docker.host.address}:${vertx-exec-alpine.port}</vertx-exec-alpine.url>
-                <vertx.version>${project.version}</vertx.version>
-              </systemPropertyVariables>
-            </configuration>
-          </plugin>
-
         </plugins>
       </build>
     </profile>
