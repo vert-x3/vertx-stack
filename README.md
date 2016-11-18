@@ -35,7 +35,7 @@ Therefore it should be used with explicit dependencies:
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>stack-bom</artifactId>
+      <artifactId>vertx-stack-depchain</artifactId>
       <version>3.1.0</version>
       <type>pom</type>
       <scope>import</scope>
