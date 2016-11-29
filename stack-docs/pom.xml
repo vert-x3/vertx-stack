@@ -178,6 +178,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-consul-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mongo-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -401,6 +408,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mysql-postgresql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-consul-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -928,6 +941,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-reactive-streams/">
                   <fileset dir="${project.build.directory}/work/vertx-reactive-streams-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-consul-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-consul-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mongo-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mongo-client-docs-zip"/>

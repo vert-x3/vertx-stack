@@ -166,6 +166,18 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-consul-client",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-consul-service",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-mongo-client",
       "version": "\${vertx.version}",
       "included": true
