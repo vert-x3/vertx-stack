@@ -11,11 +11,13 @@
   "homepage": "http://vertx.io",
   "description": "Vert.x 3 Event Bus Client as NPM",
   "license": "Apache-2.0",
+  "typings": "vertx-eventbus.d.ts",
   "files": [
     "vertx-eventbus.js",
+    "vertx-eventbus.d.ts",
     "README.md"
   ],
   "dependencies": {
-    "sockjs-client":"1.0.3"
+    "sockjs-client":"1.1.0"
   }
 }
