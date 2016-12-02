@@ -18,6 +18,6 @@
     "README.md"
   ],
   "dependencies": {
-    "sockjs-client":"1.1.0"
+    "sockjs-client":"1.1.1"
   }
 }
