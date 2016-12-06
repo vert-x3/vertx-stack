@@ -1,4 +1,4 @@
-declare module EventBus {
+declare namespace EventBus {
 
   interface EventBusStatic {
     new(url: string, options?: any): EventBus;
@@ -7,8 +7,8 @@ declare module EventBus {
   interface EventBus {
     url: string;
     options?: any;
-    onopen: (error: Error, message: any) => any;
-    onclose: (error: Error, message: any) => any;
+    onopen: () => any;
+    onclose: (error: Error) => any;
     registerHandler: (address: string, headers: any, callback: (error: Error, message: any) => any) => any;
     unregisterHandler: (address: string, headers: any, callback: (error: Error, message: any) => any) => any;
     send: (address: string, message: any, headers: any, callback: (error: Error, message: any) => any) => any;
