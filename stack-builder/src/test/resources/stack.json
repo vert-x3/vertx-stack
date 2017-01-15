@@ -1,0 +1,25 @@
+{
+  "directory": "target/stack/json",
+  "from": {
+    "id" : "min"
+  },
+  "dependencies": [
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-rx-java",
+      "version": "3.0.0",
+      "ignoreTransitive": true
+    },
+    {
+      "groupId": "org.hsqldb",
+      "artifactId": "hsqldb",
+      "version": "2.3.3"
+    }
+  ],
+  "files": [
+    {
+      "file": "src/test/resources/hello.html",
+      "targetDirectory": "files"
+    }
+  ]
+}
