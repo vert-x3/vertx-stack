@@ -72,6 +72,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-ruby</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -384,6 +391,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-groovy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin-compiler</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1010,6 +1023,7 @@
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
                 </copy>

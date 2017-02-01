@@ -20,6 +20,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-lang-kotlin-compiler",
+      "version": "${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-lang-js",
       "version": "${vertx.version}",
       "included": true
