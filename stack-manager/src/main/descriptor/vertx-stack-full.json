@@ -7,7 +7,7 @@
 //
 // You can also set `exclusions` and whether or not the dependency need to resolve its transitive dependencies.
 //
-// Then launch the resolution process with: vertx resolve --dir=lib --stack=./vertx-stack.json
+// Then launch the resolution process with: vertx resolve --dir=lib --stack=./vertx-vertx.json
 //
 // To remove a dependency:
 // - either remove the dependency declaration or just toggled the `included` value. Then launch the resolution process.
@@ -55,7 +55,7 @@
       "included": true
     },
     // To include ceylon, switch the 'included' boolean to 'true' and launch
-    // `vertx resolve --dir=lib --stack=./vertx-stack.json`.
+    // `vertx resolve --dir=lib --stack=./vertx-vertx.json`.
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-lang-ceylon",
@@ -337,6 +337,54 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-service-discovery-backend-redis",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-git",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-hocon",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-kubernetes-configmap",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-redis",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-spring-config-server",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-yaml",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-zookeeper",
       "version": "\${vertx.version}",
       "included": false
     },
