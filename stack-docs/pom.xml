@@ -175,6 +175,13 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mqtt-server</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -270,6 +277,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-sockjs-service-proxy</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -284,7 +298,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-jgroups</artifactId>
+      <artifactId>vertx-infinispan</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
@@ -510,6 +524,18 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-sockjs-service-proxy</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
@@ -528,7 +554,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-jgroups</artifactId>
+      <artifactId>vertx-infinispan</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -613,6 +639,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-reactive-streams</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mqtt-server</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -894,7 +926,7 @@
             </configuration>
           </execution>
 
-          <!-- Unpack js for jsdoc generation to target/rb -->
+          <!-- Unpack ruby for ruby generation to target/rb -->
           <execution>
             <id>unpack-rb</id>
             <goals>
@@ -946,7 +978,6 @@
               <detectLinks/>
               <detectJavaApiLink/>
               <links>
-                <link>http://jgroups.org/javadoc</link>
                 <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
                 <link>http://reactivex.io/RxJava/javadoc/</link>
                 <link>http://netty.io/4.0/api/</link>
@@ -1098,6 +1129,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-web/">
                   <fileset dir="${project.build.directory}/work/vertx-web-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-web-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-web-client-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
                 </copy>
@@ -1107,8 +1141,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-hazelcast/">
                   <fileset dir="${project.build.directory}/work/vertx-hazelcast-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-jgroups/">
-                  <fileset dir="${project.build.directory}/work/vertx-jgroups-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-infinispan/">
+                  <fileset dir="${project.build.directory}/work/vertx-infinispan-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-ignite/">
                   <fileset dir="${project.build.directory}/work/vertx-ignite-docs-zip"/>
@@ -1146,7 +1180,6 @@
                 <copy todir="${project.build.directory}/docs/vertx-stack-manager/">
                   <fileset dir="${project.build.directory}/work/vertx-stack-manager-docs-zip"/>
                 </copy>
-
                 <copy todir="${project.build.directory}/docs/vertx-circuit-breaker/">
                   <fileset dir="${project.build.directory}/work/vertx-circuit-breaker-docs-zip"/>
                 </copy>
@@ -1164,6 +1197,30 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-docker-links/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-git/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-git-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-hocon/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-hocon-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-kubernetes-configmap/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-kubernetes-configmap-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-redis/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-redis-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-spring-config-server/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-spring-config-server-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-yaml/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-yaml-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config-zookeeper/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-zookeeper-docs-zip"/>
                 </copy>
               </target>
             </configuration>
