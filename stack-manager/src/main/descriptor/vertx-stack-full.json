@@ -96,13 +96,7 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-maven-service-factory",
       "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-reactive-streams",
-      "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
@@ -198,6 +192,12 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-mongo-service",
       "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-reactive-streams",
+      "version": "\${vertx.version}",
       "included": true
     },
     {
@@ -215,6 +215,12 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-web",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-web-client",
       "version": "\${vertx.version}",
       "included": true
     },
@@ -288,7 +294,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-jgroups",
+      "artifactId": "vertx-infinispan",
       "version": "\${vertx.version}",
       "included": false
     },
@@ -411,6 +417,18 @@
       "artifactId": "vertx-amqp-bridge",
       "version": "\${vertx.version}",
       "included": true
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-consul-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-mqtt-server",
+      "version": "\${vertx.version}",
+      "included": false
     }
   ]
 }

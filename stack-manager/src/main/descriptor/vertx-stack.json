@@ -220,6 +220,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-web-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-web-templ-handlebars",
       "version": "\${vertx.version}",
       "classifier": "shaded",
@@ -288,7 +294,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-jgroups",
+      "artifactId": "vertx-infinispan",
       "version": "\${vertx.version}",
       "included": false
     },
@@ -409,6 +415,18 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-amqp-bridge",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-consul-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-mqtt-server",
       "version": "\${vertx.version}",
       "included": false
     }
