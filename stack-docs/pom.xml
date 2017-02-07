@@ -907,7 +907,7 @@
               <includeClassifiers>sources</includeClassifiers>
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
-              <excludes>examples\/**,**\/impl\/**,**\/package-info.java</excludes>
+              <excludes>examples\/**,**\/impl\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
             </configuration>
           </execution>
 
