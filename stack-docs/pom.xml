@@ -941,6 +941,21 @@
             </configuration>
           </execution>
 
+          <!-- Unpack kotlin for kotlin generation to target/kotlin -->
+          <execution>
+            <id>unpack-kotlin</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/kotlin-dependency-maven-plugin-markers</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <outputDirectory>${project.build.directory}/kotlin</outputDirectory>
+              <includes>**/*.kt</includes>
+            </configuration>
+          </execution>
+
           <!-- Unpack docs to target/work -->
           <execution>
             <id>unpack-docs</id>
@@ -1041,6 +1056,26 @@
             <type>gem</type>
           </dependency>
         </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jetbrains.dokka</groupId>
+        <artifactId>dokka-maven-plugin</artifactId>
+        <version>0.9.13</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>dokka</goal>
+            </goals>
+            <configuration>
+              <sourceDirectories>
+                <sourceDirectory>${project.build.directory}/kotlin</sourceDirectory>
+              </sourceDirectories>
+              <!--<outputDir>${project.build.directory}/docs/kotlin</outputDir>-->
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- Copy target/work to final doc structure in target/docs -->
@@ -1289,6 +1324,12 @@
         <pluginRepository>
           <id>rubygems-releases</id>
           <url>http://rubygems-proxy.torquebox.org/releases</url>
+        </pluginRepository>
+        <!-- For dokka-maven-plugin -->
+        <pluginRepository>
+          <id>jcenter</id>
+          <name>JCenter</name>
+          <url>https://jcenter.bintray.com/</url>
         </pluginRepository>
       </pluginRepositories>
       <repositories>
