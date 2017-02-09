@@ -1257,6 +1257,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-config-zookeeper/">
                   <fileset dir="${project.build.directory}/work/vertx-config-zookeeper-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mqtt-server/">
+                  <fileset dir="${project.build.directory}/work/vertx-mqtt-server-docs-zip"/>
+                </copy>
               </target>
             </configuration>
             <goals>
