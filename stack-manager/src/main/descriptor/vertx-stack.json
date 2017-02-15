@@ -38,6 +38,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-hazelcast",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-lang-groovy",
       "version": "\${vertx.version}",
       "included": true
