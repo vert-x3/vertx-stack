@@ -432,6 +432,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-kafka-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-consul-client",
       "version": "\${vertx.version}",
       "included": false
