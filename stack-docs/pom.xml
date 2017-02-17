@@ -914,6 +914,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-sync</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1078,10 +1092,11 @@
               <links>
                 <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
                 <link>http://reactivex.io/RxJava/javadoc/</link>
-                <link>http://netty.io/4.0/api/</link>
+                <link>http://netty.io/4.1/api/</link>
                 <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.7/</link>
                 <link>http://fasterxml.github.io/jackson-core/javadoc/2.7/</link>
                 <link>http://fasterxml.github.io/jackson-databind/javadoc/2.7/</link>
+                <link>http://www.grpc.io/grpc-java/javadoc/</link>
               </links>
             </configuration>
           </execution>
@@ -1348,6 +1363,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
                 </copy>
               </target>
             </configuration>

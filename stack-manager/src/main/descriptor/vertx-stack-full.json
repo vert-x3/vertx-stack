@@ -447,6 +447,12 @@
       "artifactId": "vertx-mqtt-server",
       "version": "\${vertx.version}",
       "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-grpc",
+      "version": "\${vertx.version}",
+      "included": false
     }
   ]
 }

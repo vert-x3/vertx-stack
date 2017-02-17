@@ -300,6 +300,10 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config-zookeeper</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
