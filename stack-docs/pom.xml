@@ -940,6 +940,15 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <!-- Scala all-in-one -->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala-docs_2.12</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
     <!-- Dependencies required by the javadoc -->
     <dependency>
       <groupId>log4j</groupId>
@@ -1366,6 +1375,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-grpc/">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/">
+                  <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
                 </copy>
               </target>
             </configuration>
