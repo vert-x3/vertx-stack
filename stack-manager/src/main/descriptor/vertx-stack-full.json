@@ -150,7 +150,7 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-auth-shiro",
       "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
