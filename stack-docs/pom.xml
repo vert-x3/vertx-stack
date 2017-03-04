@@ -1346,25 +1346,25 @@
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-git/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-git-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-hocon/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-hocon-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-kubernetes-configmap/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-kubernetes-configmap-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-redis/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-redis-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-spring-config-server/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-spring-config-server-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-yaml/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-yaml-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config-zookeeper/">
+                <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-zookeeper-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mqtt-server/">
