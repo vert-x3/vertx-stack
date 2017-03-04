@@ -1331,17 +1331,23 @@
                 <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-kubernetes/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-kubernetes-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-consul/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-consul-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery-backend-redis/">
-                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-backend-redis-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery-bridge-docker-links/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-consul-discovery/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                  <fileset dir="${project.build.directory}/work/vertx-service-discovery-backend-redis-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-docs-zip"/>
