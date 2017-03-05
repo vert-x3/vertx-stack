@@ -802,6 +802,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-health-check</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-health-check</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-config</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1348,6 +1362,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-backend-redis-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-health-check/">
+                  <fileset dir="${project.build.directory}/work/vertx-health-check-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-docs-zip"/>
