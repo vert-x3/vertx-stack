@@ -7,12 +7,12 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>3.4.0</version>
+    <version>3.4.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>vertx-stack-depchain</artifactId>
-  <version>3.4.0</version>
+  <version>3.4.1-SNAPSHOT</version>
 
   <name>Vert.x Stack - Dependency Chain</name>
   <packaging>pom</packaging>
