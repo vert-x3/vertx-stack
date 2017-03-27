@@ -468,6 +468,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htdigest</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htdigest</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1281,6 +1295,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-jwt/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-jwt-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-htdigest/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-htdigest-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web/">
                   <fileset dir="${project.build.directory}/work/vertx-web-docs-zip"/>
