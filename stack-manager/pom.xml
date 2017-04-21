@@ -211,6 +211,22 @@
               </arguments>
             </configuration>
           </execution>
+	  <execution>
+            <id>build-scala-stack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>io.vertx.core.Launcher</mainClass>
+              <arguments>
+                <argument>resolve</argument>
+                <argument>${project.basedir}/target/vertx-stack/vertx-stack-scala.json</argument>
+                <argument>--dir=${project.basedir}/target/scala-lib</argument>
+                <argument>--no-cache</argument>
+              </arguments>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -288,6 +304,21 @@
               <appendAssemblyId>true</appendAssemblyId>
               <descriptors>
                 <descriptor>src/main/assembly/stack-full.xml</descriptor>
+              </descriptors>
+            </configuration>
+            <phase>package</phase>
+          </execution>
+
+          <execution>
+            <id>vertx-stack-scala</id>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>${finalName}</finalName>
+              <appendAssemblyId>true</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/main/assembly/stack-scala.xml</descriptor>
               </descriptors>
             </configuration>
             <phase>package</phase>
