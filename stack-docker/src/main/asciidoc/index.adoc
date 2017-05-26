@@ -5,14 +5,14 @@ Execute Vert.x applications in Docker containers.
 == Introduction
 
 https://www.docker.com/[Docker] lets you deploy applications inside lightweight and isolated software containers.
-Applications run side by side in isolated Linux containers. If you never used Docker before check this online https://www.docker.com/tryit/[tutorial].
+Applications run side by side in isolated Linux containers. If you never used Docker before check this online https://docs.docker.com/get-started/[tutorial].
 
 Vert.x provides Docker images that you can use to run your applications. Two Docker images are provided:
 
 * `vertx/vertx3` is the base image you need to extend to run your own application
 * `vertx/vertx3-exec` is providing the `vertx` command to your system without having to install `vert.x` yourself.
 
-The images are available from https://registry.hub.docker.com/repos/vertx/[Docker Hub].
+The images are available from https://hub.docker.com/u/vertx/[Docker Hub].
 
 This guide presents how to use these two images but also how to automate Docker image creation using Maven, generate
 Fabric8 metadata and use _fat jars_.
@@ -535,7 +535,7 @@ For instance:
 [source, shell]
 ----
 > docker run -i -t vertx/vertx3-exec -version
-3.0.0-SNAPSHOT
+3.4.2-SNAPSHOT
 ----
 
 To run a verticle:
