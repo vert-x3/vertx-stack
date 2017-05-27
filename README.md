@@ -65,7 +65,7 @@ Examples of docker image usages are in https://github.com/vert-x3/vertx-examples
 
 #### Pushing Docker image to Docker Hub
 
-The images can be pushed to Docker Hub. Before, be sure you are in the _vertx_ organisation on docker hub (https://registry.hub.docker.com/repos/vertx/). Then, add your credentials into `~/.m2/settings.xml`:
+The images can be pushed to Docker Hub. Before, be sure you are in the _vertx_ organisation on docker hub (https://hub.docker.com/u/vertx/). Then, add your credentials into `~/.m2/settings.xml`:
 
 ```
 <server>
@@ -89,13 +89,13 @@ mvn docker:push
 ### Adding a new module to the stack
 
 1. Add it to `vertx-dependencies` (open the project, add it to the `pom.xml`, install, commit and push)
-2. Add it to `stack-depchain/pom.xml` (open the project, add the dependency, without the version (inherited from 
+2. Add it to `stack-depchain/pom.xml` (open the project, add the dependency, without the version (inherited from
 vertx-dependencies))
 3. Add it in the stack manager:
   * Open `./stack-manager/src/main/descriptor/vertx-stack.json`
   * Add the dependency. If the dependency must be embedded in the _min_ distribution, set `included` to `true`. So forget to use the `\${version}`.
   * Open `./stack-manager/src/main/descriptor/vertx-stack-full.json`
-  * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. So forget to use the `\${version}`.  
+  * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. So forget to use the `\${version}`.
 4. Add it to the doc distribution:
   * Open `./stack-docs/pom.xml`
   * Add the `docs` dependency (the using `<classifier>docs</classifier>` and `<type>zip</type>`)
@@ -107,6 +107,6 @@ vertx-dependencies))
 </copy>
 ```
   * Save the `pom.xml` file
-4. Build (`mvn clean install` from the root).  
+4. Build (`mvn clean install` from the root).
 
-  
+
