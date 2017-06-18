@@ -36,8 +36,8 @@
 
   <properties>
 
-    <vertx.version>3.4.5-SNAPSHOT</vertx.version>
-    <vertx.docs.version>3.4.5-SNAPSHOT</vertx.docs.version>
+    <vertx.version>3.5.0-SNAPSHOT</vertx.version>
+    <vertx.docs.version>3.5.0-SNAPSHOT</vertx.docs.version>
 
     <asciidoclet.version>1.5.1</asciidoclet.version>
     <apacheds-protocol-dns.version>1.5.7</apacheds-protocol-dns.version>
