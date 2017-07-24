@@ -278,14 +278,14 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mqtt-server</artifactId>
+      <artifactId>vertx-mqtt</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mqtt-server</artifactId>
+      <artifactId>vertx-mqtt</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1407,8 +1407,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-zookeeper-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mqtt-server/">
-                  <fileset dir="${project.build.directory}/work/vertx-mqtt-server-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-mqtt/">
+                  <fileset dir="${project.build.directory}/work/vertx-mqtt-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
