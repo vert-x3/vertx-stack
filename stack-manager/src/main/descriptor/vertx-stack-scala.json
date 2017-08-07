@@ -62,7 +62,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-mqtt-server-scala_2.12",
+      "artifactId": "vertx-mqtt-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
     },
