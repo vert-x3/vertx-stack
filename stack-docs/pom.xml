@@ -897,6 +897,33 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-vault</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-vault</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-consul</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-consul</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1400,6 +1427,12 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-spring-config-server-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-vault-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-config/">
+                  <fileset dir="${project.build.directory}/work/vertx-config-consul-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-config/">
                   <fileset dir="${project.build.directory}/work/vertx-config-yaml-docs-zip"/>

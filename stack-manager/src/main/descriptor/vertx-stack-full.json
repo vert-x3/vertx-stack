@@ -402,6 +402,18 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-config-vault",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-config-consul",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-config-yaml",
       "version": "\${vertx.version}",
       "included": false
