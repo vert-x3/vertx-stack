@@ -456,7 +456,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-mqtt-server",
+      "artifactId": "vertx-mqtt",
       "version": "\${vertx.version}",
       "included": false
     },
