@@ -118,6 +118,23 @@ public class VertxStacksTest {
     assertThat(resolved).isNotEmpty();
   }
 
+  /**
+   * This tests checks that all our dependencies converge to the same version. This test check the Scala stack.
+   */
+  @Test
+  public void testScalaConvergence() {
+    // Prepare the stack - use full stack, include everything
+    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-scala.json"));
+    stack.getDependencies().stream()
+      .filter(d ->  ! d.getGACV().contains("ceylon"))
+      .forEach(d -> d.setIncluded(true));
+
+    StackResolution resolution = new StackResolution(stack, root,
+      new StackResolutionOptions().setFailOnConflicts(true));
+    Map<String, File> resolved = resolution.resolve();
+    assertThat(resolved).isNotEmpty();
+  }
+
   @Test
   public void testTheResolutionOfTheWebStack() {
     Stack stack = Stack.fromDescriptor(new File("src/test/resources/stacks/vertx-web-stack.json"));
