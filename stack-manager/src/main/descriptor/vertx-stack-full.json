@@ -324,12 +324,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-ignite",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-service-discovery",
       "version": "\${vertx.version}",
       "included": true
