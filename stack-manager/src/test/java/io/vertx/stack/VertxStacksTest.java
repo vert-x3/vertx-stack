@@ -113,7 +113,7 @@ public class VertxStacksTest {
         .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
-        new StackResolutionOptions().setFailOnConflicts(true));
+        new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
     Map<String, File> resolved = resolution.resolve();
     assertThat(resolved).isNotEmpty();
   }
@@ -130,7 +130,7 @@ public class VertxStacksTest {
       .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
-      new StackResolutionOptions().setFailOnConflicts(true));
+      new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
     Map<String, File> resolved = resolution.resolve();
     assertThat(resolved).isNotEmpty();
   }
