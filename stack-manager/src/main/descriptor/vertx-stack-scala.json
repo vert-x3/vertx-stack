@@ -338,12 +338,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-config-consul-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-config-yaml-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
