@@ -522,6 +522,20 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-api-contract</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-api-contract</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
     <!-- no -docs.zip-->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1349,6 +1363,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web-client/">
                   <fileset dir="${project.build.directory}/work/vertx-web-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-web-api-contract/">
+                  <fileset dir="${project.build.directory}/work/vertx-web-api-contract-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
