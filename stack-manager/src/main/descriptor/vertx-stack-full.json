@@ -190,12 +190,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-mongo-embedded-db",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-mongo-service",
       "version": "\${vertx.version}",
       "included": false
