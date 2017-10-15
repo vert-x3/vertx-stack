@@ -93,7 +93,27 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-kotlin-compiler</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin-coroutines</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin-coroutines</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1076,6 +1096,55 @@
           <artifactId>maven-antrun-plugin</artifactId>
           <version>1.8</version>
         </plugin>
+        <plugin>
+          <groupId>org.jetbrains.dokka</groupId>
+          <artifactId>dokka-maven-plugin</artifactId>
+          <version>0.9.15</version>
+          <configuration>
+            <moduleName>vertx</moduleName>
+            <sourceDirectories>
+              <sourceDirectory>${project.build.directory}/java</sourceDirectory>
+              <sourceDirectory>${project.build.directory}/kotlin</sourceDirectory>
+            </sourceDirectories>
+            <jdkVersion>8</jdkVersion>
+            <outputFormat>html</outputFormat>
+            <outputDir>${project.build.directory}/docs/kdoc</outputDir>
+            <skipDeprecated>true</skipDeprecated>
+            <skipEmptyPackages>true</skipEmptyPackages>
+            <impliedPlatforms>
+              <platform>JVM</platform>
+            </impliedPlatforms>
+            <includes>
+              <file>kotlin.md</file>
+            </includes>
+            <externalDocumentationLinks>
+              <link>
+                <url>http://docs.hazelcast.org/docs/3.5/javadoc/</url>
+              </link>
+              <link>
+                <url>http://reactivex.io/RxJava/1.x/javadoc/</url>
+              </link>
+              <link>
+                <url>http://reactivex.io/RxJava/javadoc/</url>
+              </link>
+              <link>
+                <url>http://netty.io/4.1/api/</url>
+              </link>
+              <link>
+                <url>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</url>
+              </link>
+              <link>
+                <url>http://fasterxml.github.io/jackson-core/javadoc/2.9/</url>
+              </link>
+              <link>
+                <url>http://fasterxml.github.io/jackson-databind/javadoc/2.9/</url>
+              </link>
+              <link>
+                <url>http://www.grpc.io/grpc-java/javadoc/</url>
+              </link>
+            </externalDocumentationLinks>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -1144,6 +1213,7 @@
               <includeGroupIds>io.vertx</includeGroupIds>
               <outputDirectory>${project.build.directory}/kotlin</outputDirectory>
               <includes>**/*.kt</includes>
+              <excludes>examples/**</excludes>
             </configuration>
           </execution>
 
@@ -1188,9 +1258,9 @@
                 <link>http://reactivex.io/RxJava/1.x/javadoc/</link>
                 <link>http://reactivex.io/RxJava/javadoc/</link>
                 <link>http://netty.io/4.1/api/</link>
-                <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.7/</link>
-                <link>http://fasterxml.github.io/jackson-core/javadoc/2.7/</link>
-                <link>http://fasterxml.github.io/jackson-databind/javadoc/2.7/</link>
+                <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</link>
+                <link>http://fasterxml.github.io/jackson-core/javadoc/2.9/</link>
+                <link>http://fasterxml.github.io/jackson-databind/javadoc/2.9/</link>
                 <link>http://www.grpc.io/grpc-java/javadoc/</link>
               </links>
             </configuration>
@@ -1254,19 +1324,13 @@
       <plugin>
         <groupId>org.jetbrains.dokka</groupId>
         <artifactId>dokka-maven-plugin</artifactId>
-        <version>0.9.13</version>
+        <version>0.9.15</version>
         <executions>
           <execution>
             <phase>process-resources</phase>
             <goals>
               <goal>dokka</goal>
             </goals>
-            <configuration>
-              <sourceDirectories>
-                <sourceDirectory>${project.build.directory}/kotlin</sourceDirectory>
-              </sourceDirectories>
-              <!--<outputDir>${project.build.directory}/docs/kotlin</outputDir>-->
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -1485,6 +1549,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-grpc/">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-lang-kotlin-coroutines/">
+                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-coroutines-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
