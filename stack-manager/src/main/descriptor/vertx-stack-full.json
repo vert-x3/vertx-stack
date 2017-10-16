@@ -278,7 +278,7 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-shell",
       "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
