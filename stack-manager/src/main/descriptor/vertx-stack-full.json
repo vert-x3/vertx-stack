@@ -56,6 +56,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-lang-kotlin-coroutines",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-lang-js",
       "version": "\${vertx.version}",
       "included": true
