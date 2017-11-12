@@ -620,7 +620,6 @@
       <classifier>sources</classifier>
     </dependency>
 
-<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-ignite</artifactId>
@@ -634,7 +633,6 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
--->
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1446,11 +1444,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-infinispan/">
                   <fileset dir="${project.build.directory}/work/vertx-infinispan-docs-zip"/>
                 </copy>
-<!--
                 <copy todir="${project.build.directory}/docs/vertx-ignite/">
                   <fileset dir="${project.build.directory}/work/vertx-ignite-docs-zip"/>
                 </copy>
--->
                 <copy todir="${project.build.directory}/docs/vertx-redis-client/">
                   <fileset dir="${project.build.directory}/work/vertx-redis-client-docs-zip"/>
                 </copy>
