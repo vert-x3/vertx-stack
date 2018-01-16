@@ -220,6 +220,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-junit5",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-web",
       "version": "\${vertx.version}",
       "included": true
