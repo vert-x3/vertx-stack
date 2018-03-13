@@ -1088,16 +1088,6 @@
       <type>test-jar</type>
       <version>${project.version}</version>
     </dependency>
-
-    <!-- Dependencies requires by yardoc -->
-    <dependency>
-      <groupId>rubygems</groupId>
-      <artifactId>yard</artifactId>
-      <version>0.8.7.6</version>
-      <type>gem</type>
-      <scope>provided</scope>
-    </dependency>
-
   </dependencies>
 
   <build>
@@ -1107,55 +1097,6 @@
         <plugin>
           <artifactId>maven-antrun-plugin</artifactId>
           <version>1.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.jetbrains.dokka</groupId>
-          <artifactId>dokka-maven-plugin</artifactId>
-          <version>0.9.15</version>
-          <configuration>
-            <moduleName>vertx</moduleName>
-            <sourceDirectories>
-              <sourceDirectory>${project.build.directory}/java</sourceDirectory>
-              <sourceDirectory>${project.build.directory}/kotlin</sourceDirectory>
-            </sourceDirectories>
-            <jdkVersion>8</jdkVersion>
-            <outputFormat>html</outputFormat>
-            <outputDir>${project.build.directory}/docs/kdoc</outputDir>
-            <skipDeprecated>true</skipDeprecated>
-            <skipEmptyPackages>true</skipEmptyPackages>
-            <impliedPlatforms>
-              <platform>JVM</platform>
-            </impliedPlatforms>
-            <includes>
-              <file>kotlin.md</file>
-            </includes>
-            <externalDocumentationLinks>
-              <link>
-                <url>http://docs.hazelcast.org/docs/3.5/javadoc/</url>
-              </link>
-              <link>
-                <url>http://reactivex.io/RxJava/1.x/javadoc/</url>
-              </link>
-              <link>
-                <url>http://reactivex.io/RxJava/javadoc/</url>
-              </link>
-              <link>
-                <url>http://netty.io/4.1/api/</url>
-              </link>
-              <link>
-                <url>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</url>
-              </link>
-              <link>
-                <url>http://fasterxml.github.io/jackson-core/javadoc/2.9/</url>
-              </link>
-              <link>
-                <url>http://fasterxml.github.io/jackson-databind/javadoc/2.9/</url>
-              </link>
-              <link>
-                <url>http://www.grpc.io/grpc-java/javadoc/</url>
-              </link>
-            </externalDocumentationLinks>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -1180,52 +1121,6 @@
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
               <excludes>examples\/**,**\/impl\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
-            </configuration>
-          </execution>
-
-          <!-- Unpack js for jsdoc generation to target/js -->
-          <execution>
-            <id>unpack-js</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/js-dependency-maven-plugin-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <outputDirectory>${project.build.directory}/js</outputDirectory>
-              <includes>vertx-*/*.js</includes>
-            </configuration>
-          </execution>
-
-          <!-- Unpack ruby for ruby generation to target/rb -->
-          <execution>
-            <id>unpack-rb</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/rb-dependency-maven-plugin-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <outputDirectory>${project.build.directory}/rb</outputDirectory>
-              <includes>vertx-*/*.rb,vertx/*.rb</includes>
-            </configuration>
-          </execution>
-
-          <!-- Unpack kotlin for kotlin generation to target/kotlin -->
-          <execution>
-            <id>unpack-kotlin</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/kotlin-dependency-maven-plugin-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <outputDirectory>${project.build.directory}/kotlin</outputDirectory>
-              <includes>**/*.kt</includes>
-              <excludes>examples/**</excludes>
             </configuration>
           </execution>
 
@@ -1280,73 +1175,6 @@
         </executions>
       </plugin>
 
-      <!-- Process JsDoc from target/java to target/docs/apidocs -->
-      <plugin>
-        <groupId>com.phasebash.jsdoc</groupId>
-        <artifactId>jsdoc3-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>jsdoc3</goal>
-            </goals>
-            <configuration>
-              <recursive>true</recursive>
-              <directoryRoots>
-                <directoryRoot>${project.build.directory}/js</directoryRoot>
-              </directoryRoots>
-              <outputDirectory>${project.build.directory}/docs/jsdoc</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Process YarDoc from target/rb to target/docs/yardoc -->
-      <plugin>
-        <groupId>de.saumya.mojo</groupId>
-        <artifactId>gem-maven-plugin</artifactId>
-        <version>1.1.4</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <execArgs>${project.build.directory}/rubygems/bin/yardoc &#45;&#45;no-private -m html -o ${project.build.directory}/docs/yardoc ${project.build.directory}/rb/**/*.rb</execArgs>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>rubygems</groupId>
-            <artifactId>yard</artifactId>
-            <version>0.8.7.6</version>
-            <type>gem</type>
-          </dependency>
-          <dependency>
-            <groupId>rubygems</groupId>
-            <artifactId>asciidoctor</artifactId>
-            <version>1.5.3</version>
-            <type>gem</type>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jetbrains.dokka</groupId>
-        <artifactId>dokka-maven-plugin</artifactId>
-        <version>0.9.15</version>
-        <executions>
-          <execution>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>dokka</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
       <!-- Copy target/work to final doc structure in target/docs -->
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -1357,10 +1185,6 @@
                 <!-- Copy the docs to the site dir -->
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-docs-zip"/>
@@ -1569,6 +1393,12 @@
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/">
+                  <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
+                </copy>
               </target>
             </configuration>
             <goals>
@@ -1623,34 +1453,4 @@
 
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>repo</id>
-      <activation>
-        <property>
-          <name>!skipRepo</name>
-        </property>
-      </activation>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>rubygems-releases</id>
-          <url>http://rubygems-proxy.torquebox.org/releases</url>
-        </pluginRepository>
-        <!-- For dokka-maven-plugin -->
-        <pluginRepository>
-          <id>jcenter</id>
-          <name>JCenter</name>
-          <url>https://jcenter.bintray.com/</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <repositories>
-        <repository>
-          <id>rubygems-releases</id>
-          <url>http://rubygems-proxy.torquebox.org/releases</url>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
-
 </project>
