@@ -1216,9 +1216,11 @@
                 <copy todir="${project.build.directory}/docs/vertx-service-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-service-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-rx">
+                <copy todir="${project.build.directory}/docs">
                   <fileset dir="${project.build.directory}/work/vertx-rx-java2-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-java-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-rx">
                   <fileset dir="${project.build.directory}/work/vertx-rx-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-js-docs-zip"/>
                 </copy>
