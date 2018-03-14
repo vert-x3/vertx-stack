@@ -72,10 +72,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-hawkular-metrics</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-reactive-streams</artifactId>
     </dependency>
     <dependency>

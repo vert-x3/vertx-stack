@@ -82,12 +82,6 @@
     // `vertx resolve --dir=lib --stack=./vertx-vertx.json`.
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-lang-ceylon",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-service-proxy",
       "version": "\${vertx.version}",
       "included": true
@@ -101,12 +95,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-dropwizard-metrics",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-hawkular-metrics",
       "version": "\${vertx.version}",
       "included": false
     },

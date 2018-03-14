@@ -230,12 +230,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-hawkular-metrics-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-shell-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
