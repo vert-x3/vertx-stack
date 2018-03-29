@@ -19,7 +19,7 @@ the base stack:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>stack-depchain</artifactId>
-  <version>3.1.0</version>
+  <version>3.5.1</version>
   <type>pom</type>
 </dependency>
 ~~~~
@@ -36,7 +36,7 @@ Therefore it should be used with explicit dependencies:
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-depchain</artifactId>
-      <version>3.1.0</version>
+      <version>3.5.1</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
