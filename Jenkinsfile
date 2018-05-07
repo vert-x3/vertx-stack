@@ -12,7 +12,7 @@ pipeline {
         jdk 'OracleJDK 8'
       }
       steps {
-        sh 'mvn -U -B -Dsurefire.reportNameSuffix=OracleJDK_8 clean deploy -s $MAVEN_SETTINGS_PATH'
+        sh 'mvn -U -B -Dsurefire.reportNameSuffix=OracleJDK_8 -DskipDocker clean deploy -s $MAVEN_SETTINGS_PATH'
       }
       post {
         always {
@@ -31,7 +31,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        sh 'mvn -U -B -fn -Dsurefire.reportNameSuffix=OracleJDK_latest clean test'
+        sh 'mvn -U -B -fn -Dsurefire.reportNameSuffix=OracleJDK_latest -DskipDocker clean test'
       }
       post {
         always {
