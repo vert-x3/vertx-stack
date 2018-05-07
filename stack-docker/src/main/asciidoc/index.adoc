@@ -535,7 +535,7 @@ For instance:
 [source, shell]
 ----
 > docker run -i -t vertx/vertx3-exec -version
-3.5.1
+3.5.2-SNAPSHOT
 ----
 
 To run a verticle:
