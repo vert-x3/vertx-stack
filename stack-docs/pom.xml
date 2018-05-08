@@ -197,6 +197,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-micrometer-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-micrometer-metrics</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mail-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1489,6 +1503,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-stack-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-micrometer-metrics/">
+                  <fileset dir="${project.build.directory}/work/vertx-micrometer-metrics-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-hawkular-metrics/">
                   <fileset dir="${project.build.directory}/work/vertx-hawkular-metrics-docs-zip"/>

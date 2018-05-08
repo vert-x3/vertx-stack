@@ -106,6 +106,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-micrometer-metrics",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-maven-service-factory",
       "version": "\${vertx.version}",
       "included": true
