@@ -7,11 +7,11 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>3.5.2.CR2</version>
+    <version>3.5.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>vertx-stack-docker</artifactId>
-  <version>3.5.2.CR2</version>
+  <version>3.5.2-SNAPSHOT</version>
 
   <name>Vert.x Stack - Docker images</name>
   <packaging>pom</packaging>
@@ -25,7 +25,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-stack-manager</artifactId>
-      <version>3.5.2.CR2</version>
+      <version>3.5.2-SNAPSHOT</version>
       <classifier>full</classifier>
       <type>zip</type>
     </dependency>
