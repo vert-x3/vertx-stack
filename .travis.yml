@@ -8,7 +8,7 @@ jobs:
     - stage: test
       name: "OracleJDK 8"
       jdk: oraclejdk8
-      script: mvn -q clean verify -B
+      script: mvn -q clean verify -B -DskipNpm -DskipDocker
     - stage: deploy
       name: "Deploy to Sonatype's snapshots repository"
       if: type != pull_request
