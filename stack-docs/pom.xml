@@ -530,6 +530,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htpasswd</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htpasswd</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -552,6 +566,49 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-freemarker</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-handlebars</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-jade</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-mvel</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-pebble</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-rocker</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-thymeleaf</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -774,22 +831,6 @@
           <artifactId>vertx-stack-manager</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon-stack</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
 
     <dependency>
@@ -1073,6 +1114,11 @@
       <version>1.2.17</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.8.2</version>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
@@ -1087,6 +1133,21 @@
       <artifactId>vertx-core</artifactId>
       <type>test-jar</type>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-jmx</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-influx</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+      <version>1.0.5</version>
     </dependency>
   </dependencies>
 
@@ -1120,7 +1181,7 @@
               <includeClassifiers>sources</includeClassifiers>
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
-              <excludes>examples\/**,**\/impl\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
+              <excludes>examples\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
             </configuration>
           </execution>
 
@@ -1185,9 +1246,6 @@
                 <!-- Copy the docs to the site dir -->
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/">
-                  <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-unit/">
                   <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
@@ -1263,6 +1321,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-auth-htdigest/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-htdigest-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-htpasswd/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-htpasswd-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web/">
                   <fileset dir="${project.build.directory}/work/vertx-web-docs-zip"/>
                 </copy>
@@ -1313,9 +1374,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-camel-bridge/">
                   <fileset dir="${project.build.directory}/work/vertx-camel-bridge-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/">
-                  <fileset dir="${project.build.directory}/work/vertx-lang-ceylon-stack-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-micrometer-metrics/">
                   <fileset dir="${project.build.directory}/work/vertx-micrometer-metrics-docs-zip"/>

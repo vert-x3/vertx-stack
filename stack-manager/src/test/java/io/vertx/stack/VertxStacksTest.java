@@ -109,7 +109,6 @@ public class VertxStacksTest {
     // Prepare the stack - use full stack, include everything
     Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-full.json"));
     stack.getDependencies().stream()
-        .filter(d ->  ! d.getGACV().contains("ceylon"))
         .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
@@ -126,7 +125,6 @@ public class VertxStacksTest {
     // Prepare the stack - use full stack, include everything
     Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-scala.json"));
     stack.getDependencies().stream()
-      .filter(d ->  ! d.getGACV().contains("ceylon"))
       .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
