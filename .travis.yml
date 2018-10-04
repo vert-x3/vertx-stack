@@ -21,6 +21,7 @@ deploy:
   keep-history: false
   repo: vertx-ci/vertx-docs-snapshot
   target-branch: master
+  local-dir: ./stack-docs/target/html
   on:
     branch: master
 notifications:
