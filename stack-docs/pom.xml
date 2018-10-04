@@ -1244,6 +1244,9 @@
             <configuration>
               <target>
                 <!-- Copy the docs to the site dir -->
+                <copy todir="${project.build.directory}/docs/">
+                  <fileset dir="${project.basedir}/src/main/asciidoc"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
                 </copy>
