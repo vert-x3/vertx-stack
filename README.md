@@ -1,7 +1,7 @@
 vertx-stack
 ========
 
-[![Build Status](https://vertx.ci.cloudbees.com/buildStatus/icon?job=vert.x3-stack)](https://vertx.ci.cloudbees.com/view/vert.x-3/job/vert.x3-stack/)
+[![Build Status](https://travis-ci.org/vert-x3/vertx-stack.svg?branch=master)](https://travis-ci.org/vert-x3/vertx-stack)
 
 The Vert.x stack : Vert.x + the endorsed modules
 
