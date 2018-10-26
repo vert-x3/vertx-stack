@@ -31,6 +31,7 @@
 - link:vertx-mail-client/java/index.html[Mail client]
 - link:vertx-stomp/java/index.html[STOMP]
 - link:vertx-consul-client/java/index.html[Consul client]
+- link:vertx-cassandra-client/java/index.html[Cassandra client]
 - link:vertx-rabbitmq-client/java/index.html[RabbitMQ client]
 - link:vertx-kafka-client/java/index.html[Kafka client]
 - link:vertx-amqp-bridge/java/index.html[AMQP bridge]
