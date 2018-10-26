@@ -382,6 +382,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-cassandra-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-cassandra-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mongo-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1149,6 +1163,17 @@
       <artifactId>micrometer-registry-prometheus</artifactId>
       <version>1.0.5</version>
     </dependency>
+    <dependency>
+      <groupId>com.datastax.cassandra</groupId>
+      <artifactId>cassandra-driver-core</artifactId>
+      <version>3.5.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
 
   <build>
@@ -1290,6 +1315,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-consul-client/">
                   <fileset dir="${project.build.directory}/work/vertx-consul-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-cassandra-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-cassandra-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mongo-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mongo-client-docs-zip"/>
