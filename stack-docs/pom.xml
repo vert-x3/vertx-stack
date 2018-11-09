@@ -52,7 +52,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-docgen</artifactId>
-      <version>${vertx.version}</version>
       <optional>true</optional>
     </dependency>
 
