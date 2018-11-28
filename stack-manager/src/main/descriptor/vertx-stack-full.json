@@ -112,13 +112,13 @@
       "groupId": "io.vertx",
       "artifactId": "vertx-rx-groovy",
       "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-rx-js",
       "version": "\${vertx.version}",
-      "included": true
+      "included": false
     },
     {
       "groupId": "io.vertx",
