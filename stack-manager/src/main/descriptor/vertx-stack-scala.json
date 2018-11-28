@@ -146,12 +146,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-sockjs-service-proxy-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-web-templ-freemarker-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
