@@ -110,18 +110,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-rx-groovy",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-rx-js",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-service-factory",
       "version": "\${vertx.version}",
       "included": false
@@ -176,19 +164,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-consul-service",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-mongo-client",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-mongo-service",
       "version": "\${vertx.version}",
       "included": false
     },
@@ -293,12 +269,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-infinispan",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-mysql-postgresql-client",
       "version": "\${vertx.version}",
       "included": false
     },
@@ -413,12 +383,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-rabbitmq-client",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-amqp-bridge",
       "version": "\${vertx.version}",
       "included": false
     },

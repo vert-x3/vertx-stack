@@ -47,8 +47,6 @@ public class VertxStacksTest {
       "io.vertx:vertx-maven-service-factory:jar",
       "io.vertx:vertx-reactive-streams:jar",
       "io.vertx:vertx-rx-java:jar",
-      "io.vertx:vertx-rx-groovy:jar",
-      "io.vertx:vertx-rx-js:jar",
       "io.vertx:vertx-service-factory:jar"
   );
 

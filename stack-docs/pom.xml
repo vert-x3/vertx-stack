@@ -211,20 +211,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mail-service</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mail-service</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-http-service-factory</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -305,22 +291,6 @@
       <artifactId>vertx-rx-java2</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-groovy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-js</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
 
     <dependency>
@@ -425,20 +395,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jdbc-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mysql-postgresql-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mysql-postgresql-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -764,20 +720,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-rabbitmq-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-amqp-bridge</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-amqp-bridge</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1311,9 +1253,6 @@
                 <copy todir="${project.build.directory}/docs/vertx-mail-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mail-service/">
-                  <fileset dir="${project.build.directory}/work/vertx-mail-service-docs-zip"/>
-                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-http-service-factory/">
                   <fileset dir="${project.build.directory}/work/vertx-http-service-factory-docs-zip"/>
                 </copy>
@@ -1329,10 +1268,6 @@
                 <copy todir="${project.build.directory}/docs">
                   <fileset dir="${project.build.directory}/work/vertx-rx-java2-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-java-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-rx">
-                  <fileset dir="${project.build.directory}/work/vertx-rx-groovy-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-rx-js-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-reactive-streams/">
                   <fileset dir="${project.build.directory}/work/vertx-reactive-streams-docs-zip"/>
@@ -1351,9 +1286,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-jdbc-client/">
                   <fileset dir="${project.build.directory}/work/vertx-jdbc-client-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mysql-postgresql-client/">
-                  <fileset dir="${project.build.directory}/work/vertx-mysql-postgresql-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-common/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
@@ -1414,9 +1346,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-rabbitmq-client/">
                   <fileset dir="${project.build.directory}/work/vertx-rabbitmq-client-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-amqp-bridge/">
-                  <fileset dir="${project.build.directory}/work/vertx-amqp-bridge-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-stomp/">
                   <fileset dir="${project.build.directory}/work/vertx-stomp-docs-zip"/>

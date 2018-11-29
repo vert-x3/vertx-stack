@@ -56,12 +56,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-amqp-bridge-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-mqtt-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
@@ -87,12 +81,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-mongo-client-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-mongo-service-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
     },
