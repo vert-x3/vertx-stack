@@ -414,6 +414,12 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
