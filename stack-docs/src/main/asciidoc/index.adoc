@@ -9,6 +9,7 @@
 - link:vertx-web-client/java/index.html[Web client]
 - link:vertx-web-api-contract/java/index.html[Web API contracts]
 - link:vertx-web-api-service/java/index.html[Web API service]
+- link:vertx-web-graphql/java/index.html[Web GraphQL]
 - link:vertx-sql-common/java/index.html[SQL common]
 - link:vertx-jdbc-client/java/index.html[JDBC client]
 - link:vertx-mysql-postgresql-client/java/index.html[MySQL / PostgreSQL client Client]
