@@ -337,33 +337,34 @@ In the `pom.xml` file add the following plugin configuration
 
 [source, xml]
 ----
-<groupId>com.spotify</groupId>
-<artifactId>docker-maven-plugin</artifactId>
-<version>0.2.8</version>
-<executions>
-  <execution>
-    <id>docker</id>
-    <phase>package</phase>
-    <goals>
-      <goal>build</goal>
-    </goals>
-  </execution>
-</executions>
-<configuration>
-  <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
-  <!-- Configure the image name -->
-  <imageName>sample/vertx-hello</imageName>
-  <resources>
-    <resource>
-      <targetPath>/verticles</targetPath>
-      <directory>${project.build.directory}</directory>
-      <includes>
-        <include>${project.artifactId}-${project.version}.jar</include>
-      </includes>
-    </resource>
-    <!-- don't forget to also add all the dependencies required by your application -->
-  </resources>
-</configuration>
+<plugin>
+ <groupId>com.spotify</groupId>
+ <artifactId>docker-maven-plugin</artifactId>
+ <version>0.2.8</version>
+ <executions>
+   <execution>
+     <id>docker</id>
+     <phase>package</phase>
+     <goals>
+       <goal>build</goal>
+     </goals>
+   </execution>
+ </executions>
+ <configuration>
+   <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+   <!-- Configure the image name -->
+   <imageName>sample/vertx-hello</imageName>
+   <resources>
+     <resource>
+       <targetPath>/verticles</targetPath>
+       <directory>${project.build.directory}</directory>
+       <includes>
+         <include>${project.artifactId}-${project.version}.jar</include>
+       </includes>
+     </resource>
+     <!-- don't forget to also add all the dependencies required by your application -->
+   </resources>
+ </configuration>
 </plugin>
 ----
 
