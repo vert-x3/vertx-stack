@@ -37,6 +37,7 @@
 - link:vertx-rabbitmq-client/java/index.html[RabbitMQ client]
 - link:vertx-kafka-client/java/index.html[Kafka client]
 - link:vertx-amqp-bridge/java/index.html[AMQP bridge]
+- link:vertx-amqp-client/java/index.html[AMQP client]
 - link:vertx-tcp-eventbus-bridge/java/index.html[TCP Eventbus bridge]
 - link:vertx-camel-bridge/java/index.html[Camel bridge]
 - link:vertx-dropwizard-metrics/java/index.html[Dropwizard metrics]
