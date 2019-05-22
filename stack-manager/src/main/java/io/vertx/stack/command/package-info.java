@@ -126,7 +126,7 @@
  * ----
  * {
  * "variables": {
- *   "vertx.version": "3.7.1"
+ *   "vertx.version": "3.7.2-SNAPSHOT"
  * }
  * ----
  *
