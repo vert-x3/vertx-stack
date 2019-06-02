@@ -23,6 +23,7 @@
 - link:vertx-circuit-breaker/java/index.html[Circuit breaker]
 - link:vertx-config/java/index.html[Config]
 - link:vertx-mqtt/java/index.html[MQTT]
+- link:vertx-pg-client/java/index.html[PostgreSQL client]
 - link:vertx-auth-common/java/index.html[Auth common]
 - link:vertx-auth-jdbc/java/index.html[Auth JDBC]
 - link:vertx-auth-jwt/java/index.html[JWT auth]

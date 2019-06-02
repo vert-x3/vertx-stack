@@ -339,6 +339,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-pg-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-pg-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-kafka-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1559,6 +1573,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mqtt/">
                   <fileset dir="${project.build.directory}/work/vertx-mqtt-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
