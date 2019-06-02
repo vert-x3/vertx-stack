@@ -337,6 +337,34 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-pg-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-pg-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-kafka-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1375,6 +1403,12 @@
                 <copy todir="${project.build.directory}/docs/vertx-jdbc-client/">
                   <fileset dir="${project.build.directory}/work/vertx-jdbc-client-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mysql-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-mysql-client-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-common/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
                 </copy>
@@ -1521,6 +1555,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mqtt/">
                   <fileset dir="${project.build.directory}/work/vertx-mqtt-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
