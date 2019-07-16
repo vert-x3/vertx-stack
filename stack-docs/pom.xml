@@ -353,6 +353,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-kafka-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1423,6 +1437,12 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mysql-postgresql-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mysql-postgresql-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-mysql-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-mysql-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-common/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
