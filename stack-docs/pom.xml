@@ -197,6 +197,34 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-opentracing</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-opentracing</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-zipkin</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-zipkin</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mail-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1286,6 +1314,12 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mail-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-zipkin/">
+                  <fileset dir="${project.build.directory}/work/vertx-zipkin-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-opentracing/">
+                  <fileset dir="${project.build.directory}/work/vertx-opentracing-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-http-service-factory/">
                   <fileset dir="${project.build.directory}/work/vertx-http-service-factory-docs-zip"/>

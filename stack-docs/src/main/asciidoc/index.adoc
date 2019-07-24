@@ -42,6 +42,8 @@
 - link:vertx-camel-bridge/java/index.html[Camel bridge]
 - link:vertx-dropwizard-metrics/java/index.html[Dropwizard metrics]
 - link:vertx-micrometer-metrics/java/index.html[Micrometer metrics]
+- link:vertx-zipkin/java/index.html[Zipkin]
+- link:vertx-opentracing/java/index.html[Opentracing]
 - link:vertx-health-check/java/index.html[Health check]
 - link:vertx-shell/java/index.html[Shell]
 - link:vertx-docker/index.html[Docker]
@@ -58,7 +60,6 @@
 - link:vertx-service-factory/java/index.html[Service factories]
 - link:vertx-maven-service-factory/java/index.html[Maven service factory]
 - link:vertx-http-service-factory/java/index.html[HTTP service factory]
-
 
 === Kotlin
 
