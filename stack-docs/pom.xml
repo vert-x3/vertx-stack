@@ -1274,6 +1274,7 @@
               <sourcepath>${project.build.directory}/java</sourcepath>
               <detectLinks/>
               <detectJavaApiLink/>
+              <quiet>true</quiet>
               <links>
                 <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
                 <link>http://reactivex.io/RxJava/1.x/javadoc/</link>
