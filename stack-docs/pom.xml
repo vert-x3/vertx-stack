@@ -1158,6 +1158,7 @@
     </dependency>
 
     <!-- Scala all-in-one -->
+<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-scala-docs_2.12</artifactId>
@@ -1165,6 +1166,7 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
+-->
 
     <!-- Dependencies required by the javadoc -->
     <dependency>
@@ -1568,9 +1570,11 @@
                 <copy todir="${project.build.directory}/docs/vertx-lang-kotlin-coroutines/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-coroutines-docs-zip"/>
                 </copy>
+<!--
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
                 </copy>
+-->
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
