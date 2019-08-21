@@ -211,7 +211,8 @@
               </arguments>
             </configuration>
           </execution>
-	  <execution>
+<!--
+          <execution>
             <id>build-scala-stack</id>
             <phase>prepare-package</phase>
             <goals>
@@ -222,11 +223,12 @@
               <arguments>
                 <argument>resolve</argument>
                 <argument>${project.basedir}/target/vertx-stack/vertx-stack-scala.json</argument>
-                <argument>--dir=${project.basedir}/target/scala-lib</argument>
-                <argument>--no-cache</argument>
+                <argument>&#45;&#45;dir=${project.basedir}/target/scala-lib</argument>
+                <argument>&#45;&#45;no-cache</argument>
               </arguments>
             </configuration>
           </execution>
+-->
         </executions>
       </plugin>
       <plugin>
@@ -309,6 +311,7 @@
             <phase>package</phase>
           </execution>
 
+<!--
           <execution>
             <id>vertx-stack-scala</id>
             <goals>
@@ -323,6 +326,7 @@
             </configuration>
             <phase>package</phase>
           </execution>
+-->
 
           <execution>
             <id>doc</id>
