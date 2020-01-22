@@ -1217,7 +1217,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-scala-docs_2.12</artifactId>
-      <version>3.8.0</version>
+      <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
