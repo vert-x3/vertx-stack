@@ -61,7 +61,7 @@ It builds the 2 main images :
 
 All images have a _readme_ file containing their documentation and build instructions.
 
-Examples of docker image usages are in https://github.com/vert-x3/vertx-examples/docker-examples
+Examples of docker image usages are in https://github.com/vert-x3/vertx-examples/tree/master/docker-examples
 
 #### Pushing Docker image to Docker Hub
 
