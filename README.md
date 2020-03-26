@@ -18,7 +18,7 @@ the base stack:
 ~~~~
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>stack-depchain</artifactId>
+  <artifactId>vertx-stack-depchain</artifactId>
   <version>3.5.1</version>
   <type>pom</type>
 </dependency>
