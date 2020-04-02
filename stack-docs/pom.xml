@@ -1617,6 +1617,21 @@
                   <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
                 </copy>
+
+                <!-- Unpack sqlclient common docs to specific modules-->
+                <copy todir="${project.build.directory}/docs/vertx-mysql-client">
+                  <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip/vertx-sql-client"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-pg-client">
+                  <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip/vertx-sql-client"/>
+                  <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip/vertx-sql-client"/>
+                </copy>
+
               </target>
             </configuration>
             <goals>
