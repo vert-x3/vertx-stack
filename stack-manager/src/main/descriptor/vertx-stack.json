@@ -15,7 +15,7 @@
 {
   "variables": {
     "vertx.version": "${vertx.version}",
-    "tcnative.version": "2.0.26.Final"
+    "tcnative.version": "2.0.29.Final"
   },
   "dependencies": [
     {
