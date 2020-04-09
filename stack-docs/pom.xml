@@ -1392,11 +1392,11 @@
                 <copy todir="${project.build.directory}/docs/vertx-junit5/">
                   <fileset dir="${project.build.directory}/work/vertx-junit5-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-junit5-rx-java/">
-                  <fileset dir="${project.build.directory}/work/vertx-junit5-rx-java-docs-zip"/>
-                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mail-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/">
+                  <fileset dir="${project.build.directory}/work/vertx-dropwizard-metrics-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-zipkin/">
                   <fileset dir="${project.build.directory}/work/vertx-zipkin-docs-zip"/>
