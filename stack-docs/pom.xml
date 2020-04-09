@@ -169,14 +169,14 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-junit5-web-client</artifactId>
+      <artifactId>vertx-junit5-rx-java</artifactId>
       <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
+      <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-junit5-web-client</artifactId>
+      <artifactId>vertx-junit5-rx-java2</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1392,11 +1392,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-junit5/">
                   <fileset dir="${project.build.directory}/work/vertx-junit5-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-junit5-web-client/">
-                  <fileset dir="${project.build.directory}/work/vertx-junit5-web-client-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/">
-                  <fileset dir="${project.build.directory}/work/vertx-dropwizard-metrics-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-junit5-rx-java/">
+                  <fileset dir="${project.build.directory}/work/vertx-junit5-rx-java-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mail-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
