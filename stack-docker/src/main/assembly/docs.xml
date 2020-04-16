@@ -11,9 +11,5 @@
       <directory>${asciidoc.dir}</directory>
       <outputDirectory>/</outputDirectory>
     </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}/docs/vertx-core/ruby/yardoc</directory>
-      <outputDirectory>/ruby/yardoc</outputDirectory>
-    </fileSet>
   </fileSets>
 </assembly>

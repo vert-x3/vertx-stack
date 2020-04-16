@@ -23,78 +23,6 @@ The base image (`vertx/vertx3`) lets you run your vert.x application in a Docker
 _extend_ the image to deploy your own application - _i.e._ create your own `Dockerfile` inheriting from
 `vertx/vertx3`. Your application is then  launched using the `vertx` command (but in the container).
 
-=== Deploying a JavaScript verticle in a docker container
-
-Let's start with a simple JavaScript verticle such as:
-
-.hello-verticle.js
-[source, javascript]
-----
-vertx.createHttpServer().requestHandler(function (request) {
-    request.response().end("Hello world");
-}).listen(8080);
-----
-
-Create in the same directory a `Dockerfile` with the following content:
-
-.Dockerfile
-[source]
-----
-# Extend vert.x image                       <1>
-FROM vertx/vertx3
-
-# Set the name of the verticle to deploy    <2>
-ENV VERTICLE_NAME hello-verticle.js
-
-# Set the location of the verticles         <3>
-ENV VERTICLE_HOME /usr/verticles
-
-EXPOSE 8080
-
-# Copy your verticle to the container       <4>
-COPY $VERTICLE_NAME $VERTICLE_HOME/
-
-# Launch the verticle                       <5>
-WORKDIR $VERTICLE_HOME
-ENTRYPOINT ["sh", "-c"]
-CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
-----
-<1> First extend the image provided by vert.x
-<2> Set the name of the verticle
-<3> It sets the location in the container where the verticle file is placed
-<4> Copy the verticle files
-<5> Instructions to launch the verticle
-
-Then do build the image, just launch:
-
-[source, shell]
-----
-docker build -t sample/vertx-javascript .
-----
-
-Then, run it with:
-
-[source, shell]
-----
-docker run -t -i -p 8080:8080 sample/vertx-javascript
-----
-
-To see the result, open a browser to http://localhost:8080 or http://192.168.59.103:8080 if your are using boot2docker.
-
-NOTE: The container is launched with the '-t -i` flags meaning _interactive_. Stop the container by hitting `CTRL+C`
-. More details about the Docker `run` command are available http://docs.docker.com/reference/run/[here].
-
-You may have noticed the `EXPOSE 8080` in the `Dockerfile` and the `-p 8080:8080` in the `run` command. The first one
-is an optional information telling that the application wants to listen the port 8080. The second one is
-*mandatory* and instructs docker to forward the port 8080 from the host to the 8080 of the container.
-
-NOTE: You may also have noticed the convoluted way to launch the application. Instead of calling `vertx` directly, it
- uses `sh -c` along with `exec`. `sh -c` is to turn around a Docker limitation not expanding variables in `CMD`.
- This way the launched shell does. More details on the Docker http://docs.docker.com/reference/builder/#cmd[builder documentation].
- `exec` is to make the `vertx` command process replace the shell, so that it gets pid 1 and receives signals,
- like `SIGTERM` when running `docker stop`. Without `exec` the shell keeps running along with the `vertx` command process,
- and the `vertx` command does not get signals, thus preventing graceful shutdown.
-
 === Deploying a Groovy verticle in a docker container
 
 Running a groovy verticle in a docker container is not much different. Instead of the `hello-verticle.js` from the
@@ -140,53 +68,6 @@ The build and run instructions are very close to the previous ones:
 > docker build -t sample/vertx-groovy .
 ....
 > docker run -t -i -p 8080:8080 sample/vertx-groovy
-----
-
-=== Deploying a Ruby verticle in a docker container
-
-Running a groovy verticle in a docker container is not much different. Instead of the `hello-verticle.js/groovy` from
- the previous examples, we now have a `hello-verticle.rb`:
-
-.hello-verticle.rb
-[source, ruby]
-----
-$vertx.create_http_server().request_handler() { |request|
-    request.response().end("A ruby world full of gems")
-}.listen(8080)
-----
-
-So, in the `Dockerfile` we just change the verticle file name:
-
-.Dockerfile
-[source]
-----
-# Extend vert.x image
-FROM vertx/vertx3
-
-# Set the name of the verticle to deploy
-ENV VERTICLE_NAME hello-verticle.rb
-
-# Set the location of the verticles
-ENV VERTICLE_HOME /usr/verticles
-
-EXPOSE 8080
-
-# Copy your verticle to the container
-COPY $VERTICLE_NAME $VERTICLE_HOME/
-
-# Launch the verticle
-WORKDIR $VERTICLE_HOME
-ENTRYPOINT ["sh", "-c"]
-CMD ["exec vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/*"]
-----
-
-The build and run instructions are very close to the previous ones:
-
-[source]
-----
-> docker build -t sample/vertx-ruby .
-....
-> docker run -t -i -p 8080:8080 sample/vertx-ruby
 ----
 
 === Deploying a Java verticle in a docker container
@@ -566,12 +447,6 @@ The `vertx/vertx3-exec` image provides the default "full" Vert.x stack. You may 
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-web",
-      "version": "${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-lang-js",
       "version": "${vertx.version}",
       "included": true
     }

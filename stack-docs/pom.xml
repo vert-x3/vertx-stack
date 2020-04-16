@@ -119,28 +119,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ruby</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ruby</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-js</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-unit</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1611,8 +1589,6 @@
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-js-docs-zip"/>
-                  <fileset dir="${project.build.directory}/work/vertx-lang-ruby-docs-zip"/>
                 </copy>
               </target>
             </configuration>

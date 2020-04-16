@@ -62,18 +62,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-lang-js",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-lang-ruby",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-service-proxy",
       "version": "\${vertx.version}",
       "included": true
