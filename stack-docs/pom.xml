@@ -683,6 +683,20 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-validation</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-validation</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
     <!-- no -docs.zip-->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1461,6 +1475,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-web-graphql/">
                   <fileset dir="${project.build.directory}/work/vertx-web-graphql-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-web-validation/">
+                  <fileset dir="${project.build.directory}/work/vertx-web-validation-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
                 </copy>
@@ -1581,6 +1598,10 @@
                 <copy todir="${project.build.directory}/docs/vertx-lang-kotlin-coroutines/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-coroutines-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-json-schema/">
+                  <fileset dir="${project.build.directory}/work/vertx-json-schema-docs-zip"/>
+                </copy>
+
 <!--
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
