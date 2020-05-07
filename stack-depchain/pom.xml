@@ -375,15 +375,21 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-amqp-client</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-kafka-client</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-json-schema</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-health-check</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mqtt</artifactId>
     </dependency>
   </dependencies>
 
