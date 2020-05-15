@@ -353,6 +353,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-db2-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-sql-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
@@ -366,6 +373,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-db2-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1468,6 +1481,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mysql-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mysql-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-db2-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-db2-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-common/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
