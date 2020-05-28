@@ -96,12 +96,6 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin-compiler</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
