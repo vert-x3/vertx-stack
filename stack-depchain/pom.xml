@@ -143,7 +143,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-sql-client</artifactId>
-      <version>4.0.0-milestone5</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
