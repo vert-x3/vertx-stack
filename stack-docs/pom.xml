@@ -747,6 +747,7 @@
       <classifier>sources</classifier>
     </dependency>
 
+<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-zookeeper</artifactId>
@@ -760,6 +761,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+-->
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1504,9 +1506,11 @@
                 <copy todir="${project.build.directory}/docs/vertx-hazelcast/">
                   <fileset dir="${project.build.directory}/work/vertx-hazelcast-docs-zip"/>
                 </copy>
+<!--
                 <copy todir="${project.build.directory}/docs/vertx-zookeeper/">
                   <fileset dir="${project.build.directory}/work/vertx-zookeeper-docs-zip"/>
                 </copy>
+-->
                 <copy todir="${project.build.directory}/docs/vertx-infinispan/">
                   <fileset dir="${project.build.directory}/work/vertx-infinispan-docs-zip"/>
                 </copy>
