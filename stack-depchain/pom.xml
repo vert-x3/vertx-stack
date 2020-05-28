@@ -142,7 +142,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-sql</artifactId>
+      <artifactId>vertx-auth-sql-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
