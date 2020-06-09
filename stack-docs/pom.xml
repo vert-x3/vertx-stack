@@ -1524,6 +1524,12 @@
                 <copy todir="${project.build.directory}/docs/vertx-auth-shiro/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-shiro-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-sql-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-sql-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-webauthn/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-webauthn-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-oauth2/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-oauth2-docs-zip"/>
                 </copy>
