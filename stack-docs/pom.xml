@@ -1710,6 +1710,20 @@
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
                 </copy>
+
+                <!-- Concat override files in a single override.adoc -->
+                <ac:for param="letter" xmlns:ac="antlib:net.sf.antcontrib">
+                  <path>
+                    <dirset dir="${project.build.directory}/docs" includes="**/override"/>
+                  </path>
+                  <sequential>
+                    <echo message="Building @{letter}/index.adoc"/>
+                    <concat destfile="@{letter}/../override.adoc">
+                      <fileset dir="@{letter}" includes="*.adoc" excludes="index.adoc"/>
+                    </concat>
+                  </sequential>
+                </ac:for>
+
               </target>
             </configuration>
             <goals>
@@ -1718,6 +1732,19 @@
             <phase>process-resources</phase>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>ant-contrib</groupId>
+            <artifactId>ant-contrib</artifactId>
+            <version>1.0b3</version>
+            <exclusions>
+              <exclusion>
+                <groupId>ant</groupId>
+                <artifactId>ant</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+        </dependencies>
       </plugin>
 
       <!-- Process all .adoc files to target/html -->
