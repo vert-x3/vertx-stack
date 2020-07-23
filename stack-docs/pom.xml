@@ -439,20 +439,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-sql-common</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sql-common</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-jdbc-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1502,9 +1488,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-mongo-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mongo-client-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-sql-common/">
-                  <fileset dir="${project.build.directory}/work/vertx-sql-common-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-jdbc-client/">
                   <fileset dir="${project.build.directory}/work/vertx-jdbc-client-docs-zip"/>
