@@ -121,9 +121,9 @@ vertx-dependencies))
   * RxJava: in `vertx-rx`, edit `rx-java/pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
-6. Add it to the website
+6. Add it to the website in `vertx-web-site`:
   * Edit the docs summary page `src/site/docs/index.html`, use `Tech Preview` label
-7. Add it to the starter website:
+7. Add it to the starter website in `vertx-starter`:
   * Edit the stack definition file `src/main/resources/starter.json`
     * Add the module details in one of the categories (web, data, ...etc)
     * Exclude the module from versions that did not have it (`exclusions`)
