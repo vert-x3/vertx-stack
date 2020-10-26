@@ -1,8 +1,8 @@
 {
-  "name": "vertx3-eventbus-client",
+  "name": "vertx4-eventbus-client",
   "author": "The Vert.x Team",
-  "version": "${project.version}",
-  "keywords": ["websockets", "websocket", "sockjs", "vert.x"],
+  "version": "1.0.0",
+  "keywords": ["websockets", "websocket", "sockjs", "eventbus", "vert.x"],
   "repository": {
     "type": "git",
     "url": "git://github.com/vert-x3/vertx-stack.git"
@@ -16,6 +16,6 @@
     "README.md"
   ],
   "dependencies": {
-    "sockjs-client":"^1.1.5"
+    "sockjs-client":"^1.5.0"
   }
 }
