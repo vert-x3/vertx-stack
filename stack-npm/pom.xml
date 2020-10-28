@@ -29,24 +29,11 @@
       <version>${project.version}</version>
       <type>tar.gz</type>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web</artifactId>
-      <version>${project.version}</version>
-      <classifier>client</classifier>
-      <type>js</type>
-    </dependency>
   </dependencies>
 
   <build>
 
     <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/npm/client</directory>
-        <filtering>true</filtering>
-        <targetPath>${project.build.directory}/npm/client</targetPath>
-      </resource>
-
       <resource>
         <directory>${project.basedir}/src/main/npm/full</directory>
         <filtering>true</filtering>
@@ -102,19 +89,6 @@
               <includeClassifiers>full</includeClassifiers>
               <includeTypes>tar.gz</includeTypes>
               <outputDirectory>${project.build.directory}/npm/full</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>copy-vertxbus-js</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeArtifactIds>vertx-web</includeArtifactIds>
-              <includeClassifiers>client</includeClassifiers>
-              <outputDirectory>${project.build.directory}/npm/client</outputDirectory>
-              <stripVersion>true</stripVersion>
             </configuration>
           </execution>
         </executions>
@@ -174,41 +148,10 @@
                   <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
                 </configuration>
               </execution>
-              <execution>
-                <id>npm-install-client</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <phase>package</phase>
-                <configuration>
-                  <arguments>install</arguments>
-                  <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
-                </configuration>
-              </execution>
             </executions>
             <configuration>
               <installDirectory>${project.build.directory}/node</installDirectory>
             </configuration>
-          </plugin>
-
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
-            <executions>
-              <execution>
-                <id>move-vertxbus</id>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <phase>prepare-package</phase>
-                <configuration>
-                  <target>
-                    <move file="${project.build.directory}/npm/client/vertx-web-client.js"
-                          tofile="${project.build.directory}/npm/client/vertx-eventbus.js"/>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
@@ -247,17 +190,6 @@
                 <configuration>
                   <arguments>publish</arguments>
                   <workingDirectory>${project.build.directory}/npm/full</workingDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>npm-publish-client</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <phase>deploy</phase>
-                <configuration>
-                  <arguments>publish</arguments>
-                  <workingDirectory>${project.build.directory}/npm/client</workingDirectory>
                 </configuration>
               </execution>
             </executions>
