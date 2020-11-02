@@ -62,12 +62,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-http-service-factory",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-dropwizard-metrics",
       "version": "\${vertx.version}",
       "included": true
@@ -80,19 +74,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-maven-service-factory",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-rx-java",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-service-factory",
       "version": "\${vertx.version}",
       "included": true
     },
