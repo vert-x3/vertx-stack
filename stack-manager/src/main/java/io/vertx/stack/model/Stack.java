@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Represents a stack. A stack is composed by a set of dependencies and variables.
@@ -116,8 +117,8 @@ public class Stack {
    *
    * @return the dependencies
    */
-  public List<Dependency> getDependencies() {
-    return dependencies;
+  public Stream<Dependency> getDependencies() {
+    return dependencies.stream();
   }
 
   /**

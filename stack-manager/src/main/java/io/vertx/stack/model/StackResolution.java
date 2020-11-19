@@ -102,7 +102,7 @@ public class StackResolution {
       LOGGER.debug("Directory created: " + mkdirs);
     }
     stack.applyFiltering();
-    stack.getDependencies().stream().filter(Dependency::isIncluded).forEach(
+    stack.getDependencies().filter(Dependency::isIncluded).forEach(
       dependency -> selectedVersions.put(dependency.getManagementKey(), dependency.getVersion()));
     resolver = Resolver.create(options);
   }

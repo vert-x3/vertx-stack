@@ -106,7 +106,7 @@ public class VertxStacksTest {
   public void testConvergence() {
     // Prepare the stack - use full stack, include everything
     Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-full.json"));
-    stack.getDependencies().stream()
+    stack.getDependencies()
         .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
@@ -152,13 +152,13 @@ public class VertxStacksTest {
   }
 
   private void setUpBaseStack(Stack stack) {
-    stack.getDependencies().stream()
+    stack.getDependencies()
         .filter(dependency -> wasPartOfTheBaseStack(dependency.getManagementKey()))
         .forEach(dependency -> dependency.setIncluded(true));
   }
 
   private void tearDownBaseStack(Stack stack) {
-    stack.getDependencies().stream()
+    stack.getDependencies()
         .filter(dependency -> wasPartOfTheBaseStack(dependency.getManagementKey()))
         .forEach(dependency -> dependency.setIncluded(false));
   }
