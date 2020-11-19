@@ -16,6 +16,8 @@
 
 package io.vertx.stack.model;
 
+import java.util.List;
+
 /**
  * Thrown when a conflict is detected between two dependencies.
  *
@@ -24,23 +26,25 @@ package io.vertx.stack.model;
 public class DependencyConflictException extends RuntimeException {
 
   private final String artifact;
-  private final String chosenVersion;
-  private final String dependency;
-  private final String otherVersion;
+  private final String version;
+  private final List<String> trace;
+  private final String conflictingDependency;
+  private final String conflictingVersion;
 
   /**
    * Creates a {@link DependencyConflictException}.
    *
    * @param artifact      the artifact
-   * @param chosenVersion the current version
-   * @param dependency    the conflicting dependency
-   * @param otherVersion  the other version
+   * @param version the current version
+   * @param conflictingDependency    the conflicting dependency
+   * @param conflictingVersion  the other version
    */
-  public DependencyConflictException(String artifact, String chosenVersion, String dependency, String otherVersion) {
+  public DependencyConflictException(String artifact, String version, List<String> trace, String conflictingDependency, String conflictingVersion) {
     this.artifact = artifact;
-    this.chosenVersion = chosenVersion;
-    this.dependency = dependency;
-    this.otherVersion = otherVersion;
+    this.version = version;
+    this.trace = trace;
+    this.conflictingDependency = conflictingDependency;
+    this.conflictingVersion = conflictingVersion;
   }
 
   /**
@@ -51,7 +55,8 @@ public class DependencyConflictException extends RuntimeException {
    */
   @Override
   public String getMessage() {
-    return "Conflict detected for artifact " + artifact + " - version " + chosenVersion + " was already selected " +
-        "while " + dependency + " depends on version " + otherVersion;
+    return "Conflict detected for artifact " + artifact + " - version " + version + " was already selected " +
+      " by " + trace +
+      " while " + conflictingDependency + " depends on version " + conflictingVersion;
   }
 }

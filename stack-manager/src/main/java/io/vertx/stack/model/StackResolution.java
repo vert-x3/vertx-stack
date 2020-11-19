@@ -171,10 +171,9 @@ public class StackResolution {
         selectedVersions.put(gaec, artifact.getBaseVersion());
         keepATrace(dependency, artifact);
       } else {
-        LOGGER.warn("Conflict detected for artifact " + gaec + " - version " + version + " was already selected by " + traces.get(gaec + ":" + version) + " while "
-          + dependency.getGACV() + " depends on version " + artifact.getBaseVersion());
+        List<String> trace = traces.get(gaec + ":" + version);
         if (options.isFailOnConflicts()) {
-          throw new DependencyConflictException(gaec, version, dependency.getGACV(), artifact.getBaseVersion());
+          throw new DependencyConflictException(gaec, version, trace, dependency.getGACV(), artifact.getBaseVersion());
         }
       }
       addSelectedArtifact(dependency, artifact, version);
