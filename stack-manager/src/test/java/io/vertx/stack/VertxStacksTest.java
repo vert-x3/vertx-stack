@@ -113,6 +113,11 @@ public class VertxStacksTest {
         new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
     Map<String, File> resolved = resolution.resolve();
     assertThat(resolved).isNotEmpty();
+    // Check we don't have loggers in the distrib
+    resolved.forEach((k,v) -> {
+      assertThat(k).doesNotStartWith("log4j:log4j");
+      assertThat(k).doesNotStartWith("org.apache.logging.log4j:");
+    });
   }
 
   /**
