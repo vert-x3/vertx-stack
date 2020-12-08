@@ -9,8 +9,8 @@ Applications run side by side in isolated Linux containers. If you never used Do
 
 Vert.x provides Docker images that you can use to run your applications. Two Docker images are provided:
 
-* `vertx/vertx3` is the base image you need to extend to run your own application
-* `vertx/vertx3-exec` is providing the `vertx` command to your system without having to install `vert.x` yourself.
+* `vertx/vertx4` is the base image you need to extend to run your own application
+* `vertx/vertx4-exec` is providing the `vertx` command to your system without having to install `vert.x` yourself.
 
 The images are available from https://hub.docker.com/u/vertx/[Docker Hub].
 
@@ -19,9 +19,9 @@ Fabric8 metadata and use _fat jars_.
 
 == The base image
 
-The base image (`vertx/vertx3`) lets you run your vert.x application in a Docker container. For this, you must
+The base image (`vertx/vertx4`) lets you run your vert.x application in a Docker container. For this, you must
 _extend_ the image to deploy your own application - _i.e._ create your own `Dockerfile` inheriting from
-`vertx/vertx3`. Your application is then  launched using the `vertx` command (but in the container).
+`vertx/vertx4`. Your application is then  launched using the `vertx` command (but in the container).
 
 === Deploying a Groovy verticle in a docker container
 
@@ -42,7 +42,7 @@ So, in the `Dockerfile` we just change the verticle file name:
 [source]
 ----
 # Extend vert.x image
-FROM vertx/vertx3
+FROM vertx/vertx4
 
 # Set the name of the verticle to deploy
 ENV VERTICLE_NAME hello-verticle.groovy
@@ -99,7 +99,7 @@ Let's now imagine that this verticle is packaged into the `target/hello-verticle
 .Dockerfile
 ----
 # Extend vert.x image
-FROM vertx/vertx3
+FROM vertx/vertx4
 
 #                                                       <1>
 ENV VERTICLE_NAME io.vertx.sample.hello.HelloVerticle
@@ -253,7 +253,7 @@ The plugin copies the listed content into `target/docker`. Each resource is copi
 
 [source]
 ----
-FROM vertx/vertx3
+FROM vertx/vertx4
 
 ENV VERTICLE_HOME /usr/verticles
 ENV VERTICLE_NAME io.vertx.example.HelloWorldVerticle
@@ -334,7 +334,7 @@ The rest of the `Dockerfile configuration is given in the `pom.xml` file. Add th
       <image>
         <name>${docker.image}</name>
         <build>
-          <from>vertx/vertx3</from>
+          <from>vertx/vertx4</from>
           <tags>
             <tag>${project.version}</tag>
           </tags>
@@ -408,14 +408,14 @@ mvn io.fabric8:fabric8-maven-plugin:2.1.4:apply
 
 == The executable image
 
-The `vertx/vertx3-exec` image provides the `vertx` command to the host. So no need to install vert.x on your machine,
+The `vertx/vertx4-exec` image provides the `vertx` command to the host. So no need to install vert.x on your machine,
  you can just use this docker image.
 
 For instance:
 
 [source, shell]
 ----
-> docker run -i -t vertx/vertx3-exec -version
+> docker run -i -t vertx/vertx4-exec -version
 4.0.1-SNAPSHOT
 ----
 
@@ -424,7 +424,7 @@ To run a verticle:
 [source, shell]
 ----
 docker run -i -t -p 8080:8080 \
-    -v $PWD:/verticles vertx/vertx3-exec \
+    -v $PWD:/verticles vertx/vertx4-exec \
     run io.vertx.sample.RandomGeneratorVerticle \
     -cp /verticles/MY_VERTICLE.jar
 ----
@@ -434,7 +434,7 @@ This command mounts the current directory (`PWD`) into `/verticles` and then lau
 
 === Customizing the stack
 
-The `vertx/vertx3-exec` image provides the default "full" Vert.x stack. You may want to customize this stack and create
+The `vertx/vertx4-exec` image provides the default "full" Vert.x stack. You may want to customize this stack and create
  your own exec image. First, create a `vertx-stack.json` file:
 
 [source,json]
@@ -460,7 +460,7 @@ You can list any dependency you need, not just the Vert.x artifacts
 Then write a `Dockerfile` for your custom executable image:
 
 ----
-FROM vertx/vertx3-exec                                     <1>
+FROM vertx/vertx4-exec                                     <1>
 
 COPY vertx-stack.json ${VERTX_HOME}/vertx-stack.json       <2>
 
@@ -474,7 +474,7 @@ You should know be able to build your custom executable image:
 
 [source,shell]
 ----
-docker build -t mycompany/my-vertx3-exec .
+docker build -t mycompany/my-vertx4-exec .
 ----
 
 And run your verticle:
@@ -482,7 +482,7 @@ And run your verticle:
 [source,shell]
 ----
 docker run -i -t -p 8080:8080 \
-    -v $PWD:/verticles mycompany/my-vertx3-exec \
+    -v $PWD:/verticles mycompany/my-vertx4-exec \
     run io.vertx.sample.RandomGeneratorVerticle \
     -cp /verticles/MY_VERTICLE.jar
 ----
@@ -518,7 +518,7 @@ CMD ["exec java -jar $VERTICLE_FILE"]                               <4>
 <3> Copy the _Fat jar_ from _target_. Change it if you don't use Maven.
 <4> Launch the application using the `java` executable (instead of `vertx`
 
-It's basically the same `Dockerfile` as before. However, this time we extend `java:8` instead of the `vertx/vertx3`
+It's basically the same `Dockerfile` as before. However, this time we extend `java:8` instead of the `vertx/vertx4`
 image. Then we copy the fat jar to the container, and launch it with the `java` executable. All the configuration
 settings presented above are still valid.
 

@@ -13,13 +13,13 @@ Notice that you need to have docker installed on your machine.
 ## Vert.x Stack docker base Image
 
 The built image contains the `vertx` command in the system path.
- 
+
 ### Using the base image
 
 The image is intended to be used by extension using the Docker `FROM` directive. Here is an example:
 
 ```
-FROM vertx/vertx3
+FROM vertx/vertx4
 
 # Set the location of the verticles
 ENV VERTICLE_HOME /usr/verticles
@@ -43,16 +43,16 @@ CMD ["vertx run $VERTICLE_NAME -cp $VERTICLE_HOME/* $VERTX_OPTIONS"]
 
 ### Launching the base image
 
-The resulting image is not made to be launched directly (as it contains only vert.x and no applications). If you 
+The resulting image is not made to be launched directly (as it contains only vert.x and no applications). If you
 still want to launch it uses:
- 
-`docker run -i -t vertx/vertx3`
 
-The vert.x files are located in ` /usr/local/vert.x-3.0.0-SNAPSHOT/`.
+`docker run -i -t vertx/vertx4`
+
+The vert.x files are located in ` /usr/local/vert.x-4.0.0-SNAPSHOT/`.
 
 You can access the `vertx` command directly using:
 
-`docker run -i -t vertx/vertx3 vertx`
+`docker run -i -t vertx/vertx4 vertx`
 
 ## Vert.x executable image from Docker
 
@@ -62,14 +62,14 @@ A Docker image providing the `vertx` command
 
 Just launch:
 
-`docker run -i -t vertx/vertx3-exec`
+`docker run -i -t vertx/vertx4-exec`
 
 Append the `vertx` command parameter you need.
 
 for instance:
 
 ```
-> docker run -i -t vertx/vertx3-exec -version
+> docker run -i -t vertx/vertx4-exec -version
 3.0.0-SNAPSHOT
 ```
 
@@ -77,7 +77,7 @@ If you want to run a verticle:
 
 ```
 docker run -i -t -p 8080:8080 \
-    -v $PWD:/verticles vertx/vertx3-exec \
+    -v $PWD:/verticles vertx/vertx4-exec \
     run io.vertx.sample.RandomGeneratorVerticle \
     -cp /verticles/MY_VERTICLE.jar
 ```

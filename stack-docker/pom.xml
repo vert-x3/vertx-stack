@@ -58,7 +58,7 @@
           <plugin>
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>0.15.9</version>
+            <version>0.34.1</version>
             <executions>
               <execution>
                 <id>build-images</id>
@@ -87,8 +87,8 @@
               <images>
                 <!-- Regular vert.x stack -->
                 <image>
-                  <alias>${docker.domain}/vertx3</alias>
-                  <name>${docker.domain}/vertx3</name>
+                  <alias>${docker.domain}/vertx4</alias>
+                  <name>${docker.domain}/vertx4</name>
                   <build>
                     <tags>
                       <tag>latest</tag>
@@ -124,45 +124,8 @@
                 </image>
 
                 <image>
-                  <alias>${docker.domain}/vertx3-alpine</alias>
-                  <name>${docker.domain}/vertx3-alpine</name>
-                  <build>
-                    <tags>
-                      <tag>latest</tag>
-                      <tag>${project.version}</tag>
-                    </tags>
-                    <dockerFile>base-alpine/Dockerfile</dockerFile>
-                  </build>
-                  <run>
-                    <namingStrategy>none</namingStrategy>
-                    <volumes>
-                      <bind>
-                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
-                      </bind>
-                    </volumes>
-                    <ports>
-                      <port>${vertx-alpine.host}:${vertx-alpine.port}:8080</port>
-                    </ports>
-                    <cmd>vertx run /verticles/MyVerticle.groovy</cmd>
-                    <wait>
-                      <log>Verticle startup - alpine</log>
-                      <http>
-                        <url>http://${vertx-alpine.host}:${vertx-alpine.port}/</url>
-                        <method>GET</method>
-                        <status>200</status>
-                      </http>
-                      <time>30000</time>
-                    </wait>
-                    <log>
-                      <enabled>true</enabled>
-                      <color>red</color>
-                    </log>
-                  </run>
-                </image>
-
-                <image>
-                  <alias>${docker.domain}/vertx3-exec</alias>
-                  <name>${docker.domain}/vertx3-exec</name>
+                  <alias>${docker.domain}/vertx4-exec</alias>
+                  <name>${docker.domain}/vertx4-exec</name>
                   <build>
                     <tags>
                       <tag>latest</tag>
@@ -196,43 +159,6 @@
                     </log>
                   </run>
                 </image>
-
-                <image>
-                  <alias>${docker.domain}/vertx3-exec-alpine</alias>
-                  <name>${docker.domain}/vertx3-exec-alpine</name>
-                  <build>
-                    <tags>
-                      <tag>latest</tag>
-                      <tag>${project.version}</tag>
-                    </tags>
-                    <dockerFile>exec-alpine/Dockerfile</dockerFile>
-                  </build>
-                  <run>
-                    <namingStrategy>none</namingStrategy>
-                    <volumes>
-                      <bind>
-                        <volume>${project.basedir}/src/test/it/:/verticles</volume>
-                      </bind>
-                    </volumes>
-                    <ports>
-                      <port>${vertx-exec-alpine.host}:${vertx-exec-alpine.port}:8080</port>
-                    </ports>
-                    <cmd>run /verticles/MyVerticle.groovy</cmd>
-                    <wait>
-                      <log>Verticle startup - exec-alpine</log>
-                      <http>
-                        <url>http://${vertx-exec-alpine.host}:${vertx-exec-alpine.port}/</url>
-                        <method>GET</method>
-                        <status>200</status>
-                      </http>
-                      <time>30000</time>
-                    </wait>
-                    <log>
-                      <enabled>true</enabled>
-                      <color>red</color>
-                    </log>
-                  </run>
-                </image>
               </images>
             </configuration>
           </plugin>
@@ -250,22 +176,8 @@
                 <configuration>
                   <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
                   <includeClassifiers>full</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/docker/${docker.domain}/vertx3/build</outputDirectory>
+                  <outputDirectory>${project.build.directory}/docker/${docker.domain}/vertx4/build</outputDirectory>
                   <markersDirectory>${project.build.directory}/marker-dependency</markersDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>unzip-vertx-stack-alpine</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>unpack-dependencies</goal>
-                </goals>
-                <configuration>
-                  <includeArtifactIds>vertx-stack-manager</includeArtifactIds>
-                  <includeClassifiers>full</includeClassifiers>
-                  <outputDirectory>${project.build.directory}/docker/${docker.domain}/vertx3-alpine/build
-                  </outputDirectory>
-                  <markersDirectory>${project.build.directory}/marker-dependency-alpine</markersDirectory>
                 </configuration>
               </execution>
             </executions>
@@ -294,8 +206,6 @@
               <systemPropertyVariables>
                 <vertx.url>http://${docker.host.address}:${vertx.port}</vertx.url>
                 <vertx-exec.url>http://${docker.host.address}:${vertx-exec.port}</vertx-exec.url>
-                <vertx-alpine.url>http://${docker.host.address}:${vertx-alpine.port}</vertx-alpine.url>
-                <vertx-exec-alpine.url>http://${docker.host.address}:${vertx-exec-alpine.port}</vertx-exec-alpine.url>
                 <vertx.version>${project.version}</vertx.version>
               </systemPropertyVariables>
             </configuration>

@@ -18,6 +18,7 @@ package io.vertx.stack.docker;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.parsing.Parser;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.jayway.restassured.RestAssured.get;
@@ -45,6 +46,7 @@ public class VersionIT {
     assertEquals(versionExpected, version);
   }
 
+  @Ignore
   @Test
   public void testVersionOfAlpineContainer() {
     String containerUrl = System.getProperty("vertx-alpine.url");
@@ -71,6 +73,7 @@ public class VersionIT {
     assertEquals(versionExpected, version);
   }
 
+  @Ignore
   @Test
   public void testVersionOfAlpineExecContainer() {
     String containerUrl = System.getProperty("vertx-exec-alpine.url");
