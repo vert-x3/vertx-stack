@@ -292,6 +292,12 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java-gen</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -303,6 +309,12 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-rx-java2</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java2-gen</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
