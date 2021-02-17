@@ -1,7 +1,7 @@
 vertx-stack
 ========
 
-[![Build Status](https://travis-ci.org/vert-x3/vertx-stack.svg?branch=master)](https://travis-ci.org/vert-x3/vertx-stack)
+[![Build Status](https://github.com/vert-x3/vertx-stack/workflows/CI/badge.svg?branch=3.9)](https://github.com/vert-x3/vertx-stack/actions?query=workflow%3ACI)
 
 The Vert.x stack : Vert.x + the endorsed modules
 
