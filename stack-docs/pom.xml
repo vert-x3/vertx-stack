@@ -759,6 +759,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-sstore-infinispan</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-sstore-infinispan</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web-graphql</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1577,6 +1591,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web-api-service/">
                   <fileset dir="${project.build.directory}/work/vertx-web-api-service-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-web/">
+                  <fileset dir="${project.build.directory}/work/vertx-web-sstore-infinispan-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web-graphql/">
                   <fileset dir="${project.build.directory}/work/vertx-web-graphql-docs-zip"/>
