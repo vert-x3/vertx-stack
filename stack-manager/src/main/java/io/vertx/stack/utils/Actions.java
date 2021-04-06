@@ -16,7 +16,7 @@
 
 package io.vertx.stack.utils;
 
-import io.vertx.core.logging.LoggerFactory;
+import io.vertx.core.impl.logging.LoggerFactory;
 import org.eclipse.aether.artifact.Artifact;
 
 import java.io.File;
@@ -43,7 +43,7 @@ public class Actions {
     void execute();
   }
 
-  private final static io.vertx.core.logging.Logger LOGGER = LoggerFactory.getLogger("Stack Resolver");
+  private final static io.vertx.core.impl.logging.Logger LOGGER = LoggerFactory.getLogger("Stack Resolver");
 
   /**
    * Action to copy an artifact to a directory.

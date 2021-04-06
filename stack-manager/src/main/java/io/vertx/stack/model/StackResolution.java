@@ -16,8 +16,8 @@
 
 package io.vertx.stack.model;
 
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
+import io.vertx.core.impl.logging.Logger;
+import io.vertx.core.impl.logging.LoggerFactory;
 import io.vertx.stack.resolver.Resolver;
 import io.vertx.stack.utils.Actions;
 import io.vertx.stack.utils.Cache;
