@@ -45,6 +45,7 @@
 - link:vertx-micrometer-metrics/java/index.html[Micrometer metrics]
 - link:vertx-zipkin/java/index.html[Zipkin]
 - link:vertx-opentracing/java/index.html[Opentracing]
+- link:vertx-opentelemetry/java/index.html[Opentelemetry]
 - link:vertx-health-check/java/index.html[Health check]
 - link:vertx-shell/java/index.html[Shell]
 - link:vertx-docker/index.html[Docker]
