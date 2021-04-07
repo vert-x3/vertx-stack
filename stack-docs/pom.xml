@@ -773,6 +773,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-sstore-cookie</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-sstore-redis</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web-sstore-infinispan</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
