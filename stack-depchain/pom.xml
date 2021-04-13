@@ -348,6 +348,10 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-zookeeper</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-config</artifactId>
     </dependency>
     <dependency>
