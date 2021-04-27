@@ -115,6 +115,9 @@ vertx-dependencies))
   * Groovy (only in Vert.x 3): in `vertx-lang-groovy`, edit `pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
+  * RxJava3 (only in Vert.x 4): in `vertx-rx`, edit `rx-java3/pom.xml`
+    * Add an `optional` dependency to the POM
+    * Update the list in the `maven-dependency-plugin` config
   * RxJava2: in `vertx-rx`, edit `rx-java2/pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
