@@ -335,6 +335,26 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java3</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java3</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java3-gen</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mqtt</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1523,7 +1543,8 @@
               <links>
                 <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
                 <link>http://reactivex.io/RxJava/1.x/javadoc/</link>
-                <link>http://reactivex.io/RxJava/javadoc/</link>
+                <link>http://reactivex.io/RxJava/2.x/javadoc/</link>
+                <link>http://reactivex.io/RxJava/3.x/javadoc/</link>
                 <link>http://netty.io/4.1/api/</link>
                 <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</link>
                 <link>http://fasterxml.github.io/jackson-core/javadoc/2.9/</link>
@@ -1583,6 +1604,7 @@
                   <fileset dir="${project.build.directory}/work/vertx-service-proxy-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs">
+                  <fileset dir="${project.build.directory}/work/vertx-rx-java3-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-java2-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-java-docs-zip"/>
                 </copy>
