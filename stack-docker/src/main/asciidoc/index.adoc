@@ -416,7 +416,7 @@ For instance:
 [source, shell]
 ----
 > docker run -i -t vertx/vertx4-exec -version
-4.1.0.CR2
+4.1.0-SNAPSHOT
 ----
 
 To run a verticle:
