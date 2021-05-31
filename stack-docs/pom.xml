@@ -155,6 +155,13 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-junit5-rx-java3</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-dropwizard-metrics</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
