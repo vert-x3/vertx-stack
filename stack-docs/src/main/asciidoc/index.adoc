@@ -17,6 +17,7 @@
 - link:vertx-redis-client/java/index.html[Redis client]
 - link:vertx-rx/java/index.html[RxJava]
 - link:vertx-rx/java2/index.html[RxJava2]
+- link:vertx-rx/java3/index.html[RxJava3]
 - link:vertx-reactive-streams/java/index.html[Reactive streams]
 - link:vertx-sync/java/index.html[Vert.x Sync]
 - link:vertx-service-discovery/java/index.html[Service discovery]
