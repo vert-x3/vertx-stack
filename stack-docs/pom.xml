@@ -24,20 +24,20 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>3.9.8-SNAPSHOT</version>
+    <version>3.9.8</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>vertx-stack-docs</artifactId>
-  <version>3.9.8-SNAPSHOT</version>
+  <version>3.9.8</version>
 
   <name>Vert.x Stack - Docs</name>
   <packaging>pom</packaging>
 
   <properties>
 
-    <vertx.version>3.9.8-SNAPSHOT</vertx.version>
-    <vertx.docs.version>3.9.8-SNAPSHOT</vertx.docs.version>
+    <vertx.version>3.9.8</vertx.version>
+    <vertx.docs.version>3.9.8</vertx.docs.version>
 
     <asciidoclet.version>1.5.1</asciidoclet.version>
     <apacheds-protocol-dns.version>1.5.7</apacheds-protocol-dns.version>
