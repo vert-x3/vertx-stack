@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>vertx-stack</artifactId>
-  <version>3.9.8</version>
+  <version>3.9.9-SNAPSHOT</version>
 
   <name>Vert.x Stack - Project</name>
   <packaging>pom</packaging>
@@ -38,7 +38,7 @@
   -->
 
   <properties>
-    <stack.version>3.9.8</stack.version>
+    <stack.version>3.9.9-SNAPSHOT</stack.version>
   </properties>
 
   <dependencyManagement>
