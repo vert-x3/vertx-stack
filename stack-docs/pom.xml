@@ -397,6 +397,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-oracle-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-mssql-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -433,6 +440,15 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+    <!--
+      todo: does not pass currently 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-oracle-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mssql-client</artifactId>
@@ -1433,6 +1449,10 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-haproxy</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-jmx</artifactId>
       <version>1.0.5</version>
@@ -1476,6 +1496,20 @@
           <artifactId>guava</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-haproxy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.agroal</groupId>
+      <artifactId>agroal-api</artifactId>
+      <version>1.11</version>
+    </dependency>
+    <dependency>
+      <groupId>io.agroal</groupId>
+      <artifactId>agroal-pool</artifactId>
+      <version>1.11</version>
     </dependency>
   </dependencies>
 
@@ -1555,6 +1589,7 @@
             </goals>
             <phase>process-resources</phase>
             <configuration>
+              <source>8</source>
               <reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>
               <additionalparam>-Xdoclint:none</additionalparam>
               <sourcepath>${project.build.directory}/java</sourcepath>
@@ -1653,7 +1688,10 @@
                 <copy todir="${project.build.directory}/docs/vertx-db2-client/">
                   <fileset dir="${project.build.directory}/work/vertx-db2-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mssql-client/">
+                <copy todir="${project.build.directory}/docs/vertx-oracle-client/">
+                  <fileset dir="${project.build.directory}/work/vertx-oracle-client-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-m-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mssql-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sql-client-templates/">
