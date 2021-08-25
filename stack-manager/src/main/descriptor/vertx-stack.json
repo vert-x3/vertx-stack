@@ -128,6 +128,18 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-auth-webauthn",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-auth-otp",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-jdbc-client",
       "version": "\${vertx.version}",
       "included": false
