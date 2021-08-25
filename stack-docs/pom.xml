@@ -716,6 +716,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-otp</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-otp</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1708,6 +1722,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-webauthn/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-webauthn-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-auth-otp/">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-otp-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-oauth2/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-oauth2-docs-zip"/>
