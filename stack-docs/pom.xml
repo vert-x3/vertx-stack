@@ -1705,7 +1705,7 @@
                 <copy todir="${project.build.directory}/docs/vertx-oracle-client/">
                   <fileset dir="${project.build.directory}/work/vertx-oracle-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-m-client/">
+                <copy todir="${project.build.directory}/docs/vertx-mssql-client/">
                   <fileset dir="${project.build.directory}/work/vertx-mssql-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sql-client-templates/">
