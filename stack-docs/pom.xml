@@ -1081,6 +1081,20 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-uri-template</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-uri-template</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
     <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1809,6 +1823,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-http-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-http-proxy-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-uri-template/">
+                  <fileset dir="${project.build.directory}/work/vertx-uri-template-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-tcp-eventbus-bridge/">
                   <fileset dir="${project.build.directory}/work/vertx-tcp-eventbus-bridge-docs-zip"/>
