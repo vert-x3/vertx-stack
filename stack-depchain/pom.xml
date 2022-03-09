@@ -440,6 +440,10 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-http-proxy</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-uri-template</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
