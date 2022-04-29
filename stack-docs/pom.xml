@@ -1095,6 +1095,46 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-server</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-server</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
     <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1827,6 +1867,15 @@
                 <copy todir="${project.build.directory}/docs/vertx-uri-template/">
                   <fileset dir="${project.build.directory}/work/vertx-uri-template-docs-zip"/>
                 </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-common-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-server-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-client-docs-zip"/>
+                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-tcp-eventbus-bridge/">
                   <fileset dir="${project.build.directory}/work/vertx-tcp-eventbus-bridge-docs-zip"/>
                 </copy>
@@ -1908,7 +1957,7 @@
                 <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                <copy todir="${project.build.directory}/docs/vertx-grpc-netty/">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-lang-kotlin-coroutines/">
