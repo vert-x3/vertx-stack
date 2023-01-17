@@ -26,6 +26,8 @@ import org.eclipse.aether.artifact.Artifact;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -90,6 +92,29 @@ public class StackResolution {
       Path source = artifact.artifact.getFile().toPath();
       Path output = directory.toPath().resolve(source.getFileName());
       resolved.put(artifact.artifact.toString(), output.toFile());
+    }
+
+    return resolved;
+  }
+
+  public Map<String, File> resolve(Predicate<String> validator) {
+    traces.clear();
+    selectedVersions.clear();
+    init();
+    stack.getDependencies().forEach(this::resolve);
+    List<Actions.Action> chain = computeChainOfActions();
+
+    chain.forEach(Actions.Action::execute);
+
+    Map<String, File> resolved = new LinkedHashMap<>();
+    for (ResolvedArtifact artifact : selectedArtifacts.values()) {
+      String gav = artifact.artifact.toString();
+      if (!validator.test(gav)) {
+        throw new IllegalStateException("Invalid artifact " + gav + ", used by " + artifact.getUsages());
+      }
+      Path source = artifact.artifact.getFile().toPath();
+      Path output = directory.toPath().resolve(source.getFileName());
+      resolved.put(gav, output.toFile());
     }
 
     return resolved;
@@ -195,6 +220,11 @@ public class StackResolution {
   private void addSelectedArtifact(Dependency dependency, Artifact artifact, String version) {
     String key = getManagementKey(artifact);
     ResolvedArtifact resolved = selectedArtifacts.get(key);
+    if (artifact.getGroupId().equals("org.apache.logging.log4j")) {
+      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
+      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
+      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
+    }
     if (resolved != null) {
       resolved.addUsage(getManagementKey(dependency));
     } else {

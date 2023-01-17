@@ -18,6 +18,7 @@ package io.vertx.stack;
 
 import com.jayway.awaitility.Awaitility;
 import io.vertx.core.impl.launcher.commands.VersionCommand;
+import io.vertx.stack.model.Dependency;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
 import io.vertx.stack.model.StackResolutionOptions;
@@ -106,18 +107,17 @@ public class VertxStacksTest {
   public void testConvergence() {
     // Prepare the stack - use full stack, include everything
     Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-full.json"));
+    // Stack stack = new Stack().addDependency(new Dependency("io.vertx", "vertx-core", "4.4.0-SNAPSHOT"));
     stack.getDependencies()
         .forEach(d -> d.setIncluded(true));
 
     StackResolution resolution = new StackResolution(stack, root,
         new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
-    Map<String, File> resolved = resolution.resolve();
-    assertThat(resolved).isNotEmpty();
-    // Check we don't have loggers in the distrib
-    resolved.forEach((k,v) -> {
-      assertThat(k).doesNotStartWith("log4j:log4j");
-      assertThat(k).doesNotStartWith("org.apache.logging.log4j:");
+    Map<String, File> resolved = resolution.resolve(gav -> {
+      // Check we don't have loggers in the distrib
+      return !gav.startsWith("log4j:log4j") && !gav.startsWith("org.apache.logging.log4j:") && !gav.startsWith("org.slf4j:");
     });
+    assertThat(resolved).isNotEmpty();
   }
 
   /**
