@@ -220,11 +220,6 @@ public class StackResolution {
   private void addSelectedArtifact(Dependency dependency, Artifact artifact, String version) {
     String key = getManagementKey(artifact);
     ResolvedArtifact resolved = selectedArtifacts.get(key);
-    if (artifact.getGroupId().equals("org.apache.logging.log4j")) {
-      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
-      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
-      System.out.println("USED BY " + dependency.getGroupId() + ":" + dependency.getArtifactId() + " transitive=" + dependency.isTransitive() + " scope=" + dependency.getScope());
-    }
     if (resolved != null) {
       resolved.addUsage(getManagementKey(dependency));
     } else {

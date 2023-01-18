@@ -115,7 +115,7 @@ public class VertxStacksTest {
         new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
     Map<String, File> resolved = resolution.resolve(gav -> {
       // Check we don't have loggers in the distrib
-      return !gav.startsWith("log4j:log4j") && !gav.startsWith("org.apache.logging.log4j:") && !gav.startsWith("org.slf4j:");
+      return !gav.startsWith("log4j:log4j") && !gav.startsWith("org.apache.logging.log4j:");
     });
     assertThat(resolved).isNotEmpty();
   }
