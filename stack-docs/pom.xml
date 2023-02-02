@@ -218,6 +218,20 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-openapi</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-openapi</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-zipkin</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1714,6 +1728,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-opentelemetry/">
                   <fileset dir="${project.build.directory}/work/vertx-opentelemetry-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-openapi/">
+                  <fileset dir="${project.build.directory}/work/vertx-openapi-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-http-service-factory/">
                   <fileset dir="${project.build.directory}/work/vertx-http-service-factory-docs-zip"/>
