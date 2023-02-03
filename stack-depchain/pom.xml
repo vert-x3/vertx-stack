@@ -184,6 +184,10 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-openapi-router</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web-sstore-cookie</artifactId>
     </dependency>
     <dependency>
