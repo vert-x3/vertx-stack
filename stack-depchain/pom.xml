@@ -464,6 +464,10 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-grpc-server</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-io_uring-incubator</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

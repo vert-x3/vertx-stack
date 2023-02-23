@@ -1506,16 +1506,19 @@
       <classifier>sources</classifier>
     </dependency>
 
-    <!-- Scala all-in-one -->
-<!--
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-docs_2.12</artifactId>
+      <artifactId>vertx-io_uring-incubator</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
--->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-io_uring-incubator</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
     <!-- Dependencies required by the javadoc -->
     <dependency>
@@ -2000,12 +2003,9 @@
                 <copy todir="${project.build.directory}/docs/vertx-json-schema/">
                   <fileset dir="${project.build.directory}/work/vertx-json-schema-docs-zip"/>
                 </copy>
-
-<!--
-                <copy todir="${project.build.directory}/docs/">
-                  <fileset dir="${project.build.directory}/work/vertx-lang-scala-docs_2.12-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-io_uring-incubator/">
+                  <fileset dir="${project.build.directory}/work/vertx-io_uring-incubator-docs-zip"/>
                 </copy>
--->
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
