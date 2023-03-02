@@ -32,18 +32,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-factory</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-maven-service-factory</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-http-service-factory</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-hazelcast</artifactId>
     </dependency>
     <dependency>
@@ -290,10 +278,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-shell</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sync</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>

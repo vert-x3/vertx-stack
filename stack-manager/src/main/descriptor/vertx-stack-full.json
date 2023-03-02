@@ -244,12 +244,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-sync",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-tcp-eventbus-bridge",
       "version": "\${vertx.version}",
       "included": true

@@ -43,12 +43,9 @@ import static org.assertj.core.api.Assertions.fail;
 public class VertxStacksTest {
 
   private static final List<String> BASE = Arrays.asList(
-      "io.vertx:vertx-http-service-factory:jar",
       "io.vertx:vertx-dropwizard-metrics:jar",
-      "io.vertx:vertx-maven-service-factory:jar",
       "io.vertx:vertx-reactive-streams:jar",
-      "io.vertx:vertx-rx-java:jar",
-      "io.vertx:vertx-service-factory:jar"
+      "io.vertx:vertx-rx-java:jar"
   );
 
 
