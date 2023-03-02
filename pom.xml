@@ -29,14 +29,6 @@
     </license>
   </licenses>
 
-  <!--
-    <scm>
-      <connection>scm:git:git@github.com:eclipse/vert.x.git</connection>
-      <developerConnection>scm:git:git@github.com:eclipse/vert.x.git</developerConnection>
-      <url>git@github.com:eclipse/vert.x.git</url>
-    </scm>
-  -->
-
   <properties>
     <stack.version>5.0.0-SNAPSHOT</stack.version>
   </properties>
@@ -65,12 +57,9 @@
   </build>
 
   <modules>
-    <!-- docker documentation must be built regardless we build the image -->
     <module>stack-depchain</module>
     <module>stack-manager</module>
-    <module>stack-docker</module>
     <module>stack-docs</module>
-    <module>stack-npm</module>
   </modules>
 
   <!-- Relax the enforce rule in order to allow mongodb driver snapshtos -->

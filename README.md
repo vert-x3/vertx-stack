@@ -52,40 +52,6 @@ Therefore it should be used with explicit dependencies:
   </dependencies>
 ~~~~
 
-### Docker
-
-To build docker images, you need docker1.3+ and run `mvn clean install -Pdocker`
-It builds the 2 main images :
-- vert.x3 base - the base image provisionning the vert.x stack (`vertx/vertx3`)
-- vert.x3 executable - an image providing the vert.x command (`vertx/vertx3-executable`)
-
-All images have a _readme_ file containing their documentation and build instructions.
-
-Examples of docker image usages are in https://github.com/vert-x3/vertx-examples/tree/master/docker-examples
-
-#### Pushing Docker image to Docker Hub
-
-The images can be pushed to Docker Hub. Before, be sure you are in the _vertx_ organisation on docker hub (https://hub.docker.com/u/vertx/). Then, add your credentials into `~/.m2/settings.xml`:
-
-```
-<server>
-  <id>docker-hub</id>
-  <username>username</username>
-  <password>password</password>
-  <configuration>
-    <email>email</email>
-  </configuration>
-</server>
-```
-
-Once done, in the `vertx-docker-base-image` and `vertx-docker-executable` project just launch:
-
-```
-mvn docker:push
-```
-
-**WARNING**: This is going to take a while.....
-
 ### Adding a new module to the stack
 
 1. Add it to `vertx-dependencies` (open the project, add it to the `pom.xml`, install, commit and push)
