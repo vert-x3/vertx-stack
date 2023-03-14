@@ -1,13 +1,13 @@
-name: CI
+name: vertx-stack (4.x)
 on:
   push:
     branches:
       - master
-      - '[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9x]+'
   pull_request:
     branches:
       - master
-      - '[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9x]+'
   schedule:
     - cron:  '0 4 * * *'
 jobs:
