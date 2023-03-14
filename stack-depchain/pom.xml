@@ -450,6 +450,10 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-context-storage</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-io_uring-incubator</artifactId>
     </dependency>
   </dependencies>
