@@ -1,6 +1,5 @@
 .DS_Store
 .gradle
-.vscode
 .idea
 .classpath
 .project
