@@ -86,19 +86,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-auth-jdbc",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-auth-jwt",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-auth-shiro",
       "version": "\${vertx.version}",
       "included": false
     },

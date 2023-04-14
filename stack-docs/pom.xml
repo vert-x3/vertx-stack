@@ -562,20 +562,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-jwt</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -640,20 +626,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-properties</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1750,9 +1722,6 @@
                 <copy todir="${project.build.directory}/docs/vertx-auth-common/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-shiro/">
-                  <fileset dir="${project.build.directory}/work/vertx-auth-shiro-docs-zip"/>
-                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-sql-client/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-sql-client-docs-zip"/>
                 </copy>
@@ -1767,9 +1736,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-properties/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-properties-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-jdbc/">
-                  <fileset dir="${project.build.directory}/work/vertx-auth-jdbc-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-mongo/">
                   <fileset dir="${project.build.directory}/work/vertx-auth-mongo-docs-zip"/>

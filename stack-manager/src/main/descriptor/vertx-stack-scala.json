@@ -92,12 +92,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-auth-shiro-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-auth-htdigest-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
@@ -117,12 +111,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-auth-jwt-scala_2.12",
-      "version": "\${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-auth-jdbc-scala_2.12",
       "version": "\${vertx.version}",
       "included": false
     },
