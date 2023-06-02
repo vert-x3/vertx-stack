@@ -412,15 +412,12 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-    <!--
-      todo: does not pass currently
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-oracle-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-    -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mssql-client</artifactId>
