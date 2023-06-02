@@ -1716,15 +1716,15 @@
               <detectJavaApiLink/>
               <quiet>true</quiet>
               <links>
-                <link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>
-                <link>http://reactivex.io/RxJava/1.x/javadoc/</link>
-                <link>http://reactivex.io/RxJava/2.x/javadoc/</link>
-                <link>http://reactivex.io/RxJava/3.x/javadoc/</link>
-                <link>http://netty.io/4.1/api/</link>
-                <link>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</link>
-                <link>http://fasterxml.github.io/jackson-core/javadoc/2.9/</link>
-                <link>http://fasterxml.github.io/jackson-databind/javadoc/2.9/</link>
-                <link>http://www.grpc.io/grpc-java/javadoc/</link>
+                <link>https://docs.hazelcast.org/docs/3.5/javadoc/</link>
+                <link>https://reactivex.io/RxJava/1.x/javadoc/</link>
+                <link>https://reactivex.io/RxJava/2.x/javadoc/</link>
+                <link>https://reactivex.io/RxJava/3.x/javadoc/</link>
+                <link>https://netty.io/4.1/api/</link>
+                <link>https://fasterxml.github.io/jackson-annotations/javadoc/2.9/</link>
+                <link>https://fasterxml.github.io/jackson-core/javadoc/2.9/</link>
+                <link>https://fasterxml.github.io/jackson-databind/javadoc/2.9/</link>
+                <link>https://www.grpc.io/grpc-java/javadoc/</link>
               </links>
             </configuration>
           </execution>
