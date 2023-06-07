@@ -1,7 +1,8 @@
 vertx-stack
 ========
 
-[![Build Status](https://github.com/vert-x3/vertx-stack/workflows/CI/badge.svg?branch=master)](https://github.com/vert-x3/vertx-stack/actions?query=workflow%3ACI)
+[![Build Status (5.x)](https://github.com/vert-x3/vertx-stack/actions/workflows/ci-5.x.yml/badge.svg)](https://github.com/vert-x3/vertx-stack/actions/workflows/ci-5.x.yml)
+[![Build Status (4.x)](https://github.com/vert-x3/vertx-stack/actions/workflows/ci-4.x.yml/badge.svg)](https://github.com/vert-x3/vertx-stack/actions/workflows/ci-4.x.yml)
 
 The Vert.x stack : Vert.x + the endorsed modules
 
