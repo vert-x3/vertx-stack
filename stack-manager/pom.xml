@@ -49,7 +49,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-legacy-cli</artifactId>
+      <artifactId>vertx-launcher-legacy-cli</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

@@ -5,7 +5,7 @@
 === Java
 
 - link:vertx-core/java/index.html[Core]
-- link:vertx-application-launcher/java/index.html[Application Launcher]
+- link:vertx-launcher-application/java/index.html[Application Launcher]
 - link:vertx-web/java/index.html[Web]
 - link:vertx-web-client/java/index.html[Web client]
 - link:vertx-web-api-contract/java/index.html[Web API contracts]

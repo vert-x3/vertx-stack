@@ -71,21 +71,21 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-legacy-cli</artifactId>
+      <artifactId>vertx-launcher-legacy-cli</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-application-launcher</artifactId>
+      <artifactId>vertx-launcher-application</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-application-launcher</artifactId>
+      <artifactId>vertx-launcher-application</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1651,8 +1651,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-application-launcher/">
-                  <fileset dir="${project.build.directory}/work/vertx-application-launcher-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-launcher-application/">
+                  <fileset dir="${project.build.directory}/work/vertx-launcher-application-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-unit/">
                   <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
