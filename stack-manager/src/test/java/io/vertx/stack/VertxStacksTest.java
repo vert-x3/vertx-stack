@@ -65,38 +65,6 @@ public class VertxStacksTest {
     System.clearProperty("vertx.version");
   }
 
-  @Test
-  public void testResolutionOfMinSwitchToBaseAndRevertToMin() {
-    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack.json"));
-
-    // Min stack
-    StackResolution resolution = new StackResolution(stack, root,
-        new StackResolutionOptions().setFailOnConflicts(true));
-    Map<String, File> resolved = resolution.resolve();
-    hasKeysStartingBy(resolved, "io.vertx:vertx-core:jar:").ensureThatAllFilesExist(resolved);
-    int minArtifacts = resolved.size();
-
-    // Base
-    setUpBaseStack(stack);
-    resolution = new StackResolution(stack, root,
-        new StackResolutionOptions().setFailOnConflicts(true));
-    resolved = resolution.resolve();
-    for (String b : BASE) {
-      hasKeysStartingBy(resolved, b);
-    }
-    hasKeysStartingBy(resolved, "io.vertx:vertx-core:jar:").ensureThatAllFilesExist(resolved);
-
-    tearDownBaseStack(stack);
-    resolution = new StackResolution(stack, root,
-        new StackResolutionOptions().setFailOnConflicts(true));
-    resolved = resolution.resolve();
-    for (String b : BASE) {
-      doNotHaveKeysStartingBy(resolved, b);
-    }
-    hasKeysStartingBy(resolved, "io.vertx:vertx-core:jar:").ensureThatAllFilesExist(resolved);
-    assertThat(resolved.size()).isEqualTo(minArtifacts);
-  }
-
   /**
    * This tests checks that all our dependencies converge to the same version.
    */
@@ -116,22 +84,6 @@ public class VertxStacksTest {
     });
     assertThat(resolved).isNotEmpty();
   }
-
-  /**
-   * This tests checks that all our dependencies converge to the same version. This test check the Scala stack.
-   */
-//  @Test
-//  public void testScalaConvergence() {
-//    // Prepare the stack - use full stack, include everything
-//    Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-scala.json"));
-//    stack.getDependencies().stream()
-//      .forEach(d -> d.setIncluded(true));
-//
-//    StackResolution resolution = new StackResolution(stack, root,
-//      new StackResolutionOptions().setFailOnConflicts(true).setCacheDisabled(true));
-//    Map<String, File> resolved = resolution.resolve();
-//    assertThat(resolved).isNotEmpty();
-//  }
 
   @Test
   public void testTheResolutionOfTheWebStack() {

@@ -5,6 +5,7 @@
 === Java
 
 - link:vertx-core/java/index.html[Core]
+- link:vertx-launcher-application/java/index.html[Application Launcher]
 - link:vertx-web/java/index.html[Web]
 - link:vertx-web-client/java/index.html[Web client]
 - link:vertx-web-api-contract/java/index.html[Web API contracts]
@@ -47,8 +48,6 @@
 - link:vertx-opentelemetry/java/index.html[Opentelemetry]
 - link:vertx-health-check/java/index.html[Health check]
 - link:vertx-shell/java/index.html[Shell]
-- link:vertx-docker/index.html[Docker]
-- link:vertx-stack-manager/stack-manager/index.html[Stack manager]
 - link:vertx-unit/java/index.html[Vert.x unit]
 - link:vertx-junit5/java/index.html[Vert.x JUnit 5]
 - link:vertx-hazelcast/java/index.html[Hazelcast]

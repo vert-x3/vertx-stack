@@ -59,10 +59,8 @@ Therefore it should be used with explicit dependencies:
 2. Add it to `stack-depchain/pom.xml` (open the project, add the dependency, without the version (inherited from
 vertx-dependencies))
 3. Add it in the stack manager:
-  * Open `./stack-manager/src/main/descriptor/vertx-stack.json`
-  * Add the dependency. If the dependency must be embedded in the _min_ distribution, set `included` to `true`. So forget to use the `\${version}`.
   * Open `./stack-manager/src/main/descriptor/vertx-stack-full.json`
-  * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. So forget to use the `\${version}`.
+  * Add the dependency. If the dependency must be embedded in the _full_ distribution, set `included` to `true`. Don't forget to use the `\${version}`.
 4. Add it to the doc distribution:
   * Open `./stack-docs/pom.xml`
   * Add the `docs` dependency (the using `<classifier>docs</classifier>` and `<type>zip</type>`)
@@ -97,6 +95,3 @@ vertx-dependencies))
   * Edit the stack definition file `src/main/resources/starter.json`
     * Add the module details in one of the categories (web, data, ...etc)
     * Exclude the module from versions that did not have it (`exclusions`)
-
-
-

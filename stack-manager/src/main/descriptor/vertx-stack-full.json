@@ -25,6 +25,12 @@
       "included": true
     },
     {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-launcher-application",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
       "groupId": "io.netty",
       "artifactId": "netty-tcnative-boringssl-static",
       "version": "\${tcnative.version}",
