@@ -55,7 +55,7 @@ Therefore it should be used with explicit dependencies:
 
 ### Adding a new module to the stack
 
-1. Add it to `vertx-dependencies` (open the project, add it to the `pom.xml`, install, commit and push)
+1. Add it to [`vertx-dependencies`](https://github.com/vert-x3/vertx-dependencies) (open the project, add it to the `pom.xml`, install, commit and push)
 2. Add it to `stack-depchain/pom.xml` (open the project, add the dependency, without the version (inherited from
 vertx-dependencies))
 3. Add it in the stack manager:
@@ -72,26 +72,20 @@ vertx-dependencies))
 </copy>
 ```
   * Save the `pom.xml` file
-4. Build (`mvn clean install` from the root).
+  * Build (`mvn clean install` from the root).
 5. Make it polyglot  (unless the module is not polyglot, e.g. a cluster manager)
-  * Kotlin: in `vertx-lang-kotlin`, edit `vertx-lang-kotlin/pom.xml`
+  * Kotlin: in [`vertx-lang-kotlin`](https://github.com/vert-x3/vertx-lang-kotlin), edit `vertx-lang-kotlin/pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
-  * Groovy (only in Vert.x 3): in `vertx-lang-groovy`, edit `pom.xml`
+  * RxJava3: in [`vertx-rx`](https://github.com/vert-x3/vertx-rx), edit `rx-java3/pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
-  * RxJava3 (only in Vert.x 4): in `vertx-rx`, edit `rx-java3/pom.xml`
+  * RxJava2: in [`vertx-rx`](https://github.com/vert-x3/vertx-rx), edit `rx-java2/pom.xml`
     * Add an `optional` dependency to the POM
     * Update the list in the `maven-dependency-plugin` config
-  * RxJava2: in `vertx-rx`, edit `rx-java2/pom.xml`
-    * Add an `optional` dependency to the POM
-    * Update the list in the `maven-dependency-plugin` config
-  * RxJava: in `vertx-rx`, edit `rx-java/pom.xml`
-    * Add an `optional` dependency to the POM
-    * Update the list in the `maven-dependency-plugin` config
-6. Add it to the website in `vertx-web-site`:
-  * Edit the docs summary page `src/site/docs/index.html`, use `Tech Preview` label
-7. Add it to the starter website in `vertx-starter`:
+6. Add it to the website in [`vertx-web-site`](https://github.com/vertx-web-site/vertx-web-site.github.io):
+  * Edit the docs summary page `docs/metadata/<version>.jsx`, use `Tech Preview` label
+7. Add it to the starter website in [`vertx-starter`](https://github.com/vert-x3/vertx-starter/):
   * Edit the stack definition file `src/main/resources/starter.json`
     * Add the module details in one of the categories (web, data, ...etc)
     * Exclude the module from versions that did not have it (`exclusions`)
