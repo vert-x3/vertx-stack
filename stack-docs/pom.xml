@@ -71,20 +71,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-virtual-threads</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-virtual-threads</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-groovy</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1758,9 +1744,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-core/">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-virtual-threads/">
-                  <fileset dir="${project.build.directory}/work/vertx-virtual-threads-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-unit/">
                   <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
