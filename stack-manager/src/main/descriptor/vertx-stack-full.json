@@ -391,6 +391,24 @@
       "artifactId": "vertx-grpc",
       "version": "\${vertx.version}",
       "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-json-schema",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-openapi",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-web-openapi-router",
+      "version": "\${vertx.version}",
+      "included": false
     }
   ]
 }
