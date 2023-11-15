@@ -126,7 +126,7 @@
  * ----
  * {
  * "variables": {
- *   "vertx.version": "4.5.0"
+ *   "vertx.version": "4.5.1-SNAPSHOT"
  * }
  * ----
  *
