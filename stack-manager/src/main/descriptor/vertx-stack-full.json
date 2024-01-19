@@ -190,7 +190,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-web-templ-jade",
+      "artifactId": "vertx-web-templ-pug",
       "version": "\${vertx.version}",
       "classifier": "shaded",
       "transitive": false,
