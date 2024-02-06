@@ -107,7 +107,7 @@ public class VertxStacksTest {
   public void testConvergence() {
     // Prepare the stack - use full stack, include everything
     Stack stack = Stack.fromDescriptor(new File("target/vertx-stack/vertx-stack-full.json"));
-    // Stack stack = new Stack().addDependency(new Dependency("io.vertx", "vertx-core", "4.4.8-SNAPSHOT"));
+    // Stack stack = new Stack().addDependency(new Dependency("io.vertx", "vertx-core", "4.4.8"));
     stack.getDependencies()
         .forEach(d -> d.setIncluded(true));
 
