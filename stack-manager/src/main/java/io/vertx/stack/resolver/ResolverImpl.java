@@ -22,9 +22,12 @@ import io.vertx.core.impl.logging.LoggerFactory;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
+import org.eclipse.aether.collection.CollectResult;
+import org.eclipse.aether.collection.DependencyCollectionException;
 import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.graph.DependencyFilter;
@@ -48,6 +51,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * An implementation of {@link Resolver} based on Aether.
@@ -61,7 +65,7 @@ public class ResolverImpl implements Resolver {
   public static final String REMOTE_SNAPSHOT_POLICY_SYS_PROP = "vertx.maven.remoteSnapshotPolicy";
 
   private final RepositorySystem system;
-  private LocalRepository localRepo;
+  private final LocalRepository localRepo;
   private final List<RemoteRepository> remotes = new ArrayList<>();
 
   /**
@@ -178,63 +182,62 @@ public class ResolverImpl implements Resolver {
    */
   public List<Artifact> resolve(Artifact artifact, boolean transitive, List<String> exclusions) {
 
-    DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
-    session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
+    RepositorySystemSession session = session(system, localRepo);
 
     LOGGER.info("Resolving " + artifact.toString());
 
     DependencyFilter filter =
-        DependencyFilterUtils.andFilter(
-            DependencyFilterUtils.classpathFilter(
-                JavaScopes.COMPILE
-            ),
-            // Remove optionals and dependencies of optionals
-            (dependencyNode, list) -> {
-              for (DependencyNode parent : list) {
-                if (parent.getDependency().isOptional()) {
-                  return false;
-                }
-              }
-
-              return !dependencyNode.getDependency().isOptional();
-            },
-
-            // Remove excluded dependencies
-            (dependencyNode, list) -> {
-              // Build the list of exclusion, traverse the tree.
-              Collection<Exclusion> ex = new ArrayList<>();
-              for (DependencyNode parent : list) {
-                ex.addAll(parent.getDependency().getExclusions());
-              }
-
-              for (Exclusion e : ex) {
-                // Check the the passed artifact is excluded
-                if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
-                    && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
-                  return false;
-                }
-
-                // Check if a parent artifact is excluded
-                for (DependencyNode parent : list) {
-                  if (e.getArtifactId().equals(parent.getArtifact().getArtifactId())
-                      && e.getGroupId().equals(parent.getArtifact().getGroupId())) {
-                    return false;
-                  }
-                }
-              }
-              return true;
-            },
-
-            // Remove provided dependencies and transitive dependencies of provided dependencies
-            (dependencyNode, list) -> {
-              for (DependencyNode parent : list) {
-                if (!parent.getDependency().getScope().toLowerCase().equals("compile")) {
-                  return false;
-                }
-              }
-              return dependencyNode.getDependency().getScope().toLowerCase().equals("compile");
+      DependencyFilterUtils.andFilter(
+        DependencyFilterUtils.classpathFilter(
+          JavaScopes.COMPILE
+        ),
+        // Remove optionals and dependencies of optionals
+        (dependencyNode, list) -> {
+          for (DependencyNode parent : list) {
+            if (parent.getDependency().isOptional()) {
+              return false;
             }
-        );
+          }
+
+          return !dependencyNode.getDependency().isOptional();
+        },
+
+        // Remove excluded dependencies
+        (dependencyNode, list) -> {
+          // Build the list of exclusion, traverse the tree.
+          Collection<Exclusion> ex = new ArrayList<>();
+          for (DependencyNode parent : list) {
+            ex.addAll(parent.getDependency().getExclusions());
+          }
+
+          for (Exclusion e : ex) {
+            // Check the the passed artifact is excluded
+            if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
+              && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
+              return false;
+            }
+
+            // Check if a parent artifact is excluded
+            for (DependencyNode parent : list) {
+              if (e.getArtifactId().equals(parent.getArtifact().getArtifactId())
+                && e.getGroupId().equals(parent.getArtifact().getGroupId())) {
+                return false;
+              }
+            }
+          }
+          return true;
+        },
+
+        // Remove provided dependencies and transitive dependencies of provided dependencies
+        (dependencyNode, list) -> {
+          for (DependencyNode parent : list) {
+            if (!parent.getDependency().getScope().equalsIgnoreCase("compile")) {
+              return false;
+            }
+          }
+          return dependencyNode.getDependency().getScope().equalsIgnoreCase("compile");
+        }
+      );
 
 
     List<ArtifactResult> artifactResults;
@@ -243,38 +246,41 @@ public class ResolverImpl implements Resolver {
         ArtifactRequest artifactRequest = new ArtifactRequest(artifact, remotes, null);
         artifactResults = Collections.singletonList(system.resolveArtifact(session, artifactRequest));
       } else {
-        CollectRequest collectRequest = new CollectRequest();
-        Dependency root = new Dependency(artifact, JavaScopes.COMPILE)
-            .setExclusions(
-                exclusions.stream()
-                    .map(e -> {
-                      // Exclusion are structured as groupId:artifactId.
-                      String[] segments = e.split(":");
-                      if (segments.length != 2) {
-                        throw new IllegalStateException("Invalid exclusion format: " + e + " - exclusion are " +
-                            "structured as follows: groupId:artifactId");
-                      }
-                      return new Exclusion(segments[0], segments[1], null, null);
-                    })
-                    .collect(Collectors.toList()));
-        collectRequest.setRoot(root);
-        collectRequest.setRepositories(remotes);
+        CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
         DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, filter);
         artifactResults =
-            system.resolveDependencies(session, dependencyRequest).getArtifactResults();
+          system.resolveDependencies(session, dependencyRequest).getArtifactResults();
       }
     } catch (DependencyResolutionException | ArtifactResolutionException e) {
-      throw new IllegalArgumentException("Cannot resolve artifact " + artifact.toString() +
-          " in maven repositories: " + e.getMessage());
+      throw new IllegalArgumentException("Cannot resolve artifact " + artifact +
+        " in maven repositories: " + e.getMessage());
     } catch (NullPointerException e) {
       // Sucks, but aether throws a NPE if repository name is invalid....
-      throw new IllegalArgumentException("Cannot find module " + artifact.toString() + ". Maybe repository URL is invalid?");
+      throw new IllegalArgumentException("Cannot find module " + artifact + ". Maybe repository URL is invalid?");
     }
 
     List<Artifact> artifacts = artifactResults.stream().map(ArtifactResult::getArtifact)
-        .collect(Collectors.toList());
+      .collect(Collectors.toList());
     LOGGER.trace("Dependencies resolved by " + artifact.getArtifactId() + " => " + artifacts);
     return artifacts;
+  }
+
+  private DependencyNode resolveTree(Artifact artifact, boolean withTransitive, List<String> exclusions) {
+    CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
+    RepositorySystemSession session = session(system, localRepo);
+    try {
+      CollectResult collectResult = system.collectDependencies(session, collectRequest);
+      DependencyNode root = collectResult.getRoot();
+      if (withTransitive) {
+        return root;
+      } else {
+        root.setChildren(new ArrayList<>());
+        return root;
+      }
+    } catch (DependencyCollectionException e) {
+      throw new IllegalArgumentException("Cannot resolve artifact " + artifact.toString() +
+        " in maven repositories: " + e.getMessage());
+    }
   }
 
   protected void customizeRemoteRepoBuilder(RemoteRepository.Builder builder) {
@@ -301,10 +307,82 @@ public class ResolverImpl implements Resolver {
     return null;
   }
 
+  private static RepositorySystemSession session(RepositorySystem system, LocalRepository localRepo) {
+    DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
+    session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
+    return session;
+  }
+
+  private static CollectRequest collectRequest(Artifact artifact, List<String> exclusions, List<RemoteRepository> remotes) {
+    CollectRequest collectRequest = new CollectRequest();
+    Dependency root = new Dependency(artifact, JavaScopes.COMPILE)
+      .setExclusions(
+        exclusions.stream()
+          .map(e -> {
+            // Exclusion are structured as groupId:artifactId.
+            String[] segments = e.split(":");
+            if (segments.length != 2) {
+              throw new IllegalStateException("Invalid exclusion format: " + e + " - exclusion are " +
+                "structured as follows: groupId:artifactId");
+            }
+            return new Exclusion(segments[0], segments[1], null, null);
+          })
+          .collect(Collectors.toList()));
+    collectRequest.setRoot(root);
+    collectRequest.setRepositories(remotes);
+    return collectRequest;
+  }
+
   @Override
   public List<Artifact> resolve(String gacv, ResolutionOptions options) {
     DefaultArtifact artifact = new DefaultArtifact(gacv);
     return resolve(artifact, options.isWithTransitive(), options.getExclusions());
+  }
+
+  @Override
+  public List<io.vertx.stack.model.Artifact> resolveTree(String gacv, ResolutionOptions options) {
+    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(gacv);
+    DependencyNode root = resolveTree(rootArtifact, options.isWithTransitive(), options.getExclusions());
+    List<Exclusion> exclusions = Stream.concat(Stream.of(root), root.getChildren().stream())
+      .map(DependencyNode::getDependency)
+      .flatMap(dependency -> dependency.getExclusions().stream())
+      .collect(Collectors.toList());
+    // TODO exclusions calculated correctly?
+    return Stream
+      .concat(Stream.of(rootArtifact), toArtifacts(root, exclusions))
+      .collect(Collectors.toList());
+  }
+
+  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode, List<Exclusion> exclusions) {
+    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(coordinates(dependencyNode));
+    return dependencyNode.getChildren().stream()
+      // remove optional dependencies
+      .filter(childNode -> !childNode.getDependency().isOptional())
+      // remove excluded dependencies
+      .filter(childNode -> exclusions.stream().noneMatch(exclusion ->
+        exclusion.getGroupId().equals(childNode.getArtifact().getGroupId())
+          && exclusion.getArtifactId().equals(childNode.getArtifact().getArtifactId())))
+      // remove provided dependencies and transitive dependencies of provided dependencies
+      .filter(childNode -> childNode.getDependency().getScope().equalsIgnoreCase("compile"))
+      .flatMap(childNode -> {
+        io.vertx.stack.model.Artifact childArtifact = io.vertx.stack.model.Artifact.artifact(coordinates(childNode));
+        childArtifact.addVia(rootArtifact);
+        return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode, exclusions));
+      });
+  }
+
+  private String coordinates(DependencyNode node) {
+    Artifact artifact = node.getArtifact();
+    String groupId = artifact.getGroupId();
+    String artifactId = artifact.getArtifactId();
+    String version = artifact.getVersion();
+    String classifier = artifact.getClassifier();
+    String extension = artifact.getExtension();
+    // <groupId>:<artifactId>[:<extension>[:<classifier>]]:<version>
+    return groupId + ":" + artifactId
+      + ":" + extension
+      + (classifier.isEmpty() ? "" : ":" + classifier)
+      + ":" + version;
   }
 }
 

@@ -21,9 +21,8 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
+import io.vertx.stack.model.Artifact;
 import io.vertx.stack.resolver.ResolutionOptions;
-import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.artifact.DefaultArtifact;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,11 +45,11 @@ public class Cache {
     public Artifact deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
       JsonNode node = p.getCodec().readTree(p);
       Artifact artifact;
-      if (node.get("classifier") != null) {
-        artifact = new DefaultArtifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+      if (!node.get("classifier").asText().isEmpty()) {
+        artifact = Artifact.artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
             node.get("classifier").asText(), node.get("extension").asText(), node.get("version").asText());
       } else {
-        artifact = new DefaultArtifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+        artifact = Artifact.artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
             node.get("extension").asText(), node.get("version").asText());
       }
       artifact = artifact.setFile(new File(node.get("file").asText()));
@@ -135,8 +134,7 @@ public class Cache {
       return false;
     }
 
-    if (entry.getArtifacts().stream().filter(artifact -> !artifact.getFile().isFile())
-        .findAny().isPresent()) {
+    if (entry.getArtifacts().stream().anyMatch(artifact -> !artifact.getFile().isFile())) {
       return false;
     }
 

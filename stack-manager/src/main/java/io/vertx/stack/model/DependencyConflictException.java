@@ -29,7 +29,7 @@ public class DependencyConflictException extends RuntimeException {
   private final String version;
   private final List<String> trace;
   private final String conflictingDependency;
-  private final String conflictingVersion;
+  private final Artifact conflictingArtifact;
 
   /**
    * Creates a {@link DependencyConflictException}.
@@ -37,14 +37,14 @@ public class DependencyConflictException extends RuntimeException {
    * @param artifact      the artifact
    * @param version the current version
    * @param conflictingDependency    the conflicting dependency
-   * @param conflictingVersion  the other version
+   * @param conflictingArtifact  the conflicting {@link Artifact}
    */
-  public DependencyConflictException(String artifact, String version, List<String> trace, String conflictingDependency, String conflictingVersion) {
+  public DependencyConflictException(String artifact, String version, List<String> trace, String conflictingDependency, Artifact conflictingArtifact) {
     this.artifact = artifact;
     this.version = version;
     this.trace = trace;
     this.conflictingDependency = conflictingDependency;
-    this.conflictingVersion = conflictingVersion;
+    this.conflictingArtifact = conflictingArtifact;
   }
 
   /**
@@ -55,8 +55,12 @@ public class DependencyConflictException extends RuntimeException {
    */
   @Override
   public String getMessage() {
-    return "Conflict detected for artifact " + artifact + " - version " + version + " was already selected " +
+
+    return "Conflict detected for artifact " + artifact + " - version " + version + " was already selected" +
       " by " + trace +
-      " while " + conflictingDependency + " depends on version " + conflictingVersion;
+      " while " + conflictingDependency + " depends on version " + conflictingArtifact.getVersion() +
+      " - see the following chain:\n" +
+      Artifact.renderChain(conflictingArtifact);
   }
+
 }

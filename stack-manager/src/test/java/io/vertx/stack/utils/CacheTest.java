@@ -16,9 +16,8 @@
 
 package io.vertx.stack.utils;
 
+import io.vertx.stack.model.Artifact;
 import io.vertx.stack.resolver.ResolutionOptions;
-import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.artifact.DefaultArtifact;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,14 +60,14 @@ public class CacheTest {
   }
 
   @Test
-  public void testCachingOfReleaseAndUpdate() throws IOException {
+  public void testCachingOfReleaseAndUpdate() {
     String gacv = "org.acme:acme:jar:1.0";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
-    Artifact artifact2 = new DefaultArtifact("org.acme:acme-dep:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact2 = Artifact.artifact("org.acme:acme-dep:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -84,14 +83,14 @@ public class CacheTest {
   }
 
   @Test
-  public void testCachingOfSnapshotAndUpdate() throws IOException {
+  public void testCachingOfSnapshotAndUpdate() {
     String gacv = "org.acme:acme:jar:1.0-SNAPSHOT";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
-    Artifact artifact2 = new DefaultArtifact("org.acme:acme-dep:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact2 = Artifact.artifact("org.acme:acme-dep:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -116,7 +115,7 @@ public class CacheTest {
     assertThat(list).isNull();
 
     File file = File.createTempFile("acme", ".jar");
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0").setFile(file);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(file);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -124,14 +123,14 @@ public class CacheTest {
   }
 
   @Test
-  public void testCacheDisabledForSnapshots() throws IOException {
+  public void testCacheDisabledForSnapshots() {
     String gacv = "org.acme:acme:jar:1.0-SNAPSHOT";
     cache = new Cache(false, true, cacheFile);
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -139,13 +138,13 @@ public class CacheTest {
   }
 
   @Test
-  public void testWithInvalidArtifact() throws IOException {
+  public void testWithInvalidArtifact() {
     String gacv = "org.acme:acme:jar:1.0";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0").setFile(new File("does not exist.jar"));
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(new File("does not exist.jar"));
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -153,7 +152,7 @@ public class CacheTest {
   }
 
   @Test
-  public void testWithEmptyResolution() throws IOException {
+  public void testWithEmptyResolution() {
     String gacv = "org.acme:acme:jar:1.0";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
@@ -164,13 +163,13 @@ public class CacheTest {
   }
 
   @Test
-  public void testCacheReloading() throws IOException {
+  public void testCacheReloading() {
     String gacv = "org.acme:acme:jar:1.0";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -184,13 +183,13 @@ public class CacheTest {
   }
 
   @Test
-  public void testSnapshotEviction() throws IOException {
+  public void testSnapshotEviction() {
     String gacv = "org.acme:acme:jar:1.0-SNAPSHOT";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -204,13 +203,13 @@ public class CacheTest {
   }
 
   @Test
-  public void testNonSnapshotEviction() throws IOException {
+  public void testNonSnapshotEviction() {
     String gacv = "org.acme:acme:jar:1.0-SNAPSHOT";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -224,13 +223,13 @@ public class CacheTest {
   }
 
   @Test
-  public void testCachingUsingDifferentResolutionOption() throws IOException {
+  public void testCachingUsingDifferentResolutionOption() {
     String gacv = "org.acme:acme:jar:1.0";
     ResolutionOptions options = new ResolutionOptions();
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = new DefaultArtifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);

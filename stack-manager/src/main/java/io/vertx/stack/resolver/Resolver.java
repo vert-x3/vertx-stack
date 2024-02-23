@@ -37,6 +37,8 @@ public interface Resolver {
    */
   List<Artifact> resolve(String dependency, ResolutionOptions options);
 
+  List<io.vertx.stack.model.Artifact> resolveTree(String dependency, ResolutionOptions options);
+
   /**
    * Creates a {@link Resolver} using the default implementation and default options.
    *
