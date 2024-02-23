@@ -16,7 +16,8 @@
 
 package io.vertx.stack.resolver;
 
-import org.eclipse.aether.artifact.Artifact;
+
+import io.vertx.stack.model.Artifact;
 
 import java.util.List;
 
