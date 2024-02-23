@@ -26,7 +26,6 @@ import org.eclipse.aether.artifact.Artifact;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -54,7 +53,7 @@ public class StackResolution {
   private final StackResolutionOptions options;
   private Resolver resolver;
 
-  private Cache cache;
+  private final Cache cache;
 
   /**
    * Creates an instance of {@link StackResolution}.
@@ -168,10 +167,12 @@ public class StackResolution {
   }
 
   private void resolve(Dependency dependency) {
-    List<Artifact> list;
+    List<io.vertx.stack.model.Artifact> list;
     if (dependency.isIncluded()) {
       list = cache.get(dependency.getGACV(), dependency.getResolutionOptions());
+      // artifacts = cache.get(dependency.getGACV(), dependency.getResolutionOptions());
       if (list == null || list.isEmpty()) {
+        // list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
         list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
         cache.put(dependency.getGACV(), dependency.getResolutionOptions(), list);
         cache.writeCacheOnFile();
@@ -183,7 +184,7 @@ public class StackResolution {
     }
 
     if (list == null || list.isEmpty()) {
-      throw new IllegalArgumentException("Cannot resolve " + dependency.toString());
+      throw new IllegalArgumentException("Cannot resolve " + dependency);
     }
 
     LOGGER.debug("Artifacts resolved for " + dependency.getGACV() + " : "
@@ -198,7 +199,7 @@ public class StackResolution {
       } else {
         List<String> trace = traces.get(gaec + ":" + version);
         if (options.isFailOnConflicts()) {
-          throw new DependencyConflictException(gaec, version, trace, dependency.getGACV(), artifact.getBaseVersion());
+          throw new DependencyConflictException(gaec, version, trace, dependency.getGACV(), artifact);
         }
       }
       addSelectedArtifact(dependency, artifact, version);
@@ -233,7 +234,7 @@ public class StackResolution {
     return artifact.getGroupId()
       + ":" + artifact.getArtifactId()
       + ":" + artifact.getExtension()
-      + (artifact.getClassifier() != null && artifact.getClassifier().length() > 0
+      + (artifact.getClassifier() != null && !artifact.getClassifier().isEmpty()
       ? ":" + artifact.getClassifier() : "");
   }
 
@@ -247,7 +248,7 @@ public class StackResolution {
   public static class ResolvedArtifact {
     private Artifact artifact;
     private String selectedVersion;
-    private Set<String> usages = new LinkedHashSet<>();
+    private final Set<String> usages = new LinkedHashSet<>();
 
     public Artifact getArtifact() {
       return artifact;

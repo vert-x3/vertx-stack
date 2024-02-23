@@ -31,15 +31,14 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  */
 public class StackResolutionTest {
 
-  private File root = new File("target/stack");
+  private final File root = new File("target/stack");
 
   private final static StackResolutionOptions STRICT = new StackResolutionOptions().setFailOnConflicts(true);
 
@@ -252,7 +251,28 @@ public class StackResolutionTest {
     assertThat(resolved).containsKey("io.vertx:vertx-core:jar:3.1.0");
     assertThat(resolved).doesNotContainKeys("io.vertx:vertx-core:jar:3.0.0");
     assertThat(resolved).doesNotContainKeys("io.vertx:vertx-stomp:jar:3.1.0");
-
   }
 
+  @Test
+  public void testTheResolutionWhenATransitiveDependencyConflicts() {
+    // This stack introduces a dependency conflict:
+    // vertx-web-templ-pug:4.4.8 depends transitively on a newer version of org.jetbrains:annotations
+    // than vertx-lang-kotlin:4.4.8
+    Stack stack = new Stack()
+      .addDependency(new Dependency("io.vertx", "vertx-web-templ-pug", "4.4.8"))
+      .addDependency(new Dependency("io.vertx", "vertx-lang-kotlin", "4.4.8"));
+
+    StackResolution resolution = new StackResolution(stack, root, STRICT);
+
+    assertThatThrownBy(resolution::resolve)
+      .isInstanceOf(DependencyConflictException.class)
+      .hasMessage("Conflict detected for artifact org.jetbrains:annotations:jar - " +
+        "version 15.0 was already selected by [io.vertx:vertx-web-templ-pug:jar:4.4.8] " +
+        "while io.vertx:vertx-lang-kotlin:jar:4.4.8 depends on version 13.0" +
+        " - see the following chain:\n" +
+        "io.vertx:vertx-lang-kotlin:jar:4.4.8\n" +
+        "\t\\-- org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:1.7.21\n" +
+        "\t\t\\-- org.jetbrains.kotlin:kotlin-stdlib:jar:1.7.21\n" +
+        "\t\t\t\\-- org.jetbrains:annotations:jar:13.0");
+  }
 }

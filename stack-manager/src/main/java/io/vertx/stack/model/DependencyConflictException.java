@@ -16,7 +16,11 @@
 
 package io.vertx.stack.model;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Thrown when a conflict is detected between two dependencies.
@@ -29,7 +33,7 @@ public class DependencyConflictException extends RuntimeException {
   private final String version;
   private final List<String> trace;
   private final String conflictingDependency;
-  private final String conflictingVersion;
+  private final Artifact conflictingArtifact;
 
   /**
    * Creates a {@link DependencyConflictException}.
@@ -37,14 +41,14 @@ public class DependencyConflictException extends RuntimeException {
    * @param artifact      the artifact
    * @param version the current version
    * @param conflictingDependency    the conflicting dependency
-   * @param conflictingVersion  the other version
+   * @param conflictingArtifact  the conflicting {@link Artifact}
    */
-  public DependencyConflictException(String artifact, String version, List<String> trace, String conflictingDependency, String conflictingVersion) {
+  public DependencyConflictException(String artifact, String version, List<String> trace, String conflictingDependency, Artifact conflictingArtifact) {
     this.artifact = artifact;
     this.version = version;
     this.trace = trace;
     this.conflictingDependency = conflictingDependency;
-    this.conflictingVersion = conflictingVersion;
+    this.conflictingArtifact = conflictingArtifact;
   }
 
   /**
@@ -55,8 +59,28 @@ public class DependencyConflictException extends RuntimeException {
    */
   @Override
   public String getMessage() {
-    return "Conflict detected for artifact " + artifact + " - version " + version + " was already selected " +
+
+    return "Conflict detected for artifact " + artifact + " - version " + version + " was already selected" +
       " by " + trace +
-      " while " + conflictingDependency + " depends on version " + conflictingVersion;
+      " while " + conflictingDependency + " depends on version " + conflictingArtifact.getVersion() +
+      " - see the following chain:\n" +
+      renderArtifactChain(conflictingArtifact, new ArrayList<>());
   }
+
+  private String renderArtifactChain(Artifact fromArtifact, List<String> acc) {
+    if (fromArtifact.getVia() == null) {
+      StringBuilder resultBuilder = new StringBuilder(fromArtifact.getCoordinates());
+      AtomicInteger level = new AtomicInteger(0);
+      acc.forEach(coords -> {
+        String indent = StringUtils.repeat('\t', level.incrementAndGet());
+        resultBuilder.append("\n")
+          .append(indent).append("\\-- ").append(coords);
+      });
+      return resultBuilder.toString();
+    } else {
+      acc.add(0, fromArtifact.getCoordinates());
+      return renderArtifactChain(fromArtifact.getVia(), acc);
+    }
+  }
+
 }
