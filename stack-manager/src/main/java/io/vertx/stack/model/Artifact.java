@@ -45,6 +45,12 @@ public class Artifact extends AbstractArtifact {
     return globalArtifacts.merge(coordinates, new Artifact(coordinates, via), (a1, a2) -> a1.addVia(a2.via));
   }
 
+  // TODO make via a single value instead of a collection
+  public static Artifact artifact(org.eclipse.aether.artifact.Artifact fromArtifact, Artifact... via) {
+    String coordinates = coordinates(fromArtifact);
+    return globalArtifacts.merge(coordinates, new Artifact(fromArtifact, via), (a1, a2) -> a1.addVia(a2.via));
+  }
+
   /**
    * Add more artifacts pointing to this.
    */
@@ -71,10 +77,10 @@ public class Artifact extends AbstractArtifact {
     Optional<Artifact> maybeVia = fromArtifact.via.stream().findFirst();
     if (maybeVia.isPresent()) {
       Artifact via = maybeVia.get();
-      acc.add(0, fromArtifact.getCoordinates());
+      acc.add(0, coordinates(fromArtifact));
       return renderChain(via, level + 1, acc);
     } else {
-      StringBuilder chainBuilder = new StringBuilder(fromArtifact.getCoordinates());
+      StringBuilder chainBuilder = new StringBuilder(coordinates(fromArtifact));
       for (int i = 0; i < acc.size(); i++) {
         String indent = StringUtils.repeat("\t", i + 1);
         chainBuilder
@@ -110,15 +116,12 @@ public class Artifact extends AbstractArtifact {
     return internal.getExtension();
   }
 
-  /**
-   * @return the artifact coordinates in the form {@code <groupId>:<artifactId>[:<extension>[:<classifier>]]:<version>}
-   */
-  public String getCoordinates() {
+  private static String coordinates(org.eclipse.aether.artifact.Artifact artifact) {
     // <groupId>:<artifactId>[:<extension>[:<classifier>]]:<version>
-    return getGroupId() + ":" + getArtifactId()
-      + ":" + getExtension()
-      + (getClassifier().isEmpty() ? "" : ":" + getClassifier())
-      + ":" + getVersion();
+    return artifact.getGroupId() + ":" + artifact.getArtifactId()
+      + ":" + artifact.getExtension()
+      + (artifact.getClassifier().isEmpty() ? "" : ":" + artifact.getClassifier())
+      + ":" + artifact.getVersion();
   }
 
   @Override

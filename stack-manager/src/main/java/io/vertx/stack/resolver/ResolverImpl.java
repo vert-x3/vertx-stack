@@ -26,8 +26,6 @@ import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
-import org.eclipse.aether.collection.CollectResult;
-import org.eclipse.aether.collection.DependencyCollectionException;
 import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.graph.DependencyFilter;
@@ -186,60 +184,6 @@ public class ResolverImpl implements Resolver {
 
     LOGGER.info("Resolving " + artifact.toString());
 
-    DependencyFilter filter =
-      DependencyFilterUtils.andFilter(
-        DependencyFilterUtils.classpathFilter(
-          JavaScopes.COMPILE
-        ),
-        // Remove optionals and dependencies of optionals
-        (dependencyNode, list) -> {
-          for (DependencyNode parent : list) {
-            if (parent.getDependency().isOptional()) {
-              return false;
-            }
-          }
-
-          return !dependencyNode.getDependency().isOptional();
-        },
-
-        // Remove excluded dependencies
-        (dependencyNode, list) -> {
-          // Build the list of exclusion, traverse the tree.
-          Collection<Exclusion> ex = new ArrayList<>();
-          for (DependencyNode parent : list) {
-            ex.addAll(parent.getDependency().getExclusions());
-          }
-
-          for (Exclusion e : ex) {
-            // Check the the passed artifact is excluded
-            if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
-              && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
-              return false;
-            }
-
-            // Check if a parent artifact is excluded
-            for (DependencyNode parent : list) {
-              if (e.getArtifactId().equals(parent.getArtifact().getArtifactId())
-                && e.getGroupId().equals(parent.getArtifact().getGroupId())) {
-                return false;
-              }
-            }
-          }
-          return true;
-        },
-
-        // Remove provided dependencies and transitive dependencies of provided dependencies
-        (dependencyNode, list) -> {
-          for (DependencyNode parent : list) {
-            if (!parent.getDependency().getScope().equalsIgnoreCase("compile")) {
-              return false;
-            }
-          }
-          return dependencyNode.getDependency().getScope().equalsIgnoreCase("compile");
-        }
-      );
-
-
     List<ArtifactResult> artifactResults;
     try {
       if (!transitive) {
@@ -247,7 +191,7 @@ public class ResolverImpl implements Resolver {
         artifactResults = Collections.singletonList(system.resolveArtifact(session, artifactRequest));
       } else {
         CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
-        DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, filter);
+        DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, dependencyFilter());
         artifactResults =
           system.resolveDependencies(session, dependencyRequest).getArtifactResults();
       }
@@ -267,17 +211,18 @@ public class ResolverImpl implements Resolver {
 
   private DependencyNode resolveTree(Artifact artifact, boolean withTransitive, List<String> exclusions) {
     CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
+    DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, dependencyFilter());
     RepositorySystemSession session = session(system, localRepo);
     try {
-      CollectResult collectResult = system.collectDependencies(session, collectRequest);
-      DependencyNode root = collectResult.getRoot();
+      DependencyResult dependencyResult = system.resolveDependencies(session, dependencyRequest);
+      DependencyNode root = dependencyResult.getRoot();
       if (withTransitive) {
         return root;
       } else {
         root.setChildren(new ArrayList<>());
         return root;
       }
-    } catch (DependencyCollectionException e) {
+    } catch (DependencyResolutionException e) {
       throw new IllegalArgumentException("Cannot resolve artifact " + artifact.toString() +
         " in maven repositories: " + e.getMessage());
     }
@@ -333,6 +278,61 @@ public class ResolverImpl implements Resolver {
     return collectRequest;
   }
 
+  public DependencyFilter dependencyFilter() {
+    return
+      DependencyFilterUtils.andFilter(
+        DependencyFilterUtils.classpathFilter(
+          JavaScopes.COMPILE
+        ),
+        // Remove optionals and dependencies of optionals
+        (dependencyNode, list) -> {
+          for (DependencyNode parent : list) {
+            if (parent.getDependency().isOptional()) {
+              return false;
+            }
+          }
+
+          return !dependencyNode.getDependency().isOptional();
+        },
+
+        // Remove excluded dependencies
+        (dependencyNode, list) -> {
+          // Build the list of exclusion, traverse the tree.
+          Collection<Exclusion> ex = new ArrayList<>();
+          for (DependencyNode parent : list) {
+            ex.addAll(parent.getDependency().getExclusions());
+          }
+
+          for (Exclusion e : ex) {
+            // Check the the passed artifact is excluded
+            if (e.getArtifactId().equals(dependencyNode.getArtifact().getArtifactId())
+              && e.getGroupId().equals(dependencyNode.getArtifact().getGroupId())) {
+              return false;
+            }
+
+            // Check if a parent artifact is excluded
+            for (DependencyNode parent : list) {
+              if (e.getArtifactId().equals(parent.getArtifact().getArtifactId())
+                && e.getGroupId().equals(parent.getArtifact().getGroupId())) {
+                return false;
+              }
+            }
+          }
+          return true;
+        },
+
+        // Remove provided dependencies and transitive dependencies of provided dependencies
+        (dependencyNode, list) -> {
+          for (DependencyNode parent : list) {
+            if (!parent.getDependency().getScope().equalsIgnoreCase("compile")) {
+              return false;
+            }
+          }
+          return dependencyNode.getDependency().getScope().equalsIgnoreCase("compile");
+        }
+      );
+  }
+
   @Override
   public List<Artifact> resolve(String gacv, ResolutionOptions options) {
     DefaultArtifact artifact = new DefaultArtifact(gacv);
@@ -354,7 +354,7 @@ public class ResolverImpl implements Resolver {
   }
 
   private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode, List<Exclusion> exclusions) {
-    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(coordinates(dependencyNode));
+    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(dependencyNode.getArtifact());
     return dependencyNode.getChildren().stream()
       // remove optional dependencies
       .filter(childNode -> !childNode.getDependency().isOptional())
@@ -365,24 +365,11 @@ public class ResolverImpl implements Resolver {
       // remove provided dependencies and transitive dependencies of provided dependencies
       .filter(childNode -> childNode.getDependency().getScope().equalsIgnoreCase("compile"))
       .flatMap(childNode -> {
-        io.vertx.stack.model.Artifact childArtifact = io.vertx.stack.model.Artifact.artifact(coordinates(childNode));
+        io.vertx.stack.model.Artifact childArtifact = io.vertx.stack.model.Artifact.artifact(childNode.getArtifact());
         childArtifact.addVia(rootArtifact);
         return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode, exclusions));
       });
   }
 
-  private String coordinates(DependencyNode node) {
-    Artifact artifact = node.getArtifact();
-    String groupId = artifact.getGroupId();
-    String artifactId = artifact.getArtifactId();
-    String version = artifact.getVersion();
-    String classifier = artifact.getClassifier();
-    String extension = artifact.getExtension();
-    // <groupId>:<artifactId>[:<extension>[:<classifier>]]:<version>
-    return groupId + ":" + artifactId
-      + ":" + extension
-      + (classifier.isEmpty() ? "" : ":" + classifier)
-      + ":" + version;
-  }
 }
 
