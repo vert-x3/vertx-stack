@@ -343,31 +343,18 @@ public class ResolverImpl implements Resolver {
   public List<io.vertx.stack.model.Artifact> resolveTree(String gacv, ResolutionOptions options) {
     io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(gacv);
     DependencyNode root = resolveTree(rootArtifact, options.isWithTransitive(), options.getExclusions());
-    List<Exclusion> exclusions = Stream.concat(Stream.of(root), root.getChildren().stream())
-      .map(DependencyNode::getDependency)
-      .flatMap(dependency -> dependency.getExclusions().stream())
-      .collect(Collectors.toList());
-    // TODO exclusions calculated correctly?
     return Stream
-      .concat(Stream.of(rootArtifact), toArtifacts(root, exclusions))
+      .concat(Stream.of(rootArtifact), toArtifacts(root))
       .collect(Collectors.toList());
   }
 
-  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode, List<Exclusion> exclusions) {
+  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode) {
     io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(dependencyNode.getArtifact());
     return dependencyNode.getChildren().stream()
-      // remove optional dependencies
-      .filter(childNode -> !childNode.getDependency().isOptional())
-      // remove excluded dependencies
-      .filter(childNode -> exclusions.stream().noneMatch(exclusion ->
-        exclusion.getGroupId().equals(childNode.getArtifact().getGroupId())
-          && exclusion.getArtifactId().equals(childNode.getArtifact().getArtifactId())))
-      // remove provided dependencies and transitive dependencies of provided dependencies
-      .filter(childNode -> childNode.getDependency().getScope().equalsIgnoreCase("compile"))
       .flatMap(childNode -> {
         io.vertx.stack.model.Artifact childArtifact = io.vertx.stack.model.Artifact.artifact(childNode.getArtifact());
         childArtifact.addVia(rootArtifact);
-        return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode, exclusions));
+        return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode));
       });
   }
 
