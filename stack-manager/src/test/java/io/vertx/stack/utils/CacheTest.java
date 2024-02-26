@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -49,14 +50,13 @@ public class CacheTest {
   }
 
   @Before
-  public void setUp() {
+  public void setUp() throws IOException {
     cacheFile = new File("target/test-cache/cache.json");
     if (cacheFile.isFile()) {
-      cacheFile.delete();
+      Files.delete(cacheFile.toPath());
     }
 
     cache = new Cache(false, false, cacheFile);
-
   }
 
   @Test
@@ -196,6 +196,7 @@ public class CacheTest {
     assertThat(list).hasSize(1);
 
     Optional<Cache.CacheEntry> entry = cache.find(gacv, options);
+    assertThat(entry).isPresent();
     entry.get().setInsertionTime(System.currentTimeMillis() - 25 * 60 * 60 * 1000);
 
     list = cache.get(gacv, options);
@@ -216,6 +217,7 @@ public class CacheTest {
     assertThat(list).hasSize(1);
 
     Optional<Cache.CacheEntry> entry = cache.find(gacv, options);
+    assertThat(entry).isPresent();
     entry.get().setInsertionTime(System.currentTimeMillis() - 22 * 60 * 60 * 1000);
 
     list = cache.get(gacv, options);
@@ -252,8 +254,21 @@ public class CacheTest {
     list = cache.get(gacv, options);
     assertThat(list).hasSize(1);
     assertThat(cache.size()).isEqualTo(3);
-
   }
 
+  @Test
+  public void testDeserializationOfViaArtifact() {
+    ResolutionOptions resolutionOptions = new ResolutionOptions();
+    Artifact root = new Artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    String gacv = "org.acme:transitive:jar:1.1";
+    Artifact transitive = new Artifact(gacv, root).setFile(TEMP_FILE);
+    cache.put(gacv, resolutionOptions, Collections.singletonList(transitive));
+    cache.writeCacheOnFile();
+
+    cache = new Cache(false, false, cacheFile);
+    List<Artifact> deserialized = cache.get(gacv, resolutionOptions);
+    assertThat(deserialized).hasSize(1);
+    assertThat(deserialized.get(0).getVia()).isEqualTo(root);
+  }
 
 }

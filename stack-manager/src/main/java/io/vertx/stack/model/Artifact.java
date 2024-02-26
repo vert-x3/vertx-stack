@@ -20,12 +20,12 @@ public class Artifact extends AbstractArtifact {
     this(new DefaultArtifact(coordinates), via);
   }
 
-  public Artifact(String groupId, String artifactId, String classifier, String extension, String version) {
-    this(groupId + ":" + artifactId + ":" + extension + ":" + classifier + ":" + version, null);
+  public Artifact(String groupId, String artifactId, String classifier, String extension, String version, Artifact via) {
+    this(groupId + ":" + artifactId + ":" + extension + ":" + classifier + ":" + version, via);
   }
 
-  public Artifact(String groupId, String artifactId, String extension, String version) {
-    this(groupId + ":" + artifactId + ":" + extension + ":" + version, null);
+  public Artifact(String groupId, String artifactId, String extension, String version, Artifact via) {
+    this(groupId + ":" + artifactId + ":" + extension + ":" + version, via);
   }
 
   public Artifact(org.eclipse.aether.artifact.Artifact fromArtifact, Artifact via) {
