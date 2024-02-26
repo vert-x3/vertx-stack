@@ -173,7 +173,7 @@ public class StackResolution {
       // artifacts = cache.get(dependency.getGACV(), dependency.getResolutionOptions());
       if (list == null || list.isEmpty()) {
         // list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
-        list = resolver.resolveTree(dependency.getGACV(), dependency.getResolutionOptions());
+        list = resolver.resolve(dependency.getGACV(), dependency.getResolutionOptions());
         cache.put(dependency.getGACV(), dependency.getResolutionOptions(), list);
         cache.writeCacheOnFile();
       } else {

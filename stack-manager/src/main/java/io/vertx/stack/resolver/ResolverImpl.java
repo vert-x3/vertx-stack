@@ -19,12 +19,11 @@ package io.vertx.stack.resolver;
 
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
+import io.vertx.stack.model.Artifact;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
-import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
 import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.graph.Dependency;
@@ -33,7 +32,9 @@ import org.eclipse.aether.graph.DependencyNode;
 import org.eclipse.aether.graph.Exclusion;
 import org.eclipse.aether.impl.DefaultServiceLocator;
 import org.eclipse.aether.repository.*;
-import org.eclipse.aether.resolution.*;
+import org.eclipse.aether.resolution.DependencyRequest;
+import org.eclipse.aether.resolution.DependencyResolutionException;
+import org.eclipse.aether.resolution.DependencyResult;
 import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
@@ -46,7 +47,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -174,42 +174,11 @@ public class ResolverImpl implements Resolver {
    * Resolve the given artifact.
    *
    * @param artifact   the artifact
-   * @param transitive whether or not the transitive dependencies needs to be resolved too
+   * @param withTransitive whether the transitive dependencies needs to be resolved too
    * @param exclusions the list of exclusions
-   * @return the list of artifact
+   * @return the list of resolved artifacts
    */
-  public List<Artifact> resolve(Artifact artifact, boolean transitive, List<String> exclusions) {
-
-    RepositorySystemSession session = session(system, localRepo);
-
-    LOGGER.info("Resolving " + artifact.toString());
-
-    List<ArtifactResult> artifactResults;
-    try {
-      if (!transitive) {
-        ArtifactRequest artifactRequest = new ArtifactRequest(artifact, remotes, null);
-        artifactResults = Collections.singletonList(system.resolveArtifact(session, artifactRequest));
-      } else {
-        CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
-        DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, dependencyFilter());
-        artifactResults =
-          system.resolveDependencies(session, dependencyRequest).getArtifactResults();
-      }
-    } catch (DependencyResolutionException | ArtifactResolutionException e) {
-      throw new IllegalArgumentException("Cannot resolve artifact " + artifact +
-        " in maven repositories: " + e.getMessage());
-    } catch (NullPointerException e) {
-      // Sucks, but aether throws a NPE if repository name is invalid....
-      throw new IllegalArgumentException("Cannot find module " + artifact + ". Maybe repository URL is invalid?");
-    }
-
-    List<Artifact> artifacts = artifactResults.stream().map(ArtifactResult::getArtifact)
-      .collect(Collectors.toList());
-    LOGGER.trace("Dependencies resolved by " + artifact.getArtifactId() + " => " + artifacts);
-    return artifacts;
-  }
-
-  private DependencyNode resolveTree(Artifact artifact, boolean withTransitive, List<String> exclusions) {
+  private DependencyNode resolve(Artifact artifact, boolean withTransitive, List<String> exclusions) {
     CollectRequest collectRequest = collectRequest(artifact, exclusions, remotes);
     DependencyRequest dependencyRequest = new DependencyRequest(collectRequest, dependencyFilter());
     RepositorySystemSession session = session(system, localRepo);
@@ -277,7 +246,7 @@ public class ResolverImpl implements Resolver {
     return collectRequest;
   }
 
-  public DependencyFilter dependencyFilter() {
+  private static DependencyFilter dependencyFilter() {
     return
       DependencyFilterUtils.andFilter(
         DependencyFilterUtils.classpathFilter(
@@ -334,24 +303,18 @@ public class ResolverImpl implements Resolver {
 
   @Override
   public List<Artifact> resolve(String gacv, ResolutionOptions options) {
-    DefaultArtifact artifact = new DefaultArtifact(gacv);
-    return resolve(artifact, options.isWithTransitive(), options.getExclusions());
-  }
-
-  @Override
-  public List<io.vertx.stack.model.Artifact> resolveTree(String gacv, ResolutionOptions options) {
-    DependencyNode root = resolveTree(new io.vertx.stack.model.Artifact(gacv), options.isWithTransitive(), options.getExclusions());
+    DependencyNode root = resolve(new Artifact(gacv), options.isWithTransitive(), options.getExclusions());
     List<Exclusion> exclusions = Stream.concat(Stream.of(root), root.getChildren().stream())
       .map(DependencyNode::getDependency)
       .flatMap(dependency -> dependency.getExclusions().stream())
       .collect(Collectors.toList());
-    io.vertx.stack.model.Artifact rootArtifact = new io.vertx.stack.model.Artifact(root.getArtifact(), null);
+    Artifact rootArtifact = new Artifact(root.getArtifact(), null);
     return Stream
       .concat(Stream.of(rootArtifact), toArtifacts(root, rootArtifact, exclusions))
       .collect(Collectors.toList());
   }
 
-  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode, io.vertx.stack.model.Artifact rootArtifact, List<Exclusion> exclusions) {
+  private Stream<Artifact> toArtifacts(DependencyNode dependencyNode, Artifact rootArtifact, List<Exclusion> exclusions) {
     return dependencyNode.getChildren().stream()
       // remove optional dependencies
       .filter(childNode -> !childNode.getDependency().isOptional())
@@ -362,7 +325,7 @@ public class ResolverImpl implements Resolver {
       // remove provided dependencies and transitive dependencies of provided dependencies
       .filter(childNode -> childNode.getDependency().getScope().equalsIgnoreCase("compile"))
       .flatMap(childNode -> {
-        io.vertx.stack.model.Artifact childArtifact = new io.vertx.stack.model.Artifact(childNode.getArtifact(), rootArtifact);
+        Artifact childArtifact = new Artifact(childNode.getArtifact(), rootArtifact);
         return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode, childArtifact, exclusions));
       });
   }

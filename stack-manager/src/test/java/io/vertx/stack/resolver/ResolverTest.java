@@ -17,11 +17,11 @@
 package io.vertx.stack.resolver;
 
 
+import io.vertx.stack.model.Artifact;
 import io.vertx.stack.utils.FileUtils;
 import io.vertx.stack.utils.LocalArtifact;
 import io.vertx.stack.utils.LocalDependency;
 import io.vertx.stack.utils.LocalRepoBuilder;
-import org.eclipse.aether.artifact.Artifact;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class ResolverTest {
 
   public final static File LOCAL = new File(ROOT, "fake-local-maven-repo");
 
-  private Resolver resolver = Resolver.create(new ResolverOptions().setLocalRepository(LOCAL.getAbsolutePath()));
+  private final Resolver resolver = Resolver.create(new ResolverOptions().setLocalRepository(LOCAL.getAbsolutePath()));
 
   @Before
   public void setUp() {
@@ -105,7 +105,7 @@ public class ResolverTest {
 
   @Test
   public void testResolutionWhenADependencyIsPresentTwiceInTheGraph() {
-    
+
     new LocalRepoBuilder(LOCAL)
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.0").generateMainArtifact())
         .addArtifact(new LocalArtifact("com.acme", "acme-lib", "1.0")
@@ -128,7 +128,7 @@ public class ResolverTest {
 
   @Test
   public void testResolutionWhenADependencyIsPresentTwiceInTheGraphWithDifferentScope() {
-    
+
     new LocalRepoBuilder(LOCAL)
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.0").generateMainArtifact())
         .addArtifact(new LocalArtifact("com.acme", "acme-lib", "1.0")
@@ -151,7 +151,7 @@ public class ResolverTest {
 
   @Test
   public void testResolutionWhenADependencyIsPresentTwiceInTheGraphWithVersion() {
-    
+
     new LocalRepoBuilder(LOCAL)
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.0").generateMainArtifact())
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.1").generateMainArtifact())
@@ -174,7 +174,7 @@ public class ResolverTest {
 
   @Test
   public void testResolutionWhenADependencyIsPresentTwiceInTheGraphWithVersionInverted() {
-    
+
     new LocalRepoBuilder(LOCAL)
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.0").generateMainArtifact())
         .addArtifact(new LocalArtifact("com.acme", "acme-api", "1.1").generateMainArtifact())

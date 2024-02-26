@@ -16,7 +16,8 @@
 
 package io.vertx.stack.resolver;
 
-import org.eclipse.aether.artifact.Artifact;
+
+import io.vertx.stack.model.Artifact;
 
 import java.util.List;
 
@@ -36,8 +37,6 @@ public interface Resolver {
    * not resolved. The first artifact of the list if the artifact for the given dependency.
    */
   List<Artifact> resolve(String dependency, ResolutionOptions options);
-
-  List<io.vertx.stack.model.Artifact> resolveTree(String dependency, ResolutionOptions options);
 
   /**
    * Creates a {@link Resolver} using the default implementation and default options.
