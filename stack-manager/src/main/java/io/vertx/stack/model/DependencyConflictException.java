@@ -16,7 +16,11 @@
 
 package io.vertx.stack.model;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Thrown when a conflict is detected between two dependencies.
@@ -60,7 +64,23 @@ public class DependencyConflictException extends RuntimeException {
       " by " + trace +
       " while " + conflictingDependency + " depends on version " + conflictingArtifact.getVersion() +
       " - see the following chain:\n" +
-      Artifact.renderChain(conflictingArtifact);
+      renderArtifactChain(conflictingArtifact, new ArrayList<>());
+  }
+
+  private String renderArtifactChain(Artifact fromArtifact, List<String> acc) {
+    if (fromArtifact.getVia() == null) {
+      StringBuilder resultBuilder = new StringBuilder(fromArtifact.getCoordinates());
+      AtomicInteger level = new AtomicInteger(0);
+      acc.forEach(coords -> {
+        String indent = StringUtils.repeat('\t', level.incrementAndGet());
+        resultBuilder.append("\n")
+          .append(indent).append("\\-- ").append(coords);
+      });
+      return resultBuilder.toString();
+    } else {
+      acc.add(0, fromArtifact.getCoordinates());
+      return renderArtifactChain(fromArtifact.getVia(), acc);
+    }
   }
 
 }

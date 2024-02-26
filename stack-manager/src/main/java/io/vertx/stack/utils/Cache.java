@@ -46,10 +46,10 @@ public class Cache {
       JsonNode node = p.getCodec().readTree(p);
       Artifact artifact;
       if (!node.get("classifier").asText().isEmpty()) {
-        artifact = Artifact.artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+        artifact = new Artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
             node.get("classifier").asText(), node.get("extension").asText(), node.get("version").asText());
       } else {
-        artifact = Artifact.artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+        artifact = new Artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
             node.get("extension").asText(), node.get("version").asText());
       }
       artifact = artifact.setFile(new File(node.get("file").asText()));

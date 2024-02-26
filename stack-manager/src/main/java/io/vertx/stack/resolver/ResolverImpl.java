@@ -235,7 +235,6 @@ public class ResolverImpl implements Resolver {
     }
   }
 
-
   private static Authentication extractAuth(URL url) {
     String userInfo = url.getUserInfo();
     if (userInfo != null) {
@@ -341,20 +340,30 @@ public class ResolverImpl implements Resolver {
 
   @Override
   public List<io.vertx.stack.model.Artifact> resolveTree(String gacv, ResolutionOptions options) {
-    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(gacv);
+    io.vertx.stack.model.Artifact rootArtifact = new io.vertx.stack.model.Artifact(gacv);
     DependencyNode root = resolveTree(rootArtifact, options.isWithTransitive(), options.getExclusions());
+    List<Exclusion> exclusions = Stream.concat(Stream.of(root), root.getChildren().stream())
+      .map(DependencyNode::getDependency)
+      .flatMap(dependency -> dependency.getExclusions().stream())
+      .collect(Collectors.toList());
     return Stream
-      .concat(Stream.of(rootArtifact), toArtifacts(root))
+      .concat(Stream.of(rootArtifact), toArtifacts(root, rootArtifact, exclusions))
       .collect(Collectors.toList());
   }
 
-  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode) {
-    io.vertx.stack.model.Artifact rootArtifact = io.vertx.stack.model.Artifact.artifact(dependencyNode.getArtifact());
+  private Stream<io.vertx.stack.model.Artifact> toArtifacts(DependencyNode dependencyNode, io.vertx.stack.model.Artifact rootArtifact, List<Exclusion> exclusions) {
     return dependencyNode.getChildren().stream()
+      // remove optional dependencies
+      .filter(childNode -> !childNode.getDependency().isOptional())
+      // remove excluded dependencies
+      .filter(childNode -> exclusions.stream().noneMatch(exclusion ->
+        exclusion.getGroupId().equals(childNode.getArtifact().getGroupId())
+          && exclusion.getArtifactId().equals(childNode.getArtifact().getArtifactId())))
+      // remove provided dependencies and transitive dependencies of provided dependencies
+      .filter(childNode -> childNode.getDependency().getScope().equalsIgnoreCase("compile"))
       .flatMap(childNode -> {
-        io.vertx.stack.model.Artifact childArtifact = io.vertx.stack.model.Artifact.artifact(childNode.getArtifact());
-        childArtifact.addVia(rootArtifact);
-        return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode));
+        io.vertx.stack.model.Artifact childArtifact = new io.vertx.stack.model.Artifact(childNode.getArtifact(), rootArtifact);
+        return Stream.concat(Stream.of(childArtifact), toArtifacts(childNode, childArtifact, exclusions));
       });
   }
 

@@ -66,8 +66,8 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
-    Artifact artifact2 = Artifact.artifact("org.acme:acme-dep:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact2 = new Artifact("org.acme:acme-dep:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -89,8 +89,8 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
-    Artifact artifact2 = Artifact.artifact("org.acme:acme-dep:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact2 = new Artifact("org.acme:acme-dep:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -115,7 +115,7 @@ public class CacheTest {
     assertThat(list).isNull();
 
     File file = File.createTempFile("acme", ".jar");
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(file);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0").setFile(file);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -130,7 +130,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -144,7 +144,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(new File("does not exist.jar"));
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0").setFile(new File("does not exist.jar"));
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -169,7 +169,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -189,7 +189,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -209,7 +209,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0-SNAPSHOT").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
@@ -229,7 +229,7 @@ public class CacheTest {
     List<Artifact> list = cache.get(gacv, options);
     assertThat(list).isNull();
 
-    Artifact artifact = Artifact.artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
+    Artifact artifact = new Artifact("org.acme:acme:jar:1.0").setFile(TEMP_FILE);
 
     cache.put(gacv, options, Collections.singletonList(artifact));
     list = cache.get(gacv, options);
