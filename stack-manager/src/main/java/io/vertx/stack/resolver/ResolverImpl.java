@@ -340,12 +340,12 @@ public class ResolverImpl implements Resolver {
 
   @Override
   public List<io.vertx.stack.model.Artifact> resolveTree(String gacv, ResolutionOptions options) {
-    io.vertx.stack.model.Artifact rootArtifact = new io.vertx.stack.model.Artifact(gacv);
-    DependencyNode root = resolveTree(rootArtifact, options.isWithTransitive(), options.getExclusions());
+    DependencyNode root = resolveTree(new io.vertx.stack.model.Artifact(gacv), options.isWithTransitive(), options.getExclusions());
     List<Exclusion> exclusions = Stream.concat(Stream.of(root), root.getChildren().stream())
       .map(DependencyNode::getDependency)
       .flatMap(dependency -> dependency.getExclusions().stream())
       .collect(Collectors.toList());
+    io.vertx.stack.model.Artifact rootArtifact = new io.vertx.stack.model.Artifact(root.getArtifact(), null);
     return Stream
       .concat(Stream.of(rootArtifact), toArtifacts(root, rootArtifact, exclusions))
       .collect(Collectors.toList());
