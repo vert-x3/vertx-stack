@@ -21,9 +21,8 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
+import io.vertx.stack.model.Artifact;
 import io.vertx.stack.resolver.ResolutionOptions;
-import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.artifact.DefaultArtifact;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,22 +40,33 @@ public class Cache {
 
   // We don't use the MAPPEr from vert.x because it requires some tuning.
   private static final ObjectMapper MAPPER = new ObjectMapper().registerModule(
-      new SimpleModule("artifact-module").addDeserializer(Artifact.class, new JsonDeserializer<Artifact>() {
-    @Override
-    public Artifact deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-      JsonNode node = p.getCodec().readTree(p);
-      Artifact artifact;
-      if (node.get("classifier") != null) {
-        artifact = new DefaultArtifact(node.get("groupId").asText(), node.get("artifactId").asText(),
-            node.get("classifier").asText(), node.get("extension").asText(), node.get("version").asText());
-      } else {
-        artifact = new DefaultArtifact(node.get("groupId").asText(), node.get("artifactId").asText(),
-            node.get("extension").asText(), node.get("version").asText());
+    new SimpleModule("artifact-module").addDeserializer(Artifact.class, new JsonDeserializer<Artifact>() {
+      @Override
+      public Artifact deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        JsonNode node = p.getCodec().readTree(p);
+        return fromJsonNode(node);
       }
-      artifact = artifact.setFile(new File(node.get("file").asText()));
-      return artifact;
-    }
-  }));
+
+      private Artifact fromJsonNode(JsonNode node) {
+        JsonNode viaNode = node.get("via");
+        Artifact via;
+        if (viaNode == null || viaNode.asText().equalsIgnoreCase("null")) {
+          via = null;
+        } else {
+          via = fromJsonNode(viaNode);
+        }
+
+        Artifact artifact;
+        if (!node.get("classifier").asText().isEmpty()) {
+          artifact = new Artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+            node.get("classifier").asText(), node.get("extension").asText(), node.get("version").asText(), via);
+        } else {
+          artifact = new Artifact(node.get("groupId").asText(), node.get("artifactId").asText(),
+            node.get("extension").asText(), node.get("version").asText(), via);
+        }
+        return artifact.setFile(new File(node.get("file").asText()));
+      }
+    }));
 
   private final boolean disabled;
   private final boolean disabledForSnapshot;
@@ -83,7 +93,7 @@ public class Cache {
     if (!disabled && this.cacheFile != null && this.cacheFile.isFile()) {
       LOGGER.info("Loading resolver cache from " + this.cacheFile.getAbsolutePath());
       JavaType type = MAPPER.getTypeFactory().
-          constructCollectionType(List.class, CacheEntry.class);
+        constructCollectionType(List.class, CacheEntry.class);
       try {
         cache.addAll(MAPPER.readValue(this.cacheFile, type));
       } catch (IOException e) {
@@ -135,8 +145,7 @@ public class Cache {
       return false;
     }
 
-    if (entry.getArtifacts().stream().filter(artifact -> !artifact.getFile().isFile())
-        .findAny().isPresent()) {
+    if (entry.getArtifacts().stream().anyMatch(artifact -> !artifact.getFile().isFile())) {
       return false;
     }
 
@@ -165,16 +174,16 @@ public class Cache {
     } else {
       CacheEntry cached = new CacheEntry();
       cached.setArtifacts(list)
-          .setGacv(gacv)
-          .setOptions(resolutionOptions)
-          .setInsertionTime(System.currentTimeMillis());
+        .setGacv(gacv)
+        .setOptions(resolutionOptions)
+        .setInsertionTime(System.currentTimeMillis());
       cache.add(cached);
     }
   }
 
   public Optional<CacheEntry> find(String gacv, ResolutionOptions options) {
     return cache.stream().filter(entry -> entry.gacv.equals(gacv)
-        && entry.options.equals(options)).findFirst();
+      && entry.options.equals(options)).findFirst();
   }
 
   public int size() {
