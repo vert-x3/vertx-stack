@@ -1,23 +1,29 @@
 package io.vertx.stack.model;
 
 import org.eclipse.aether.artifact.AbstractArtifact;
-import org.eclipse.aether.artifact.DefaultArtifact;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Artifact extends AbstractArtifact {
 
-  private org.eclipse.aether.artifact.Artifact internal;
+  private final String groupId;
+  private final String artifactId;
+  private final String version;
+  private final String classifier;
+  private final String extension;
+  private final File file;
+  private final Map<String, String> properties;
   private final Artifact via;
+  private static final Pattern coordinatesPattern =
+    Pattern.compile("([^: ]+):([^: ]+)(:([^: ]*)(:([^: ]+))?)?:([^: ]+)");
 
   public Artifact(String coordinates) {
     this(coordinates, null);
-  }
-
-  public Artifact(String coordinates, Artifact via) {
-    this(new DefaultArtifact(coordinates), via);
   }
 
   public Artifact(String groupId, String artifactId, String classifier, String extension, String version, Artifact via) {
@@ -29,53 +35,94 @@ public class Artifact extends AbstractArtifact {
   }
 
   public Artifact(org.eclipse.aether.artifact.Artifact fromArtifact, Artifact via) {
-    internal = fromArtifact;
-    this.via = via;
+    this(coordinates(fromArtifact), via, fromArtifact.getFile(), fromArtifact.getProperties());
+  }
+
+  public Artifact(String coordinates, Artifact viaArtifact) {
+    this(coordinates, viaArtifact, null, new HashMap<>());
+  }
+
+  private Artifact(String coordinates, Artifact viaArtifact, File artifactFile, Map<String, String> props) {
+    Matcher m = coordinatesPattern.matcher(coordinates);
+
+    if (!m.matches()) {
+      throw new IllegalArgumentException("Bad artifact coordinates " + coordinates
+        + ", expected format is <groupId>:<artifactId>[:<extension>[:<classifier>]]:<version>");
+    }
+
+    groupId = m.group(1);
+    artifactId = m.group(2);
+    extension = defaultIfEmpty(m.group(4), "jar");
+    classifier = defaultIfEmpty(m.group(6), "");
+    version = m.group(7);
+    file = artifactFile;
+    properties = copyProperties(props);
+    via = viaArtifact;
+  }
+
+  private String defaultIfEmpty(String value, String defaultValue) {
+    if (value == null || value.trim().isEmpty()) {
+      return defaultValue;
+    } else {
+      return value;
+    }
   }
 
   @Override
   public String getGroupId() {
-    return internal.getGroupId();
+    return groupId;
   }
 
   @Override
   public String getArtifactId() {
-    return internal.getArtifactId();
+    return artifactId;
   }
 
   @Override
   public String getVersion() {
-    return internal.getVersion();
+    return version;
   }
 
   @Override
   public String getClassifier() {
-    return internal.getClassifier();
+    return classifier;
   }
 
   @Override
   public String getExtension() {
-    return internal.getExtension();
+    return extension;
   }
 
   @Override
   public Artifact setFile(File file) {
-    internal = internal.setFile(file);
-    return this;
+    if (Objects.equals(this.file, file)) {
+      return this;
+    } else {
+      return new Artifact(coordinates(this), via, file, properties);
+    }
   }
 
   @Override
   public File getFile() {
-    return internal.getFile();
+    return file;
   }
 
   @Override
   public Map<String, String> getProperties() {
-    return internal.getProperties();
+    return properties;
+  }
+
+  @Override
+  public Artifact setProperties(Map<String, String> properties) {
+    if (Objects.equals(this.properties, properties)) {
+      return this;
+    } else {
+      return new Artifact(coordinates(this), via, file, copyProperties(properties));
+    }
   }
 
   public Artifact getVia() {
-    return this.via;
+    return via;
   }
 
   public String getCoordinates() {
@@ -88,12 +135,19 @@ public class Artifact extends AbstractArtifact {
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
     Artifact artifact = (Artifact) o;
-    return Objects.equals(internal, artifact.internal) && Objects.equals(via, artifact.via);
+    return Objects.equals(groupId, artifact.groupId)
+      && Objects.equals(artifactId, artifact.artifactId)
+      && Objects.equals(version, artifact.version)
+      && Objects.equals(classifier, artifact.classifier)
+      && Objects.equals(extension, artifact.extension)
+      && Objects.equals(file, artifact.file)
+      && Objects.equals(properties, artifact.properties)
+      && Objects.equals(via, artifact.via);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), internal, via);
+    return Objects.hash(super.hashCode(), groupId, artifactId, version, classifier, extension, file, properties, via);
   }
 
   private static String coordinates(org.eclipse.aether.artifact.Artifact artifact) {
