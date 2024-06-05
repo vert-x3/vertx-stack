@@ -11,15 +11,15 @@
 - link:vertx-web-api-contract/java/index.html[Web API contracts]
 - link:vertx-web-api-service/java/index.html[Web API service]
 - link:vertx-web-graphql/java/index.html[Web GraphQL]
+- link:vertx-http-proxy/java/index.html[HTTP proxy]
 - link:vertx-jdbc-client/java/index.html[JDBC client]
-- link:vertx-mysql-postgresql-client/java/index.html[MySQL / PostgreSQL client Client]
 - link:vertx-mongo-client/java/index.html[Mongo client]
 - link:vertx-redis-client/java/index.html[Redis client]
 - link:vertx-rx/java/index.html[RxJava]
 - link:vertx-rx/java2/index.html[RxJava2]
 - link:vertx-rx/java3/index.html[RxJava3]
 - link:vertx-reactive-streams/java/index.html[Reactive streams]
-- link:vertx-sync/java/index.html[Vert.x Sync]
+- link:vertx-service-resolver/java/index.html[Service resolver]
 - link:vertx-service-discovery/java/index.html[Service discovery]
 - link:vertx-circuit-breaker/java/index.html[Circuit breaker]
 - link:vertx-config/java/index.html[Config]
@@ -57,9 +57,6 @@
 - link:vertx-service-proxy/java/index.html[Service proxies]
 - link:vertx-sockjs-service-proxy/java/index.html[SockJS service proxies]
 - link:vertx-grpc/java/index.html[gRPC]
-- link:vertx-service-factory/java/index.html[Service factories]
-- link:vertx-maven-service-factory/java/index.html[Maven service factory]
-- link:vertx-http-service-factory/java/index.html[HTTP service factory]
 
 === Kotlin
 
