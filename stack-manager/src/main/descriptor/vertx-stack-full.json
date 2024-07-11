@@ -388,7 +388,19 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-grpc",
+      "artifactId": "vertx-grpc-common",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-grpc-client",
+      "version": "\${vertx.version}",
+      "included": false
+    },
+    {
+      "groupId": "io.vertx",
+      "artifactId": "vertx-grpc-server",
       "version": "\${vertx.version}",
       "included": false
     },
