@@ -69,6 +69,7 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-launcher-legacy-cli</artifactId>
@@ -166,14 +167,12 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-junit5-rx-java2</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-junit5-rx-java3</artifactId>
@@ -367,59 +366,34 @@
       <classifier>sources</classifier>
     </dependency>
 
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-pg-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mysql-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-db2-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-oracle-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mssql-client</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sql-client-templates</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
+    <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-sql-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-pg-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-pg-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -427,11 +401,27 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-db2-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-db2-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-oracle-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -439,11 +429,27 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mssql-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mssql-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-client-templates</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -718,6 +724,7 @@
       <classifier>sources</classifier>
     </dependency>
 
+    <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-templ-freemarker</artifactId>
@@ -795,7 +802,6 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-sstore-redis</artifactId>
@@ -939,14 +945,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-docker</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-redis-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1056,6 +1054,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-grpc-client</artifactId>
@@ -1069,6 +1068,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-grpc-server</artifactId>
@@ -1082,6 +1082,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-grpc-context-storage</artifactId>
@@ -1095,6 +1096,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-grpc-protoc-plugin2</artifactId>
@@ -1334,6 +1336,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config-vault</artifactId>
@@ -1347,6 +1350,7 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
+
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config-consul</artifactId>
@@ -1524,10 +1528,6 @@
     </dependency>
     <dependency>
       <groupId>io.netty</groupId>
-      <artifactId>netty-codec-haproxy</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
       <artifactId>netty-transport-native-kqueue</artifactId>
     </dependency>
     <dependency>
@@ -1539,16 +1539,6 @@
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-component-annotations</artifactId>
       <version>13.0.15.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>io.agroal</groupId>
-      <artifactId>agroal-api</artifactId>
-      <version>1.11</version>
-    </dependency>
-    <dependency>
-      <groupId>io.agroal</groupId>
-      <artifactId>agroal-pool</artifactId>
-      <version>1.11</version>
     </dependency>
   </dependencies>
 
