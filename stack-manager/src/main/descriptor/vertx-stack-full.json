@@ -110,6 +110,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-auth-webauthn4j",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-auth-otp",
       "version": "\${vertx.version}",
       "included": true
