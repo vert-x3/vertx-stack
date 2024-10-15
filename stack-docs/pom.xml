@@ -1105,6 +1105,14 @@
       <type>zip</type>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-docs</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+
     <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -1827,6 +1835,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-grpc/">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-protoc-plugin2-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-docs-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-tcp-eventbus-bridge/">
                   <fileset dir="${project.build.directory}/work/vertx-tcp-eventbus-bridge-docs-zip"/>
