@@ -51,12 +51,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-docgen</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
