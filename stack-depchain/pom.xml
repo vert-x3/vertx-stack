@@ -7,12 +7,12 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>5.0.0-SNAPSHOT</version>
+    <version>5.0.0.CR1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>vertx-stack-depchain</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.0.0.CR1</version>
 
   <name>Vert.x Stack - Dependency Chain</name>
   <packaging>pom</packaging>
@@ -157,10 +157,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-api-contract</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -446,11 +442,19 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-grpc-context-storage</artifactId>
+      <artifactId>vertx-grpcio-common</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-io_uring-incubator</artifactId>
+      <artifactId>vertx-grpcio-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpcio-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-resolver</artifactId>
     </dependency>
   </dependencies>
 

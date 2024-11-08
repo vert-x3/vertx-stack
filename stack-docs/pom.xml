@@ -24,20 +24,20 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>5.0.0-SNAPSHOT</version>
+    <version>5.0.0.CR1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>vertx-stack-docs</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.0.0.CR1</version>
 
   <name>Vert.x Stack - Docs</name>
   <packaging>pom</packaging>
 
   <properties>
 
-    <vertx.version>5.0.0-SNAPSHOT</vertx.version>
-    <vertx.docs.version>5.0.0-SNAPSHOT</vertx.docs.version>
+    <vertx.version>5.0.0.CR1</vertx.version>
+    <vertx.docs.version>5.0.0.CR1</vertx.docs.version>
 
     <asciidoclet.version>1.5.1</asciidoclet.version>
     <apacheds-protocol-dns.version>1.5.7</apacheds-protocol-dns.version>
@@ -1055,7 +1055,25 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-grpc-context-storage</artifactId>
+      <artifactId>vertx-grpcio-common</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpcio-client</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpcio-server</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpcio-context-storage</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1381,20 +1399,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-json-schema</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-io_uring-incubator</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-io_uring-incubator</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1848,9 +1852,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-json-schema/">
                   <fileset dir="${project.build.directory}/work/vertx-json-schema-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-io_uring-incubator/">
-                  <fileset dir="${project.build.directory}/work/vertx-io_uring-incubator-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
