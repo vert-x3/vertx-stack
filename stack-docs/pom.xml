@@ -1562,7 +1562,7 @@
                 <link>https://docs.hazelcast.org/docs/3.5/javadoc/</link>
                 <link>https://reactivex.io/RxJava/2.x/javadoc/</link>
                 <link>https://reactivex.io/RxJava/3.x/javadoc/</link>
-                <link>https://netty.io/4.2/api/</link>
+                <link>https://netty.io/4.1/api/</link>
                 <link>https://fasterxml.github.io/jackson-annotations/javadoc/2.9/</link>
                 <link>https://fasterxml.github.io/jackson-core/javadoc/2.9/</link>
                 <link>https://fasterxml.github.io/jackson-databind/javadoc/2.9/</link>
