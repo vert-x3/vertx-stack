@@ -1584,254 +1584,254 @@
                 <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.basedir}/src/main/asciidoc"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-core/">
+                <copy todir="${project.build.directory}/docs/vertx-core/java">
                   <fileset dir="${project.build.directory}/work/vertx-core-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-launcher-application/">
+                <copy todir="${project.build.directory}/docs/vertx-launcher-application/java">
                   <fileset dir="${project.build.directory}/work/vertx-launcher-application-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-unit/">
+                <copy todir="${project.build.directory}/docs/vertx-unit/java">
                   <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-junit5/">
+                <copy todir="${project.build.directory}/docs/vertx-junit5/java">
                   <fileset dir="${project.build.directory}/work/vertx-junit5-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mail-client/">
+                <copy todir="${project.build.directory}/docs/vertx-mail-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-mail-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/">
+                <copy todir="${project.build.directory}/docs/vertx-dropwizard-metrics/java">
                   <fileset dir="${project.build.directory}/work/vertx-dropwizard-metrics-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-zipkin/">
+                <copy todir="${project.build.directory}/docs/vertx-zipkin/java">
                   <fileset dir="${project.build.directory}/work/vertx-zipkin-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-opentracing/">
+                <copy todir="${project.build.directory}/docs/vertx-opentracing/java">
                   <fileset dir="${project.build.directory}/work/vertx-opentracing-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-opentelemetry/">
+                <copy todir="${project.build.directory}/docs/vertx-opentelemetry/java">
                   <fileset dir="${project.build.directory}/work/vertx-opentelemetry-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-openapi/">
+                <copy todir="${project.build.directory}/docs/vertx-openapi/java">
                   <fileset dir="${project.build.directory}/work/vertx-openapi-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-proxy/">
+                <copy todir="${project.build.directory}/docs/vertx-service-proxy/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs">
+                <copy todir="${project.build.directory}/docs/">
                   <fileset dir="${project.build.directory}/work/vertx-rx-java3-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-rx-java2-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-reactive-streams/">
+                <copy todir="${project.build.directory}/docs/vertx-reactive-streams/java">
                   <fileset dir="${project.build.directory}/work/vertx-reactive-streams-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-consul-client/">
+                <copy todir="${project.build.directory}/docs/vertx-consul-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-consul-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-cassandra-client/">
+                <copy todir="${project.build.directory}/docs/vertx-cassandra-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-cassandra-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mongo-client/">
+                <copy todir="${project.build.directory}/docs/vertx-mongo-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-mongo-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-jdbc-client/">
+                <copy todir="${project.build.directory}/docs/vertx-jdbc-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-jdbc-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mysql-client/">
+                <copy todir="${project.build.directory}/docs/vertx-mysql-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-mysql-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-db2-client/">
+                <copy todir="${project.build.directory}/docs/vertx-db2-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-db2-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-oracle-client/">
+                <copy todir="${project.build.directory}/docs/vertx-oracle-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-oracle-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mssql-client/">
+                <copy todir="${project.build.directory}/docs/vertx-mssql-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-mssql-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-sql-client-templates/">
+                <copy todir="${project.build.directory}/docs/vertx-sql-client-templates/java">
                   <fileset dir="${project.build.directory}/work/vertx-sql-client-templates-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-common/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-common/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-common-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-sql-client/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-sql-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-sql-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-webauthn/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-webauthn/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-webauthn-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-otp/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-otp/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-otp-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-oauth2/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-oauth2/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-oauth2-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-properties/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-properties/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-properties-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-mongo/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-mongo/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-mongo-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-jwt/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-jwt/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-jwt-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-ldap/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-ldap/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-ldap-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-htdigest/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-htdigest/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-htdigest-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-htpasswd/">
+                <copy todir="${project.build.directory}/docs/vertx-auth-htpasswd/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-htpasswd-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web/">
+                <copy todir="${project.build.directory}/docs/vertx-web/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-client/">
+                <copy todir="${project.build.directory}/docs/vertx-web-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-openapi-router/">
+                <copy todir="${project.build.directory}/docs/vertx-web-openapi-router/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-openapi-router-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-api-service/">
+                <copy todir="${project.build.directory}/docs/vertx-web-api-service/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-api-service-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web/">
+                <copy todir="${project.build.directory}/docs/vertx-web/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-sstore-infinispan-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-graphql/">
+                <copy todir="${project.build.directory}/docs/vertx-web-graphql/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-graphql-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-proxy/">
+                <copy todir="${project.build.directory}/docs/vertx-web-proxy/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-web-validation/">
+                <copy todir="${project.build.directory}/docs/vertx-web-validation/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-validation-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/">
+                <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/java">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-hazelcast/">
+                <copy todir="${project.build.directory}/docs/vertx-hazelcast/java">
                   <fileset dir="${project.build.directory}/work/vertx-hazelcast-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-zookeeper/">
+                <copy todir="${project.build.directory}/docs/vertx-zookeeper/java">
                   <fileset dir="${project.build.directory}/work/vertx-zookeeper-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-infinispan/">
+                <copy todir="${project.build.directory}/docs/vertx-infinispan/java">
                   <fileset dir="${project.build.directory}/work/vertx-infinispan-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-ignite/">
+                <copy todir="${project.build.directory}/docs/vertx-ignite/java">
                   <fileset dir="${project.build.directory}/work/vertx-ignite-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-redis-client/">
+                <copy todir="${project.build.directory}/docs/vertx-redis-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-redis-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-rabbitmq-client/">
+                <copy todir="${project.build.directory}/docs/vertx-rabbitmq-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-rabbitmq-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-amqp-client/">
+                <copy todir="${project.build.directory}/docs/vertx-amqp-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-amqp-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-stomp/">
+                <copy todir="${project.build.directory}/docs/vertx-stomp/java">
                   <fileset dir="${project.build.directory}/work/vertx-stomp-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-http-proxy/">
+                <copy todir="${project.build.directory}/docs/vertx-http-proxy/java">
                   <fileset dir="${project.build.directory}/work/vertx-http-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-uri-template/">
+                <copy todir="${project.build.directory}/docs/vertx-uri-template/java">
                   <fileset dir="${project.build.directory}/work/vertx-uri-template-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-grpc/">
+                <copy todir="${project.build.directory}/docs/vertx-grpc/java">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-docs-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-tcp-eventbus-bridge/">
+                <copy todir="${project.build.directory}/docs/vertx-tcp-eventbus-bridge/java">
                   <fileset dir="${project.build.directory}/work/vertx-tcp-eventbus-bridge-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-shell/">
+                <copy todir="${project.build.directory}/docs/vertx-shell/java">
                   <fileset dir="${project.build.directory}/work/vertx-shell-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-camel-bridge/">
+                <copy todir="${project.build.directory}/docs/vertx-camel-bridge/java">
                   <fileset dir="${project.build.directory}/work/vertx-camel-bridge-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-micrometer-metrics/">
+                <copy todir="${project.build.directory}/docs/vertx-micrometer-metrics/java">
                   <fileset dir="${project.build.directory}/work/vertx-micrometer-metrics-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-circuit-breaker/">
+                <copy todir="${project.build.directory}/docs/vertx-circuit-breaker/java">
                   <fileset dir="${project.build.directory}/work/vertx-circuit-breaker-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-resolver/">
+                <copy todir="${project.build.directory}/docs/vertx-service-resolver/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-resolver-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-kubernetes-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-consul-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-docker-links-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-bridge-zookeeper-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-service-discovery/">
+                <copy todir="${project.build.directory}/docs/vertx-service-discovery/java">
                   <fileset dir="${project.build.directory}/work/vertx-service-discovery-backend-redis-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-health-check/">
+                <copy todir="${project.build.directory}/docs/vertx-health-check/java">
                   <fileset dir="${project.build.directory}/work/vertx-health-check-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-git-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-hocon-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-kubernetes-configmap-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-redis-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-spring-config-server-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-vault-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-consul-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-yaml-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-config/">
+                <copy todir="${project.build.directory}/docs/vertx-config/java">
                   <fileset dir="${project.build.directory}/work/vertx-config-zookeeper-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-mqtt/">
+                <copy todir="${project.build.directory}/docs/vertx-mqtt/java">
                   <fileset dir="${project.build.directory}/work/vertx-mqtt-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-pg-client/">
+                <copy todir="${project.build.directory}/docs/vertx-pg-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-pg-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-kafka-client/">
+                <copy todir="${project.build.directory}/docs/vertx-kafka-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-kafka-client-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-lang-kotlin-coroutines/">
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-coroutines-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-json-schema/">
+                <copy todir="${project.build.directory}/docs/vertx-json-schema/java">
                   <fileset dir="${project.build.directory}/work/vertx-json-schema-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/">
+                <copy todir="${project.build.directory}/docs/java">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
                 </copy>
