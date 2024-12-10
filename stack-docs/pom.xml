@@ -129,20 +129,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-unit</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-unit</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-junit5</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -849,20 +835,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-sockjs-service-proxy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sockjs-service-proxy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-hazelcast</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1064,6 +1036,50 @@
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
+    </dependency>
+
+    <!-- Hidden / deprecated -->
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sockjs-service-proxy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sockjs-service-proxy</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-unit</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-unit</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>sources</classifier>
     </dependency>
 
     <!-- no -docs.zip -->
@@ -1590,9 +1606,6 @@
                 <copy todir="${project.build.directory}/docs/vertx-launcher-application/java">
                   <fileset dir="${project.build.directory}/work/vertx-launcher-application-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-unit/java">
-                  <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
-                </copy>
                 <copy todir="${project.build.directory}/docs/vertx-junit5/java">
                   <fileset dir="${project.build.directory}/work/vertx-junit5-docs-zip"/>
                 </copy>
@@ -1710,9 +1723,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-web-validation/java">
                   <fileset dir="${project.build.directory}/work/vertx-web-validation-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/java">
-                  <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-hazelcast/java">
                   <fileset dir="${project.build.directory}/work/vertx-hazelcast-docs-zip"/>
@@ -1834,6 +1844,18 @@
                 <copy todir="${project.build.directory}/docs/java">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
+                </copy>
+
+                <!-- Hidden / deprecated docs -->
+
+                <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/java">
+                  <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-grpc-netty/">
+                  <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-unit/java">
+                  <fileset dir="${project.build.directory}/work/vertx-unit-docs-zip"/>
                 </copy>
 
                 <!-- Concat override files in a single override.adoc -->
