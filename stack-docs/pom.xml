@@ -630,14 +630,14 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-webauthn</artifactId>
+      <artifactId>vertx-auth-webauthn4j</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-webauthn</artifactId>
+      <artifactId>vertx-auth-webauthn4j</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1673,8 +1673,8 @@
                 <copy todir="${project.build.directory}/docs/vertx-auth-sql-client/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-sql-client-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-auth-webauthn/java">
-                  <fileset dir="${project.build.directory}/work/vertx-auth-webauthn-docs-zip"/>
+                <copy todir="${project.build.directory}/docs/vertx-auth-webauthn4j/java">
+                  <fileset dir="${project.build.directory}/work/vertx-auth-webauthn4j-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-auth-otp/java">
                   <fileset dir="${project.build.directory}/work/vertx-auth-otp-docs-zip"/>
