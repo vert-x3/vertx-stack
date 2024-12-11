@@ -80,12 +80,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-rx-java",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-auth-common",
       "version": "\${vertx.version}",
       "included": true
@@ -104,7 +98,7 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-auth-webauthn",
+      "artifactId": "vertx-auth-webauthn4j",
       "version": "\${vertx.version}",
       "included": true
     },
@@ -153,12 +147,6 @@
     {
       "groupId": "io.vertx",
       "artifactId": "vertx-junit5",
-      "version": "\${vertx.version}",
-      "included": true
-    },
-    {
-      "groupId": "io.vertx",
-      "artifactId": "vertx-junit5-rx-java",
       "version": "\${vertx.version}",
       "included": true
     },

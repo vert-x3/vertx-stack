@@ -45,7 +45,7 @@ public class VertxStacksTest {
   private static final List<String> BASE = Arrays.asList(
       "io.vertx:vertx-dropwizard-metrics:jar",
       "io.vertx:vertx-reactive-streams:jar",
-      "io.vertx:vertx-rx-java:jar"
+      "io.vertx:vertx-rx-java2:jar"
   );
 
 

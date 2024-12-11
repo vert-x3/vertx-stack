@@ -50,12 +50,6 @@
     },
     {
       "groupId": "io.vertx",
-      "artifactId": "vertx-rx-java",
-      "version": "${vertx.version}",
-      "included": false
-    },
-    {
-      "groupId": "io.vertx",
       "artifactId": "vertx-service-factory",
       "version": "${vertx.version}",
       "included": false
