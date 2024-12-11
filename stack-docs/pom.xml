@@ -1845,7 +1845,7 @@
                 <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/java">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
                 </copy>
-                <copy todir="${project.build.directory}/docs/vertx-grpc-netty/">
+                <copy todir="${project.build.directory}/docs/vertx-grpc-netty/java">
                   <fileset dir="${project.build.directory}/work/vertx-grpc-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-unit/java">
