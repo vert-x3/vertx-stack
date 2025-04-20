@@ -1526,7 +1526,7 @@
               <includeClassifiers>sources</includeClassifiers>
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
-              <excludes>examples\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
+              <excludes>examples\/**,**\/package-info.java,io\/vertx\/groovy\/**,module-info.java</excludes>
             </configuration>
           </execution>
 
@@ -1553,7 +1553,6 @@
       <!-- Process Javadoc from target/java to target/docs/apidocs -->
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
         <executions>
           <execution>
             <goals>
@@ -1561,9 +1560,8 @@
             </goals>
             <phase>process-resources</phase>
             <configuration>
-              <source>8</source>
-              <reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>
-              <additionalparam>-Xdoclint:none</additionalparam>
+              <source>11</source>
+              <outputDirectory>${project.build.directory}/docs/</outputDirectory>
               <sourcepath>${project.build.directory}/java</sourcepath>
               <detectLinks/>
               <detectJavaApiLink/>
