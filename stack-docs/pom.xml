@@ -454,15 +454,14 @@
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-    <!--
-      todo: does not pass currently
+<!--
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-oracle-client</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>sources</classifier>
     </dependency>
-    -->
+-->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mssql-client</artifactId>
@@ -1572,6 +1571,20 @@
       <artifactId>netty-codec-haproxy</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport-native-kqueue</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>4.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger.parser.v3</groupId>
+      <artifactId>swagger-parser-v3</artifactId>
+      <version>2.1.16</version>
+    </dependency>
+    <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-jmx</artifactId>
       <version>1.0.5</version>
@@ -1615,10 +1628,6 @@
           <artifactId>guava</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-codec-haproxy</artifactId>
     </dependency>
     <dependency>
       <groupId>io.agroal</groupId>
