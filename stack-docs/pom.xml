@@ -1020,6 +1020,12 @@
       <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-grpc-reflection</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
