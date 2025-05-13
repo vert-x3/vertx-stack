@@ -110,6 +110,12 @@
     },
     {
       "groupId": "io.vertx",
+      "artifactId": "vertx-auth-abac",
+      "version": "\${vertx.version}",
+      "included": true
+    },
+    {
+      "groupId": "io.vertx",
       "artifactId": "vertx-jdbc-client",
       "version": "\${vertx.version}",
       "included": true
