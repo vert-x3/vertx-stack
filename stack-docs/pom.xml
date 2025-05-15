@@ -1499,20 +1499,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-sync</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sync</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-json-schema</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -1953,9 +1939,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-shell/">
                   <fileset dir="${project.build.directory}/work/vertx-shell-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-sync/">
-                  <fileset dir="${project.build.directory}/work/vertx-sync-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-camel-bridge/">
                   <fileset dir="${project.build.directory}/work/vertx-camel-bridge-docs-zip"/>
