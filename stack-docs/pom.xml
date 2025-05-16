@@ -1015,14 +1015,6 @@
 
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-docker</artifactId>
-      <version>${project.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-redis-client</artifactId>
       <version>${project.version}</version>
       <classifier>docs</classifier>
@@ -1882,9 +1874,6 @@
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-sockjs-service-proxy/">
                   <fileset dir="${project.build.directory}/work/vertx-sockjs-service-proxy-docs-zip"/>
-                </copy>
-                <copy todir="${project.build.directory}/docs/vertx-docker/">
-                  <fileset dir="${project.build.directory}/work/vertx-stack-docker-docs-zip"/>
                 </copy>
                 <copy todir="${project.build.directory}/docs/vertx-hazelcast/">
                   <fileset dir="${project.build.directory}/work/vertx-hazelcast-docs-zip"/>
