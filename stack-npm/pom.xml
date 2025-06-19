@@ -12,7 +12,7 @@
 
   <artifactId>vertx-stack-npm</artifactId>
 
-  <name>Vert.x Stack - NPM packages</name>
+  <name>Vert.x Stack NPM packages</name>
   <packaging>pom</packaging>
 
   <dependencies>

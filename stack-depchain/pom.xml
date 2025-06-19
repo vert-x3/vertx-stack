@@ -14,7 +14,7 @@
   <artifactId>vertx-stack-depchain</artifactId>
   <version>4.5.16-SNAPSHOT</version>
 
-  <name>Vert.x Stack - Dependency Chain</name>
+  <name>Vert.x Stack Dependency Chain</name>
   <packaging>pom</packaging>
 
   <dependencies>

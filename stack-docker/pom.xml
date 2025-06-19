@@ -13,7 +13,7 @@
   <artifactId>vertx-stack-docker</artifactId>
   <version>4.5.15-SNAPSHOT</version>
 
-  <name>Vert.x Stack - Docker images</name>
+  <name>Vert.x Stack Docker images</name>
   <packaging>pom</packaging>
 
   <properties>

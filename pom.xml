@@ -13,7 +13,7 @@
   <artifactId>vertx-stack</artifactId>
   <version>4.5.16-SNAPSHOT</version>
 
-  <name>Vert.x Stack - Project</name>
+  <name>Vert.x Stack</name>
   <packaging>pom</packaging>
 
   <licenses>
