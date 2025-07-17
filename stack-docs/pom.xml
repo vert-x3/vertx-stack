@@ -1096,7 +1096,21 @@
     <!-- no -docs.zip -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-bridge-common</artifactId>
+      <artifactId>vertx-eventbus-bridge-common</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-eventbus-bridge-grpc</artifactId>
+      <version>${project.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-eventbus-bridge-grpc</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>
@@ -1856,6 +1870,9 @@
                 <copy todir="${project.build.directory}/docs/java">
                   <fileset dir="${project.build.directory}/work/vertx-lang-groovy-docs-zip"/>
                   <fileset dir="${project.build.directory}/work/vertx-lang-kotlin-docs-zip"/>
+                </copy>
+                <copy todir="${project.build.directory}/docs/vertx-eventbus-bridge-grpc/java">
+                  <fileset dir="${project.build.directory}/work/vertx-eventbus-bridge-grpc-docs-zip"/>
                 </copy>
 
                 <!-- Hidden / deprecated docs -->
