@@ -24,12 +24,12 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-stack</artifactId>
-    <version>5.0.2-SNAPSHOT</version>
+    <version>5.0.2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>vertx-stack-docs</artifactId>
-  <version>5.0.2-SNAPSHOT</version>
+  <version>5.0.2</version>
 
   <name>Vert.x Stack - Docs</name>
   <packaging>pom</packaging>
