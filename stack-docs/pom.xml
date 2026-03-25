@@ -1655,7 +1655,7 @@
               <includeClassifiers>sources</includeClassifiers>
               <outputDirectory>${project.build.directory}/java</outputDirectory>
               <includes>**/*.java</includes>
-              <excludes>examples\/**,**\/package-info.java,io\/vertx\/groovy\/**</excludes>
+              <excludes>examples\/**,**\/package-info.java,io\/vertx\/groovy\/**,io/vertx/**/kafka/**,io/vertx/oracleclient/**</excludes>
             </configuration>
           </execution>
 
