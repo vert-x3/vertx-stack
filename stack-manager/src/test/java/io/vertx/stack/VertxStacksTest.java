@@ -18,7 +18,6 @@ package io.vertx.stack;
 
 import com.jayway.awaitility.Awaitility;
 import io.vertx.core.impl.launcher.commands.VersionCommand;
-import io.vertx.stack.model.Dependency;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
 import io.vertx.stack.model.StackResolutionOptions;
