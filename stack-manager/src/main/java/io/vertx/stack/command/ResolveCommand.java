@@ -16,19 +16,15 @@
 
 package io.vertx.stack.command;
 
-import io.vertx.core.cli.CLI;
 import io.vertx.core.cli.CLIException;
-import io.vertx.core.cli.CommandLine;
 import io.vertx.core.cli.annotations.*;
 import io.vertx.core.spi.launcher.DefaultCommand;
-import io.vertx.core.spi.launcher.ExecutionContext;
 import io.vertx.stack.model.Stack;
 import io.vertx.stack.model.StackResolution;
 import io.vertx.stack.model.StackResolutionOptions;
 import io.vertx.stack.utils.Home;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 /**
