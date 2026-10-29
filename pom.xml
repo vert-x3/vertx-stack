@@ -63,6 +63,7 @@
   <modules>
     <!-- docker documentation must be built regardless we build the image -->
     <module>stack-depchain</module>
+    <module>stack-bom</module>
     <module>stack-manager</module>
     <module>stack-docs</module>
   </modules>
