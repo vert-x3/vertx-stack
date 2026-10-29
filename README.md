@@ -27,7 +27,9 @@ the base stack:
 #### Bills of Materials (Maven _BOM_)
 
 A [_BOM_](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html) is a also a POM you
-can import in your project. It will not add dependencies to your POM, instead it will set the correct versions to use.
+can import in your project. It will not add dependencies to your POM, instead it will set the versions for all Vert.x
+stack components to use in your project.
+
 Therefore it should be used with explicit dependencies:
 
 ~~~~
@@ -35,21 +37,21 @@ Therefore it should be used with explicit dependencies:
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-depchain</artifactId>
-      <version>3.5.1</version>
+      <artifactId>vertx-stack-bom</artifactId>
+      <version>4.5.35</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
   </dependencies>
 </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-core</artifactId>
-    </dependency>
-    ...
-  </dependencies>
+<dependencies>
+  <dependency>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-core</artifactId>
+  </dependency>
+  ...
+</dependencies>
 ~~~~
 
 ### Docker
