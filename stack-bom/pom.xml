@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-stack-depchain</artifactId>
+    <version>4.5.36-SNAPSHOT</version>
+    <relativePath>../stack-depchain/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>vertx-stack-bom</artifactId>
+  <version>4.5.36-SNAPSHOT</version>
+
+  <name>Vert.x Stack BOM</name>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.maveniverse.maven.plugins</groupId>
+        <artifactId>bom-builder3</artifactId>
+        <version>1.3.4</version>
+        <executions>
+          <execution>
+            <id>build-bom</id>
+            <goals>
+              <goal>build-bom</goal>
+            </goals>
+            <configuration>
+              <bomName>Vert.x Stack BOM</bomName>
+              <bomDescription>Vert.x Stack Bill of Materials</bomDescription>
+              <!--
+                Direct dependencies for this project are entirely inherited from
+                the parent, vertx-stack-depchain. This allows us to use all of
+                the depchain's dependencies in the dependency management section
+                of the generated BOM.
+              -->
+              <directDependencies>CURRENT_PROJECT</directDependencies>
+              <reactorDependencies>NONE</reactorDependencies>
+              <transitiveDependencies>NONE</transitiveDependencies>
+              <addVersionProperties>true</addVersionProperties>
+              <usePropertiesForVersion>true</usePropertiesForVersion>
+              <attach>true</attach>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
